@@ -23,6 +23,8 @@ run("build:portal");
 const websiteOut = path.join(root, "apps/website/out");
 const portalOut = path.join(root, "apps/portal/out");
 const nestedPortal = path.join(websiteOut, "portal");
+const stitchSite = path.resolve(root, "../site/public");
+const nestedOs = path.join(websiteOut, "os");
 
 if (!existsSync(websiteOut) || !existsSync(portalOut)) {
   console.error("Missing website or portal static export.");
@@ -34,5 +36,16 @@ if (existsSync(nestedPortal)) {
 }
 mkdirSync(nestedPortal, { recursive: true });
 cpSync(portalOut, nestedPortal, { recursive: true });
+
+if (existsSync(stitchSite)) {
+  if (existsSync(nestedOs)) {
+    rmSync(nestedOs, { recursive: true, force: true });
+  }
+  mkdirSync(nestedOs, { recursive: true });
+  cpSync(stitchSite, nestedOs, { recursive: true });
+  console.log("Pages bundle includes Stitch OS site at out/os");
+} else {
+  console.warn("Skipping Stitch OS site: site/public not found");
+}
 
 console.log("Pages bundle ready: website/out (+ portal nested at out/portal)");

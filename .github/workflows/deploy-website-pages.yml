@@ -5,6 +5,7 @@ on:
     branches: [main, "cursor/interactive-movie-scaffold-9e11"]
     paths:
       - "gvg-os/**"
+      - "site/**"
       - ".github/workflows/deploy-website-pages.yml"
   workflow_dispatch:
 
