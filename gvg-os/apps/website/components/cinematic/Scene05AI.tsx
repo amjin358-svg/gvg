@@ -41,6 +41,17 @@ export function Scene05AI() {
         connections: connectionsRef.current,
         bars: barRefs.current.filter(Boolean) as HTMLElement[],
       });
+
+      const particles = particlesRef.current;
+      if (particles) {
+        gsap.to(particles, {
+          y: -30,
+          duration: 8,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }
     }, section);
 
     return () => ctx.revert();
