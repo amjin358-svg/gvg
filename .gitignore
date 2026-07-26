@@ -37,10 +37,9 @@ yarn-error.log*
 # Cursor MCP with real API keys (use mcp.example.json in git)
 .cursor/mcp.json
 
-# Stitch local secrets / downloaded assets (keep README)
+# Stitch staging leftovers (keep DESIGN.md / SITE.md / baton / designs in git)
 .stitch/screens/
 .stitch/exports/
-.stitch/DESIGN.md
 
 
 # vercel
@@ -49,3 +48,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+__pycache__/
+*.pyc

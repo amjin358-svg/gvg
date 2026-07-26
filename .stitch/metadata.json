@@ -1,0 +1,46 @@
+{
+  "name": "projects/695461038082223086",
+  "projectId": "695461038082223086",
+  "title": "GVG OS Global Trade Platform",
+  "visibility": "PRIVATE",
+  "createTime": "2026-07-26T21:53:24.550197Z",
+  "updateTime": "2026-07-26T21:55:18.058919Z",
+  "projectType": "PROJECT_DESIGN",
+  "origin": "STITCH",
+  "deviceType": "DESKTOP",
+  "designTheme": {
+    "colorMode": "DARK",
+    "font": "SPACE_GROTESK",
+    "roundness": "ROUND_EIGHT",
+    "customColor": "#40baf7"
+  },
+  "designSystemId": "assets/a1d079b816f548cca036453381c30e95",
+  "designSystemName": "Orbital Command",
+  "screens": {
+    "earth-bg": {
+      "id": "0a3038181d8949669f4017f0fc3f2316",
+      "sourceScreen": "projects/695461038082223086/screens/0a3038181d8949669f4017f0fc3f2316",
+      "width": 1376,
+      "height": 768,
+      "title": "A cinematic, photorealistic 3D holographic Earth in deep space. The Earth is the central focus, surrounded by glowing orbital arcs and luminous cyan/electric-blue light trails symbolizing global trade connectivity. The background is a 'Void Navy' and 'Midnight Ink' cosmic canvas with subtle, ethereal nebula atmospheres. High-tech, enterprise-grade aesthetic, sharp details, luminous glow, centered composition. No text.",
+      "screenType": "IMAGE"
+    },
+    "index": {
+      "id": "e4eb3765b43a42ff90cf1bb7222e0acc",
+      "sourceScreen": "projects/695461038082223086/screens/e4eb3765b43a42ff90cf1bb7222e0acc",
+      "width": 2560,
+      "height": 4142,
+      "title": "GVG OS - Global Trade Platform Homepage",
+      "screenType": "DESIGN"
+    },
+    "design-md": {
+      "id": "10114839125497143841",
+      "sourceScreen": "projects/695461038082223086/screens/10114839125497143841",
+      "width": 390,
+      "height": 884
+    }
+  },
+  "metadata": {
+    "userRole": "OWNER"
+  }
+}

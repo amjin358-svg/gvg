@@ -1,11 +1,13 @@
 # Stitch project artifacts
 
-Local design-system and export workspace for Google Stitch collaboration.
+Local design-system and export workspace for Google Stitch collaboration on **GVG OS Global Trade Platform**.
 
 | Path | Purpose |
 | --- | --- |
-| `DESIGN.md` | Project design system (tokens, typography, components) |
-| `screens/` | Downloaded Stitch screen HTML / images |
-| `exports/` | Snapshots for portal / website implementation |
+| `DESIGN.md` | Orbital Command design system |
+| `SITE.md` | Vision, sitemap, roadmap |
+| `next-prompt.md` | Baton for the next Stitch loop iteration |
+| `metadata.json` | Stitch project / screen IDs |
+| `designs/` | Staged HTML + PNG from Stitch |
 
-Generate `DESIGN.md` via Stitch skills (`design-md`, `extract-design-md`, `taste-design`) after MCP auth is configured.
+Production static pages live in `site/public/`.
