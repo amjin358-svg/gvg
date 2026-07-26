@@ -42,7 +42,12 @@ const BINARY_ROWS: Array<
 /** Cascading ledger / signal IDs */
 const DATA_CHAIN = [18394829, 18394841, 18395010];
 
-const BAR_HEIGHTS = [45, 70, 55, 90, 65, 80, 50];
+/** Charts beat — block lengths relative to Growth (12) */
+const CHART_METRICS = [
+  { label: "Revenue", blocks: 10, max: 12 },
+  { label: "ROI", blocks: 7, max: 12 },
+  { label: "Growth", blocks: 12, max: 12 },
+];
 
 function formatCounter(value: number) {
   if (value >= 1_000_000) {
@@ -317,17 +322,27 @@ export function Scene05AI() {
       </div>
 
       <div ref={chartsRef} className="ai-stage" style={{ opacity: 0 }}>
-        <div className="ai-charts">
-          {BAR_HEIGHTS.map((h, i) => (
-            <div
-              key={i}
-              ref={(el) => {
-                barRefs.current[i] = el;
-              }}
-              className="ai-bar"
-              style={{ height: h }}
-            />
+        <div className="ai-metrics">
+          {CHART_METRICS.map((metric, i) => (
+            <div key={metric.label} className="ai-metric">
+              <div className="ai-metric__label">{metric.label}</div>
+              <div className="ai-metric__track" aria-hidden>
+                <div
+                  ref={(el) => {
+                    barRefs.current[i] = el;
+                  }}
+                  className="ai-metric__fill"
+                  style={{ width: `${(metric.blocks / metric.max) * 100}%` }}
+                >
+                  {"█".repeat(metric.blocks)}
+                </div>
+              </div>
+            </div>
           ))}
+          <div className="ai-metric ai-metric--score">
+            <div className="ai-metric__label">AI Score</div>
+            <div className="ai-metric__score">98%</div>
+          </div>
         </div>
       </div>
 

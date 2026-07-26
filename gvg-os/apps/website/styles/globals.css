@@ -246,6 +246,66 @@ a {
   transform: scaleY(0);
 }
 
+.ai-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: min(92vw, 28rem);
+}
+
+.ai-metric__label {
+  margin-bottom: 0.35rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gv-muted);
+}
+
+.ai-metric__track {
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(200, 163, 95, 0.12);
+}
+
+.ai-metric__fill {
+  display: block;
+  transform-origin: left center;
+  transform: scaleX(0);
+  font-family: "Courier New", "SF Mono", ui-monospace, monospace;
+  font-size: clamp(1rem, 3vw, 1.35rem);
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  color: var(--gv-secondary);
+  text-shadow: 0 0 16px rgba(200, 163, 95, 0.35);
+  white-space: nowrap;
+  background: linear-gradient(
+    90deg,
+    rgba(200, 163, 95, 0.35),
+    rgba(200, 163, 95, 0.08)
+  );
+  padding: 0.15rem 0.35rem;
+}
+
+.ai-metric--score {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(200, 163, 95, 0.25);
+}
+
+.ai-metric--score .ai-metric__label {
+  margin-bottom: 0;
+}
+
+.ai-metric__score {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  color: var(--gv-secondary);
+  text-shadow: 0 0 24px rgba(212, 175, 55, 0.4);
+}
+
 .scene-stub {
   display: grid;
   place-items: center;

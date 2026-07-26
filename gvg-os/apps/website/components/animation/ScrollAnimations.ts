@@ -134,7 +134,8 @@ export function createAiDataTimeline(
     gsap.set(stages.charts, { opacity: 0 });
     tl.to(stages.charts, { opacity: 1, duration: 0.4 });
     if (stages.bars.length) {
-      tl.to(stages.bars, { scaleY: 1, stagger: 0.08, duration: 0.5 }, "<");
+      gsap.set(stages.bars, { scaleX: 0 });
+      tl.to(stages.bars, { scaleX: 1, stagger: 0.12, duration: 0.55, ease: "power2.out" }, "<");
     }
   }
   if (stages.connections) {
