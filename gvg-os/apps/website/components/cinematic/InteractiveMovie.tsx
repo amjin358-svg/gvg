@@ -15,12 +15,12 @@ import { Scene08RealEstate } from "@/components/cinematic/Scene08RealEstate";
 import { Ending } from "@/components/cinematic/Ending";
 
 /**
- * Global Vista Group Interactive Movie — cinematic homepage storytelling
- * Scene 1 Opening → 2 Network → 3 Trade → 4 Marketplace → 5 AI
- * → 6 Business → 7 Investment → 8 Real Estate → 9 Ending
+ * Interactive Movie scaffold (plan):
+ * 01 Logo (GSAP) → 02 Earth (R3F spin +=3000) → 03 Global hops
+ * (Golden Arc → Glow → Pulse) → 04 Marketplace → 05 AI
+ * (Particles → Numbers → Charts → Connections) → 06–08 stubs → Ending
  *
- * Note: avoid next/dynamic ssr:false here — it triggers insertBefore
- * hydration crashes on GitHub Pages static export.
+ * MouseGlow: #D4AF37 blur 80px. Noise strength 0.02.
  */
 export function InteractiveMovie() {
   useEffect(() => {
@@ -38,13 +38,7 @@ export function InteractiveMovie() {
         className="movie-root movie-root--seamless"
         aria-label="Global Vista Group Interactive Movie"
       >
-        <GalaxyPhotoLayer className="movie-root__galaxy" mode="fixed" />
-        <div className="galaxy-backdrop movie-root__galaxy movie-root__galaxy--fx" aria-hidden>
-          <div className="galaxy-backdrop__nebula" />
-          <div className="galaxy-backdrop__stars galaxy-backdrop__stars--far" />
-          <div className="galaxy-backdrop__stars galaxy-backdrop__stars--near" />
-          <div className="galaxy-backdrop__dust" />
-        </div>
+        <GalaxyPhotoLayer className="movie-root__galaxy" mode="absolute" />
         <MouseGlow />
         <Scene01Logo />
         <Scene02Earth />

@@ -6,7 +6,7 @@ export type GlobalHop = {
   lon: number;
 };
 
-/** Trade / market hop order for Scene 2 Global Network */
+/** Trade / market hop order for Scene 3 Global */
 export const GLOBAL_ROUTE: GlobalHop[] = [
   { id: "usa", label: "USA", lat: 37.09, lon: -95.71 },
   { id: "taiwan", label: "Taiwan", lat: 23.7, lon: 120.96 },

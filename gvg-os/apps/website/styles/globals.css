@@ -899,6 +899,12 @@ a {
   padding: 2rem 1.25rem;
 }
 
+.opening-scene__copy--logo {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+}
+
 .opening-scene__logo {
   margin-bottom: 1rem;
   max-width: min(96vw, 1100px);
@@ -906,6 +912,71 @@ a {
   line-height: 1.08;
   letter-spacing: 0.12em;
   text-indent: 0.12em;
+}
+
+.opening-scene__logo--gvg {
+  margin: 0;
+  font-size: clamp(4.5rem, 18vw, 10rem);
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  color: #fff;
+  text-shadow: 0 0 48px rgba(212, 175, 55, 0.35);
+}
+
+/* Scene 02 — Earth scroll spin */
+.earth-scene {
+  display: grid;
+  place-items: center;
+}
+
+.earth-scene__stage {
+  position: absolute;
+  inset: 0;
+}
+
+.earth-scene__stage canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.earth-scene__copy {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 1.25rem;
+  pointer-events: none;
+}
+
+.earth-scene__eyebrow {
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: rgba(200, 163, 95, 0.85);
+}
+
+.earth-scene__copy h2 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 0.18em;
+}
+
+.earth-scene__copy p {
+  margin: 0.75rem 0 0;
+  color: var(--gv-muted);
+}
+
+.subpage {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: linear-gradient(180deg, #0b1f3a, #000);
+}
+
+.subpage a {
+  color: var(--gv-secondary);
+  border-bottom: 1px solid currentColor;
 }
 
 .opening-scene__brand {

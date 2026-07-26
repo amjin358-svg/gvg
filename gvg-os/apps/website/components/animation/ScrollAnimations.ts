@@ -48,7 +48,7 @@ type GlobalRouteOptions = {
 };
 
 /**
- * Scene 2 — pin · per hop Golden Arc → Glow → Pulse · supply-chain finale
+ * Scene 3 — pin · per hop Golden Arc → Glow → Pulse · supply-chain finale
  */
 export function createGlobalRouteTimeline({
   section,

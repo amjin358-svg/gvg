@@ -1,2 +1,1 @@
-/** Reserved for marketing UI primitives */
-export {};
+export { StubPage } from "@/components/ui/StubPage";

@@ -83,9 +83,9 @@ export function Scene04Marketplace() {
                 className="market-card"
                 style={{ transformStyle: "preserve-3d" }}
                 whileHover={{
-                  scale: 1.05,
-                  rotateX: 8,
-                  rotateY: 6,
+                  rotateY: 15,
+                  rotateX: 10,
+                  scale: 1.08,
                 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
               >
