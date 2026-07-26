@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
 import { createAiDataTimeline } from "@/components/animation/ScrollAnimations";
-import { BRAND_GOLD } from "@/lib/cinematic";
+import { AnimatedGrid } from "@/components/cinematic/AnimatedGrid";
+import { AI_LAYER, BRAND_GOLD } from "@/lib/cinematic";
 import { gsap, registerGsapPlugins } from "@/lib/gsap";
 
 const ParticleField = dynamic(
@@ -203,16 +204,23 @@ export function Scene05AI() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="scene scene--navy">
-      <div className="noise-overlay" />
-      <header className="ai-headline">
-        <h2 className="ai-headline__title">Artificial Intelligence</h2>
-        <p className="ai-headline__for">for</p>
-        <p className="ai-headline__sub">Global Business</p>
-      </header>
+    <section ref={sectionRef} className="scene scene--navy ai-scene">
+      {/* Layer 1 — Animated Grid · Gradient · Noise */}
+      <div
+        className="ai-layer ai-layer--1"
+        style={{ zIndex: AI_LAYER.atmosphere }}
+        aria-hidden
+      >
+        <div className="ai-gradient" />
+        <AnimatedGrid />
+        <div className="noise-overlay" />
+      </div>
+
+      {/* Layer 2 — Particles */}
       <div
         ref={particlesRef}
-        style={{ position: "absolute", inset: 0, opacity: 0 }}
+        className="ai-layer ai-layer--2"
+        style={{ zIndex: AI_LAYER.particles, opacity: 0 }}
       >
         <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
           <ambientLight intensity={0.6} />
@@ -230,186 +238,208 @@ export function Scene05AI() {
         />
       </div>
 
-      <div ref={numbersRef} className="ai-stage" style={{ opacity: 0 }}>
-        <div className="ai-numbers-stack">
-          <div className="ai-binary-flow" aria-label="Binary stream into AI">
-            {BINARY_ROWS.map((row, i) => {
-              if (row.kind === "bits") {
+      {/* Layer 4 — Glass Dashboard (plate under data widgets) */}
+      <div
+        className="ai-layer ai-layer--4 ai-glass-dashboard"
+        style={{ zIndex: AI_LAYER.glass }}
+        aria-hidden
+      >
+        <div className="ai-glass-dashboard__panel" />
+      </div>
+
+      {/* Layer 3 — Charts · Connections · Numbers */}
+      <div
+        className="ai-layer ai-layer--3"
+        style={{ zIndex: AI_LAYER.data }}
+      >
+        <header className="ai-headline">
+          <h2 className="ai-headline__title">Artificial Intelligence</h2>
+          <p className="ai-headline__for">for</p>
+          <p className="ai-headline__sub">Global Business</p>
+        </header>
+
+        <div ref={numbersRef} className="ai-stage" style={{ opacity: 0 }}>
+          <div className="ai-numbers-stack">
+            <div className="ai-binary-flow" aria-label="Binary stream into AI">
+              {BINARY_ROWS.map((row, i) => {
+                if (row.kind === "bits") {
+                  return (
+                    <div
+                      key={row.key}
+                      ref={(el) => {
+                        binaryRefs.current[i] = el;
+                      }}
+                      className="ai-binary-flow__bits"
+                    >
+                      {row.value}
+                    </div>
+                  );
+                }
+                if (row.kind === "label") {
+                  return (
+                    <div
+                      key={row.key}
+                      ref={(el) => {
+                        binaryRefs.current[i] = el;
+                      }}
+                      className="ai-binary-flow__ai"
+                    >
+                      {row.value}
+                    </div>
+                  );
+                }
                 return (
                   <div
                     key={row.key}
                     ref={(el) => {
                       binaryRefs.current[i] = el;
                     }}
-                    className="ai-binary-flow__bits"
+                    className="ai-binary-flow__arrow"
+                    aria-hidden
                   >
-                    {row.value}
-                  </div>
-                );
-              }
-              if (row.kind === "label") {
-                return (
-                  <div
-                    key={row.key}
-                    ref={(el) => {
-                      binaryRefs.current[i] = el;
-                    }}
-                    className="ai-binary-flow__ai"
-                  >
-                    {row.value}
-                  </div>
-                );
-              }
-              return (
-                <div
-                  key={row.key}
-                  ref={(el) => {
-                    binaryRefs.current[i] = el;
-                  }}
-                  className="ai-binary-flow__arrow"
-                  aria-hidden
-                >
-                  ↓
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="ai-digits" aria-label="Signal digits">
-            {DIGITS.map((d, i) => (
-              <span
-                key={`${d}-${i}`}
-                ref={(el) => {
-                  digitRefs.current[i] = el;
-                }}
-                className="ai-digit"
-              >
-                {d}
-              </span>
-            ))}
-          </div>
-
-          <div className="ai-kpis">
-            {KPIS.map((kpi, i) => (
-              <div
-                key={kpi.label}
-                ref={(el) => {
-                  kpiRefs.current[i] = el;
-                }}
-                className="ai-kpi"
-              >
-                <strong
-                  ref={
-                    kpi.kind === "counter"
-                      ? (el) => {
-                          counterValueRef.current = el;
-                        }
-                      : undefined
-                  }
-                >
-                  {kpi.value}
-                </strong>
-                <span>{kpi.label}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="ai-data-chain" aria-label="Cascading data signals">
-            {DATA_CHAIN.map((id, i) => (
-              <div key={id} className="ai-data-chain__step">
-                <div
-                  ref={(el) => {
-                    chainRefs.current[i] = el;
-                  }}
-                  className="ai-data-chain__id"
-                >
-                  {id}
-                </div>
-                {i < DATA_CHAIN.length - 1 ? (
-                  <div className="ai-data-chain__arrow" aria-hidden>
                     ↓
                   </div>
-                ) : null}
-              </div>
-            ))}
+                );
+              })}
+            </div>
+
+            <div className="ai-digits" aria-label="Signal digits">
+              {DIGITS.map((d, i) => (
+                <span
+                  key={`${d}-${i}`}
+                  ref={(el) => {
+                    digitRefs.current[i] = el;
+                  }}
+                  className="ai-digit"
+                >
+                  {d}
+                </span>
+              ))}
+            </div>
+
+            <div className="ai-kpis">
+              {KPIS.map((kpi, i) => (
+                <div
+                  key={kpi.label}
+                  ref={(el) => {
+                    kpiRefs.current[i] = el;
+                  }}
+                  className="ai-kpi"
+                >
+                  <strong
+                    ref={
+                      kpi.kind === "counter"
+                        ? (el) => {
+                            counterValueRef.current = el;
+                          }
+                        : undefined
+                    }
+                  >
+                    {kpi.value}
+                  </strong>
+                  <span>{kpi.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="ai-data-chain" aria-label="Cascading data signals">
+              {DATA_CHAIN.map((id, i) => (
+                <div key={id} className="ai-data-chain__step">
+                  <div
+                    ref={(el) => {
+                      chainRefs.current[i] = el;
+                    }}
+                    className="ai-data-chain__id"
+                  >
+                    {id}
+                  </div>
+                  {i < DATA_CHAIN.length - 1 ? (
+                    <div className="ai-data-chain__arrow" aria-hidden>
+                      ↓
+                    </div>
+                  ) : null}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div ref={chartsRef} className="ai-stage" style={{ opacity: 0 }}>
-        <div className="ai-metrics">
-          {CHART_METRICS.map((metric, i) => (
-            <div key={metric.label} className="ai-metric">
-              <div className="ai-metric__label">{metric.label}</div>
-              <div className="ai-metric__track" aria-hidden>
-                <div
-                  ref={(el) => {
-                    barRefs.current[i] = el;
-                  }}
-                  className="ai-metric__fill"
-                  style={{ width: `${(metric.blocks / metric.max) * 100}%` }}
-                >
-                  {"█".repeat(metric.blocks)}
+        <div ref={chartsRef} className="ai-stage" style={{ opacity: 0 }}>
+          <div className="ai-metrics">
+            {CHART_METRICS.map((metric, i) => (
+              <div key={metric.label} className="ai-metric">
+                <div className="ai-metric__label">{metric.label}</div>
+                <div className="ai-metric__track" aria-hidden>
+                  <div
+                    ref={(el) => {
+                      barRefs.current[i] = el;
+                    }}
+                    className="ai-metric__fill"
+                    style={{ width: `${(metric.blocks / metric.max) * 100}%` }}
+                  >
+                    {"█".repeat(metric.blocks)}
+                  </div>
                 </div>
               </div>
+            ))}
+            <div className="ai-metric ai-metric--score">
+              <div className="ai-metric__label">AI Score</div>
+              <div className="ai-metric__score">98%</div>
+            </div>
+          </div>
+        </div>
+
+        <div ref={connectionsRef} className="ai-stage" style={{ opacity: 0 }}>
+          <div
+            className="ai-network"
+            aria-label="Revenue Market Inventory CRM network"
+          >
+            <div className="ai-network__canvas">
+              <Canvas camera={{ position: [0, 0, 4.2], fov: 45 }}>
+                <ambientLight intensity={0.4} />
+                <NetworkLines mode="crm" />
+              </Canvas>
+            </div>
+            <ul className="ai-network__labels">
+              <li className="ai-network__labels-left">Revenue</li>
+              <li className="ai-network__labels-right ai-network__labels-right--top">
+                Market
+              </li>
+              <li className="ai-network__labels-right ai-network__labels-right--mid">
+                Inventory
+              </li>
+              <li className="ai-network__labels-right ai-network__labels-right--bot">
+                CRM
+              </li>
+            </ul>
+            <p className="ai-network__pipeline">
+              LineGeometry → TubeGeometry → Glow Shader
+            </p>
+          </div>
+        </div>
+
+        <nav className="ai-stage-rail" aria-label="AI data beat stages">
+          {STAGE_RAIL.map((label, i) => (
+            <div key={label} className="ai-stage-rail__step">
+              <span
+                ref={(el) => {
+                  railRefs.current[i] = el;
+                }}
+                className="ai-stage-rail__label"
+              >
+                {label}
+              </span>
+              {i < STAGE_RAIL.length - 1 ? (
+                <span className="ai-stage-rail__arrow" aria-hidden>
+                  ↓
+                </span>
+              ) : null}
             </div>
           ))}
-          <div className="ai-metric ai-metric--score">
-            <div className="ai-metric__label">AI Score</div>
-            <div className="ai-metric__score">98%</div>
-          </div>
-        </div>
+        </nav>
       </div>
 
-      <div ref={connectionsRef} className="ai-stage" style={{ opacity: 0 }}>
-        <div
-          className="ai-network"
-          aria-label="Revenue Market Inventory CRM network"
-        >
-          <div className="ai-network__canvas">
-            <Canvas camera={{ position: [0, 0, 4.2], fov: 45 }}>
-              <color attach="background" args={["#000000"]} />
-              <ambientLight intensity={0.4} />
-              <NetworkLines mode="crm" />
-            </Canvas>
-          </div>
-          <ul className="ai-network__labels">
-            <li className="ai-network__labels-left">Revenue</li>
-            <li className="ai-network__labels-right ai-network__labels-right--top">
-              Market
-            </li>
-            <li className="ai-network__labels-right ai-network__labels-right--mid">
-              Inventory
-            </li>
-            <li className="ai-network__labels-right ai-network__labels-right--bot">
-              CRM
-            </li>
-          </ul>
-          <p className="ai-network__pipeline">
-            LineGeometry → TubeGeometry → Glow Shader
-          </p>
-        </div>
-      </div>
-
-      <nav className="ai-stage-rail" aria-label="AI data beat stages">
-        {STAGE_RAIL.map((label, i) => (
-          <div key={label} className="ai-stage-rail__step">
-            <span
-              ref={(el) => {
-                railRefs.current[i] = el;
-              }}
-              className="ai-stage-rail__label"
-            >
-              {label}
-            </span>
-            {i < STAGE_RAIL.length - 1 ? (
-              <span className="ai-stage-rail__arrow" aria-hidden>
-                ↓
-              </span>
-            ) : null}
-          </div>
-        ))}
-      </nav>
+      {/* Layer 5 — Mouse Glow lives on InteractiveMovie (z-index 50) */}
     </section>
   );
 }

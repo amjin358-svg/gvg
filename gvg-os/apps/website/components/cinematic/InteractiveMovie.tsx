@@ -33,6 +33,7 @@ const Scene05AI = dynamic(
 export function InteractiveMovie() {
   return (
     <main className="movie-root">
+      {/* Layer 5 — Mouse Glow (topmost cinematic overlay) */}
       <MouseGlow />
       <Scene01Logo />
       <Scene02Earth />

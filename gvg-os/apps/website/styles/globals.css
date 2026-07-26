@@ -227,13 +227,87 @@ a {
   color: var(--gv-muted);
 }
 
+.ai-scene {
+  isolation: isolate;
+}
+
+.ai-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ai-layer--1,
+.ai-layer--2 {
+  overflow: hidden;
+}
+
+.ai-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, #0b1f3a 0%, #000 70%),
+    linear-gradient(180deg, #0b1f3a 0%, #000 100%);
+}
+
+.ai-animated-grid {
+  position: absolute;
+  inset: -20% -10% 0;
+  perspective: 600px;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 35%, #000 75%, transparent 100%);
+}
+
+.ai-animated-grid__plane {
+  position: absolute;
+  inset: 0;
+  transform: rotateX(62deg) translateY(8%);
+  background-image:
+    linear-gradient(rgba(200, 163, 95, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 163, 95, 0.16) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: ai-grid-drift 18s linear infinite;
+  opacity: 0.55;
+}
+
+@keyframes ai-grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 48px;
+  }
+}
+
+.ai-glass-dashboard {
+  display: grid;
+  place-items: center;
+  padding: clamp(4.5rem, 12vh, 7rem) 1.25rem 2rem;
+}
+
+.ai-glass-dashboard__panel {
+  width: min(92vw, 40rem);
+  height: min(68svh, 28rem);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(200, 163, 95, 0.28);
+  background: linear-gradient(
+    160deg,
+    rgba(11, 31, 58, 0.55),
+    rgba(0, 0, 0, 0.35)
+  );
+  backdrop-filter: blur(18px) saturate(1.15);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 40px rgba(200, 163, 95, 0.08);
+}
+
 .ai-headline {
   pointer-events: none;
   position: absolute;
   top: clamp(1.5rem, 4vw, 3rem);
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 1;
   text-align: center;
   padding: 0 1rem;
 }

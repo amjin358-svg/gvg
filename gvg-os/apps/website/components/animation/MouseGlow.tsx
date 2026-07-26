@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 /**
+ * Layer 5 — Mouse Glow
  * Fixed gold bloom that tracks the pointer.
  * pointer-events-none so it never blocks CTAs.
  */
@@ -49,7 +50,7 @@ export function MouseGlow() {
         background: "radial-gradient(circle,#D4AF37,transparent)",
         filter: "blur(80px)",
         opacity: 0.45,
-        zIndex: 50,
+        zIndex: 50, // Layer 5 — above all scene layers
         mixBlendMode: "screen",
       }}
     />
