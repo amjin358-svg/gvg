@@ -10,7 +10,7 @@ import { ValueBar } from "@/components/home/ValueBar";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Marketing homepage — continuous full-bleed galaxy, gold-foil brand mark.
+ * Marketing homepage — continuous full-bleed galaxy, wordmark branding.
  */
 export function HomePage() {
   const root = useRef<HTMLDivElement>(null);
