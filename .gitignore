@@ -34,10 +34,14 @@ yarn-error.log*
 .env*
 !.env.example
 
+# Cursor MCP with real API keys (use mcp.example.json in git)
+.cursor/mcp.json
+
 # Stitch local secrets / downloaded assets (keep README)
 .stitch/screens/
 .stitch/exports/
 .stitch/DESIGN.md
+
 
 # vercel
 .vercel
