@@ -68,7 +68,7 @@ export function Ending() {
           </p>
           <div ref={cta}>
             <Link className="ending-scene__cta" href="/">
-              Return to Homepage
+              Back to Homepage
             </Link>
           </div>
         </div>

@@ -742,6 +742,13 @@ a {
   isolation: isolate;
 }
 
+.opening-scene__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.85;
+}
+
 .galaxy-backdrop {
   position: absolute;
   inset: 0;
@@ -1487,12 +1494,53 @@ a {
 
 .home-root {
   position: relative;
-  background:
-    radial-gradient(ellipse 80% 50% at 70% 20%, rgba(60, 100, 220, 0.18), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(100, 70, 200, 0.12), transparent 50%),
-    linear-gradient(180deg, var(--os-bg) 0%, var(--os-navy) 40%, #000 100%);
+  background: #01040c;
   color: var(--gv-text);
   overflow-x: hidden;
+}
+
+.galaxy-photo,
+.home-root__galaxy {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.home-root__galaxy--fx {
+  opacity: 0.65;
+  mix-blend-mode: screen;
+}
+
+.home-root > :not(.home-root__galaxy):not(.galaxy-photo) {
+  position: relative;
+  z-index: 1;
+}
+
+.home-about {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5rem) 1.5rem;
+  text-align: center;
+}
+
+.home-about__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(126, 182, 255, 0.8);
+}
+
+.home-about h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+
+.home-about p {
+  margin: 1rem 0 0;
+  line-height: 1.75;
+  color: rgba(220, 230, 255, 0.72);
 }
 
 .site-header {
@@ -1633,6 +1681,7 @@ a {
   position: absolute;
   inset: 0;
   z-index: 0;
+  mask-image: radial-gradient(ellipse 70% 70% at 62% 48%, #000 20%, transparent 78%);
 }
 
 .home-hero__stage canvas {

@@ -1,12 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { Canvas } from "@react-three/fiber";
-
-const HeroGlobe = dynamic(
-  () => import("@/components/three/HeroGlobe").then((m) => m.HeroGlobe),
-  { ssr: false },
-);
+import { useRef } from "react";
+import Link from "next/link";
+import { CanvasSafe } from "@/components/three/CanvasSafe";
+import { HeroGlobe } from "@/components/three/HeroGlobe";
+import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 const STATS = [
   {
@@ -25,8 +23,24 @@ const STATS = [
     label: "Core Modules",
     icon: (
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden>
-        <rect x="3" y="14" width="18" height="4" rx="1" fill="currentColor" opacity="0.45" />
-        <rect x="5" y="9" width="14" height="4" rx="1" fill="currentColor" opacity="0.7" />
+        <rect
+          x="3"
+          y="14"
+          width="18"
+          height="4"
+          rx="1"
+          fill="currentColor"
+          opacity="0.45"
+        />
+        <rect
+          x="5"
+          y="9"
+          width="14"
+          height="4"
+          rx="1"
+          fill="currentColor"
+          opacity="0.7"
+        />
         <rect x="7" y="4" width="10" height="4" rx="1" fill="currentColor" />
       </svg>
     ),
@@ -70,17 +84,58 @@ const STATS = [
 ];
 
 export function HeroCinematic() {
+  const root = useRef<HTMLElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLElement>(null);
+  const scrollRef = useRef<HTMLAnchorElement>(null);
+
+  useGSAP(
+    () => {
+      registerGsapPlugins();
+      if (!root.current || !copyRef.current || !statsRef.current) return;
+
+      const lines = copyRef.current.querySelectorAll(
+        ".home-hero__eyebrow, .home-hero__title, .home-hero__lead, .home-hero__actions",
+      );
+      const stats = statsRef.current.querySelectorAll(".home-stat");
+
+      gsap.set(lines, { opacity: 0, y: 28 });
+      gsap.set(stats, { opacity: 0, x: 24 });
+      if (scrollRef.current) gsap.set(scrollRef.current, { opacity: 0, y: 12 });
+
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.to(lines, { opacity: 1, y: 0, duration: 0.9, stagger: 0.12 }, 0.15)
+        .to(stats, { opacity: 1, x: 0, duration: 0.7, stagger: 0.1 }, 0.55)
+        .to(
+          scrollRef.current,
+          { opacity: 1, y: 0, duration: 0.6 },
+          1.1,
+        );
+
+      gsap.to(stats, {
+        y: -6,
+        duration: 2.8,
+        stagger: { each: 0.35, yoyo: true, repeat: -1 },
+        ease: "sine.inOut",
+      });
+    },
+    { scope: root },
+  );
+
   return (
-    <section className="home-hero" id="overview">
+    <section ref={root} className="home-hero" id="overview">
       <div className="home-hero__stage" aria-hidden>
-        <Canvas camera={{ position: [0, 0, 5.2], fov: 42 }}>
+        <CanvasSafe
+          camera={{ position: [0.2, 0.05, 5.1], fov: 40 }}
+          fallback={<div className="opening-scene__fallback" />}
+        >
           <HeroGlobe />
-        </Canvas>
+        </CanvasSafe>
         <div className="home-hero__flare" />
         <div className="home-hero__vignette" />
       </div>
 
-      <div className="home-hero__content">
+      <div ref={copyRef} className="home-hero__content">
         <p className="home-hero__eyebrow">Global Vista Group</p>
         <h1 className="home-hero__title">
           One OS.{" "}
@@ -95,14 +150,18 @@ export function HeroCinematic() {
           <a className="btn btn--glow" href="#modules">
             Explore Modules <span aria-hidden>→</span>
           </a>
-          <a className="btn btn--ghost" href="#cinematic">
+          <Link className="btn btn--ghost" href="/experience">
             <span className="btn__play" aria-hidden />
             Watch Movie
-          </a>
+          </Link>
         </div>
       </div>
 
-      <aside className="home-hero__stats" aria-label="Platform metrics">
+      <aside
+        ref={statsRef}
+        className="home-hero__stats"
+        aria-label="Platform metrics"
+      >
         {STATS.map((stat) => (
           <div key={stat.label} className="home-stat">
             <span className="home-stat__icon">{stat.icon}</span>
@@ -114,7 +173,7 @@ export function HeroCinematic() {
         ))}
       </aside>
 
-      <a className="home-hero__scroll" href="#modules">
+      <a ref={scrollRef} className="home-hero__scroll" href="#modules">
         <span className="home-hero__scroll-mouse" aria-hidden />
         Scroll to explore
       </a>

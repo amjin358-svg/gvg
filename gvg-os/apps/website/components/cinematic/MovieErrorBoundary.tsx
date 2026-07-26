@@ -29,8 +29,11 @@ export class MovieErrorBoundary extends Component<Props, State> {
             <p className="ending-scene__line" style={{ opacity: 0.7 }}>
               Reload to restart the cinematic experience.
             </p>
-            <a className="ending-scene__cta" href="./">
-              Return to Homepage
+            <a
+              className="ending-scene__cta"
+              href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/`}
+            >
+              Back to Homepage
             </a>
           </div>
         </main>

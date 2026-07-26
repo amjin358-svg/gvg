@@ -5,6 +5,7 @@ import SplitType from "split-type";
 import { Earth } from "@/components/three/Earth";
 import { Stars } from "@/components/three/Stars";
 import { CanvasSafe } from "@/components/three/CanvasSafe";
+import { GalaxyPhotoLayer } from "@/components/home/GalaxyPhotoLayer";
 import { revertSplit } from "@/components/animation/SplitText";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
@@ -61,24 +62,24 @@ export function Scene01Logo() {
       gsap.set(chars, { opacity: 0, y: 40, scale: 0.6 });
 
       gsap
-        .timeline({ defaults: { ease: "power2.out" } })
-        .to(stage.current, { opacity: 1, scale: 1, duration: 2.4 }, 0)
+        .timeline({ defaults: { ease: "power3.out" } })
+        .to(stage.current, { opacity: 1, scale: 1, duration: 2.8 }, 0)
         .to(
           chars,
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 1.1,
-            stagger: 0.1,
+            duration: 1.25,
+            stagger: 0.045,
             ease: "power3.out",
           },
-          2.2,
+          2.35,
         )
-        .to(brand.current, { opacity: 1, y: 0, duration: 0.9 }, 3.6)
-        .to(lineA.current, { opacity: 1, y: 0, duration: 0.75 }, 4.5)
-        .to(lineB.current, { opacity: 1, y: 0, duration: 0.75 }, 5.05)
-        .to(hint.current, { opacity: 1, y: 0, duration: 0.7 }, 6.0);
+        .to(brand.current, { opacity: 1, y: 0, duration: 1 }, 4.0)
+        .to(lineA.current, { opacity: 1, y: 0, duration: 0.85 }, 4.85)
+        .to(lineB.current, { opacity: 1, y: 0, duration: 0.85 }, 5.35)
+        .to(hint.current, { opacity: 1, y: 0, duration: 0.75 }, 6.2);
 
       return () => {
         revertSplit(split);
@@ -90,6 +91,7 @@ export function Scene01Logo() {
   return (
     <div ref={root}>
       <section className="scene scene--cosmos opening-scene" aria-label="Opening">
+        <GalaxyPhotoLayer className="opening-scene__photo" />
         <div className="galaxy-backdrop" aria-hidden>
           <div className="galaxy-backdrop__nebula" />
           <div className="galaxy-backdrop__stars galaxy-backdrop__stars--far" />

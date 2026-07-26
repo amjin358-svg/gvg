@@ -1,12 +1,14 @@
 "use client";
 
+import Link from "next/link";
+
 const NAV = [
   { href: "#overview", label: "Overview" },
   { href: "#modules", label: "Modules" },
   { href: "#solutions", label: "Solutions" },
-  { href: "/marketplace", label: "Marketplace" },
-  { href: "/ai", label: "AI Services" },
-  { href: "#about", label: "About Global Vista Group" },
+  { href: "/marketplace", label: "Marketplace", external: true },
+  { href: "/ai", label: "AI Services", external: true },
+  { href: "#about", label: "About" },
 ];
 
 export function SiteHeader() {
@@ -42,11 +44,17 @@ export function SiteHeader() {
       </a>
 
       <nav className="site-header__nav" aria-label="Primary">
-        {NAV.map((item) => (
-          <a key={item.href} href={item.href}>
-            {item.label}
-          </a>
-        ))}
+        {NAV.map((item) =>
+          item.external ? (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
+          ) : (
+            <a key={item.href} href={item.href}>
+              {item.label}
+            </a>
+          ),
+        )}
       </nav>
 
       <a className="site-header__cta" href="#get-started">

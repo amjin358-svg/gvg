@@ -1,6 +1,6 @@
-﻿import { InteractiveMovie } from "@/components/cinematic/InteractiveMovie";
+﻿import { HomePage } from "@/components/home/HomePage";
 
-/** Homepage = cinematic Interactive Movie (GSAP × ScrollTrigger storytelling) */
+/** Homepage — Global Vista Group cinematic landing (design mock baseline) */
 export default function MarketingHomePage() {
-  return <InteractiveMovie />;
+  return <HomePage />;
 }

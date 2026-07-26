@@ -1,49 +1,72 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { useRef } from "react";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { GalaxyPhotoLayer } from "@/components/home/GalaxyPhotoLayer";
 import { HeroCinematic } from "@/components/home/HeroCinematic";
 import { ModulesSection } from "@/components/home/ModulesSection";
 import { ValueBar } from "@/components/home/ValueBar";
+import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
-const InteractiveMovie = dynamic(
-  () =>
-    import("@/components/cinematic/InteractiveMovie").then(
-      (m) => m.InteractiveMovie,
-    ),
-  { ssr: false },
-);
-
-/** Marketing landing + embedded Cinematic Experience */
+/**
+ * Marketing homepage matching the Global Vista Group design mock:
+ * galaxy hero → modules → values. Movie lives at /experience.
+ */
 export function HomePage() {
+  const root = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      registerGsapPlugins();
+      if (!root.current) return;
+
+      const sections = root.current.querySelectorAll(
+        ".home-modules, .home-values, .home-about, .home-footer",
+      );
+      gsap.from(sections, {
+        opacity: 0,
+        y: 48,
+        duration: 1.05,
+        stagger: 0.14,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    },
+    { scope: root },
+  );
+
   return (
-    <div className="home-root">
+    <div ref={root} className="home-root">
+      <GalaxyPhotoLayer className="home-root__galaxy" />
+      <div className="galaxy-backdrop home-root__galaxy home-root__galaxy--fx" aria-hidden>
+        <div className="galaxy-backdrop__nebula" />
+        <div className="galaxy-backdrop__stars galaxy-backdrop__stars--far" />
+        <div className="galaxy-backdrop__stars galaxy-backdrop__stars--near" />
+        <div className="galaxy-backdrop__dust" />
+      </div>
+
       <SiteHeader />
       <HeroCinematic />
       <ModulesSection />
       <ValueBar />
 
-      <section className="home-cinematic-gate" id="cinematic">
-        <div className="home-cinematic-gate__inner" id="about">
-          <p className="home-cinematic-gate__eyebrow">Cinematic Experience</p>
-          <h2>Enter the Interactive Movie</h2>
-          <p>
-            從品牌標誌到地球航線、市場合作與 AI 決策——以捲動敘事感受 Global Vista Group 的全球願景。
-          </p>
-          <a className="btn btn--glow" href="#movie-start">
-            Begin Experience <span aria-hidden>↓</span>
-          </a>
-        </div>
+      <section className="home-about" id="about">
+        <p className="home-about__eyebrow">About Global Vista Group</p>
+        <h2>Connecting Markets. Creating Value.</h2>
+        <p>
+          Global Vista Group 以電影級敘事與一體化營運系統，串連全球貿易、市場合作、
+          AI 決策與企業服務——從第一眼宇宙地球，到完整商業旅程。
+        </p>
       </section>
-
-      <div id="movie-start">
-        <InteractiveMovie />
-      </div>
 
       <footer className="home-footer" id="get-started">
         <div>
           <strong>Global Vista Group</strong>
-          <p>Connecting Markets. Creating Value.</p>
+          <p>Building the Future of Global Business.</p>
         </div>
         <a className="btn btn--glow" href="mailto:hello@globalvistagroup.com">
           Get Started
