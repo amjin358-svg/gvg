@@ -124,6 +124,31 @@ a {
   pointer-events: none;
 }
 
+.ai-numbers-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  padding: 1rem;
+}
+
+.ai-digits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.65rem, 2.5vw, 1.4rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-digit {
+  display: inline-block;
+  font-size: clamp(2.4rem, 8vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--gv-secondary);
+  text-shadow: 0 0 28px rgba(200, 163, 95, 0.4);
+}
+
 .ai-kpis {
   display: flex;
   flex-wrap: wrap;
@@ -149,7 +174,6 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 0.15rem;
-  margin-bottom: 2rem;
   font-variant-numeric: tabular-nums;
 }
 

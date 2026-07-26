@@ -12,13 +12,16 @@ const ParticleField = dynamic(
   { ssr: false },
 );
 
+/** Particles resolve into these digits */
+const DIGITS = ["0", "1", "8", "5", "3", "9"];
+
 const KPIS = [
-  { value: "50+", label: "Markets" },
-  { value: "10k+", label: "SKUs" },
-  { value: "5k+", label: "Partners" },
+  { value: "99.7%", label: "AI" },
+  { value: "24M", label: "GDP" },
+  { value: "$18.5B", label: "ROI" },
 ];
 
-/** Cascading ledger / signal IDs for the Numbers beat */
+/** Cascading ledger / signal IDs */
 const DATA_CHAIN = [18394829, 18394841, 18395010];
 
 const BAR_HEIGHTS = [45, 70, 55, 90, 65, 80, 50];
@@ -31,6 +34,8 @@ export function Scene05AI() {
   const connectionsRef = useRef<HTMLDivElement>(null);
   const barRefs = useRef<(HTMLDivElement | null)[]>([]);
   const chainRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const digitRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const kpiRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     registerGsapPlugins();
@@ -57,7 +62,44 @@ export function Scene05AI() {
         });
       }
 
+      const digits = digitRefs.current.filter(Boolean) as HTMLElement[];
+      const kpis = kpiRefs.current.filter(Boolean) as HTMLElement[];
       const chain = chainRefs.current.filter(Boolean) as HTMLElement[];
+
+      if (digits.length) {
+        gsap.set(digits, { opacity: 0, y: 40, scale: 0.6 });
+        gsap.to(digits, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: "sine.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+
+      if (kpis.length) {
+        gsap.set(kpis, { opacity: 0, y: 28 });
+        gsap.to(kpis, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.18,
+          ease: "sine.out",
+          delay: 0.9,
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+
       if (chain.length) {
         gsap.set(chain, { opacity: 0, y: -24 });
         gsap.to(chain, {
@@ -66,7 +108,7 @@ export function Scene05AI() {
           duration: 1.1,
           stagger: 0.45,
           ease: "sine.out",
-          delay: 0.4,
+          delay: 1.6,
           scrollTrigger: {
             trigger: section,
             start: "top top",
@@ -90,7 +132,6 @@ export function Scene05AI() {
           <ambientLight intensity={0.6} />
           <ParticleField />
         </Canvas>
-        {/* Soft gold glow layer */}
         <div
           aria-hidden
           style={{
@@ -103,37 +144,56 @@ export function Scene05AI() {
         />
       </div>
 
-      <div
-        ref={numbersRef}
-        className="ai-stage"
-        style={{ opacity: 0 }}
-      >
-        <div className="ai-data-chain" aria-label="Cascading data signals">
-          {DATA_CHAIN.map((id, i) => (
-            <div key={id} className="ai-data-chain__step">
-              <div
+      <div ref={numbersRef} className="ai-stage" style={{ opacity: 0 }}>
+        <div className="ai-numbers-stack">
+          <div className="ai-digits" aria-label="Signal digits">
+            {DIGITS.map((d, i) => (
+              <span
+                key={`${d}-${i}`}
                 ref={(el) => {
-                  chainRefs.current[i] = el;
+                  digitRefs.current[i] = el;
                 }}
-                className="ai-data-chain__id"
+                className="ai-digit"
               >
-                {id}
+                {d}
+              </span>
+            ))}
+          </div>
+
+          <div className="ai-kpis">
+            {KPIS.map((kpi, i) => (
+              <div
+                key={kpi.label}
+                ref={(el) => {
+                  kpiRefs.current[i] = el;
+                }}
+                className="ai-kpi"
+              >
+                <strong>{kpi.value}</strong>
+                <span>{kpi.label}</span>
               </div>
-              {i < DATA_CHAIN.length - 1 ? (
-                <div className="ai-data-chain__arrow" aria-hidden>
-                  ↓
+            ))}
+          </div>
+
+          <div className="ai-data-chain" aria-label="Cascading data signals">
+            {DATA_CHAIN.map((id, i) => (
+              <div key={id} className="ai-data-chain__step">
+                <div
+                  ref={(el) => {
+                    chainRefs.current[i] = el;
+                  }}
+                  className="ai-data-chain__id"
+                >
+                  {id}
                 </div>
-              ) : null}
-            </div>
-          ))}
-        </div>
-        <div className="ai-kpis">
-          {KPIS.map((kpi) => (
-            <div key={kpi.label} className="ai-kpi">
-              <strong>{kpi.value}</strong>
-              <span>{kpi.label}</span>
-            </div>
-          ))}
+                {i < DATA_CHAIN.length - 1 ? (
+                  <div className="ai-data-chain__arrow" aria-hidden>
+                    ↓
+                  </div>
+                ) : null}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
