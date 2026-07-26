@@ -347,32 +347,84 @@ export function Scene05AI() {
       </div>
 
       <div ref={connectionsRef} className="ai-stage" style={{ opacity: 0 }}>
-        <svg width="320" height="180" viewBox="0 0 320 180">
-          {[
-            [40, 90],
-            [120, 40],
-            [200, 120],
-            [280, 60],
-          ].map(([x, y], i, arr) => {
-            const next = arr[i + 1];
-            return (
-              <g key={i}>
-                {next ? (
-                  <line
-                    x1={x}
-                    y1={y}
-                    x2={next[0]}
-                    y2={next[1]}
-                    stroke={BRAND_GOLD}
-                    strokeWidth="1.5"
-                    opacity={0.7}
-                  />
-                ) : null}
-                <circle cx={x} cy={y} r="6" fill={BRAND_GOLD} />
-              </g>
-            );
-          })}
-        </svg>
+        <div className="ai-network" aria-label="Revenue Market Inventory CRM network">
+          <svg
+            className="ai-network__svg"
+            viewBox="0 0 320 280"
+            width="320"
+            height="280"
+          >
+            {/* Vertical spine */}
+            <line
+              x1="80"
+              y1="40"
+              x2="80"
+              y2="240"
+              stroke={BRAND_GOLD}
+              strokeWidth="1.5"
+              opacity="0.55"
+            />
+            {/* Horizontal links */}
+            <line
+              x1="80"
+              y1="40"
+              x2="240"
+              y2="40"
+              stroke={BRAND_GOLD}
+              strokeWidth="1.75"
+              opacity="0.85"
+            />
+            <line
+              x1="80"
+              y1="140"
+              x2="240"
+              y2="140"
+              stroke={BRAND_GOLD}
+              strokeWidth="1.75"
+              opacity="0.85"
+            />
+            <line
+              x1="80"
+              y1="240"
+              x2="240"
+              y2="240"
+              stroke={BRAND_GOLD}
+              strokeWidth="1.75"
+              opacity="0.85"
+            />
+            {/* Nodes */}
+            {[
+              [80, 40],
+              [240, 40],
+              [80, 140],
+              [240, 140],
+              [80, 240],
+              [240, 240],
+            ].map(([cx, cy], i) => (
+              <circle
+                key={i}
+                cx={cx}
+                cy={cy}
+                r="7"
+                fill={BRAND_GOLD}
+                className="ai-network__node"
+              />
+            ))}
+            {/* Labels */}
+            <text x="80" y="22" textAnchor="middle" className="ai-network__label">
+              Revenue
+            </text>
+            <text x="240" y="22" textAnchor="middle" className="ai-network__label">
+              Market
+            </text>
+            <text x="240" y="122" textAnchor="middle" className="ai-network__label">
+              Inventory
+            </text>
+            <text x="240" y="222" textAnchor="middle" className="ai-network__label">
+              CRM
+            </text>
+          </svg>
+        </div>
       </div>
 
       <div

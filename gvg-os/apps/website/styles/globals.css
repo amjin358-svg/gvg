@@ -355,6 +355,30 @@ a {
   text-shadow: 0 0 24px rgba(212, 175, 55, 0.4);
 }
 
+.ai-network {
+  display: grid;
+  place-items: center;
+  width: min(92vw, 22rem);
+}
+
+.ai-network__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 0 12px rgba(200, 163, 95, 0.35));
+}
+
+.ai-network__label {
+  fill: var(--gv-muted);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ai-network__node {
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.55));
+}
+
 .scene-stub {
   display: grid;
   place-items: center;
