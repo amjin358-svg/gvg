@@ -1,6 +1,7 @@
 "use client";
 
 import { Component, type ErrorInfo, type ReactNode } from "react";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 
 type Props = { children: ReactNode };
 type State = { error: Error | null };
@@ -22,10 +23,7 @@ export class MovieErrorBoundary extends Component<Props, State> {
       return (
         <main className="movie-root ending-scene" aria-label="Global Vista Group">
           <div className="ending-scene__mark">
-            <h1 className="logo">Global Vista Group</h1>
-            <p className="ending-scene__line">
-              Connecting Markets. Creating Value.
-            </p>
+            <BrandLogo size="lg" />
             <p className="ending-scene__line" style={{ opacity: 0.7 }}>
               Reload to restart the cinematic experience.
             </p>

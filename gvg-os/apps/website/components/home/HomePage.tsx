@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { GalaxyPhotoLayer } from "@/components/home/GalaxyPhotoLayer";
 import { HeroCinematic } from "@/components/home/HeroCinematic";
 import { ModulesSection } from "@/components/home/ModulesSection";
@@ -9,8 +10,7 @@ import { ValueBar } from "@/components/home/ValueBar";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Marketing homepage matching the Global Vista Group design mock:
- * galaxy hero → modules → values. Movie lives at /experience.
+ * Marketing homepage — continuous full-bleed galaxy, gold-foil brand mark.
  */
 export function HomePage() {
   const root = useRef<HTMLDivElement>(null);
@@ -25,13 +25,13 @@ export function HomePage() {
       );
       gsap.from(sections, {
         opacity: 0,
-        y: 48,
+        y: 36,
         duration: 1.05,
-        stagger: 0.14,
+        stagger: 0.12,
         ease: "power3.out",
         scrollTrigger: {
-          trigger: root.current,
-          start: "top 80%",
+          trigger: ".home-modules",
+          start: "top 85%",
           toggleActions: "play none none reverse",
         },
       });
@@ -40,9 +40,13 @@ export function HomePage() {
   );
 
   return (
-    <div ref={root} className="home-root">
-      <GalaxyPhotoLayer className="home-root__galaxy" />
-      <div className="galaxy-backdrop home-root__galaxy home-root__galaxy--fx" aria-hidden>
+    <div ref={root} className="home-root home-root--seamless">
+      {/* Single continuous full-bleed plate — no section seams */}
+      <GalaxyPhotoLayer className="home-root__galaxy" mode="absolute" />
+      <div
+        className="galaxy-backdrop home-root__galaxy home-root__galaxy--fx"
+        aria-hidden
+      >
         <div className="galaxy-backdrop__nebula" />
         <div className="galaxy-backdrop__stars galaxy-backdrop__stars--far" />
         <div className="galaxy-backdrop__stars galaxy-backdrop__stars--near" />
@@ -55,6 +59,7 @@ export function HomePage() {
       <ValueBar />
 
       <section className="home-about" id="about">
+        <BrandLogo size="lg" className="home-about__logo" />
         <p className="home-about__eyebrow">About Global Vista Group</p>
         <h2>Connecting Markets. Creating Value.</h2>
         <p>
@@ -64,9 +69,8 @@ export function HomePage() {
       </section>
 
       <footer className="home-footer" id="get-started">
-        <div>
-          <strong>Global Vista Group</strong>
-          <p>Building the Future of Global Business.</p>
+        <div className="home-footer__brand">
+          <BrandLogo size="md" />
         </div>
         <a className="btn btn--glow" href="mailto:hello@globalvistagroup.com">
           Get Started

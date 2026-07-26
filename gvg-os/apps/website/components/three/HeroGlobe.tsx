@@ -165,8 +165,7 @@ export function HeroGlobe() {
 
   return (
     <>
-      <color attach="background" args={["#01040c"]} />
-      <fog attach="fog" args={["#01040c", 7, 18]} />
+      <fog attach="fog" args={["#01040c", 8, 20]} />
       <ambientLight intensity={0.32} />
       <directionalLight position={[-4.2, 2.2, 3]} intensity={2.4} color="#b7d4ff" />
       <directionalLight position={[3.2, -1.2, 2]} intensity={0.7} color="#7a63ff" />

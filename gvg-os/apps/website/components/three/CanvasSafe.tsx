@@ -83,11 +83,12 @@ export function CanvasSafe({
           {...props}
           gl={{
             antialias: true,
+            alpha: true,
             powerPreference: "default",
             failIfMajorPerformanceCaveat: false,
           }}
           onCreated={({ gl }) => {
-            gl.setClearColor("#020b1c");
+            gl.setClearColor(0x000000, 0);
           }}
         >
           {children}

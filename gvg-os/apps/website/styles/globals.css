@@ -42,13 +42,47 @@ a {
 .movie-root {
   position: relative;
   overflow-x: hidden;
-  background: var(--gv-black);
+  background: #01040c;
+}
+
+.movie-root--seamless {
+  isolation: isolate;
+}
+
+.movie-root--seamless > .movie-root__galaxy,
+.movie-root--seamless > .galaxy-photo {
+  z-index: 0;
+}
+
+.movie-root__galaxy--fx {
+  opacity: 0.45;
+  mix-blend-mode: screen;
+}
+
+.movie-root--seamless > :not(.movie-root__galaxy):not(.galaxy-photo) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Kill hard scene bands so the galaxy plate stays continuous */
+.movie-root--seamless .scene,
+.movie-root--seamless .scene--black,
+.movie-root--seamless .scene--navy,
+.movie-root--seamless .scene--cosmos,
+.scene--transparent {
+  background: transparent !important;
 }
 
 .movie-boot {
   min-height: 100svh;
-  background:
-    radial-gradient(ellipse at 50% 40%, #0a2248 0%, #020b1c 55%, #000 100%);
+  background: transparent;
+}
+
+.opening-scene__crest {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.35));
 }
 
 .scene {
@@ -957,10 +991,10 @@ a {
   inset: 8% 6%;
   border-radius: 1.5rem;
   background:
-    radial-gradient(ellipse at 30% 45%, rgba(30, 70, 130, 0.45), transparent 50%),
-    radial-gradient(ellipse at 70% 50%, rgba(20, 50, 100, 0.4), transparent 55%),
-    linear-gradient(180deg, rgba(8, 24, 48, 0.9), rgba(0, 0, 0, 0.55));
-  border: 1px solid rgba(200, 163, 95, 0.12);
+    radial-gradient(ellipse at 30% 45%, rgba(30, 70, 130, 0.28), transparent 50%),
+    radial-gradient(ellipse at 70% 50%, rgba(20, 50, 100, 0.22), transparent 55%),
+    linear-gradient(180deg, rgba(8, 24, 48, 0.35), rgba(0, 0, 0, 0.18));
+  border: 1px solid rgba(200, 163, 95, 0.18);
   overflow: hidden;
 }
 
@@ -1430,13 +1464,7 @@ a {
   display: grid;
   place-items: center;
   text-align: center;
-  background:
-    radial-gradient(ellipse at 50% 45%, rgba(44, 91, 172, 0.28), transparent 36%),
-    radial-gradient(ellipse at 35% 60%, rgba(200, 163, 95, 0.1), transparent 28%),
-    radial-gradient(circle at 15% 25%, #fff 0 0.7px, transparent 1px),
-    radial-gradient(circle at 75% 18%, #9fc5ff 0 0.8px, transparent 1.2px),
-    #000;
-  background-size: auto, auto, 71px 73px, 127px 131px, auto;
+  background: transparent;
 }
 
 .ending-scene__mark {
@@ -1499,22 +1527,109 @@ a {
   overflow-x: hidden;
 }
 
+.home-root--seamless {
+  isolation: isolate;
+  min-height: 100svh;
+}
+
+/* One continuous full-bleed plate across the whole page height */
+.home-root--seamless > .galaxy-photo,
+.home-root--seamless > .home-root__galaxy {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  pointer-events: none;
+}
+
 .galaxy-photo,
 .home-root__galaxy {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
 }
 
+.galaxy-photo--fixed {
+  position: fixed;
+}
+
 .home-root__galaxy--fx {
-  opacity: 0.65;
+  opacity: 0.55;
   mix-blend-mode: screen;
 }
 
 .home-root > :not(.home-root__galaxy):not(.galaxy-photo) {
   position: relative;
   z-index: 1;
+}
+
+/* Brand — hot-stamped gold foil */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.brand-logo__mark {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.28));
+}
+
+.brand-logo__wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.brand-logo__title {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+  background: linear-gradient(
+    115deg,
+    #f8e7b0 0%,
+    #e4c98a 28%,
+    #c8a35f 52%,
+    #f0d78a 74%,
+    #a8843d 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 24px rgba(212, 175, 55, 0.18);
+}
+
+.brand-logo--sm .brand-logo__title {
+  font-size: 0.92rem;
+}
+
+.brand-logo--md .brand-logo__title {
+  font-size: 1.05rem;
+}
+
+.brand-logo--lg .brand-logo__title {
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+}
+
+.brand-logo__tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(228, 201, 138, 0.62);
+}
+
+.brand-logo--sm .brand-logo__tag {
+  display: none;
+}
+
+.home-about__logo {
+  justify-content: center;
+  margin-bottom: 1.25rem;
 }
 
 .home-about {
@@ -1552,9 +1667,9 @@ a {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
-  background: rgba(2, 6, 15, 0.72);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(126, 182, 255, 0.08);
+  background: rgba(2, 6, 15, 0.28);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(200, 163, 95, 0.16);
 }
 
 .site-header__brand {
@@ -1563,13 +1678,6 @@ a {
   gap: 0.55rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-}
-
-.site-header__name span {
-  background: linear-gradient(120deg, var(--os-blue-bright), var(--os-violet));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .site-header__nav {
@@ -1715,8 +1823,8 @@ a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(2, 6, 15, 0.92) 0%, rgba(2, 6, 15, 0.55) 42%, rgba(2, 6, 15, 0.2) 70%),
-    linear-gradient(180deg, rgba(2, 6, 15, 0.35) 0%, transparent 30%, rgba(2, 6, 15, 0.75) 100%);
+    linear-gradient(90deg, rgba(1, 4, 12, 0.72) 0%, rgba(1, 4, 12, 0.28) 46%, rgba(1, 4, 12, 0.08) 72%),
+    linear-gradient(180deg, rgba(1, 4, 12, 0.18) 0%, transparent 35%, rgba(1, 4, 12, 0.22) 100%);
 }
 
 @keyframes hero-flare {
@@ -1966,8 +2074,8 @@ a {
   min-height: 220px;
   padding: 1.35rem 1.25rem 1.5rem;
   border-radius: 1.1rem;
-  border: 1px solid rgba(126, 182, 255, 0.16);
-  background: linear-gradient(160deg, rgba(16, 32, 64, 0.85), rgba(8, 14, 28, 0.9));
+  border: 1px solid rgba(200, 163, 95, 0.22);
+  background: linear-gradient(160deg, rgba(16, 32, 64, 0.42), rgba(8, 14, 28, 0.5));
   backdrop-filter: blur(12px);
   transition:
     transform 0.3s ease,
@@ -2041,8 +2149,8 @@ a {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1.25rem;
   border-radius: 1.25rem;
-  border: 1px solid rgba(126, 182, 255, 0.12);
-  background: rgba(8, 16, 36, 0.55);
+  border: 1px solid rgba(200, 163, 95, 0.18);
+  background: rgba(8, 16, 36, 0.28);
   backdrop-filter: blur(14px);
 }
 
@@ -2091,10 +2199,8 @@ a {
   z-index: 2;
   padding: clamp(3rem, 8vw, 5rem) 1.5rem;
   text-align: center;
-  border-top: 1px solid rgba(126, 182, 255, 0.1);
-  background:
-    radial-gradient(ellipse 60% 80% at 50% 0%, rgba(91, 140, 255, 0.16), transparent 60%),
-    linear-gradient(180deg, rgba(2, 6, 15, 0.2), #000);
+  border-top: 1px solid rgba(200, 163, 95, 0.16);
+  background: transparent;
 }
 
 .home-cinematic-gate__inner {
@@ -2128,8 +2234,12 @@ a {
   justify-content: space-between;
   gap: 1rem;
   padding: 2rem clamp(1.25rem, 4vw, 2.5rem);
-  border-top: 1px solid rgba(126, 182, 255, 0.1);
-  background: #000;
+  border-top: 1px solid rgba(200, 163, 95, 0.18);
+  background: transparent;
+}
+
+.home-footer__brand .brand-logo__tag {
+  display: block;
 }
 
 .home-footer strong {
@@ -2183,4 +2293,5 @@ a {
   .home-values__list {
     grid-template-columns: 1fr;
   }
+
 }

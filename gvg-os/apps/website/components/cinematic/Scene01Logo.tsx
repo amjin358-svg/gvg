@@ -5,15 +5,15 @@ import SplitType from "split-type";
 import { Earth } from "@/components/three/Earth";
 import { Stars } from "@/components/three/Stars";
 import { CanvasSafe } from "@/components/three/CanvasSafe";
-import { GalaxyPhotoLayer } from "@/components/home/GalaxyPhotoLayer";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { revertSplit } from "@/components/animation/SplitText";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 function OpeningWorld() {
   return (
     <>
-      <color attach="background" args={["#020b1c"]} />
-      <fog attach="fog" args={["#020b1c", 6, 16]} />
+      {/* Transparent canvas so the full-bleed galaxy plate shows through */}
+      <fog attach="fog" args={["#020b1c", 8, 18]} />
       <ambientLight intensity={0.45} />
       <directionalLight position={[-3, 2, 4]} intensity={1.6} color="#9ec5ff" />
       <pointLight position={[2, 1, 3]} intensity={1.2} color="#C8A35F" />
@@ -90,14 +90,7 @@ export function Scene01Logo() {
 
   return (
     <div ref={root}>
-      <section className="scene scene--cosmos opening-scene" aria-label="Opening">
-        <GalaxyPhotoLayer className="opening-scene__photo" />
-        <div className="galaxy-backdrop" aria-hidden>
-          <div className="galaxy-backdrop__nebula" />
-          <div className="galaxy-backdrop__stars galaxy-backdrop__stars--far" />
-          <div className="galaxy-backdrop__stars galaxy-backdrop__stars--near" />
-          <div className="galaxy-backdrop__dust" />
-        </div>
+      <section className="scene scene--transparent opening-scene" aria-label="Opening">
         <div ref={stage} className="opening-scene__stage">
           <CanvasSafe
             camera={{ position: [0, 0, 5.4], fov: 42 }}
@@ -109,6 +102,9 @@ export function Scene01Logo() {
         </div>
 
         <div className="opening-scene__copy">
+          <div className="opening-scene__crest" aria-hidden>
+            <BrandLogo size="lg" showWordmark={false} />
+          </div>
           <h1 ref={logo} className="logo opening-scene__logo">
             Global Vista Group
           </h1>

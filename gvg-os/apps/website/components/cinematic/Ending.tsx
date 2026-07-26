@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import SplitType from "split-type";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { revertSplit } from "@/components/animation/SplitText";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
@@ -60,6 +61,9 @@ export function Ending() {
     <div ref={root}>
       <section className="scene scene--black ending-scene" aria-label="Ending">
         <div className="ending-scene__mark">
+          <div className="opening-scene__crest" aria-hidden>
+            <BrandLogo size="lg" showWordmark={false} />
+          </div>
           <h2 ref={logo} className="logo">
             Global Vista Group
           </h2>

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { MouseGlow } from "@/components/animation/MouseGlow";
 import { MovieErrorBoundary } from "@/components/cinematic/MovieErrorBoundary";
+import { GalaxyPhotoLayer } from "@/components/home/GalaxyPhotoLayer";
 import { Scene01Logo } from "@/components/cinematic/Scene01Logo";
 import { Scene02Earth } from "@/components/cinematic/Scene02Earth";
 import { Scene03Global } from "@/components/cinematic/Scene03Global";
@@ -34,9 +35,16 @@ export function InteractiveMovie() {
   return (
     <MovieErrorBoundary>
       <main
-        className="movie-root"
+        className="movie-root movie-root--seamless"
         aria-label="Global Vista Group Interactive Movie"
       >
+        <GalaxyPhotoLayer className="movie-root__galaxy" mode="fixed" />
+        <div className="galaxy-backdrop movie-root__galaxy movie-root__galaxy--fx" aria-hidden>
+          <div className="galaxy-backdrop__nebula" />
+          <div className="galaxy-backdrop__stars galaxy-backdrop__stars--far" />
+          <div className="galaxy-backdrop__stars galaxy-backdrop__stars--near" />
+          <div className="galaxy-backdrop__dust" />
+        </div>
         <MouseGlow />
         <Scene01Logo />
         <Scene02Earth />
