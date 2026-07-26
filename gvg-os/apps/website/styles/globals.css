@@ -2168,18 +2168,19 @@ a {
   .home-values__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
 
-@media (max-width: 560px) {
-  .home-values__list {
-    grid-template-columns: 1fr;
-  }
-
+  /* Compact / tablet: swipe the rail — no left/right arrows */
   .home-modules__nav {
     display: none;
   }
 
   .home-modules__rail {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-values__list {
     grid-template-columns: 1fr;
   }
 }
