@@ -20,6 +20,7 @@ export function Scene03Global() {
   const arcRefs = useRef<(SVGPathElement | null)[]>([]);
   const glowRefs = useRef<(SVGPathElement | null)[]>([]);
   const pulseRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const railRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
     registerGsapPlugins();
@@ -33,6 +34,7 @@ export function Scene03Global() {
         arcs: arcRefs.current.filter(Boolean) as SVGPathElement[],
         glows: glowRefs.current.filter(Boolean) as SVGPathElement[],
         pulses: pulseRefs.current.filter(Boolean) as HTMLElement[],
+        railItems: railRefs.current.filter(Boolean) as HTMLElement[],
       });
     }, section);
 
@@ -123,6 +125,26 @@ export function Scene03Global() {
           </div>
         );
       })}
+
+      <nav className="global-hop-rail" aria-label="Global market hops">
+        {GLOBAL_ROUTE.map((hop, i) => (
+          <div key={`rail-${hop.id}`} className="global-hop-rail__step">
+            <span
+              ref={(el) => {
+                railRefs.current[i] = el;
+              }}
+              className="global-hop-rail__label"
+            >
+              {hop.label}
+            </span>
+            {i < GLOBAL_ROUTE.length - 1 ? (
+              <span className="global-hop-rail__arrow" aria-hidden>
+                ↓
+              </span>
+            ) : null}
+          </div>
+        ))}
+      </nav>
     </section>
   );
 }

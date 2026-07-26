@@ -39,6 +39,8 @@ type GlobalRouteOptions = {
   arcs: SVGPathElement[];
   glows: SVGPathElement[];
   pulses: HTMLElement[];
+  /** USA → Taiwan → Japan → Vietnam → Europe rail */
+  railItems?: HTMLElement[];
 };
 
 /**
@@ -50,6 +52,7 @@ export function createGlobalRouteTimeline({
   arcs,
   glows,
   pulses,
+  railItems = [],
 }: GlobalRouteOptions): gsap.core.Timeline {
   registerGsapPlugins();
 
@@ -64,12 +67,34 @@ export function createGlobalRouteTimeline({
     },
   });
 
+  if (railItems.length) {
+    gsap.set(railItems, { opacity: 0.35, color: "rgba(245,245,245,0.45)" });
+  }
+
   hopLabels.forEach((label, i) => {
     const arc = arcs[i];
     const glow = glows[i];
     const pulse = pulses[i];
+    const rail = railItems[i];
 
     tl.to(label, { opacity: 1, duration: 0.35 }, i);
+
+    if (rail) {
+      tl.to(
+        rail,
+        { opacity: 1, color: "#C8A35F", duration: 0.35 },
+        i,
+      );
+      railItems.forEach((item, ri) => {
+        if (ri !== i) {
+          tl.to(
+            item,
+            { opacity: 0.35, color: "rgba(245,245,245,0.45)", duration: 0.3 },
+            i,
+          );
+        }
+      });
+    }
 
     if (arc) {
       const length = arc.getTotalLength();
