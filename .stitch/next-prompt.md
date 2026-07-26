@@ -1,7 +1,7 @@
 ---
-page: modules
+page: trade
 ---
-Desktop page for **GVG OS** — full catalog of **26 Core Modules** for the global international trade transaction platform. Continue the Space-Tech glassmorphism language from the homepage: deep Void Navy cosmic background, frosted glass cards with cyan glowing borders, bilingual Traditional Chinese + English, holographic/orbital accents (subtle — Earth may appear as a small atmospheric motif, not a second full hero globe).
+Desktop page for **GVG OS Trade Desk** — the international trade transaction workspace for a global cross-border commerce OS. Continue the Space-Tech glassmorphism language: Void Navy cosmic background, frosted glass panels with cyan glowing borders, bilingual Traditional Chinese + English, subtle orbital / route-map atmosphere (trade lanes as light arcs — not a full homepage Earth takeover).
 
 **DESIGN SYSTEM (REQUIRED):**
 - Background: Void Navy `#050B1A` with Midnight Ink `#0A1628` and subtle nebula atmosphere
@@ -16,52 +16,32 @@ Desktop page for **GVG OS** — full catalog of **26 Core Modules** for the glob
 
 **Page Structure:**
 
-1. **Header** (same as homepage)
-   - Wordmark “GVG OS” → links to `index.html`
-   - Nav: Overview · Modules (active) · Solutions · Marketplace · AI Services · About GVG
-   - Get Started → trade desk CTA
+1. **Header** (same global nav)
+   - Wordmark “GVG OS” → `index.html`
+   - Nav: Overview · Modules · Solutions · Marketplace · AI Services · About GVG
+   - Active emphasis can be on a Trade Desk context (or keep Modules inactive; Trade is primary CTA)
+   - Get Started primary button
 
-2. **Page hero**
-   - Eyebrow: ALL-IN-ONE BUSINESS PLATFORM
-   - Headline: “26 Core Modules. Unlimited Possibilities.”
-   - Bilingual subcopy: modules powering cross-border trade, orders, inventory, members, AI forecasting
-   - Filter chips (glass): All · Trade Ops · Commerce · Finance · AI · Infrastructure
+2. **Hero**
+   - Eyebrow: GLOBAL TRADE DESK / 全球貿易交易台
+   - Headline: “Execute. Clear. Settle.” (one word may use cyan→violet gradient)
+   - Bilingual subcopy: real-time cross-border transactions, customs clearance visibility, multi-currency settlement
+   - CTAs: “Open Trade Desk” (primary) · “View Live Routes” (secondary)
 
-3. **Module grid**
-   - Responsive grid of glass module cards (5–6 visible columns on large desktop, wrap)
-   - Include at minimum these modules (English + Traditional Chinese titles, short descriptions, line icons, diagonal arrow):
-     1. Member Center / 會員中心
-     2. Product Center / 產品中心
-     3. Order Center / 訂單中心
-     4. Inventory Center / 庫存中心
-     5. AI Services / AI 服務
-     6. Supplier Hub / 供應商中心
-     7. Logistics Hub / 物流中心
-     8. Customs & Compliance / 關務合規
-     9. Settlement & FX / 結算與外匯
-     10. Trade Finance / 貿易融資
-     11. Marketplace / 跨境市集
-     12. CRM / 客戶關係
-     13. Analytics / 數據分析
-     14. Risk Control / 風控中心
-     15. Contract Center / 合約中心
-     16. Document Vault / 單證中心
-     17. Warehouse Network / 倉儲網絡
-     18. Pricing Engine / 定價引擎
-     19. Partner Portal / 夥伴入口
-     20. Notification Hub / 通知中心
-     21. Identity & Access / 身份權限
-     22. Integration Hub / 整合中心
-     23. ESG Tracker / ESG 追蹤
-     24. Support Desk / 服務台
-     25. Admin Console / 管理控制台
-     26. Developer API / 開發者 API
-   - Cards: glass fill, cyan border, hover glow, bilingual title stack, one-line description
+3. **Live ops strip** (glass metrics, not cluttered dashboard cards)
+   - Open Orders · In Clearance · FX Exposure · On-Time Delivery %
+   - Bilingual captions
 
-4. **CTA band**
-   - “Ready to activate your trade OS?” / 啟用全球貿易作業系統
-   - Primary: Get Started · Secondary: Talk to Sales
+4. **Transaction flow**
+   - Horizontal 5-step glass pipeline: Inquiry → Contract → Logistics → Customs → Settlement
+   - Each step: icon, EN/ZH title, one-line description
 
-5. **Footer** — match homepage footer with GVG OS wordmark and links
+5. **Workspace preview**
+   - Split layout: left = recent trade tickets table (glass), right = route map / corridor list (USA→Taiwan→Japan→Vietnam→Europe style corridors with status chips)
+   - Keep enterprise-readable; avoid dense SaaS widget soup
 
-**Content intent:** This is the module catalog for a **global international trade platform**, not a generic SaaS feature list. Emphasize cross-border operations, compliance, logistics, and AI-assisted trading.
+6. **CTA + Footer**
+   - “Start your next cross-border deal” / 啟動下一筆跨境交易
+   - Footer matching site: Privacy · Terms · Security · Trade Desk · © GVG OS
+
+**Content intent:** This is an **international trade transaction platform** desk — emphasize clearance, FX settlement, logistics corridors, and deal execution. Not a generic analytics dashboard.

@@ -24,7 +24,7 @@ This Stitch loop produces static HTML pages under `site/public/` that can later 
 ## 4. Sitemap
 
 - [x] `index` — Home / OS overview (hero Earth, modules, value bar) → `site/public/index.html`
-- [ ] `modules` — Full 26-module catalog
+- [x] `modules` — Full 26-module catalog → `site/public/modules.html`
 - [ ] `trade` — Global trade desk / transaction flows
 - [ ] `marketplace` — Cross-border marketplace
 - [ ] `ai-services` — AI customer service & forecasting
@@ -34,8 +34,8 @@ This Stitch loop produces static HTML pages under `site/public/` that can later 
 ## 5. Roadmap
 
 1. ~~**index** — Generate homepage from reference mock~~ ✅
-2. **modules** — Expand module cards into full catalog *(next)*
-3. **trade** — International trade transaction workspace concept
+2. ~~**modules** — Expand module cards into full catalog~~ ✅
+3. **trade** — International trade transaction workspace concept *(next)*
 4. **marketplace** — Buyer/supplier marketplace landing
 5. **ai-services** — AI services deep dive
 6. **solutions** — Industry solutions
