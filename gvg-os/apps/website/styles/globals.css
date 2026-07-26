@@ -78,13 +78,6 @@ a {
   background: transparent;
 }
 
-.opening-scene__crest {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.35));
-}
-
 .scene {
   position: relative;
   min-height: 100svh;
@@ -1553,17 +1546,11 @@ a {
   z-index: 1;
 }
 
-/* Brand — hot-stamped gold foil */
+/* Brand — wordmark only */
 .brand-logo {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
   min-width: 0;
-}
-
-.brand-logo__mark {
-  flex-shrink: 0;
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.28));
 }
 
 .brand-logo__wordmark {

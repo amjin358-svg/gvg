@@ -5,7 +5,6 @@ import SplitType from "split-type";
 import { Earth } from "@/components/three/Earth";
 import { Stars } from "@/components/three/Stars";
 import { CanvasSafe } from "@/components/three/CanvasSafe";
-import { BrandLogo } from "@/components/brand/BrandLogo";
 import { revertSplit } from "@/components/animation/SplitText";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
@@ -102,9 +101,6 @@ export function Scene01Logo() {
         </div>
 
         <div className="opening-scene__copy">
-          <div className="opening-scene__crest" aria-hidden>
-            <BrandLogo size="lg" showWordmark={false} />
-          </div>
           <h1 ref={logo} className="logo opening-scene__logo">
             Global Vista Group
           </h1>
