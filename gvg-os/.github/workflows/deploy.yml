@@ -1,0 +1,101 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        required: true
+        default: production
+        type: choice
+        options:
+          - production
+          - preview
+      app:
+        description: App to deploy
+        required: true
+        default: admin
+        type: choice
+        options:
+          - admin
+          - website
+          - buyer
+          - supplier
+
+concurrency:
+  group: deploy-${{ github.event.inputs.app || 'admin' }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: ${{ github.event.inputs.environment || 'production' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+          npm install -g vercel@latest
+
+      - name: Resolve app
+        id: app
+        run: |
+          APP="${{ github.event.inputs.app || 'admin' }}"
+          ENV="${{ github.event.inputs.environment || 'production' }}"
+          echo "name=$APP" >> "$GITHUB_OUTPUT"
+          echo "env=$ENV" >> "$GITHUB_OUTPUT"
+          echo "path=apps/$APP" >> "$GITHUB_OUTPUT"
+
+      - name: Pull Vercel project
+        working-directory: ${{ steps.app.outputs.path }}
+        run: |
+          vercel pull --yes --environment=${{ steps.app.outputs.env }} --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Build project
+        working-directory: ${{ steps.app.outputs.path }}
+        run: |
+          if [ "${{ steps.app.outputs.env }}" = "production" ]; then
+            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          NEXT_TELEMETRY_DISABLED: "1"
+
+      - name: Deploy prebuilt
+        working-directory: ${{ steps.app.outputs.path }}
+        run: |
+          if [ "${{ steps.app.outputs.env }}" = "production" ]; then
+            url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          else
+            url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          fi
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "### Deployed @gvg/${{ steps.app.outputs.name }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "$url" >> "$GITHUB_STEP_SUMMARY"
+        id: deploy
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

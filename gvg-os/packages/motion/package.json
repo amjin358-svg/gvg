@@ -1,0 +1,29 @@
+{
+  "name": "@gvg/motion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GVG OS cinematic motion system",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./scroll-director": "./src/scroll-director.ts",
+    "./scene-manager": "./src/scene-manager.ts",
+    "./camera-controller": "./src/camera-controller.ts",
+    "./timeline": "./src/timeline.ts",
+    "./parallax": "./src/parallax.ts",
+    "./text-reveal": "./src/text-reveal.ts",
+    "./transition": "./src/transition.ts",
+    "./particle-engine": "./src/particle-engine.ts"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "scripts": {
+    "lint": "echo \"lint motion\"",
+    "test": "echo \"test motion\""
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@gvg/kernel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GVG OS kernel — application, plugin, event, config, logger, errors",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./application": "./src/application/index.ts",
+    "./app": "./src/app/index.ts",
+    "./plugin": "./src/plugin/index.ts",
+    "./plugin/host": "./src/plugin/host.ts",
+    "./plugin/runtime": "./src/plugin/runtime.ts",
+    "./event": "./src/event/index.ts",
+    "./config": "./src/config/index.ts",
+    "./logger": "./src/logger/index.ts",
+    "./errors": "./src/errors/index.ts",
+    "./registry": "./src/registry/index.ts"
+  },
+  "scripts": {
+    "lint": "echo \"lint kernel\"",
+    "test": "tsx --test src/**/*.test.ts src/plugin/**/*.test.ts"
+  }
+}

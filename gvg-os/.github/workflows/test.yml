@@ -1,0 +1,51 @@
+name: Test
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+  workflow_dispatch:
+
+concurrency:
+  group: test-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Install test runner
+        run: npm install -D tsx --no-fund --no-audit
+
+      - name: Test kernel
+        run: npx tsx --test packages/kernel/src/**/*.test.ts
+
+      - name: Test plugins
+        run: |
+          npx tsx --test plugins/marketplace/tests/**/*.test.ts
+          npx tsx --test plugins/trade/tests/**/*.test.ts
+          npx tsx --test plugins/warehouse/tests/**/*.test.ts
+
+      - name: Test workspaces
+        run: npm run test --workspaces --if-present

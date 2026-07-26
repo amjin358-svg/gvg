@@ -1,0 +1,60 @@
+/** Compat + public: @gvg/core/config */
+
+export {
+  getSettings,
+  setSettings,
+  getSetting,
+  setSetting,
+  resetSettings,
+  getAppConfig,
+  setAppConfig,
+  resetAppConfig,
+  ConfigService,
+  resolveEnvironment,
+  isProduction,
+  isDevelopment,
+  isPreview,
+  isStaging,
+  getEnvironmentInfo,
+  applyEnvironment,
+  requireEnv,
+  getEnv,
+  registerFeatureFlag,
+  registerFeatureFlags,
+  enableFeature,
+  disableFeature,
+  isFeatureEnabled,
+  listFeatureFlags,
+  clearFeatureFlags,
+  FeatureFlagService,
+  createLicense,
+  setLicense,
+  getLicense,
+  requireLicense,
+  clearLicense,
+  isLicenseValid,
+  hasEntitlement,
+  assertEntitlement,
+  planEntitlements,
+  LicenseService,
+} from "../config";
+export type {
+  CoreSettings,
+  GvgEnv,
+  EnvironmentInfo,
+  FeatureFlag,
+  FeatureFlagSource,
+  License,
+  LicensePlan,
+  LicenseStatus,
+  LicenseEntitlement,
+} from "../config";
+
+/** Kernel config surface */
+export {
+  getConfig,
+  setConfig,
+  resetConfig,
+  Config,
+} from "@gvg/kernel/config";
+export type { GvgConfig } from "@gvg/kernel/config";

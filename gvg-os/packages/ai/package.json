@@ -1,0 +1,26 @@
+﻿{
+  "name": "@gvg/ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GVG AI Brain — gateway, prompts, knowledge, tools, agents",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./brain": "./src/brain.ts",
+    "./gateway": "./src/gateway/index.ts",
+    "./prompts": "./src/prompts/index.ts",
+    "./knowledge": "./src/knowledge/index.ts",
+    "./tools": "./src/tools/index.ts",
+    "./agent-registry": "./src/agent-registry/index.ts",
+    "./agents": "./src/agents/index.ts",
+    "./agents/*": "./src/agents/*.ts"
+  },
+  "dependencies": {
+    "@gvg/core": "*"
+  },
+  "scripts": {
+    "lint": "echo \"lint ai\"",
+    "test": "echo \"test ai\""
+  }
+}

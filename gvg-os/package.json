@@ -1,0 +1,24 @@
+{
+  "name": "gvg-os",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Global Vista Group — Trade OS monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "plugins/*",
+    "services/*"
+  ],
+  "scripts": {
+    "dev:website": "npm run dev -w @gvg/website",
+    "dev:admin": "npm run dev -w @gvg/admin",
+    "dev:buyer": "npm run dev -w @gvg/buyer",
+    "dev:supplier": "npm run dev -w @gvg/supplier",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

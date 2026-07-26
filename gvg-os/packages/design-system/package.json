@@ -1,0 +1,27 @@
+﻿{
+  "name": "@gvg/design-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GVG Enterprise Design System tokens",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./color": "./src/color/index.ts",
+    "./typography": "./src/typography/index.ts",
+    "./spacing": "./src/spacing/index.ts",
+    "./radius": "./src/radius/index.ts",
+    "./shadow": "./src/shadow/index.ts",
+    "./animation": "./src/animation/index.ts",
+    "./icon": "./src/icon/index.ts",
+    "./elevation": "./src/elevation/index.ts",
+    "./glass": "./src/glass/index.ts",
+    "./gradient": "./src/gradient/index.ts",
+    "./theme": "./src/theme.ts",
+    "./css-vars": "./src/css-vars.ts"
+  },
+  "scripts": {
+    "lint": "echo \"lint design-system\"",
+    "test": "echo \"test design-system\""
+  }
+}

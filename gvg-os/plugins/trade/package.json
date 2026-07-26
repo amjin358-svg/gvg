@@ -1,0 +1,24 @@
+{
+  "name": "@gvg/plugin-trade",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Import/export, Incoterms, customs documentation",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./manifest": "./manifest.ts",
+    "./routes": "./routes.ts",
+    "./permissions": "./permissions.ts",
+    "./navigation": "./navigation.ts",
+    "./modules": "./modules.ts",
+    "./stats": "./stats.ts"
+  },
+  "scripts": {
+    "test": "tsx --test tests/**/*.test.ts"
+  },
+  "dependencies": {
+    "@gvg/sdk": "*",
+    "@gvg/core": "*"
+  }
+}

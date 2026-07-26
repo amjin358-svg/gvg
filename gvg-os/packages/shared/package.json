@@ -1,0 +1,18 @@
+{
+  "name": "@gvg/shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cross-cutting shared utilities for GVG OS",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./env": "./src/env.ts",
+    "./result": "./src/result.ts",
+    "./http": "./src/http.ts"
+  },
+  "scripts": {
+    "lint": "echo \"lint shared\"",
+    "test": "echo \"test shared\""
+  }
+}
