@@ -1,0 +1,38 @@
+---
+description: Database and Supabase schema, migrations, RLS conventions
+globs:
+  - database/**/*
+  - supabase/**/*
+  - "**/*schema*.sql"
+  - "**/*migration*"
+alwaysApply: false
+---
+
+# Database
+
+See also: `docs/005_DATABASE_SCHEMA.md`, `docs/014_SUPABASE.md`
+
+## Source of truth
+
+- Canonical SQL outline: `database/schema.sql`
+- Versioned applies: `supabase/migrations/`
+
+## Conventions
+
+- UUID primary keys
+- `TIMESTAMPTZ` for timestamps
+- Status fields as documented unions/enums
+- Index unique business keys (`sku`, `slug`, `order_number`, tracking numbers)
+- Extend schema through migrations — do not edit applied migrations in place
+
+## Core entities
+
+`profiles` · `brands` · `categories` · `products` · `rfqs` · `quotes` · `orders`  
+Phase 2+: warehouses, inventory, shipments, customs docs, CRM, invoices, embeddings, audit_logs
+
+## RLS
+
+- Enable RLS on user/tenant tables
+- Buyer owns RFQs/orders; suppliers see invited RFQs + own quotes
+- Staff roles scoped by role matrix in `docs/008_PERMISSION.md`
+- Service role only in Edge Functions / privileged jobs

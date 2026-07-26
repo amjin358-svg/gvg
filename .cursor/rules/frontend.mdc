@@ -1,0 +1,42 @@
+---
+description: Frontend standards — Next.js App Router, Atomic Design, accessibility, motion
+globs:
+  - app/**/*.{ts,tsx}
+  - components/**/*.{ts,tsx}
+  - frontend/**/*.{ts,tsx}
+  - hooks/**/*.{ts,tsx}
+  - styles/**/*.{css,scss}
+alwaysApply: false
+---
+
+# Frontend
+
+See also: `docs/009_UI_DESIGN_SYSTEM.md`, `docs/010_COMPONENT_LIBRARY.md`, `docs/012_FRONTEND_STANDARD.md`
+
+## Next.js
+
+- App Router under `app/`
+- Export `metadata` / `generateMetadata` on public pages
+- Prefer Server Components; isolate client islands
+- Use `useDeferredValue` / `startTransition` for responsive filtering when useful
+- Avoid premature `useMemo` / `useCallback`
+
+## UI structure
+
+- Atoms → molecules → organisms in `components/`
+- Feature compositions in `frontend/features/`
+- Style with Tailwind + CSS variables from `styles/globals.css`
+- Merge classes with `cn()` (`clsx` + `tailwind-merge`)
+- Variants via `class-variance-authority` where appropriate
+
+## UX / a11y / SEO
+
+- WCAG AA contrast and visible focus
+- Semantic landmarks; label icon-only controls
+- Responsive mobile + desktop
+- Brand-first heroes on marketing surfaces; no hero card clutter
+- Intentional Framer Motion only (respect `prefers-reduced-motion`)
+
+## Design anti-patterns
+
+Avoid default AI-looking themes: purple-on-white, cream+terracotta brochure, glow-heavy dark neo UI, pill clusters, dashboard clutter in first viewport.

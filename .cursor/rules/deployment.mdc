@@ -1,0 +1,40 @@
+---
+description: Deployment — Vercel, Cloudflare, Docker, CI, environments
+globs:
+  - docker/**/*
+  - .github/**/*
+  - next.config.ts
+  - "**/Dockerfile*"
+  - "**/docker-compose*"
+alwaysApply: false
+---
+
+# Deployment
+
+See also: `docs/025_DEPLOYMENT.md`
+
+## Environments
+
+Local → Vercel Preview → Staging Supabase → Production (Vercel + Supabase + Cloudflare)
+
+## CI (`.github/workflows/ci.yml`)
+
+1. `npm ci`
+2. `npm run lint`
+3. `npm run test`
+4. `npm run build`
+
+Keep CI green before merging platform changes.
+
+## Containers
+
+- `docker/Dockerfile` uses Next `output: "standalone"`
+- Compose via `docker/docker-compose.yml`
+
+## Release checklist
+
+- Migrations applied
+- RLS verified for new tables
+- Smoke: home, products, RFQ, AI, admin
+- Secrets present in target env
+- Rollback plan noted for risky changes

@@ -1,0 +1,16 @@
+{
+  "project": "GVG Global Trade OS",
+  "version": "1.0",
+  "framework": "Next.js 15 + React 19 + TypeScript",
+  "architecture": "Enterprise SaaS",
+  "paths": {
+    "app": "app/",
+    "components": "components/",
+    "frontend": "frontend/",
+    "backend": "backend/",
+    "database": "database/",
+    "supabase": "supabase/",
+    "api": "api/",
+    "docs": "docs/"
+  }
+}
