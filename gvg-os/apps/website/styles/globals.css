@@ -227,6 +227,44 @@ a {
   color: var(--gv-muted);
 }
 
+.ai-headline {
+  pointer-events: none;
+  position: absolute;
+  top: clamp(1.5rem, 4vw, 3rem);
+  left: 0;
+  right: 0;
+  z-index: 3;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.ai-headline__title {
+  margin: 0;
+  font-size: clamp(1.6rem, 4.5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gv-secondary);
+  text-shadow: 0 0 28px rgba(200, 163, 95, 0.35);
+}
+
+.ai-headline__for {
+  margin: 0.35rem 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.35em;
+  text-transform: lowercase;
+  color: var(--gv-muted);
+}
+
+.ai-headline__sub {
+  margin: 0;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gv-text);
+}
+
 .ai-stage {
   position: absolute;
   inset: 0;

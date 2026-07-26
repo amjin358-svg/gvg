@@ -205,6 +205,11 @@ export function Scene05AI() {
   return (
     <section ref={sectionRef} className="scene scene--navy">
       <div className="noise-overlay" />
+      <header className="ai-headline">
+        <h2 className="ai-headline__title">Artificial Intelligence</h2>
+        <p className="ai-headline__for">for</p>
+        <p className="ai-headline__sub">Global Business</p>
+      </header>
       <div
         ref={particlesRef}
         style={{ position: "absolute", inset: 0, opacity: 0 }}
