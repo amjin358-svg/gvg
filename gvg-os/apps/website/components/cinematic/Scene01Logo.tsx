@@ -7,7 +7,7 @@ import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
 import { createLogoIntro } from "@/components/animation/GSAPTimeline";
 
 export function Scene01Logo() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const root = useRef<HTMLElement>(null);
   const title = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
@@ -22,11 +22,11 @@ export function Scene01Logo() {
         revertSplit(split);
       };
     },
-    { scope: sectionRef },
+    { scope: root },
   );
 
   return (
-    <section ref={sectionRef} className="scene scene--black">
+    <section ref={root} className="scene scene--black">
       <div
         style={{
           minHeight: "100svh",

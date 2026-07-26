@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Earth } from "@/components/three/Earth";
 import { Stars } from "@/components/three/Stars";
 import { createEarthScrollSpin } from "@/components/animation/ScrollAnimations";
-import { gsap, registerGsapPlugins } from "@/lib/gsap";
+import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 function EarthScene({
   rotationYRef,
@@ -24,26 +24,24 @@ function EarthScene({
 }
 
 export function Scene02Earth() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const root = useRef<HTMLElement>(null);
   const rotationYRef = useRef({ value: 0 });
 
-  useEffect(() => {
-    registerGsapPlugins();
-    const section = sectionRef.current;
-    if (!section) return;
+  useGSAP(
+    () => {
+      registerGsapPlugins();
+      if (!root.current) return;
 
-    const ctx = gsap.context(() => {
       createEarthScrollSpin({
-        section,
+        section: root.current,
         rotationY: rotationYRef.current,
       });
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: root },
+  );
 
   return (
-    <section ref={sectionRef} className="scene scene--black">
+    <section ref={root} className="scene scene--black">
       <div className="earth-pin">
         <div className="earth-canvas">
           <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>

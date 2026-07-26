@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
 import SplitType from "split-type";
@@ -69,7 +69,7 @@ function formatCounter(value: number) {
 }
 
 export function Scene05AI() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const root = useRef<HTMLElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
   const numbersRef = useRef<HTMLDivElement>(null);
   const chartsRef = useRef<HTMLDivElement>(null);
@@ -86,38 +86,27 @@ export function Scene05AI() {
   useGSAP(
     () => {
       registerGsapPlugins();
-      if (!title.current) return;
+      if (!root.current) return;
 
-      const split = new SplitType(title.current, { types: "words,chars" });
-
-      if (split.chars?.length) {
-        gsap.from(split.chars, {
-          opacity: 0,
-          y: 24,
-          duration: 0.7,
-          stagger: 0.03,
-          ease: "sine.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          },
-        });
+      let split: SplitType | null = null;
+      if (title.current) {
+        split = new SplitType(title.current, { types: "words,chars" });
+        if (split.chars?.length) {
+          gsap.from(split.chars, {
+            opacity: 0,
+            y: 24,
+            duration: 0.7,
+            stagger: 0.03,
+            ease: "sine.out",
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top 80%",
+            },
+          });
+        }
       }
 
-      return () => {
-        revertSplit(split);
-      };
-    },
-    { scope: sectionRef },
-  );
-
-  useEffect(() => {
-    registerGsapPlugins();
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const ctx = gsap.context(() => {
-      createAiDataTimeline(section, {
+      createAiDataTimeline(root.current, {
         particles: particlesRef.current,
         numbers: numbersRef.current,
         charts: chartsRef.current,
@@ -151,7 +140,7 @@ export function Scene05AI() {
           stagger: 0.14,
           ease: "sine.out",
           scrollTrigger: {
-            trigger: section,
+            trigger: root.current,
             start: "top top",
             toggleActions: "play none none reverse",
           },
@@ -169,7 +158,7 @@ export function Scene05AI() {
           ease: "sine.out",
           delay: 1.2,
           scrollTrigger: {
-            trigger: section,
+            trigger: root.current,
             start: "top top",
             toggleActions: "play none none reverse",
           },
@@ -186,7 +175,7 @@ export function Scene05AI() {
           ease: "sine.out",
           delay: 1.8,
           scrollTrigger: {
-            trigger: section,
+            trigger: root.current,
             start: "top top",
             toggleActions: "play none none reverse",
           },
@@ -203,7 +192,7 @@ export function Scene05AI() {
           ease: "power1.out",
           delay: 2,
           scrollTrigger: {
-            trigger: section,
+            trigger: root.current,
             start: "top top",
             toggleActions: "play none none reverse",
           },
@@ -223,19 +212,22 @@ export function Scene05AI() {
           ease: "sine.out",
           delay: 2.4,
           scrollTrigger: {
-            trigger: section,
+            trigger: root.current,
             start: "top top",
             toggleActions: "play none none reverse",
           },
         });
       }
-    }, section);
 
-    return () => ctx.revert();
-  }, []);
+      return () => {
+        revertSplit(split);
+      };
+    },
+    { scope: root },
+  );
 
   return (
-    <section ref={sectionRef} className="scene scene--navy ai-scene">
+    <section ref={root} className="scene scene--navy ai-scene">
       {/* Layer 1 — Animated Grid · Gradient · Noise */}
       <div
         className="ai-layer ai-layer--1"

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { GLOBAL_ROUTE } from "@/lib/globalRoute";
 import { BRAND_GOLD, CLASSIC_GOLD } from "@/lib/cinematic";
 import { createGlobalRouteTimeline } from "@/components/animation/ScrollAnimations";
-import { gsap, registerGsapPlugins } from "@/lib/gsap";
+import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 function hopPoint(index: number, total: number) {
   const t = total <= 1 ? 0.5 : index / (total - 1);
@@ -15,38 +15,36 @@ function hopPoint(index: number, total: number) {
 }
 
 export function Scene03Global() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const root = useRef<HTMLElement>(null);
   const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const arcRefs = useRef<(SVGPathElement | null)[]>([]);
   const glowRefs = useRef<(SVGPathElement | null)[]>([]);
   const pulseRefs = useRef<(HTMLDivElement | null)[]>([]);
   const railRefs = useRef<(HTMLElement | null)[]>([]);
 
-  useEffect(() => {
-    registerGsapPlugins();
-    const section = sectionRef.current;
-    if (!section) return;
+  useGSAP(
+    () => {
+      registerGsapPlugins();
+      if (!root.current) return;
 
-    const ctx = gsap.context(() => {
       createGlobalRouteTimeline({
-        section,
+        section: root.current,
         hopLabels: labelRefs.current.filter(Boolean) as HTMLElement[],
         arcs: arcRefs.current.filter(Boolean) as SVGPathElement[],
         glows: glowRefs.current.filter(Boolean) as SVGPathElement[],
         pulses: pulseRefs.current.filter(Boolean) as HTMLElement[],
         railItems: railRefs.current.filter(Boolean) as HTMLElement[],
       });
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: root },
+  );
 
   const points = GLOBAL_ROUTE.map((_, i) =>
     hopPoint(i, GLOBAL_ROUTE.length),
   );
 
   return (
-    <section ref={sectionRef} className="scene scene--navy">
+    <section ref={root} className="scene scene--navy">
       <div className="noise-overlay" />
       <svg
         viewBox="0 0 100 100"
