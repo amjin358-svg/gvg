@@ -32,14 +32,15 @@ jobs:
           cache-dependency-path: gvg-os/package-lock.json
       - name: Install
         run: npm ci
-      - name: Build static website
-        run: npm run build:website
+      - name: Build static website + portal
+        run: npm run build:pages
         env:
           GITHUB_PAGES: "true"
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: gvg-os/apps/website/out
+
 
   deploy:
     needs: build

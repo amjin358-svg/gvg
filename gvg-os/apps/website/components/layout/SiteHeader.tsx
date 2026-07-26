@@ -1,14 +1,19 @@
 "use client";
 
-import Link from "next/link";
 import { BrandLogo } from "@/components/brand/BrandLogo";
+
+const portalUrl = process.env.NEXT_PUBLIC_PORTAL_URL || "http://localhost:3001";
 
 const NAV = [
   { href: "#overview", label: "Overview" },
   { href: "#modules", label: "Modules" },
   { href: "#solutions", label: "Solutions" },
-  { href: "/marketplace", label: "Marketplace", external: true },
-  { href: "/ai", label: "AI Services", external: true },
+  {
+    href: `${portalUrl}/marketplace`,
+    label: "Marketplace",
+    external: true,
+  },
+  { href: `${portalUrl}/ai`, label: "AI Services", external: true },
   { href: "#about", label: "About" },
 ];
 
@@ -24,17 +29,11 @@ export function SiteHeader() {
       </a>
 
       <nav className="site-header__nav" aria-label="Primary">
-        {NAV.map((item) =>
-          item.external ? (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
-          ) : (
-            <a key={item.href} href={item.href}>
-              {item.label}
-            </a>
-          ),
-        )}
+        {NAV.map((item) => (
+          <a key={item.href} href={item.href}>
+            {item.label}
+          </a>
+        ))}
       </nav>
 
       <a className="site-header__cta" href="#get-started">

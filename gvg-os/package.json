@@ -13,6 +13,10 @@
   },
   "scripts": {
     "dev:website": "npm run dev -w @gvg/website",
-    "build:website": "npm run build -w @gvg/website"
+    "build:website": "npm run build -w @gvg/website",
+    "dev:portal": "npm run dev -w @gvg/portal",
+    "build:portal": "npm run build -w @gvg/portal",
+    "build:pages": "node ./scripts/build-pages.mjs"
   }
+
 }

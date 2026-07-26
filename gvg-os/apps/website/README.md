@@ -1,6 +1,8 @@
-# @gvg/website — Interactive Movie
+﻿# @gvg/website — Interactive Movie
 
 Cinematic marketing experience for Global Vista Group.
+
+Feature modules (Marketplace, AI, Business, Investment, Real Estate, Dashboard) live in a **separate app**: [`../portal`](../portal) (`@gvg/portal`). Do not add those routes back into this package.
 
 ## Scenes
 
@@ -19,3 +21,5 @@ npm run dev -w @gvg/website
 ```
 
 Open http://localhost:3000
+
+Portal (feature pages): `npm run dev:portal` → http://localhost:3001

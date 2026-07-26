@@ -742,19 +742,6 @@ a {
   color: var(--gv-muted);
 }
 
-.subpage {
-  min-height: 100svh;
-  display: grid;
-  place-items: center;
-  padding: 2rem;
-  background: linear-gradient(180deg, #0b1f3a, #000);
-}
-
-.subpage a {
-  color: var(--gv-secondary);
-  border-bottom: 1px solid currentColor;
-}
-
 .noise-overlay {
   pointer-events: none;
   position: absolute;
