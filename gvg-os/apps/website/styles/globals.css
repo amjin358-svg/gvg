@@ -482,6 +482,18 @@ a {
   padding: 2rem;
 }
 
+.ending-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ending-smile {
+  margin-bottom: 1.25rem;
+  overflow: visible;
+  filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.35));
+}
+
 .scene-stub h2 {
   margin: 0;
   font-size: clamp(2rem, 5vw, 3.5rem);
