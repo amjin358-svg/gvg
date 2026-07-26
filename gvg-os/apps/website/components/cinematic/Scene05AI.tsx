@@ -228,7 +228,7 @@ export function Scene05AI() {
 
   return (
     <div ref={root}>
-    <section className="scene scene--navy ai-scene">
+      <section className="scene scene--navy ai-scene">
       {/* Layer 1 — Animated Grid · Gradient · Noise */}
       <div
         className="ai-layer ai-layer--1"
@@ -466,7 +466,7 @@ export function Scene05AI() {
       </div>
 
       {/* Layer 5 — Mouse Glow lives on InteractiveMovie (z-index 50) */}
-    </section>
+      </section>
     </div>
   );
 }
