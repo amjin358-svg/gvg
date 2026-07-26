@@ -69,7 +69,7 @@ function formatCounter(value: number) {
 }
 
 export function Scene05AI() {
-  const root = useRef<HTMLElement>(null);
+  const root = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
   const numbersRef = useRef<HTMLDivElement>(null);
   const chartsRef = useRef<HTMLDivElement>(null);
@@ -227,7 +227,8 @@ export function Scene05AI() {
   );
 
   return (
-    <section ref={root} className="scene scene--navy ai-scene">
+    <div ref={root}>
+    <section className="scene scene--navy ai-scene">
       {/* Layer 1 — Animated Grid · Gradient · Noise */}
       <div
         className="ai-layer ai-layer--1"
@@ -466,6 +467,7 @@ export function Scene05AI() {
 
       {/* Layer 5 — Mouse Glow lives on InteractiveMovie (z-index 50) */}
     </section>
+    </div>
   );
 }
 

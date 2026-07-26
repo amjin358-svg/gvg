@@ -15,7 +15,7 @@ function hopPoint(index: number, total: number) {
 }
 
 export function Scene03Global() {
-  const root = useRef<HTMLElement>(null);
+  const root = useRef<HTMLDivElement>(null);
   const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const arcRefs = useRef<(SVGPathElement | null)[]>([]);
   const glowRefs = useRef<(SVGPathElement | null)[]>([]);
@@ -44,106 +44,113 @@ export function Scene03Global() {
   );
 
   return (
-    <section ref={root} className="scene scene--navy">
-      <div className="noise-overlay" />
-      <svg
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-      >
-        {points.slice(0, -1).map((p, i) => {
-          const n = points[i + 1]!;
-          const midX = (p.x + n.x) / 2;
-          const midY = Math.min(p.y, n.y) - 12;
-          const d = `M ${p.x} ${p.y} Q ${midX} ${midY} ${n.x} ${n.y}`;
+    <div ref={root}>
+      <section className="scene scene--navy">
+        <div className="noise-overlay" />
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          {points.slice(0, -1).map((p, i) => {
+            const n = points[i + 1]!;
+            const midX = (p.x + n.x) / 2;
+            const midY = Math.min(p.y, n.y) - 12;
+            const d = `M ${p.x} ${p.y} Q ${midX} ${midY} ${n.x} ${n.y}`;
+            return (
+              <g key={GLOBAL_ROUTE[i]!.id}>
+                <path
+                  ref={(el) => {
+                    arcRefs.current[i] = el;
+                  }}
+                  d={d}
+                  fill="none"
+                  stroke={BRAND_GOLD}
+                  strokeWidth="0.6"
+                  strokeLinecap="round"
+                  opacity={0}
+                />
+                <path
+                  ref={(el) => {
+                    glowRefs.current[i] = el;
+                  }}
+                  d={d}
+                  fill="none"
+                  stroke={CLASSIC_GOLD}
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  opacity={0}
+                  style={{ filter: "blur(1.2px)" }}
+                />
+              </g>
+            );
+          })}
+        </svg>
+
+        {GLOBAL_ROUTE.map((hop, i) => {
+          const p = points[i]!;
           return (
-            <g key={GLOBAL_ROUTE[i]!.id}>
-              <path
+            <div key={hop.id}>
+              <div
                 ref={(el) => {
-                  arcRefs.current[i] = el;
+                  pulseRefs.current[i] = el;
                 }}
-                d={d}
-                fill="none"
-                stroke={BRAND_GOLD}
-                strokeWidth="0.6"
-                strokeLinecap="round"
-                opacity={0}
+                style={{
+                  position: "absolute",
+                  left: `${p.x}%`,
+                  top: `${p.y}%`,
+                  width: 28,
+                  height: 28,
+                  marginLeft: -14,
+                  marginTop: -14,
+                  borderRadius: "50%",
+                  background: `radial-gradient(circle, ${CLASSIC_GOLD}, transparent)`,
+                  opacity: 0,
+                  pointerEvents: "none",
+                }}
               />
-              <path
+              <div
                 ref={(el) => {
-                  glowRefs.current[i] = el;
+                  labelRefs.current[i] = el;
                 }}
-                d={d}
-                fill="none"
-                stroke={CLASSIC_GOLD}
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                opacity={0}
-                style={{ filter: "blur(1.2px)" }}
-              />
-            </g>
+                className="hop-label"
+                style={{
+                  top: `calc(${p.y}% + 2.5rem)`,
+                  left: `${p.x}%`,
+                }}
+              >
+                {hop.label}
+              </div>
+            </div>
           );
         })}
-      </svg>
 
-      {GLOBAL_ROUTE.map((hop, i) => {
-        const p = points[i]!;
-        return (
-          <div key={hop.id}>
-            <div
-              ref={(el) => {
-                pulseRefs.current[i] = el;
-              }}
-              style={{
-                position: "absolute",
-                left: `${p.x}%`,
-                top: `${p.y}%`,
-                width: 28,
-                height: 28,
-                marginLeft: -14,
-                marginTop: -14,
-                borderRadius: "50%",
-                background: `radial-gradient(circle, ${CLASSIC_GOLD}, transparent)`,
-                opacity: 0,
-                pointerEvents: "none",
-              }}
-            />
-            <div
-              ref={(el) => {
-                labelRefs.current[i] = el;
-              }}
-              className="hop-label"
-              style={{
-                top: `calc(${p.y}% + 2.5rem)`,
-                left: `${p.x}%`,
-              }}
-            >
-              {hop.label}
-            </div>
-          </div>
-        );
-      })}
-
-      <nav className="global-hop-rail" aria-label="Global market hops">
-        {GLOBAL_ROUTE.map((hop, i) => (
-          <div key={`rail-${hop.id}`} className="global-hop-rail__step">
-            <span
-              ref={(el) => {
-                railRefs.current[i] = el;
-              }}
-              className="global-hop-rail__label"
-            >
-              {hop.label}
-            </span>
-            {i < GLOBAL_ROUTE.length - 1 ? (
-              <span className="global-hop-rail__arrow" aria-hidden>
-                ↓
+        <nav className="global-hop-rail" aria-label="Global market hops">
+          {GLOBAL_ROUTE.map((hop, i) => (
+            <div key={`rail-${hop.id}`} className="global-hop-rail__step">
+              <span
+                ref={(el) => {
+                  railRefs.current[i] = el;
+                }}
+                className="global-hop-rail__label"
+              >
+                {hop.label}
               </span>
-            ) : null}
-          </div>
-        ))}
-      </nav>
-    </section>
+              {i < GLOBAL_ROUTE.length - 1 ? (
+                <span className="global-hop-rail__arrow" aria-hidden>
+                  ↓
+                </span>
+              ) : null}
+            </div>
+          ))}
+        </nav>
+      </section>
+    </div>
   );
 }
 

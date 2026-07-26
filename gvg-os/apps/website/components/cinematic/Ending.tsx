@@ -6,7 +6,7 @@ import { BRAND_GOLD, CLASSIC_GOLD } from "@/lib/cinematic";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 export function Ending() {
-  const root = useRef<HTMLElement>(null);
+  const root = useRef<HTMLDivElement>(null);
   const smileRef = useRef<SVGPathElement>(null);
   const nodeRef = useRef<SVGCircleElement>(null);
 
@@ -48,42 +48,46 @@ export function Ending() {
   );
 
   return (
-    <section ref={root} className="scene scene--black scene-stub">
-      <div className="ending-mark">
-        <svg
-          className="ending-smile"
-          viewBox="0 0 240 90"
-          width="240"
-          height="90"
-          aria-hidden
-        >
-          {/* ______ .-' / () \ '-.______ */}
-          <path
-            ref={smileRef}
-            d="M 12 28 C 48 78, 192 78, 228 28"
-            fill="none"
-            stroke={BRAND_GOLD}
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M 12 28 C 48 78, 192 78, 228 28"
-            fill="none"
-            stroke={CLASSIC_GOLD}
-            strokeWidth="6"
-            strokeLinecap="round"
-            opacity="0.25"
-            style={{ filter: "blur(3px)" }}
-          />
-          <circle ref={nodeRef} cx="120" cy="62" r="8" fill={CLASSIC_GOLD} />
-        </svg>
-        <h2>GVG</h2>
-        <p style={{ marginTop: "1rem" }}>Connecting Markets. Creating Value.</p>
-        <p style={{ marginTop: "2rem" }}>
-          <Link href="/marketplace">Enter Marketplace →</Link>
-        </p>
-      </div>
-    </section>
+    <div ref={root}>
+      <section className="scene scene--black scene-stub">
+        <div className="ending-mark">
+          <svg
+            className="ending-smile"
+            viewBox="0 0 240 90"
+            width="240"
+            height="90"
+            aria-hidden
+          >
+            {/* ______ .-' / () \ '-.______ */}
+            <path
+              ref={smileRef}
+              d="M 12 28 C 48 78, 192 78, 228 28"
+              fill="none"
+              stroke={BRAND_GOLD}
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+            <path
+              d="M 12 28 C 48 78, 192 78, 228 28"
+              fill="none"
+              stroke={CLASSIC_GOLD}
+              strokeWidth="6"
+              strokeLinecap="round"
+              opacity="0.25"
+              style={{ filter: "blur(3px)" }}
+            />
+            <circle ref={nodeRef} cx="120" cy="62" r="8" fill={CLASSIC_GOLD} />
+          </svg>
+          <h2>GVG</h2>
+          <p style={{ marginTop: "1rem" }}>
+            Connecting Markets. Creating Value.
+          </p>
+          <p style={{ marginTop: "2rem" }}>
+            <Link href="/marketplace">Enter Marketplace →</Link>
+          </p>
+        </div>
+      </section>
+    </div>
   );
 }
 

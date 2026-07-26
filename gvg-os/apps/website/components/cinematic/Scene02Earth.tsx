@@ -24,7 +24,7 @@ function EarthScene({
 }
 
 export function Scene02Earth() {
-  const root = useRef<HTMLElement>(null);
+  const root = useRef<HTMLDivElement>(null);
   const rotationYRef = useRef({ value: 0 });
 
   useGSAP(
@@ -41,15 +41,17 @@ export function Scene02Earth() {
   );
 
   return (
-    <section ref={root} className="scene scene--black">
-      <div className="earth-pin">
-        <div className="earth-canvas">
-          <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-            <EarthScene rotationYRef={rotationYRef} />
-          </Canvas>
+    <div ref={root}>
+      <section className="scene scene--black">
+        <div className="earth-pin">
+          <div className="earth-canvas">
+            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+              <EarthScene rotationYRef={rotationYRef} />
+            </Canvas>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
