@@ -1,16 +1,6 @@
-﻿"use client";
+﻿import { InteractiveMovie } from "@/components/cinematic/InteractiveMovie";
 
-import dynamic from "next/dynamic";
-
-const InteractiveMovie = dynamic(
-  () =>
-    import("@/components/cinematic/InteractiveMovie").then(
-      (m) => m.InteractiveMovie,
-    ),
-  { ssr: false, loading: () => <main className="movie-root movie-boot" /> },
-);
-
-/** Homepage = cinematic Interactive Movie (client-only for WebGL safety) */
+/** Homepage = cinematic Interactive Movie (GSAP × ScrollTrigger storytelling) */
 export default function MarketingHomePage() {
   return <InteractiveMovie />;
 }
