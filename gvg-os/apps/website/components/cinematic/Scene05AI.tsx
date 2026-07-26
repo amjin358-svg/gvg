@@ -16,15 +16,23 @@ const ParticleField = dynamic(
 const DIGITS = ["0", "1", "8", "5", "3", "9"];
 
 const KPIS = [
-  { value: "99.7%", label: "AI" },
-  { value: "24M", label: "GDP" },
-  { value: "$18.5B", label: "ROI" },
+  { value: "99.7%", label: "AI", kind: "static" as const },
+  { value: "0", label: "GDP", kind: "counter" as const },
+  { value: "$18.5B", label: "ROI", kind: "static" as const },
 ];
 
 /** Cascading ledger / signal IDs */
 const DATA_CHAIN = [18394829, 18394841, 18395010];
 
 const BAR_HEIGHTS = [45, 70, 55, 90, 65, 80, 50];
+
+function formatCounter(value: number) {
+  if (value >= 1_000_000) {
+    const millions = value / 1_000_000;
+    return `${millions % 1 === 0 ? millions.toFixed(0) : millions.toFixed(1)}M`;
+  }
+  return Math.round(value).toLocaleString("en-US");
+}
 
 export function Scene05AI() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -36,6 +44,7 @@ export function Scene05AI() {
   const chainRefs = useRef<(HTMLDivElement | null)[]>([]);
   const digitRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const kpiRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const counterValueRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     registerGsapPlugins();
@@ -96,6 +105,26 @@ export function Scene05AI() {
             trigger: section,
             start: "top top",
             toggleActions: "play none none reverse",
+          },
+        });
+      }
+
+      const counterEl = counterValueRef.current;
+      if (counterEl) {
+        const counter = { value: 0 };
+        gsap.to(counter, {
+          value: 25000000,
+          duration: 2,
+          snap: "value",
+          ease: "power1.out",
+          delay: 1.1,
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            toggleActions: "play none none reverse",
+          },
+          onUpdate: () => {
+            counterEl.textContent = formatCounter(counter.value);
           },
         });
       }
@@ -169,7 +198,17 @@ export function Scene05AI() {
                 }}
                 className="ai-kpi"
               >
-                <strong>{kpi.value}</strong>
+                <strong
+                  ref={
+                    kpi.kind === "counter"
+                      ? (el) => {
+                          counterValueRef.current = el;
+                        }
+                      : undefined
+                  }
+                >
+                  {kpi.value}
+                </strong>
                 <span>{kpi.label}</span>
               </div>
             ))}
