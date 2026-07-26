@@ -1,5 +1,18 @@
 import type { ReactNode } from "react";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 
-export function SiteShell({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+/** Optional marketing chrome for sub-routes */
+export function SiteShell({
+  children,
+  withHeader = false,
+}: {
+  children: ReactNode;
+  withHeader?: boolean;
+}) {
+  return (
+    <div className="home-root">
+      {withHeader ? <SiteHeader /> : null}
+      {children}
+    </div>
+  );
 }

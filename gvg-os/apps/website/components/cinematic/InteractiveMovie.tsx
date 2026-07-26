@@ -32,7 +32,7 @@ const Scene05AI = dynamic(
 /** Full Interactive Movie scroll experience */
 export function InteractiveMovie() {
   return (
-    <main className="movie-root">
+    <main className="movie-root" aria-label="GVG Interactive Movie">
       {/* Layer 5 — Mouse Glow (topmost cinematic overlay) */}
       <MouseGlow />
       <Scene01Logo />

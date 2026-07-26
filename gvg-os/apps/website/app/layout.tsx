@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
+﻿import type { ReactNode } from "react";
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: "Global Vista Group",
-  description: "Connecting Markets. Creating Value.",
+  title: "GVG OS — One OS. Limitless Vision.",
+  description:
+    "GVG OS cinematic experience — AI-powered all-in-one business platform for global enterprise.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

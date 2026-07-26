@@ -1,6 +1,6 @@
-import { InteractiveMovie } from "@/components/cinematic/InteractiveMovie";
+﻿import { HomePage } from "@/components/home/HomePage";
 
-/** Interactive Movie — brand cinematic homepage */
+/** GVG OS homepage — cinematic marketing + Interactive Movie */
 export default function MarketingHomePage() {
-  return <InteractiveMovie />;
+  return <HomePage />;
 }
