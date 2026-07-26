@@ -1,30 +1,29 @@
-# @gvg/portal — Feature pages
+# @gvg/portal — GVG 企業官網分頁
 
-Separate app for Global Vista Group functional pages. Kept apart from the cinematic marketing site (`@gvg/website`).
+與 cinematic 行銷站（`@gvg/website`）分離的功能／企業站。文案以**繁體中文為主（約 80%）**，英文為輔（約 20%）。
 
-## Modules
+## 頁面
 
-| Route | Purpose |
+| 路由 | 說明 |
 | --- | --- |
-| `/` | Portal hub |
-| `/marketplace` | Product discovery & sourcing |
-| `/ai` | AI services |
-| `/business` | Company / enterprise |
-| `/investment` | Capital & growth |
-| `/real-estate` | Property desk |
-| `/dashboard` | Ops dashboard entry |
+| `/` | 首頁 Hero、服務、產品分類 |
+| `/about` | 關於 GVG |
+| `/services` | 服務項目 |
+| `/products` | 全球產品 |
+| `/trade` | 貿易中心 |
+| `/suppliers` | 供應商合作 |
+| `/news` | 最新消息 |
+| `/contact` | 聯絡／詢價 |
 
-## Dev
+## 開發
 
 ```bash
 # from gvg-os/
 npm run dev:portal
 ```
 
-Open http://localhost:3001
+http://localhost:3001
 
-Cinematic site stays on http://localhost:3000 (`npm run dev:website`).
+## 上線
 
-## Production (GitHub Pages)
-
-Built with `GITHUB_PAGES=true` → basePath `/gvg/portal`, then nested into the website static export as `out/portal/`.
+`GITHUB_PAGES=true` 時 basePath 為 `/gvg/portal`，由 `npm run build:pages` 巢狀進 website 靜態輸出。

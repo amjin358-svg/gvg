@@ -7,13 +7,9 @@ const portalUrl = process.env.NEXT_PUBLIC_PORTAL_URL || "http://localhost:3001";
 const NAV = [
   { href: "#overview", label: "Overview" },
   { href: "#modules", label: "Modules" },
-  { href: "#solutions", label: "Solutions" },
-  {
-    href: `${portalUrl}/marketplace`,
-    label: "Marketplace",
-    external: true,
-  },
-  { href: `${portalUrl}/ai`, label: "AI Services", external: true },
+  { href: `${portalUrl}/services`, label: "服務項目", external: true },
+  { href: `${portalUrl}/products`, label: "全球產品", external: true },
+  { href: `${portalUrl}/trade`, label: "貿易中心", external: true },
   { href: "#about", label: "About" },
 ];
 
@@ -36,8 +32,8 @@ export function SiteHeader() {
         ))}
       </nav>
 
-      <a className="site-header__cta" href="#get-started">
-        Get Started
+      <a className="site-header__cta" href={`${portalUrl}/contact#rfq`}>
+        立即詢價
       </a>
     </header>
   );

@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
+import { PageShell } from "@/components/PageShell";
+import { BRAND } from "@/lib/content";
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: "GVG Portal — Global Vista Group",
-  description:
-    "Feature modules for Marketplace, AI, Business, Investment, Real Estate, and Dashboard.",
+  title: `${BRAND.short} ${BRAND.nameEn}｜${BRAND.nameZh}`,
+  description: `${BRAND.taglineZh} — ${BRAND.trustZh}`,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -18,11 +19,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           crossOrigin=""
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <PageShell>{children}</PageShell>
+      </body>
     </html>
   );
 }
