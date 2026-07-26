@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
+import { CanvasSafe } from "@/components/three/CanvasSafe";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 const FloatingObjects = dynamic(
@@ -69,11 +69,11 @@ export function Scene04Marketplace() {
     <div ref={root}>
       <section className="scene scene--navy market-scene" aria-label="Marketplace">
         <div className="market-scene__canvas" aria-hidden>
-          <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+          <CanvasSafe camera={{ position: [0, 0, 5], fov: 45 }}>
             <ambientLight intensity={0.8} />
             <directionalLight position={[4, 3, 2]} intensity={1.1} />
             <FloatingObjects />
-          </Canvas>
+          </CanvasSafe>
         </div>
 
         <div className="market-scene__content">

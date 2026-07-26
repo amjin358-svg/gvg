@@ -14,7 +14,7 @@ export function Ending() {
   const root = useRef<HTMLDivElement>(null);
   const logo = useRef<HTMLHeadingElement>(null);
   const line = useRef<HTMLParagraphElement>(null);
-  const cta = useRef<HTMLAnchorElement>(null);
+  const cta = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -66,9 +66,11 @@ export function Ending() {
           <p ref={line} className="ending-scene__line">
             Building the Future of Global Business.
           </p>
-          <Link ref={cta} className="ending-scene__cta" href="/marketplace">
-            Start Your Journey
-          </Link>
+          <div ref={cta}>
+            <Link className="ending-scene__cta" href="/marketplace">
+              Start Your Journey
+            </Link>
+          </div>
         </div>
       </section>
     </div>

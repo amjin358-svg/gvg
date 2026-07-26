@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { Canvas } from "@react-three/fiber";
 import SplitType from "split-type";
 import { Earth } from "@/components/three/Earth";
 import { Stars } from "@/components/three/Stars";
+import { CanvasSafe } from "@/components/three/CanvasSafe";
 import { revertSplit } from "@/components/animation/SplitText";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
@@ -91,9 +91,12 @@ export function Scene01Logo() {
     <div ref={root}>
       <section className="scene scene--cosmos opening-scene" aria-label="Opening">
         <div ref={stage} className="opening-scene__stage">
-          <Canvas camera={{ position: [0, 0, 5.4], fov: 42 }}>
+          <CanvasSafe
+            camera={{ position: [0, 0, 5.4], fov: 42 }}
+            fallback={<div className="opening-scene__fallback" aria-hidden />}
+          >
             <OpeningWorld />
-          </Canvas>
+          </CanvasSafe>
           <div className="opening-scene__glow" aria-hidden />
         </div>
 

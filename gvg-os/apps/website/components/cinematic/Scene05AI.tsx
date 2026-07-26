@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import dynamic from "next/dynamic";
-import { Canvas } from "@react-three/fiber";
+import { CanvasSafe } from "@/components/three/CanvasSafe";
 import SplitType from "split-type";
 import { createAiDataTimeline } from "@/components/animation/ScrollAnimations";
 import { revertSplit } from "@/components/animation/SplitText";
@@ -246,10 +246,10 @@ export function Scene05AI() {
         className="ai-layer ai-layer--2"
         style={{ zIndex: AI_LAYER.particles, opacity: 0 }}
       >
-        <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
+        <CanvasSafe camera={{ position: [0, 0, 6], fov: 50 }}>
           <ambientLight intensity={0.6} />
           <ParticleField />
-        </Canvas>
+        </CanvasSafe>
         <div
           aria-hidden
           style={{
@@ -421,10 +421,10 @@ export function Scene05AI() {
             aria-label="Revenue Market Inventory CRM network"
           >
             <div className="ai-network__canvas">
-              <Canvas camera={{ position: [0, 0, 4.2], fov: 45 }}>
+              <CanvasSafe camera={{ position: [0, 0, 4.2], fov: 45 }}>
                 <ambientLight intensity={0.4} />
                 <NetworkLines mode="crm" />
-              </Canvas>
+              </CanvasSafe>
             </div>
             <ul className="ai-network__labels">
               <li className="ai-network__labels-left">Revenue</li>

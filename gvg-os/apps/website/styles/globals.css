@@ -45,6 +45,12 @@ a {
   background: var(--gv-black);
 }
 
+.movie-boot {
+  min-height: 100svh;
+  background:
+    radial-gradient(ellipse at 50% 40%, #0a2248 0%, #020b1c 55%, #000 100%);
+}
+
 .scene {
   position: relative;
   min-height: 100svh;
@@ -751,6 +757,16 @@ a {
   inset: 20% 25%;
   background: radial-gradient(circle, rgba(200, 163, 95, 0.22), transparent 65%);
   filter: blur(20px);
+}
+
+.opening-scene__fallback,
+.canvas-safe-fallback {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(26, 70, 140, 0.55), transparent 55%),
+    radial-gradient(circle at 30% 50%, rgba(200, 163, 95, 0.18), transparent 40%),
+    #020b1c;
 }
 
 .opening-scene__copy {
