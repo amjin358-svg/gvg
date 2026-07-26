@@ -144,6 +144,36 @@ a {
   color: var(--gv-muted);
 }
 
+.ai-data-chain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  margin-bottom: 2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-data-chain__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ai-data-chain__id {
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gv-secondary);
+  text-shadow: 0 0 24px rgba(200, 163, 95, 0.35);
+}
+
+.ai-data-chain__arrow {
+  color: var(--gv-gold-classic);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
 .ai-charts {
   display: flex;
   align-items: flex-end;

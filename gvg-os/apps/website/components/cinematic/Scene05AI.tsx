@@ -18,6 +18,9 @@ const KPIS = [
   { value: "5k+", label: "Partners" },
 ];
 
+/** Cascading ledger / signal IDs for the Numbers beat */
+const DATA_CHAIN = [18394829, 18394841, 18395010];
+
 const BAR_HEIGHTS = [45, 70, 55, 90, 65, 80, 50];
 
 export function Scene05AI() {
@@ -27,6 +30,7 @@ export function Scene05AI() {
   const chartsRef = useRef<HTMLDivElement>(null);
   const connectionsRef = useRef<HTMLDivElement>(null);
   const barRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const chainRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     registerGsapPlugins();
@@ -50,6 +54,24 @@ export function Scene05AI() {
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
+        });
+      }
+
+      const chain = chainRefs.current.filter(Boolean) as HTMLElement[];
+      if (chain.length) {
+        gsap.set(chain, { opacity: 0, y: -24 });
+        gsap.to(chain, {
+          opacity: 1,
+          y: 0,
+          duration: 1.1,
+          stagger: 0.45,
+          ease: "sine.out",
+          delay: 0.4,
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            toggleActions: "play none none reverse",
+          },
         });
       }
     }, section);
@@ -86,6 +108,25 @@ export function Scene05AI() {
         className="ai-stage"
         style={{ opacity: 0 }}
       >
+        <div className="ai-data-chain" aria-label="Cascading data signals">
+          {DATA_CHAIN.map((id, i) => (
+            <div key={id} className="ai-data-chain__step">
+              <div
+                ref={(el) => {
+                  chainRefs.current[i] = el;
+                }}
+                className="ai-data-chain__id"
+              >
+                {id}
+              </div>
+              {i < DATA_CHAIN.length - 1 ? (
+                <div className="ai-data-chain__arrow" aria-hidden>
+                  ↓
+                </div>
+              ) : null}
+            </div>
+          ))}
+        </div>
         <div className="ai-kpis">
           {KPIS.map((kpi) => (
             <div key={kpi.label} className="ai-kpi">
