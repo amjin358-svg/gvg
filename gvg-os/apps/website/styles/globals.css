@@ -132,6 +132,39 @@ a {
   padding: 1rem;
 }
 
+.ai-binary-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-binary-flow__bits {
+  font-family: "Courier New", "SF Mono", ui-monospace, monospace;
+  font-size: clamp(1.1rem, 3.2vw, 1.75rem);
+  letter-spacing: 0.28em;
+  color: var(--gv-secondary);
+  text-shadow: 0 0 18px rgba(200, 163, 95, 0.35);
+}
+
+.ai-binary-flow__arrow {
+  color: var(--gv-gold-classic);
+  font-size: 0.95rem;
+  line-height: 1.15;
+  opacity: 0.8;
+}
+
+.ai-binary-flow__ai {
+  margin-top: 0.35rem;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gv-secondary);
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.45);
+}
+
 .ai-digits {
   display: flex;
   flex-wrap: wrap;

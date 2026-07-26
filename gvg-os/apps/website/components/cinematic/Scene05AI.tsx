@@ -21,6 +21,24 @@ const KPIS = [
   { value: "$18.5B", label: "ROI", kind: "static" as const },
 ];
 
+/** Binary stream: bits fall into AI */
+const BINARY_ROWS: Array<
+  | { kind: "bits"; value: string; key: string }
+  | { kind: "arrow"; key: string }
+  | { kind: "label"; value: string; key: string }
+> = [
+  { kind: "bits", value: "001001010", key: "bits-a" },
+  { kind: "arrow", key: "a1" },
+  { kind: "arrow", key: "a2" },
+  { kind: "arrow", key: "a3" },
+  { kind: "arrow", key: "a4" },
+  { kind: "bits", value: "110010101", key: "bits-b" },
+  { kind: "arrow", key: "b1" },
+  { kind: "arrow", key: "b2" },
+  { kind: "arrow", key: "b3" },
+  { kind: "label", value: "AI", key: "ai" },
+];
+
 /** Cascading ledger / signal IDs */
 const DATA_CHAIN = [18394829, 18394841, 18395010];
 
@@ -44,6 +62,7 @@ export function Scene05AI() {
   const chainRefs = useRef<(HTMLDivElement | null)[]>([]);
   const digitRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const kpiRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const binaryRefs = useRef<(HTMLElement | null)[]>([]);
   const counterValueRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -71,9 +90,26 @@ export function Scene05AI() {
         });
       }
 
+      const binaryRows = binaryRefs.current.filter(Boolean) as HTMLElement[];
       const digits = digitRefs.current.filter(Boolean) as HTMLElement[];
       const kpis = kpiRefs.current.filter(Boolean) as HTMLElement[];
       const chain = chainRefs.current.filter(Boolean) as HTMLElement[];
+
+      if (binaryRows.length) {
+        gsap.set(binaryRows, { opacity: 0, y: -18 });
+        gsap.to(binaryRows, {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          stagger: 0.14,
+          ease: "sine.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
 
       if (digits.length) {
         gsap.set(digits, { opacity: 0, y: 40, scale: 0.6 });
@@ -84,6 +120,7 @@ export function Scene05AI() {
           duration: 0.7,
           stagger: 0.12,
           ease: "sine.out",
+          delay: 1.2,
           scrollTrigger: {
             trigger: section,
             start: "top top",
@@ -100,7 +137,7 @@ export function Scene05AI() {
           duration: 0.8,
           stagger: 0.18,
           ease: "sine.out",
-          delay: 0.9,
+          delay: 1.8,
           scrollTrigger: {
             trigger: section,
             start: "top top",
@@ -117,7 +154,7 @@ export function Scene05AI() {
           duration: 2,
           snap: "value",
           ease: "power1.out",
-          delay: 1.1,
+          delay: 2,
           scrollTrigger: {
             trigger: section,
             start: "top top",
@@ -137,7 +174,7 @@ export function Scene05AI() {
           duration: 1.1,
           stagger: 0.45,
           ease: "sine.out",
-          delay: 1.6,
+          delay: 2.4,
           scrollTrigger: {
             trigger: section,
             start: "top top",
@@ -175,6 +212,49 @@ export function Scene05AI() {
 
       <div ref={numbersRef} className="ai-stage" style={{ opacity: 0 }}>
         <div className="ai-numbers-stack">
+          <div className="ai-binary-flow" aria-label="Binary stream into AI">
+            {BINARY_ROWS.map((row, i) => {
+              if (row.kind === "bits") {
+                return (
+                  <div
+                    key={row.key}
+                    ref={(el) => {
+                      binaryRefs.current[i] = el;
+                    }}
+                    className="ai-binary-flow__bits"
+                  >
+                    {row.value}
+                  </div>
+                );
+              }
+              if (row.kind === "label") {
+                return (
+                  <div
+                    key={row.key}
+                    ref={(el) => {
+                      binaryRefs.current[i] = el;
+                    }}
+                    className="ai-binary-flow__ai"
+                  >
+                    {row.value}
+                  </div>
+                );
+              }
+              return (
+                <div
+                  key={row.key}
+                  ref={(el) => {
+                    binaryRefs.current[i] = el;
+                  }}
+                  className="ai-binary-flow__arrow"
+                  aria-hidden
+                >
+                  ↓
+                </div>
+              );
+            })}
+          </div>
+
           <div className="ai-digits" aria-label="Signal digits">
             {DIGITS.map((d, i) => (
               <span
