@@ -356,27 +356,65 @@ a {
 }
 
 .ai-network {
-  display: grid;
-  place-items: center;
-  width: min(92vw, 22rem);
+  position: relative;
+  width: min(92vw, 26rem);
+  height: min(70svh, 22rem);
 }
 
-.ai-network__svg {
-  width: 100%;
-  height: auto;
-  overflow: visible;
-  filter: drop-shadow(0 0 12px rgba(200, 163, 95, 0.35));
+.ai-network__canvas {
+  position: absolute;
+  inset: 0;
 }
 
-.ai-network__label {
-  fill: var(--gv-muted);
-  font-size: 12px;
-  letter-spacing: 0.16em;
+.ai-network__labels {
+  pointer-events: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+
+.ai-network__labels li {
+  position: absolute;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: var(--gv-muted);
 }
 
-.ai-network__node {
-  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.55));
+.ai-network__labels-left {
+  left: 8%;
+  top: 14%;
+}
+
+.ai-network__labels-right {
+  right: 6%;
+}
+
+.ai-network__labels-right--top {
+  top: 14%;
+}
+
+.ai-network__labels-right--mid {
+  top: 48%;
+}
+
+.ai-network__labels-right--bot {
+  top: 82%;
+}
+
+.ai-network__pipeline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.25rem;
+  margin: 0;
+  text-align: center;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(212, 175, 55, 0.7);
 }
 
 .scene-stub {

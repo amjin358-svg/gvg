@@ -12,6 +12,11 @@ const ParticleField = dynamic(
   { ssr: false },
 );
 
+const NetworkLines = dynamic(
+  () => import("@/components/three/NetworkLines").then((m) => m.NetworkLines),
+  { ssr: false },
+);
+
 /** Particles resolve into these digits */
 const DIGITS = ["0", "1", "8", "5", "3", "9"];
 
@@ -347,83 +352,32 @@ export function Scene05AI() {
       </div>
 
       <div ref={connectionsRef} className="ai-stage" style={{ opacity: 0 }}>
-        <div className="ai-network" aria-label="Revenue Market Inventory CRM network">
-          <svg
-            className="ai-network__svg"
-            viewBox="0 0 320 280"
-            width="320"
-            height="280"
-          >
-            {/* Vertical spine */}
-            <line
-              x1="80"
-              y1="40"
-              x2="80"
-              y2="240"
-              stroke={BRAND_GOLD}
-              strokeWidth="1.5"
-              opacity="0.55"
-            />
-            {/* Horizontal links */}
-            <line
-              x1="80"
-              y1="40"
-              x2="240"
-              y2="40"
-              stroke={BRAND_GOLD}
-              strokeWidth="1.75"
-              opacity="0.85"
-            />
-            <line
-              x1="80"
-              y1="140"
-              x2="240"
-              y2="140"
-              stroke={BRAND_GOLD}
-              strokeWidth="1.75"
-              opacity="0.85"
-            />
-            <line
-              x1="80"
-              y1="240"
-              x2="240"
-              y2="240"
-              stroke={BRAND_GOLD}
-              strokeWidth="1.75"
-              opacity="0.85"
-            />
-            {/* Nodes */}
-            {[
-              [80, 40],
-              [240, 40],
-              [80, 140],
-              [240, 140],
-              [80, 240],
-              [240, 240],
-            ].map(([cx, cy], i) => (
-              <circle
-                key={i}
-                cx={cx}
-                cy={cy}
-                r="7"
-                fill={BRAND_GOLD}
-                className="ai-network__node"
-              />
-            ))}
-            {/* Labels */}
-            <text x="80" y="22" textAnchor="middle" className="ai-network__label">
-              Revenue
-            </text>
-            <text x="240" y="22" textAnchor="middle" className="ai-network__label">
+        <div
+          className="ai-network"
+          aria-label="Revenue Market Inventory CRM network"
+        >
+          <div className="ai-network__canvas">
+            <Canvas camera={{ position: [0, 0, 4.2], fov: 45 }}>
+              <color attach="background" args={["#000000"]} />
+              <ambientLight intensity={0.4} />
+              <NetworkLines mode="crm" />
+            </Canvas>
+          </div>
+          <ul className="ai-network__labels">
+            <li className="ai-network__labels-left">Revenue</li>
+            <li className="ai-network__labels-right ai-network__labels-right--top">
               Market
-            </text>
-            <text x="240" y="122" textAnchor="middle" className="ai-network__label">
+            </li>
+            <li className="ai-network__labels-right ai-network__labels-right--mid">
               Inventory
-            </text>
-            <text x="240" y="222" textAnchor="middle" className="ai-network__label">
+            </li>
+            <li className="ai-network__labels-right ai-network__labels-right--bot">
               CRM
-            </text>
-          </svg>
+            </li>
+          </ul>
+          <p className="ai-network__pipeline">
+            LineGeometry → TubeGeometry → Glow Shader
+          </p>
         </div>
       </div>
 
