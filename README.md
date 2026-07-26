@@ -66,6 +66,17 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Stitch AI collaboration
+
+Google Stitch design ↔ agent tooling is prewired (Cursor MCP, OpenCode, Gemini CLI, skills).
+
+```bash
+cp .env.example .env   # set STITCH_API_KEY from stitch.withgoogle.com
+npm run setup:stitch
+```
+
+See [`docs/STITCH_COLLAB.md`](./docs/STITCH_COLLAB.md).
+
 ## Scripts
 
 | Command | Description |
@@ -76,6 +87,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run lint` | ESLint |
 | `npm run test` | Foundation unit tests |
 | `npm run structure` | Print enterprise folder map |
+| `npm run setup:stitch` | Install / repair Stitch collaboration tooling |
 
 ## Separate GitHub repository
 

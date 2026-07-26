@@ -1,0 +1,11 @@
+{
+  "mcp": {
+    "stitch": {
+      "httpUrl": "https://stitch.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "${STITCH_API_KEY}"
+      },
+      "timeout": 300000
+    }
+  }
+}
