@@ -2,9 +2,9 @@
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: "GVG OS — One OS. Limitless Vision.",
+  title: "GVG — Connecting Markets. Creating Value.",
   description:
-    "GVG OS cinematic experience — AI-powered all-in-one business platform for global enterprise.",
+    "Global Vista Group Interactive Movie — cinematic storytelling across markets, trade, marketplace, AI, and investment.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

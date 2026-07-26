@@ -41,10 +41,14 @@ type GlobalRouteOptions = {
   pulses: HTMLElement[];
   /** USA → Taiwan → Japan → Vietnam → Europe rail */
   railItems?: HTMLElement[];
+  /** Final title after all hops connect */
+  finale?: HTMLElement | null;
+  /** World map plate that unfolds at the start */
+  map?: HTMLElement | null;
 };
 
 /**
- * Per hop: Golden Arc → Glow → Pulse, then next hop.
+ * Scene 2 — pin · per hop Golden Arc → Glow → Pulse · supply-chain finale
  */
 export function createGlobalRouteTimeline({
   section,
@@ -53,6 +57,8 @@ export function createGlobalRouteTimeline({
   glows,
   pulses,
   railItems = [],
+  finale = null,
+  map = null,
 }: GlobalRouteOptions): gsap.core.Timeline {
   registerGsapPlugins();
 
@@ -60,7 +66,7 @@ export function createGlobalRouteTimeline({
     scrollTrigger: {
       trigger: section,
       start: "top top",
-      end: `+=${GLOBAL_ROUTE.length * 800}`,
+      end: `+=${GLOBAL_ROUTE.length * 900 + 600}`,
       scrub: true,
       pin: true,
       anticipatePin: 1,
@@ -69,6 +75,11 @@ export function createGlobalRouteTimeline({
 
   if (railItems.length) {
     gsap.set(railItems, { opacity: 0.35, color: "rgba(245,245,245,0.45)" });
+  }
+  if (finale) gsap.set(finale, { opacity: 0, y: 24 });
+  if (map) {
+    gsap.set(map, { opacity: 0, scale: 1.08 });
+    tl.to(map, { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" });
   }
 
   hopLabels.forEach((label, i) => {
@@ -80,11 +91,7 @@ export function createGlobalRouteTimeline({
     tl.to(label, { opacity: 1, duration: 0.35 }, i);
 
     if (rail) {
-      tl.to(
-        rail,
-        { opacity: 1, color: "#C8A35F", duration: 0.35 },
-        i,
-      );
+      tl.to(rail, { opacity: 1, color: "#C8A35F", duration: 0.35 }, i);
       railItems.forEach((item, ri) => {
         if (ri !== i) {
           tl.to(
@@ -120,6 +127,10 @@ export function createGlobalRouteTimeline({
       ).to(pulse, { scale: 1, opacity: 0.55, duration: 0.2 }, i + 0.75);
     }
   });
+
+  if (finale) {
+    tl.to(finale, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" });
+  }
 
   return tl;
 }

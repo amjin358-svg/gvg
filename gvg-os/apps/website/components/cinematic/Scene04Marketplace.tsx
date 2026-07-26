@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
+import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 const FloatingObjects = dynamic(
   () =>
@@ -17,77 +19,91 @@ const CARDS = [
   { title: "Scale", body: "Enterprise portals with AI assistance." },
 ];
 
+/**
+ * Scene 4｜Marketplace
+ * Camera flies in · glass cards rise · 3D tilt on hover
+ */
 export function Scene04Marketplace() {
-  return (
-    <section className="scene scene--navy">
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.55,
-        }}
-      >
-        <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-          <ambientLight intensity={0.8} />
-          <directionalLight position={[4, 3, 2]} intensity={1.1} />
-          <FloatingObjects />
-        </Canvas>
-      </div>
+  const root = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
-      <div
-        style={{
-          position: "relative",
-          zIndex: 2,
-          minHeight: "100svh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <h2
-          style={{
-            textAlign: "center",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "var(--gv-secondary)",
-            marginBottom: "0.5rem",
-          }}
-        >
-          Marketplace
-        </h2>
-        <p
-          style={{
-            textAlign: "center",
-            color: "var(--gv-muted)",
-            marginBottom: "1.5rem",
-          }}
-        >
-          Floating · Rotate · Glass · Reflection
-        </p>
-        <p className="market-fx-caption">
-          Scale 1.05 → RotateX → Shadow → Glow
-        </p>
-        <div className="marketplace-grid">
-          {CARDS.map((card) => (
-            <motion.div
-              key={card.title}
-              className="market-card"
-              style={{ transformStyle: "preserve-3d" }}
-              whileHover={{
-                scale: 1.05,
-                rotateX: 8,
-                rotateY: 6,
-              }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            >
-              <div className="market-card__glow" aria-hidden />
-              <h3>{card.title}</h3>
-              <p>{card.body}</p>
-            </motion.div>
-          ))}
+  useGSAP(
+    () => {
+      registerGsapPlugins();
+      if (!root.current) return;
+
+      const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
+      gsap.set(cards, { opacity: 0, y: 90, rotateX: 28, z: -80 });
+      if (titleRef.current) gsap.set(titleRef.current, { opacity: 0, y: 30 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top top",
+          end: "+=2200",
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+
+      if (titleRef.current) {
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6 });
+      }
+
+      tl.to(cards, {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        z: 0,
+        stagger: 0.22,
+        duration: 0.85,
+        ease: "power3.out",
+      });
+    },
+    { scope: root },
+  );
+
+  return (
+    <div ref={root}>
+      <section className="scene scene--navy market-scene" aria-label="Marketplace">
+        <div className="market-scene__canvas" aria-hidden>
+          <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+            <ambientLight intensity={0.8} />
+            <directionalLight position={[4, 3, 2]} intensity={1.1} />
+            <FloatingObjects />
+          </Canvas>
         </div>
-      </div>
-    </section>
+
+        <div className="market-scene__content">
+          <h2 ref={titleRef}>Marketplace</h2>
+          <p className="market-scene__sub">Glass · Float · 3D Tilt</p>
+          <div className="marketplace-grid">
+            {CARDS.map((card, i) => (
+              <motion.div
+                key={card.title}
+                ref={(el) => {
+                  cardRefs.current[i] = el;
+                }}
+                className="market-card"
+                style={{ transformStyle: "preserve-3d" }}
+                whileHover={{
+                  scale: 1.05,
+                  rotateX: 8,
+                  rotateY: 6,
+                }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              >
+                <div className="market-card__glow" aria-hidden />
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 

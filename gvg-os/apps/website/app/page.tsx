@@ -1,6 +1,6 @@
-﻿import { HomePage } from "@/components/home/HomePage";
+﻿import { InteractiveMovie } from "@/components/cinematic/InteractiveMovie";
 
-/** GVG OS homepage — cinematic marketing + Interactive Movie */
+/** Homepage = cinematic Interactive Movie (GSAP × ScrollTrigger storytelling) */
 export default function MarketingHomePage() {
-  return <HomePage />;
+  return <InteractiveMovie />;
 }

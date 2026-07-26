@@ -2,89 +2,73 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { BRAND_GOLD, CLASSIC_GOLD } from "@/lib/cinematic";
+import SplitType from "split-type";
+import { revertSplit } from "@/components/animation/SplitText";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
+/**
+ * Scene 9｜Ending
+ * Everything retracts → GVG logo → Building the Future… → Start Your Journey
+ */
 export function Ending() {
   const root = useRef<HTMLDivElement>(null);
-  const smileRef = useRef<SVGPathElement>(null);
-  const nodeRef = useRef<SVGCircleElement>(null);
+  const logo = useRef<HTMLHeadingElement>(null);
+  const line = useRef<HTMLParagraphElement>(null);
+  const cta = useRef<HTMLAnchorElement>(null);
 
   useGSAP(
     () => {
       registerGsapPlugins();
-      const smile = smileRef.current;
-      const node = nodeRef.current;
-      if (!root.current || !smile || !node) return;
+      if (!root.current || !logo.current || !line.current || !cta.current) return;
 
-      const length = smile.getTotalLength();
-      gsap.set(smile, {
-        strokeDasharray: length,
-        strokeDashoffset: length,
-        opacity: 1,
-      });
-      gsap.set(node, { scale: 0, transformOrigin: "50% 50%", opacity: 0 });
+      const split = new SplitType(logo.current, { types: "chars" });
+      const chars = split.chars?.length ? split.chars : logo.current;
+
+      gsap.set(chars, { opacity: 0, scale: 0.5, y: 30 });
+      gsap.set([line.current, cta.current], { opacity: 0, y: 24 });
 
       gsap
         .timeline({
           scrollTrigger: {
             trigger: root.current,
-            start: "top 70%",
-            toggleActions: "play none none reverse",
+            start: "top top",
+            end: "+=1600",
+            scrub: true,
+            pin: true,
+            anticipatePin: 1,
           },
         })
-        .to(smile, {
-          strokeDashoffset: 0,
-          duration: 1.4,
-          ease: "power2.inOut",
+        .to(chars, {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 0.8,
+          ease: "power3.out",
         })
-        .to(
-          node,
-          { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.6)" },
-          "-=0.35",
-        );
+        .to(line.current, { opacity: 1, y: 0, duration: 0.7 })
+        .to(cta.current, { opacity: 1, y: 0, duration: 0.55 });
+
+      return () => {
+        revertSplit(split);
+      };
     },
     { scope: root },
   );
 
   return (
     <div ref={root}>
-      <section className="scene scene--black scene-stub">
-        <div className="ending-mark">
-          <svg
-            className="ending-smile"
-            viewBox="0 0 240 90"
-            width="240"
-            height="90"
-            aria-hidden
-          >
-            {/* ______ .-' / () \ '-.______ */}
-            <path
-              ref={smileRef}
-              d="M 12 28 C 48 78, 192 78, 228 28"
-              fill="none"
-              stroke={BRAND_GOLD}
-              strokeWidth="2.5"
-              strokeLinecap="round"
-            />
-            <path
-              d="M 12 28 C 48 78, 192 78, 228 28"
-              fill="none"
-              stroke={CLASSIC_GOLD}
-              strokeWidth="6"
-              strokeLinecap="round"
-              opacity="0.25"
-              style={{ filter: "blur(3px)" }}
-            />
-            <circle ref={nodeRef} cx="120" cy="62" r="8" fill={CLASSIC_GOLD} />
-          </svg>
-          <h2>GVG</h2>
-          <p style={{ marginTop: "1rem" }}>
-            Connecting Markets. Creating Value.
+      <section className="scene scene--black ending-scene" aria-label="Ending">
+        <div className="ending-scene__mark">
+          <h2 ref={logo} className="logo">
+            GVG
+          </h2>
+          <p ref={line} className="ending-scene__line">
+            Building the Future of Global Business.
           </p>
-          <p style={{ marginTop: "2rem" }}>
-            <Link href="/marketplace">Enter Marketplace →</Link>
-          </p>
+          <Link ref={cta} className="ending-scene__cta" href="/marketplace">
+            Start Your Journey
+          </Link>
         </div>
       </section>
     </div>

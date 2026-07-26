@@ -1,154 +1,140 @@
 "use client";
 
 import { useRef } from "react";
-import { GLOBAL_ROUTE } from "@/lib/globalRoute";
-import { BRAND_GOLD, CLASSIC_GOLD } from "@/lib/cinematic";
-import { createGlobalRouteTimeline } from "@/components/animation/ScrollAnimations";
-import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
+import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
-function hopPoint(index: number, total: number) {
-  const t = total <= 1 ? 0.5 : index / (total - 1);
-  return {
-    x: 12 + t * 76,
-    y: 55 + Math.sin(t * Math.PI) * -18,
-  };
-}
+const LAYERS = [
+  {
+    id: "port",
+    title: "Cargo Port",
+    body: "Terminals · berths · container yards",
+    tone: "port",
+  },
+  {
+    id: "ship",
+    title: "Ocean Freight",
+    body: "Vessels crossing trade lanes",
+    tone: "ship",
+  },
+  {
+    id: "air",
+    title: "Air Cargo",
+    body: "High-velocity global lanes",
+    tone: "air",
+  },
+  {
+    id: "logistics",
+    title: "Logistics",
+    body: "Warehouses · last mile · orchestration",
+    tone: "logistics",
+  },
+  {
+    id: "data",
+    title: "Trade Data",
+    body: "Live telemetry across the chain",
+    tone: "data",
+  },
+] as const;
 
+/**
+ * Scene 3｜Global Trade
+ * Parallax + motion layers (not static photos) — port → ship → air → logistics → data
+ */
 export function Scene03Global() {
   const root = useRef<HTMLDivElement>(null);
-  const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const arcRefs = useRef<(SVGPathElement | null)[]>([]);
-  const glowRefs = useRef<(SVGPathElement | null)[]>([]);
-  const pulseRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const railRefs = useRef<(HTMLElement | null)[]>([]);
+  const layerRefs = useRef<(HTMLElement | null)[]>([]);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
     () => {
       registerGsapPlugins();
       if (!root.current) return;
 
-      createGlobalRouteTimeline({
-        section: root.current,
-        hopLabels: labelRefs.current.filter(Boolean) as HTMLElement[],
-        arcs: arcRefs.current.filter(Boolean) as SVGPathElement[],
-        glows: glowRefs.current.filter(Boolean) as SVGPathElement[],
-        pulses: pulseRefs.current.filter(Boolean) as HTMLElement[],
-        railItems: railRefs.current.filter(Boolean) as HTMLElement[],
+      const layers = layerRefs.current.filter(Boolean) as HTMLElement[];
+      gsap.set(layers, { opacity: 0, y: 80, scale: 1.06 });
+      if (titleRef.current) gsap.set(titleRef.current, { opacity: 0, y: 20 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top top",
+          end: "+=4200",
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+
+      if (titleRef.current) {
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6 });
+      }
+
+      layers.forEach((layer, i) => {
+        const depth = (i + 1) * 18;
+        tl.to(
+          layer,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.9,
+            ease: "power2.out",
+          },
+          i * 0.85,
+        );
+        // Parallax drift while visible
+        tl.to(
+          layer,
+          {
+            y: -depth,
+            x: i % 2 === 0 ? 24 : -24,
+            duration: 1.1,
+            ease: "none",
+          },
+          i * 0.85 + 0.4,
+        );
+        if (i < layers.length - 1) {
+          tl.to(layer, { opacity: 0.18, duration: 0.55 }, i * 0.85 + 1.1);
+        }
       });
     },
     { scope: root },
   );
 
-  const points = GLOBAL_ROUTE.map((_, i) =>
-    hopPoint(i, GLOBAL_ROUTE.length),
-  );
-
   return (
     <div ref={root}>
-      <section className="scene scene--navy">
-        <div className="noise-overlay" />
-        <svg
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          {points.slice(0, -1).map((p, i) => {
-            const n = points[i + 1]!;
-            const midX = (p.x + n.x) / 2;
-            const midY = Math.min(p.y, n.y) - 12;
-            const d = `M ${p.x} ${p.y} Q ${midX} ${midY} ${n.x} ${n.y}`;
-            return (
-              <g key={GLOBAL_ROUTE[i]!.id}>
-                <path
-                  ref={(el) => {
-                    arcRefs.current[i] = el;
-                  }}
-                  d={d}
-                  fill="none"
-                  stroke={BRAND_GOLD}
-                  strokeWidth="0.6"
-                  strokeLinecap="round"
-                  opacity={0}
-                />
-                <path
-                  ref={(el) => {
-                    glowRefs.current[i] = el;
-                  }}
-                  d={d}
-                  fill="none"
-                  stroke={CLASSIC_GOLD}
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  opacity={0}
-                  style={{ filter: "blur(1.2px)" }}
-                />
-              </g>
-            );
-          })}
-        </svg>
+      <section className="scene scene--black trade-scene" aria-label="Global Trade">
+        <div className="trade-scene__atmosphere" aria-hidden>
+          <div className="trade-scene__scan" />
+          <div className="trade-scene__horizon" />
+        </div>
 
-        {GLOBAL_ROUTE.map((hop, i) => {
-          const p = points[i]!;
-          return (
-            <div key={hop.id}>
-              <div
-                ref={(el) => {
-                  pulseRefs.current[i] = el;
-                }}
-                style={{
-                  position: "absolute",
-                  left: `${p.x}%`,
-                  top: `${p.y}%`,
-                  width: 28,
-                  height: 28,
-                  marginLeft: -14,
-                  marginTop: -14,
-                  borderRadius: "50%",
-                  background: `radial-gradient(circle, ${CLASSIC_GOLD}, transparent)`,
-                  opacity: 0,
-                  pointerEvents: "none",
-                }}
-              />
-              <div
-                ref={(el) => {
-                  labelRefs.current[i] = el;
-                }}
-                className="hop-label"
-                style={{
-                  top: `calc(${p.y}% + 2.5rem)`,
-                  left: `${p.x}%`,
-                }}
-              >
-                {hop.label}
+        <h2 ref={titleRef} className="trade-scene__title">
+          Global Trade
+        </h2>
+
+        <div className="trade-scene__stack">
+          {LAYERS.map((layer, i) => (
+            <article
+              key={layer.id}
+              ref={(el) => {
+                layerRefs.current[i] = el;
+              }}
+              className={`trade-layer trade-layer--${layer.tone}`}
+            >
+              <div className="trade-layer__motion" aria-hidden>
+                <span />
+                <span />
+                <span />
               </div>
-            </div>
-          );
-        })}
-
-        <nav className="global-hop-rail" aria-label="Global market hops">
-          {GLOBAL_ROUTE.map((hop, i) => (
-            <div key={`rail-${hop.id}`} className="global-hop-rail__step">
-              <span
-                ref={(el) => {
-                  railRefs.current[i] = el;
-                }}
-                className="global-hop-rail__label"
-              >
-                {hop.label}
-              </span>
-              {i < GLOBAL_ROUTE.length - 1 ? (
-                <span className="global-hop-rail__arrow" aria-hidden>
-                  ↓
-                </span>
-              ) : null}
-            </div>
+              <div className="trade-layer__copy">
+                <p className="trade-layer__index">0{i + 1}</p>
+                <h3>{layer.title}</h3>
+                <p>{layer.body}</p>
+              </div>
+            </article>
           ))}
-        </nav>
+        </div>
       </section>
     </div>
   );
