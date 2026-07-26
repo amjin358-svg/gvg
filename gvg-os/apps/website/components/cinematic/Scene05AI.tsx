@@ -54,6 +54,9 @@ const CHART_METRICS = [
   { label: "Growth", blocks: 12, max: 12 },
 ];
 
+/** Canonical Scene05 cascade */
+const STAGE_RAIL = ["Particles", "Numbers", "Charts", "Connections"] as const;
+
 function formatCounter(value: number) {
   if (value >= 1_000_000) {
     const millions = value / 1_000_000;
@@ -74,6 +77,7 @@ export function Scene05AI() {
   const kpiRefs = useRef<(HTMLDivElement | null)[]>([]);
   const binaryRefs = useRef<(HTMLElement | null)[]>([]);
   const counterValueRef = useRef<HTMLElement | null>(null);
+  const railRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
     registerGsapPlugins();
@@ -87,6 +91,7 @@ export function Scene05AI() {
         charts: chartsRef.current,
         connections: connectionsRef.current,
         bars: barRefs.current.filter(Boolean) as HTMLElement[],
+        railItems: railRefs.current.filter(Boolean) as HTMLElement[],
       });
 
       const particles = particlesRef.current;
@@ -381,22 +386,25 @@ export function Scene05AI() {
         </div>
       </div>
 
-      <div
-        style={{
-          position: "absolute",
-          bottom: "2rem",
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          letterSpacing: "0.18em",
-          textTransform: "uppercase",
-          color: "var(--gv-muted)",
-          fontSize: "0.75rem",
-          zIndex: 2,
-        }}
-      >
-        Particles · Numbers · Charts · Connections
-      </div>
+      <nav className="ai-stage-rail" aria-label="AI data beat stages">
+        {STAGE_RAIL.map((label, i) => (
+          <div key={label} className="ai-stage-rail__step">
+            <span
+              ref={(el) => {
+                railRefs.current[i] = el;
+              }}
+              className="ai-stage-rail__label"
+            >
+              {label}
+            </span>
+            {i < STAGE_RAIL.length - 1 ? (
+              <span className="ai-stage-rail__arrow" aria-hidden>
+                ↓
+              </span>
+            ) : null}
+          </div>
+        ))}
+      </nav>
     </section>
   );
 }

@@ -107,6 +107,8 @@ export function createAiDataTimeline(
     charts: HTMLElement | null;
     connections: HTMLElement | null;
     bars: HTMLElement[];
+    /** Optional rail labels: Particles → Numbers → Charts → Connections */
+    railItems?: HTMLElement[];
   },
 ): gsap.core.Timeline {
   registerGsapPlugins();
@@ -115,32 +117,73 @@ export function createAiDataTimeline(
     scrollTrigger: {
       trigger: section,
       start: "top top",
-      end: "+=2800",
+      end: "+=3200",
       scrub: true,
       pin: true,
       anticipatePin: 1,
     },
   });
 
+  const rail = stages.railItems ?? [];
+  const activateRail = (index: number) => {
+    if (!rail.length) return;
+    rail.forEach((el, i) => {
+      tl.to(
+        el,
+        {
+          opacity: i === index ? 1 : 0.35,
+          color: i === index ? "#C8A35F" : "rgba(245,245,245,0.45)",
+          duration: 0.35,
+        },
+        "<",
+      );
+    });
+  };
+
+  if (rail.length) {
+    gsap.set(rail, { opacity: 0.35, color: "rgba(245,245,245,0.45)" });
+  }
+
+  // Particles → Numbers → Charts → Connections (crossfade cascade)
   if (stages.particles) {
     gsap.set(stages.particles, { opacity: 0 });
     tl.to(stages.particles, { opacity: 1, duration: 1 });
+    activateRail(0);
   }
   if (stages.numbers) {
     gsap.set(stages.numbers, { opacity: 0, y: 24 });
-    tl.to(stages.numbers, { opacity: 1, y: 0, duration: 0.8 });
+    if (stages.particles) {
+      tl.to(stages.particles, { opacity: 0.15, duration: 0.5 });
+    }
+    tl.to(stages.numbers, { opacity: 1, y: 0, duration: 0.8 }, "<");
+    activateRail(1);
   }
   if (stages.charts) {
+    if (stages.numbers) {
+      tl.to(stages.numbers, { opacity: 0, duration: 0.45 });
+    }
+    if (stages.particles) {
+      tl.to(stages.particles, { opacity: 0, duration: 0.45 }, "<");
+    }
     gsap.set(stages.charts, { opacity: 0 });
-    tl.to(stages.charts, { opacity: 1, duration: 0.4 });
+    tl.to(stages.charts, { opacity: 1, duration: 0.5 }, "<");
     if (stages.bars.length) {
       gsap.set(stages.bars, { scaleX: 0 });
-      tl.to(stages.bars, { scaleX: 1, stagger: 0.12, duration: 0.55, ease: "power2.out" }, "<");
+      tl.to(
+        stages.bars,
+        { scaleX: 1, stagger: 0.12, duration: 0.55, ease: "power2.out" },
+        "<",
+      );
     }
+    activateRail(2);
   }
   if (stages.connections) {
+    if (stages.charts) {
+      tl.to(stages.charts, { opacity: 0, duration: 0.45 });
+    }
     gsap.set(stages.connections, { opacity: 0 });
-    tl.to(stages.connections, { opacity: 1, duration: 0.7 });
+    tl.to(stages.connections, { opacity: 1, duration: 0.7 }, "<");
+    activateRail(3);
   }
 
   return tl;
