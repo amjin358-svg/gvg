@@ -23,24 +23,8 @@ const STATS = [
     label: "Core Modules",
     icon: (
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden>
-        <rect
-          x="3"
-          y="14"
-          width="18"
-          height="4"
-          rx="1"
-          fill="currentColor"
-          opacity="0.45"
-        />
-        <rect
-          x="5"
-          y="9"
-          width="14"
-          height="4"
-          rx="1"
-          fill="currentColor"
-          opacity="0.7"
-        />
+        <rect x="3" y="14" width="18" height="4" rx="1" fill="currentColor" opacity="0.45" />
+        <rect x="5" y="9" width="14" height="4" rx="1" fill="currentColor" opacity="0.7" />
         <rect x="7" y="4" width="10" height="4" rx="1" fill="currentColor" />
       </svg>
     ),
@@ -94,30 +78,31 @@ export function HeroCinematic() {
       registerGsapPlugins();
       if (!root.current || !copyRef.current || !statsRef.current) return;
 
+      // Skip continuous motion when user prefers reduced motion
+      const reduce =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
       const lines = copyRef.current.querySelectorAll(
         ".home-hero__eyebrow, .home-hero__title, .home-hero__lead, .home-hero__actions",
       );
       const stats = statsRef.current.querySelectorAll(".home-stat");
 
-      gsap.set(lines, { opacity: 0, y: 28 });
-      gsap.set(stats, { opacity: 0, x: 24 });
-      if (scrollRef.current) gsap.set(scrollRef.current, { opacity: 0, y: 12 });
+      if (reduce) {
+        gsap.set([lines, stats, scrollRef.current], { clearProps: "all", opacity: 1 });
+        return;
+      }
 
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.to(lines, { opacity: 1, y: 0, duration: 0.9, stagger: 0.12 }, 0.15)
-        .to(stats, { opacity: 1, x: 0, duration: 0.7, stagger: 0.1 }, 0.55)
-        .to(
-          scrollRef.current,
-          { opacity: 1, y: 0, duration: 0.6 },
-          1.1,
-        );
+      gsap.set(lines, { opacity: 0, y: 20 });
+      gsap.set(stats, { opacity: 0, x: 16 });
+      if (scrollRef.current) gsap.set(scrollRef.current, { opacity: 0, y: 8 });
 
-      gsap.to(stats, {
-        y: -6,
-        duration: 2.8,
-        stagger: { each: 0.35, yoyo: true, repeat: -1 },
-        ease: "sine.inOut",
-      });
+      // One-shot entrance only — no infinite GSAP loops (scroll jank source)
+      gsap
+        .timeline({ defaults: { ease: "power2.out" } })
+        .to(lines, { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 }, 0.1)
+        .to(stats, { opacity: 1, x: 0, duration: 0.55, stagger: 0.07 }, 0.35)
+        .to(scrollRef.current, { opacity: 1, y: 0, duration: 0.45 }, 0.75);
     },
     { scope: root },
   );

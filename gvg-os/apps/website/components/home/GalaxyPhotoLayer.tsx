@@ -6,13 +6,16 @@ type GalaxyPhotoLayerProps = {
   mode?: "fixed" | "absolute";
 };
 
-/** High-res galaxy plate — path-aware for GitHub Pages basePath */
+/**
+ * Galaxy plate — uses a 1920 JPEG for scroll compositing cost.
+ * Avoids background-attachment:fixed (major mobile/desktop jank source).
+ */
 export function GalaxyPhotoLayer({
   className = "",
   mode = "absolute",
 }: GalaxyPhotoLayerProps) {
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  const src = `${base}/images/galaxy-hero-4k.png`;
+  const src = `${base}/images/galaxy-hero-1920.jpg`;
 
   return (
     <div
@@ -20,15 +23,14 @@ export function GalaxyPhotoLayer({
       aria-hidden
       style={{
         backgroundImage: `
-          radial-gradient(ellipse at 68% 28%, rgba(70, 120, 220, 0.2), transparent 34%),
-          radial-gradient(ellipse at 28% 62%, rgba(114, 73, 181, 0.14), transparent 36%),
-          linear-gradient(180deg, rgba(1, 4, 12, 0.28) 0%, rgba(3, 14, 32, 0.22) 42%, rgba(1, 4, 12, 0.45) 100%),
+          radial-gradient(ellipse at 68% 28%, rgba(70, 120, 220, 0.18), transparent 34%),
+          linear-gradient(180deg, rgba(1, 4, 12, 0.32) 0%, rgba(3, 14, 32, 0.2) 42%, rgba(1, 4, 12, 0.5) 100%),
           url("${src}")
         `,
         backgroundPosition: "center top",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundAttachment: mode === "fixed" ? "fixed" : "scroll",
+        backgroundAttachment: "scroll",
       }}
     />
   );

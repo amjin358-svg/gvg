@@ -1507,6 +1507,14 @@ a {
   overflow-x: hidden;
 }
 
+.home-root--perf .home-modules,
+.home-root--perf .home-values,
+.home-root--perf .home-about,
+.home-root--perf .home-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 520px;
+}
+
 .home-root--seamless {
   isolation: isolate;
   min-height: 100svh;
@@ -1530,15 +1538,17 @@ a {
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  contain: paint;
+  transform: translateZ(0);
+  will-change: auto;
 }
 
 .galaxy-photo--fixed {
-  position: fixed;
+  position: absolute; /* avoid background-attachment/fixed jank */
 }
 
 .home-root__galaxy--fx {
-  opacity: 0.55;
-  mix-blend-mode: screen;
+  display: none; /* heavy blur/star FX stack disabled for scroll perf */
 }
 
 .home-root > :not(.home-root__galaxy):not(.galaxy-photo) {
@@ -1641,9 +1651,15 @@ a {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
-  background: rgba(2, 6, 15, 0.28);
-  backdrop-filter: blur(14px);
+  background: rgba(2, 6, 15, 0.82);
   border-bottom: 1px solid rgba(200, 163, 95, 0.16);
+}
+
+@supports (backdrop-filter: blur(8px)) {
+  .site-header {
+    background: rgba(2, 6, 15, 0.55);
+    backdrop-filter: blur(8px);
+  }
 }
 
 .site-header__brand {
@@ -1757,12 +1773,14 @@ a {
     clamp(1.25rem, 5vw, 4rem)
     5rem;
   overflow: hidden;
+  contain: layout paint;
 }
 
 .home-hero__stage {
   position: absolute;
   inset: 0;
   z-index: 0;
+  contain: paint;
   mask-image: radial-gradient(ellipse 70% 70% at 62% 48%, #000 20%, transparent 78%);
 }
 
@@ -1783,13 +1801,12 @@ a {
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(160, 200, 255, 0.55) 0%,
-    rgba(90, 140, 255, 0.18) 35%,
+    rgba(160, 200, 255, 0.4) 0%,
+    rgba(90, 140, 255, 0.12) 35%,
     transparent 70%
   );
-  filter: blur(8px);
-  mix-blend-mode: screen;
-  animation: hero-flare 6s ease-in-out infinite alternate;
+  /* static glow — no blur/mix-blend/animation during scroll */
+  opacity: 0.85;
 }
 
 .home-hero__vignette {
@@ -1868,10 +1885,8 @@ a {
   padding: 1rem;
   border-radius: 1.15rem;
   border: 1px solid var(--os-glass-border);
-  background: var(--os-glass);
-  backdrop-filter: blur(18px);
+  background: rgba(10, 22, 48, 0.78);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-  animation: home-rise 1.05s ease 0.12s both;
 }
 
 .home-stat {
@@ -2049,12 +2064,11 @@ a {
   padding: 1.35rem 1.25rem 1.5rem;
   border-radius: 1.1rem;
   border: 1px solid rgba(200, 163, 95, 0.22);
-  background: linear-gradient(160deg, rgba(16, 32, 64, 0.42), rgba(8, 14, 28, 0.5));
-  backdrop-filter: blur(12px);
+  background: linear-gradient(160deg, rgba(16, 32, 64, 0.72), rgba(8, 14, 28, 0.85));
   transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .home-module-card:hover {
@@ -2124,8 +2138,7 @@ a {
   gap: 1.25rem;
   border-radius: 1.25rem;
   border: 1px solid rgba(200, 163, 95, 0.18);
-  background: rgba(8, 16, 36, 0.28);
-  backdrop-filter: blur(14px);
+  background: rgba(8, 16, 36, 0.72);
 }
 
 .home-value {

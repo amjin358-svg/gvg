@@ -10,7 +10,7 @@ import { ValueBar } from "@/components/home/ValueBar";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Marketing homepage — continuous full-bleed galaxy, wordmark branding.
+ * Marketing homepage — continuous galaxy plate, tuned for smooth scroll.
  */
 export function HomePage() {
   const root = useRef<HTMLDivElement>(null);
@@ -20,38 +20,36 @@ export function HomePage() {
       registerGsapPlugins();
       if (!root.current) return;
 
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) return;
+
       const sections = root.current.querySelectorAll(
         ".home-modules, .home-values, .home-about, .home-footer",
       );
-      gsap.from(sections, {
-        opacity: 0,
-        y: 36,
-        duration: 1.05,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".home-modules",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
+
+      // Play once — avoid reverse re-tweening that fights native scroll
+      sections.forEach((section) => {
+        gsap.from(section, {
+          opacity: 0.35,
+          y: 18,
+          duration: 0.55,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 90%",
+            once: true,
+            fastScrollEnd: true,
+          },
+        });
       });
     },
     { scope: root },
   );
 
   return (
-    <div ref={root} className="home-root home-root--seamless">
-      {/* Single continuous full-bleed plate — no section seams */}
+    <div ref={root} className="home-root home-root--seamless home-root--perf">
+      {/* Single photo plate only — no animated blur/star FX stack while scrolling */}
       <GalaxyPhotoLayer className="home-root__galaxy" mode="absolute" />
-      <div
-        className="galaxy-backdrop home-root__galaxy home-root__galaxy--fx"
-        aria-hidden
-      >
-        <div className="galaxy-backdrop__nebula" />
-        <div className="galaxy-backdrop__stars galaxy-backdrop__stars--far" />
-        <div className="galaxy-backdrop__stars galaxy-backdrop__stars--near" />
-        <div className="galaxy-backdrop__dust" />
-      </div>
 
       <SiteHeader />
       <HeroCinematic />

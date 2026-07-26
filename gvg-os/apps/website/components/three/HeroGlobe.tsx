@@ -16,7 +16,7 @@ function latLonToVec3(lat: number, lon: number, r = 1.62) {
   );
 }
 
-function arcPoints(a: THREE.Vector3, b: THREE.Vector3, segments = 72) {
+function arcPoints(a: THREE.Vector3, b: THREE.Vector3, segments = 28) {
   const points: THREE.Vector3[] = [];
   for (let i = 0; i <= segments; i++) {
     const t = i / segments;
@@ -74,8 +74,7 @@ function CityLights() {
       const v = latLonToVec3(lat!, lon!, 1.605);
       positions.push(v.x, v.y, v.z);
     }
-    // denser procedural night lights belt
-    for (let i = 0; i < 420; i++) {
+    for (let i = 0; i < 90; i++) {
       const lat = (Math.random() - 0.35) * 70;
       const lon = Math.random() * 360 - 180;
       const v = latLonToVec3(lat, lon, 1.603 + Math.random() * 0.004);
@@ -88,7 +87,7 @@ function CityLights() {
   useFrame(({ clock }) => {
     if (!ref.current) return;
     const mat = ref.current.material as THREE.PointsMaterial;
-    mat.opacity = 0.55 + Math.sin(clock.elapsedTime * 1.6) * 0.2;
+    mat.opacity = 0.55 + Math.sin(clock.elapsedTime * 1.2) * 0.15;
   });
 
   return (
@@ -98,7 +97,7 @@ function CityLights() {
       </bufferGeometry>
       <pointsMaterial
         color="#ffd9a0"
-        size={0.028}
+        size={0.03}
         transparent
         opacity={0.7}
         depthWrite={false}
@@ -114,102 +113,88 @@ function NetworkArcs() {
     () => ROUTES.map(([i, j]) => arcPoints(hubs[i]!, hubs[j]!)),
     [hubs],
   );
-  const pulse = useRef<Group>(null);
-
-  useFrame(({ clock }) => {
-    if (!pulse.current) return;
-    const t = clock.elapsedTime;
-    pulse.current.children.forEach((child, i) => {
-      const s = 1 + Math.sin(t * 2.4 + i) * 0.35;
-      child.scale.setScalar(s);
-    });
-  });
 
   return (
     <group>
-      <group ref={pulse}>
-        {hubs.map((p, i) => (
-          <mesh key={`hub-${i}`} position={p}>
-            <sphereGeometry args={[0.03, 16, 16]} />
-            <meshBasicMaterial color="#7EB6FF" transparent opacity={0.95} />
-          </mesh>
-        ))}
-      </group>
+      {hubs.map((p, i) => (
+        <mesh key={`hub-${i}`} position={p}>
+          <sphereGeometry args={[0.028, 10, 10]} />
+          <meshBasicMaterial color="#7EB6FF" transparent opacity={0.95} />
+        </mesh>
+      ))}
       {routes.map((pts, i) => (
         <Line
           key={`arc-${i}`}
           points={pts}
           color={i % 2 === 0 ? "#6EA8FF" : "#C8A35F"}
-          lineWidth={1.35}
+          lineWidth={1.2}
           transparent
-          opacity={0.88}
+          opacity={0.85}
         />
       ))}
     </group>
   );
 }
 
+/** Lightweight hero globe — lower poly, fewer stars, no per-frame hub pulse. */
 export function HeroGlobe() {
   const group = useRef<Group>(null);
   const atmos = useRef<Mesh>(null);
-  const wire = useRef<Mesh>(null);
 
-  useFrame((_, delta) => {
-    if (group.current) group.current.rotation.y += delta * 0.09;
-    if (wire.current) wire.current.rotation.y -= delta * 0.03;
+  useFrame(({ clock }, delta) => {
+    if (group.current) group.current.rotation.y += delta * 0.08;
     if (atmos.current) {
       const mat = atmos.current.material as THREE.MeshBasicMaterial;
-      mat.opacity = 0.13 + Math.sin(performance.now() * 0.0011) * 0.035;
+      mat.opacity = 0.12 + Math.sin(clock.elapsedTime * 0.9) * 0.03;
     }
   });
 
   return (
     <>
       <fog attach="fog" args={["#01040c", 8, 20]} />
-      <ambientLight intensity={0.32} />
-      <directionalLight position={[-4.2, 2.2, 3]} intensity={2.4} color="#b7d4ff" />
-      <directionalLight position={[3.2, -1.2, 2]} intensity={0.7} color="#7a63ff" />
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[-4.2, 2.2, 3]} intensity={2.2} color="#b7d4ff" />
       <pointLight
         position={[-2.8, 0.4, 2.2]}
-        intensity={4.2}
+        intensity={3.4}
         color="#8ec0ff"
         distance={10}
       />
       <DreiStars
-        radius={90}
-        depth={55}
-        count={6500}
-        factor={3.8}
-        saturation={0.55}
+        radius={70}
+        depth={40}
+        count={1400}
+        factor={3.2}
+        saturation={0.4}
         fade
-        speed={0.35}
+        speed={0.2}
       />
       <group ref={group} position={[0.55, -0.05, 0]} scale={1.22}>
         <mesh>
-          <sphereGeometry args={[1.6, 96, 96]} />
+          <sphereGeometry args={[1.6, 48, 48]} />
           <meshStandardMaterial
             color="#07162f"
-            roughness={0.48}
-            metalness={0.42}
+            roughness={0.5}
+            metalness={0.35}
             emissive="#0c2a58"
-            emissiveIntensity={0.55}
+            emissiveIntensity={0.5}
           />
         </mesh>
-        <mesh ref={wire}>
-          <sphereGeometry args={[1.608, 64, 64]} />
+        <mesh>
+          <sphereGeometry args={[1.608, 32, 32]} />
           <meshBasicMaterial
             color="#3d7cff"
             wireframe
             transparent
-            opacity={0.1}
+            opacity={0.08}
           />
         </mesh>
         <mesh ref={atmos}>
-          <sphereGeometry args={[1.82, 64, 64]} />
+          <sphereGeometry args={[1.82, 32, 32]} />
           <meshBasicMaterial
             color="#4f8dff"
             transparent
-            opacity={0.14}
+            opacity={0.13}
             side={THREE.BackSide}
             depthWrite={false}
           />

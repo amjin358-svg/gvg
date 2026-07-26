@@ -243,7 +243,19 @@ img {
     linear-gradient(90deg, rgba(0, 26, 54, 0.55), transparent 55%),
     var(--gvg-hero-image) center / cover no-repeat;
   transform: scale(1.02);
-  animation: hero-drift 18s ease-in-out infinite alternate;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero__media {
+    animation: hero-drift 28s ease-in-out infinite alternate;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__media {
+    animation: none;
+  }
 }
 
 .home-hero__veil {
