@@ -1,24 +1,15 @@
 "use client";
 
 import { useRef } from "react";
-import dynamic from "next/dynamic";
 import { CanvasSafe } from "@/components/three/CanvasSafe";
 import SplitType from "split-type";
 import { createAiDataTimeline } from "@/components/animation/ScrollAnimations";
 import { revertSplit } from "@/components/animation/SplitText";
 import { AnimatedGrid } from "@/components/cinematic/AnimatedGrid";
+import { NetworkLines } from "@/components/three/NetworkLines";
+import { ParticleField } from "@/components/three/ParticleField";
 import { AI_LAYER, BRAND_GOLD } from "@/lib/cinematic";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
-
-const ParticleField = dynamic(
-  () => import("@/components/three/ParticleField").then((m) => m.ParticleField),
-  { ssr: false },
-);
-
-const NetworkLines = dynamic(
-  () => import("@/components/three/NetworkLines").then((m) => m.NetworkLines),
-  { ssr: false },
-);
 
 /** Particles resolve into these digits */
 const DIGITS = ["0", "1", "8", "5", "3", "9"];

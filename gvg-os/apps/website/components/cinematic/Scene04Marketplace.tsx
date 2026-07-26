@@ -1,16 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { CanvasSafe } from "@/components/three/CanvasSafe";
+import { FloatingObjects } from "@/components/three/FloatingObjects";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
-
-const FloatingObjects = dynamic(
-  () =>
-    import("@/components/three/FloatingObjects").then((m) => m.FloatingObjects),
-  { ssr: false },
-);
 
 const CARDS = [
   { title: "Source", body: "Discover suppliers across key markets." },
