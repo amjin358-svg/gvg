@@ -24,7 +24,7 @@ function OpeningWorld() {
 
 /**
  * Scene 1｜Opening (≈5–8s)
- * First eye: cosmos + Earth + gold orbits — then logo & taglines.
+ * First eye: cosmos + Earth + gold orbits — then full brand + taglines.
  */
 export function Scene01Logo() {
   const root = useRef<HTMLDivElement>(null);
@@ -90,6 +90,12 @@ export function Scene01Logo() {
   return (
     <div ref={root}>
       <section className="scene scene--cosmos opening-scene" aria-label="Opening">
+        <div className="galaxy-backdrop" aria-hidden>
+          <div className="galaxy-backdrop__nebula" />
+          <div className="galaxy-backdrop__stars galaxy-backdrop__stars--far" />
+          <div className="galaxy-backdrop__stars galaxy-backdrop__stars--near" />
+          <div className="galaxy-backdrop__dust" />
+        </div>
         <div ref={stage} className="opening-scene__stage">
           <CanvasSafe
             camera={{ position: [0, 0, 5.4], fov: 42 }}
@@ -102,10 +108,10 @@ export function Scene01Logo() {
 
         <div className="opening-scene__copy">
           <h1 ref={logo} className="logo opening-scene__logo">
-            GVG
+            Global Vista Group
           </h1>
           <p ref={brand} className="opening-scene__brand">
-            Global Vista Group
+            Connecting Global Business
           </p>
           <p ref={lineA} className="opening-scene__tag">
             Connecting Markets.

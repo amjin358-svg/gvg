@@ -8,7 +8,7 @@ import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
  * Scene 9｜Ending
- * Everything retracts → GVG logo → Building the Future… → Start Your Journey
+ * Everything retracts → full brand → statement → return to the opening
  */
 export function Ending() {
   const root = useRef<HTMLDivElement>(null);
@@ -61,14 +61,14 @@ export function Ending() {
       <section className="scene scene--black ending-scene" aria-label="Ending">
         <div className="ending-scene__mark">
           <h2 ref={logo} className="logo">
-            GVG
+            Global Vista Group
           </h2>
           <p ref={line} className="ending-scene__line">
             Building the Future of Global Business.
           </p>
           <div ref={cta}>
-            <Link className="ending-scene__cta" href="/marketplace">
-              Start Your Journey
+            <Link className="ending-scene__cta" href="/">
+              Return to Homepage
             </Link>
           </div>
         </div>

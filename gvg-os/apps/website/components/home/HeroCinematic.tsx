@@ -88,7 +88,7 @@ export function HeroCinematic() {
         </h1>
         <p className="home-hero__lead">
           以 AI 與自動化整合全球企業基礎建設，打造可擴展的一體化營運系統——
-          從市場合作、供應鏈到智慧決策，盡在 GVG OS。
+          從市場合作、供應鏈到智慧決策，盡在 Global Vista Group。
         </p>
 
         <div className="home-hero__actions">

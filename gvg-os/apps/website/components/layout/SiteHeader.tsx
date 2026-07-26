@@ -6,13 +6,17 @@ const NAV = [
   { href: "#solutions", label: "Solutions" },
   { href: "/marketplace", label: "Marketplace" },
   { href: "/ai", label: "AI Services" },
-  { href: "#about", label: "About GVG" },
+  { href: "#about", label: "About Global Vista Group" },
 ];
 
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <a className="site-header__brand" href="#overview" aria-label="GVG OS">
+      <a
+        className="site-header__brand"
+        href="#overview"
+        aria-label="Global Vista Group"
+      >
         <span className="site-header__mark" aria-hidden>
           <svg viewBox="0 0 32 32" width="28" height="28">
             <path
@@ -34,9 +38,7 @@ export function SiteHeader() {
             </defs>
           </svg>
         </span>
-        <span className="site-header__name">
-          GVG <span>OS</span>
-        </span>
+        <span className="site-header__name">Global Vista Group</span>
       </a>
 
       <nav className="site-header__nav" aria-label="Primary">

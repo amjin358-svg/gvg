@@ -2,7 +2,7 @@
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: "GVG — Connecting Markets. Creating Value.",
+  title: "Global Vista Group — Connecting Markets. Creating Value.",
   description:
     "Global Vista Group Interactive Movie — cinematic storytelling across markets, trade, marketplace, AI, and investment.",
 };

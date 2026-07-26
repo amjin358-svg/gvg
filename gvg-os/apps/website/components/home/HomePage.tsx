@@ -28,7 +28,7 @@ export function HomePage() {
           <p className="home-cinematic-gate__eyebrow">Cinematic Experience</p>
           <h2>Enter the Interactive Movie</h2>
           <p>
-            從品牌標誌到地球航線、市場合作與 AI 決策——以捲動敘事感受 GVG 的全球願景。
+            從品牌標誌到地球航線、市場合作與 AI 決策——以捲動敘事感受 Global Vista Group 的全球願景。
           </p>
           <a className="btn btn--glow" href="#movie-start">
             Begin Experience <span aria-hidden>↓</span>
@@ -42,7 +42,7 @@ export function HomePage() {
 
       <footer className="home-footer" id="get-started">
         <div>
-          <strong>GVG OS</strong>
+          <strong>Global Vista Group</strong>
           <p>Connecting Markets. Creating Value.</p>
         </div>
         <a className="btn btn--glow" href="mailto:hello@globalvistagroup.com">

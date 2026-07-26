@@ -6,7 +6,7 @@
   --gv-text: #f5f5f5;
   --gv-muted: rgba(245, 245, 245, 0.65);
   --noise-strength: 0.02;
-  /* GVG OS cinematic marketing accents */
+  /* Global Vista Group cinematic marketing accents */
   --os-bg: #02060f;
   --os-navy: #071428;
   --os-blue: #5b8cff;
@@ -739,11 +739,113 @@ a {
 .opening-scene {
   display: grid;
   place-items: center;
+  isolation: isolate;
+}
+
+.galaxy-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 72% 35%, rgba(66, 117, 214, 0.2), transparent 30%),
+    radial-gradient(ellipse at 28% 64%, rgba(114, 73, 181, 0.14), transparent 34%),
+    linear-gradient(180deg, #01040c 0%, #03122b 48%, #000 100%);
+}
+
+.galaxy-backdrop__nebula {
+  position: absolute;
+  inset: -35%;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(94, 147, 255, 0.3), transparent 18%),
+    radial-gradient(ellipse at 46% 53%, rgba(200, 163, 95, 0.16), transparent 11%),
+    conic-gradient(
+      from 115deg at 50% 50%,
+      transparent 0deg,
+      rgba(47, 90, 174, 0.18) 28deg,
+      transparent 62deg,
+      rgba(123, 78, 170, 0.13) 105deg,
+      transparent 155deg
+    );
+  filter: blur(32px);
+  transform: rotate(-16deg) scale(1.15);
+  animation: galaxy-drift 28s ease-in-out infinite alternate;
+}
+
+.galaxy-backdrop__stars {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  transform-origin: 50% 50%;
+}
+
+.galaxy-backdrop__stars--far {
+  opacity: 0.68;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 0.7px, transparent 1px),
+    radial-gradient(circle, rgba(126, 182, 255, 0.8) 0 0.6px, transparent 1px),
+    radial-gradient(circle, rgba(255, 228, 174, 0.7) 0 0.55px, transparent 1px);
+  background-size: 47px 53px, 79px 83px, 113px 127px;
+  background-position: 3px 11px, 29px 37px, 71px 19px;
+  animation: galaxy-stars-far 42s linear infinite;
+}
+
+.galaxy-backdrop__stars--near {
+  opacity: 0.8;
+  background-image:
+    radial-gradient(circle, #fff 0 1.1px, transparent 1.8px),
+    radial-gradient(circle, #9fc5ff 0 0.9px, transparent 1.6px);
+  background-size: 173px 181px, 229px 211px;
+  background-position: 31px 67px, 97px 23px;
+  filter: drop-shadow(0 0 3px rgba(126, 182, 255, 0.8));
+  animation: galaxy-stars-near 20s ease-in-out infinite alternate;
+}
+
+.galaxy-backdrop__dust {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  top: 35%;
+  height: 28%;
+  transform: rotate(-12deg);
+  background:
+    radial-gradient(ellipse at center, rgba(121, 164, 235, 0.17), transparent 62%),
+    linear-gradient(90deg, transparent, rgba(200, 163, 95, 0.08), transparent);
+  filter: blur(18px);
+  mix-blend-mode: screen;
+}
+
+@keyframes galaxy-drift {
+  from {
+    transform: rotate(-18deg) scale(1.08) translate3d(-2%, 1%, 0);
+  }
+  to {
+    transform: rotate(-12deg) scale(1.2) translate3d(3%, -2%, 0);
+  }
+}
+
+@keyframes galaxy-stars-far {
+  to {
+    background-position: 50px 64px, 108px 120px, 184px 146px;
+  }
+}
+
+@keyframes galaxy-stars-near {
+  from {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.95;
+    transform: scale(1.03);
+  }
 }
 
 .opening-scene__stage {
   position: absolute;
   inset: 0;
+  z-index: 1;
 }
 
 .opening-scene__stage canvas {
@@ -778,6 +880,11 @@ a {
 
 .opening-scene__logo {
   margin-bottom: 1rem;
+  max-width: min(96vw, 1100px);
+  font-size: clamp(2rem, 7vw, 5.5rem);
+  line-height: 1.08;
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
 }
 
 .opening-scene__brand {
@@ -1316,6 +1423,13 @@ a {
   display: grid;
   place-items: center;
   text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(44, 91, 172, 0.28), transparent 36%),
+    radial-gradient(ellipse at 35% 60%, rgba(200, 163, 95, 0.1), transparent 28%),
+    radial-gradient(circle at 15% 25%, #fff 0 0.7px, transparent 1px),
+    radial-gradient(circle at 75% 18%, #9fc5ff 0 0.8px, transparent 1.2px),
+    #000;
+  background-size: auto, auto, 71px 73px, 127px 131px, auto;
 }
 
 .ending-scene__mark {
@@ -1323,6 +1437,14 @@ a {
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+}
+
+.ending-scene__mark .logo {
+  max-width: min(96vw, 1100px);
+  font-size: clamp(1.9rem, 6vw, 4.8rem);
+  line-height: 1.1;
+  letter-spacing: 0.1em;
+  text-indent: 0.1em;
 }
 
 .ending-scene__line {
@@ -1361,7 +1483,7 @@ a {
   }
 }
 
-/* ─── GVG OS Homepage (Cinematic Experience) ─── */
+/* ─── Global Vista Group Homepage (Cinematic Experience) ─── */
 
 .home-root {
   position: relative;

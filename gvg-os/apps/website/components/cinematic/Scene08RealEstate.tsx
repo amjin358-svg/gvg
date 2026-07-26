@@ -7,12 +7,15 @@ const LAYERS = [
   { title: "City", body: "Skyline as the operating canvas." },
   { title: "Architecture", body: "Towers · mixed-use · landmarks." },
   { title: "Community", body: "Places where markets meet life." },
-  { title: "GVG Project", body: "Developments shaped for the long view." },
+  {
+    title: "Global Vista Group Project",
+    body: "Developments shaped for the long view.",
+  },
 ];
 
 /**
  * Scene 8｜Real Estate
- * Camera flies toward city → buildings → community → GVG Project
+ * Camera flies toward city → buildings → community → Global Vista Group Project
  */
 export function Scene08RealEstate() {
   const root = useRef<HTMLDivElement>(null);

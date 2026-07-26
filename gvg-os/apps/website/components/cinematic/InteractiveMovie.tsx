@@ -14,7 +14,7 @@ import { Scene08RealEstate } from "@/components/cinematic/Scene08RealEstate";
 import { Ending } from "@/components/cinematic/Ending";
 
 /**
- * GVG Interactive Movie — cinematic homepage storytelling
+ * Global Vista Group Interactive Movie — cinematic homepage storytelling
  * Scene 1 Opening → 2 Network → 3 Trade → 4 Marketplace → 5 AI
  * → 6 Business → 7 Investment → 8 Real Estate → 9 Ending
  *
@@ -33,7 +33,10 @@ export function InteractiveMovie() {
 
   return (
     <MovieErrorBoundary>
-      <main className="movie-root" aria-label="GVG Interactive Movie">
+      <main
+        className="movie-root"
+        aria-label="Global Vista Group Interactive Movie"
+      >
         <MouseGlow />
         <Scene01Logo />
         <Scene02Earth />

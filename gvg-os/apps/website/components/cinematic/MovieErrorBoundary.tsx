@@ -20,9 +20,9 @@ export class MovieErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.error) {
       return (
-        <main className="movie-root ending-scene" aria-label="GVG">
+        <main className="movie-root ending-scene" aria-label="Global Vista Group">
           <div className="ending-scene__mark">
-            <h1 className="logo">GVG</h1>
+            <h1 className="logo">Global Vista Group</h1>
             <p className="ending-scene__line">
               Connecting Markets. Creating Value.
             </p>
@@ -30,7 +30,7 @@ export class MovieErrorBoundary extends Component<Props, State> {
               Reload to restart the cinematic experience.
             </p>
             <a className="ending-scene__cta" href="./">
-              Start Your Journey
+              Return to Homepage
             </a>
           </div>
         </main>
