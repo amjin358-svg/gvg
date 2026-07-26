@@ -60,6 +60,17 @@ a {
   text-transform: uppercase;
 }
 
+.logo .char,
+.ai-headline__title .char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.ai-headline__title .word {
+  display: inline-block;
+  margin-right: 0.35em;
+}
+
 .earth-pin {
   position: relative;
   width: 100%;

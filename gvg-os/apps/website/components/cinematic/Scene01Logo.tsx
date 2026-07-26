@@ -1,25 +1,28 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap";
+import { useRef } from "react";
+import SplitType from "split-type";
+import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
 import { createLogoIntro } from "@/components/animation/GSAPTimeline";
 
 export function Scene01Logo() {
   const sectionRef = useRef<HTMLElement>(null);
-  const logoRef = useRef<HTMLHeadingElement>(null);
+  const title = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
-    registerGsapPlugins();
-    const section = sectionRef.current;
-    const logo = logoRef.current;
-    if (!section || !logo) return;
+  useGSAP(
+    () => {
+      registerGsapPlugins();
+      if (!title.current) return;
 
-    const ctx = gsap.context(() => {
-      createLogoIntro(logo);
-    }, section);
+      const split = new SplitType(title.current, { types: "chars" });
+      createLogoIntro(split.chars?.length ? split.chars : title.current);
 
-    return () => ctx.revert();
-  }, []);
+      return () => {
+        split.revert();
+      };
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section ref={sectionRef} className="scene scene--black">
@@ -32,7 +35,7 @@ export function Scene01Logo() {
           overflow: "hidden",
         }}
       >
-        <h1 ref={logoRef} className="logo">
+        <h1 ref={title} className="logo">
           GVG
         </h1>
       </div>

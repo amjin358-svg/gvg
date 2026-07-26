@@ -3,10 +3,11 @@
 import { useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
+import SplitType from "split-type";
 import { createAiDataTimeline } from "@/components/animation/ScrollAnimations";
 import { AnimatedGrid } from "@/components/cinematic/AnimatedGrid";
 import { AI_LAYER, BRAND_GOLD } from "@/lib/cinematic";
-import { gsap, registerGsapPlugins } from "@/lib/gsap";
+import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 const ParticleField = dynamic(
   () => import("@/components/three/ParticleField").then((m) => m.ParticleField),
@@ -79,6 +80,35 @@ export function Scene05AI() {
   const binaryRefs = useRef<(HTMLElement | null)[]>([]);
   const counterValueRef = useRef<HTMLElement | null>(null);
   const railRefs = useRef<(HTMLElement | null)[]>([]);
+  const title = useRef<HTMLHeadingElement>(null);
+
+  useGSAP(
+    () => {
+      registerGsapPlugins();
+      if (!title.current) return;
+
+      const split = new SplitType(title.current, { types: "words,chars" });
+
+      if (split.chars?.length) {
+        gsap.from(split.chars, {
+          opacity: 0,
+          y: 24,
+          duration: 0.7,
+          stagger: 0.03,
+          ease: "sine.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+        });
+      }
+
+      return () => {
+        split.revert();
+      };
+    },
+    { scope: sectionRef },
+  );
 
   useEffect(() => {
     registerGsapPlugins();
@@ -253,7 +283,9 @@ export function Scene05AI() {
         style={{ zIndex: AI_LAYER.data }}
       >
         <header className="ai-headline">
-          <h2 className="ai-headline__title">Artificial Intelligence</h2>
+          <h2 ref={title} className="ai-headline__title">
+            Artificial Intelligence
+          </h2>
           <p className="ai-headline__for">for</p>
           <p className="ai-headline__sub">Global Business</p>
         </header>
