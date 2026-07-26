@@ -64,18 +64,36 @@ export function Scene04Marketplace() {
         >
           Floating · Rotate · Glass · Reflection
         </p>
+        <p className="market-fx-caption">
+          Scale 1.05 → RotateX → Shadow → Glow
+        </p>
         <div className="marketplace-grid">
           {CARDS.map((card) => (
             <motion.div
               key={card.title}
               className="market-card"
-              whileHover={{
-                rotateY: 15,
-                rotateX: 10,
-                scale: 1.08,
+              style={{ transformStyle: "preserve-3d" }}
+              initial="rest"
+              whileHover="hover"
+              variants={{
+                rest: {
+                  scale: 1,
+                  rotateX: 0,
+                  rotateY: 0,
+                },
+                hover: {
+                  scale: 1.05,
+                  rotateX: 12,
+                  rotateY: 10,
+                  transition: {
+                    scale: { duration: 0.22, ease: "easeOut" },
+                    rotateX: { duration: 0.32, delay: 0.06, ease: "easeOut" },
+                    rotateY: { duration: 0.32, delay: 0.06, ease: "easeOut" },
+                  },
+                },
               }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
+              <div className="market-card__glow" aria-hidden />
               <h3>{card.title}</h3>
               <p>{card.body}</p>
             </motion.div>
