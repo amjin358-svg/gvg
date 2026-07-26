@@ -1,6 +1,7 @@
 "use client";
 
 import SplitType from "split-type";
+import { gsap } from "@/lib/gsap";
 
 export { SplitType };
 
@@ -25,4 +26,19 @@ export function createSplitType(
 ): SplitType | null {
   if (!el) return null;
   return new SplitType(el, options);
+}
+
+/**
+ * Kill tweens on split nodes, then restore original DOM.
+ * Always call from useGSAP cleanup: `return () => revertSplit(split)`.
+ */
+export function revertSplit(split: SplitType | null | undefined): void {
+  if (!split) return;
+  const targets = [
+    ...(split.chars ?? []),
+    ...(split.words ?? []),
+    ...(split.lines ?? []),
+  ];
+  if (targets.length) gsap.killTweensOf(targets);
+  split.revert();
 }

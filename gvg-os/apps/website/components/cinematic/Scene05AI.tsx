@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
 import SplitType from "split-type";
 import { createAiDataTimeline } from "@/components/animation/ScrollAnimations";
+import { revertSplit } from "@/components/animation/SplitText";
 import { AnimatedGrid } from "@/components/cinematic/AnimatedGrid";
 import { AI_LAYER, BRAND_GOLD } from "@/lib/cinematic";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
@@ -104,7 +105,7 @@ export function Scene05AI() {
       }
 
       return () => {
-        split.revert();
+        revertSplit(split);
       };
     },
     { scope: sectionRef },

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import SplitType from "split-type";
+import { revertSplit } from "@/components/animation/SplitText";
 import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
 import { createLogoIntro } from "@/components/animation/GSAPTimeline";
 
@@ -18,7 +19,7 @@ export function Scene01Logo() {
       createLogoIntro(split.chars?.length ? split.chars : title.current);
 
       return () => {
-        split.revert();
+        revertSplit(split);
       };
     },
     { scope: sectionRef },
