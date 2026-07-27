@@ -9,6 +9,18 @@ export const MOVIE_V2 = {
     tag: "One OS. Limitless Vision.",
     tagZh: "一個系統 · 無限視野",
     scroll: "Scroll",
+    /** Star Wars–style opening crawl (moved from ending lockup) */
+    crawl: {
+      episode: "GLOBAL VISTA GROUP",
+      title: "Connecting Markets.\nCreating Value.",
+      titleZh: "連接全球市場，創造無限商機。",
+      paragraphs: [
+        "A long time into the future of global trade, markets no longer stand alone. Across oceans and time zones, supply chains, partners, and decisions form one living network.",
+        "GVG unites Product Center, sourcing, logistics, and AI intelligence into a single operating vision — so enterprises can discover, fulfill, and scale with clarity.",
+        "This is the journey of Global Vista Group: from orbital markets to on-the-ground commerce — connecting markets, creating value.",
+        "環球視界集團以高質感視野，串連全球貿易、商品中心與智慧決策，開啟下一章商業敘事。",
+      ],
+    },
   },
   earth: {
     eyebrow: "02 · Orbital Markets",
@@ -118,9 +130,9 @@ export const MOVIE_V2 = {
     ],
   },
   ending: {
-    title: "Global Vista Group",
-    line: "Connecting Markets. Creating Value.",
-    lineZh: "連接全球市場，創造無限商機。",
+    title: "Begin the Journey",
+    line: "Ready to connect markets?",
+    lineZh: "準備好開啟全球視野了嗎？",
     ctaPrimary: "進入企業官網",
     ctaAgain: "再看一次",
   },

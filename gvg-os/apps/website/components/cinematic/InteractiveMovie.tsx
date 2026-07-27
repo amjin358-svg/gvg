@@ -16,8 +16,8 @@ import { Ending } from "@/components/cinematic/Ending";
 
 /**
  * Interactive Movie V2 — homepage OS palette + corporate narrative
- * 01 Logo → 02 Earth → 03 Global → 04 Product Center
- * → 05 AI → 06 Services → 07 Platform → 08 Presence → Ending
+ * 01 GVG + Star Wars crawl → 02 Earth → 03 Global → 04 Product Center
+ * → 05 AI → 06 Services → 07 Platform → 08 Presence → Ending CTA
  *
  * MouseGlow: blue/violet bloom. Scrub lag 0.85. Noise 0.015.
  */

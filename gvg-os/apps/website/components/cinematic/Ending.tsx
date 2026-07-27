@@ -2,57 +2,40 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import SplitType from "split-type";
-import { revertSplit } from "@/components/animation/SplitText";
 import { SCRUB_SMOOTH } from "@/lib/cinematic";
 import { MOVIE_V2 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Scene 9｜Ending — homepage brand lockup + portal CTA
+ * Scene 9｜Ending — compact CTA close
+ * (brand crawl / lockup text now plays in Scene 01 opening)
  */
 export function Ending() {
   const root = useRef<HTMLDivElement>(null);
-  const logo = useRef<HTMLHeadingElement>(null);
-  const line = useRef<HTMLParagraphElement>(null);
-  const cta = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       registerGsapPlugins();
-      if (!root.current || !logo.current || !line.current || !cta.current) return;
+      if (!root.current || !panel.current) return;
 
-      const split = new SplitType(logo.current, { types: "chars" });
-      const chars = split.chars?.length ? split.chars : logo.current;
+      gsap.set(panel.current, { opacity: 0, y: 24 });
 
-      gsap.set(chars, { opacity: 0, scale: 0.72, y: 22 });
-      gsap.set([line.current, cta.current], { opacity: 0, y: 18 });
-
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "+=1600",
-            scrub: SCRUB_SMOOTH,
-            pin: true,
-            anticipatePin: 1,
-          },
-        })
-        .to(chars, {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          stagger: 0.05,
-          duration: 0.95,
-          ease: "power3.out",
-        })
-        .to(line.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .to(cta.current, { opacity: 1, y: 0, duration: 0.65, ease: "power2.out" });
-
-      return () => {
-        revertSplit(split);
-      };
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top top",
+          end: "+=1100",
+          scrub: SCRUB_SMOOTH,
+          pin: true,
+          anticipatePin: 1,
+        },
+      }).to(panel.current, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+      });
     },
     { scope: root },
   );
@@ -62,15 +45,14 @@ export function Ending() {
   return (
     <div ref={root}>
       <section className="scene scene--black ending-scene" aria-label="Ending">
-        <div className="ending-scene__mark">
-          <h2 ref={logo} className="logo">
-            {MOVIE_V2.ending.title}
-          </h2>
-          <p ref={line} className="ending-scene__line">
+        <div ref={panel} className="ending-scene__mark">
+          <p className="scene-eyebrow">Continue</p>
+          <h2 className="ending-scene__simple-title">{MOVIE_V2.ending.title}</h2>
+          <p className="ending-scene__line">
             <strong>{MOVIE_V2.ending.line}</strong>
             <span>{MOVIE_V2.ending.lineZh}</span>
           </p>
-          <div ref={cta} className="ending-scene__actions">
+          <div className="ending-scene__actions">
             <Link className="btn btn--glow ending-scene__cta" href={portal}>
               {MOVIE_V2.ending.ctaPrimary}
             </Link>

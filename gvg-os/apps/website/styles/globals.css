@@ -955,6 +955,105 @@ a {
   color: rgba(245, 245, 245, 0.7);
 }
 
+/* Star Wars–style opening crawl */
+.star-crawl {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star-crawl__fade {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 32%;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(1, 4, 12, 0.92) 0%,
+    rgba(1, 4, 12, 0.55) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.star-crawl__perspective {
+  position: absolute;
+  inset: 12% 0 -20%;
+  perspective: 380px;
+  perspective-origin: 50% 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 18%,
+    #000 78%,
+    transparent 100%
+  );
+}
+
+.star-crawl__text {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(34rem, 86vw);
+  transform: translateX(-50%) rotateX(28deg);
+  transform-origin: 50% 100%;
+  text-align: center;
+  color: #7eb6ff;
+  font-size: clamp(0.95rem, 2.1vw, 1.2rem);
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  will-change: transform;
+}
+
+.star-crawl__episode {
+  margin: 0 0 1.1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(126, 182, 255, 0.9);
+}
+
+.star-crawl__title {
+  margin: 0 0 0.55rem;
+  font-size: clamp(1.45rem, 3.6vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 0 28px rgba(126, 182, 255, 0.28);
+}
+
+.star-crawl__title-zh {
+  margin: 0 0 1.75rem;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  color: rgba(196, 181, 255, 0.92);
+}
+
+.star-crawl__para {
+  margin: 0 0 1.35rem;
+  color: rgba(126, 182, 255, 0.92);
+  text-wrap: pretty;
+}
+
+.star-crawl__para:last-child {
+  margin-bottom: 0;
+  color: rgba(245, 245, 245, 0.82);
+}
+
+.ending-scene__simple-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  letter-spacing: 0.08em;
+  font-weight: 650;
+}
+
 /* Scene 02 — Earth scroll spin */
 .earth-scene {
   display: grid;
