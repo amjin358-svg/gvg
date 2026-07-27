@@ -1,136 +1,51 @@
 /**
- * Interactive Movie V2 — copy aligned with homepage OS narrative
- * & corporate portal journey (Connecting Markets. Creating Value.).
+ * Interactive Movie V3 — Earth spin retained; surrounding scenes replaced.
  */
 
-export const MOVIE_V2 = {
-  opening: {
+export const MOVIE_V3 = {
+  open: {
     mark: "GVG",
-    tag: "One OS. Limitless Vision.",
-    tagZh: "一個系統 · 無限視野",
-    scroll: "Scroll",
-    /** Star Wars–style opening crawl (moved from ending lockup) */
-    crawl: {
-      episode: "GLOBAL VISTA GROUP",
-      title: "Connecting Markets.\nCreating Value.",
-      titleZh: "連接全球市場，創造無限商機。",
-      paragraphs: [
-        "A long time into the future of global trade, markets no longer stand alone. Across oceans and time zones, supply chains, partners, and decisions form one living network.",
-        "GVG unites Product Center, sourcing, logistics, and AI intelligence into a single operating vision — so enterprises can discover, fulfill, and scale with clarity.",
-        "This is the journey of Global Vista Group: from orbital markets to on-the-ground commerce — connecting markets, creating value.",
-        "環球視界集團以高質感視野，串連全球貿易、商品中心與智慧決策，開啟下一章商業敘事。",
-      ],
-    },
+    title: "Global Vista",
+    line: "Connecting Markets. Creating Value.",
+    lineZh: "連接全球市場，創造無限商機。",
+    hint: "Scroll · Move to summon meteors",
   },
   earth: {
-    eyebrow: "02 · Orbital Markets",
+    eyebrow: "Orbital View",
     title: "One Planet. Infinite Markets.",
-    body: "從軌道俯瞰全球商流 — 緩慢轉動地球，感受跨境貿易如何交織成 GVG 的完整版圖。",
+    body: "保留地球自轉視角 — 緩慢轉動，感受全球貿易版圖在星空中展開。",
   },
-  global: {
-    finale: "Global Supply Chain · 全球供應網絡",
-  },
-  market: {
-    title: "Product Center",
-    sub: "發現 · 採購 · 履約 · 成長",
-    cards: [
-      {
-        title: "Discover",
-        body: "瀏覽六大品類與全球選品，快速鎖定目標商品與供應來源。",
-      },
-      {
-        title: "Source",
-        body: "嚴選品牌與工廠網絡，建立可信賴的跨境採購節奏。",
-      },
-      {
-        title: "Fulfill",
-        body: "報價、訂單與物流一體化，讓履約節奏清晰可追蹤。",
-      },
-      {
-        title: "Scale",
-        body: "以企業級市集與數據洞察，陪同業務規模化成長。",
-      },
+  routes: {
+    eyebrow: "Trade Routes",
+    title: "Across Oceans & Skies",
+    body: "海運、空運與數位網絡交會，形成 GVG 的全球動線。",
+    hubs: [
+      { name: "Americas", note: "市場入口" },
+      { name: "Asia Pacific", note: "供應樞紐" },
+      { name: "Europe", note: "合規通道" },
+      { name: "Global Hub", note: "協同中心" },
     ],
   },
-  ai: {
-    line1: "Artificial Intelligence",
-    lineFor: "for",
-    line2: "Global Business",
-    kpis: [
-      { value: "99.9%", label: "系統可用率", kind: "static" as const },
-      { value: "0", label: "數據節點", kind: "counter" as const },
-      { value: "26", label: "核心模組", kind: "static" as const },
-    ],
-    charts: [
-      { label: "Trade", blocks: 10, max: 12 },
-      { label: "AI", blocks: 8, max: 12 },
-      { label: "Growth", blocks: 12, max: 12 },
-    ],
-    rail: ["Particles", "Numbers", "Charts", "Connections"] as const,
-  },
-  business: {
-    eyebrow: "06 · Business Lines",
-    title: "Core Services",
-    services: [
+  pillars: {
+    eyebrow: "What We Build",
+    title: "Trade. Intelligence. Scale.",
+    items: [
       {
-        title: "International Trade",
-        body: "進出口貿易專業服務，對接全球市場與合規節奏。",
-      },
-      {
-        title: "Global Sourcing",
-        body: "為您找到最優質的產品與供應來源。",
+        title: "Product Center",
+        body: "六大品類精選，支援跨境採購與品牌導入。",
       },
       {
         title: "Supply Chain",
-        body: "完整供應鏈解決方案，串聯採購到履約。",
+        body: "從報價到履約，節奏清晰可追蹤。",
       },
       {
-        title: "Logistics",
-        body: "全球物流運輸與配送，掌握交期與成本。",
-      },
-      {
-        title: "Compliance",
-        body: "專業報關與貿易合規諮詢，降低跨境風險。",
-      },
-      {
-        title: "OEM / ODM",
-        body: "客製化生產服務，支援品牌導入與規模擴張。",
+        title: "AI Insight",
+        body: "以數據與智慧決策，加速全球佈局。",
       },
     ],
   },
-  values: {
-    eyebrow: "07 · Platform Strength",
-    title: "Built to Scale",
-    pillars: [
-      {
-        title: "AI-Powered",
-        body: "以智慧決策驅動效率、預測與自動化成長。",
-      },
-      {
-        title: "Cloud-Native",
-        body: "彈性架構與高可用設計，支撐跨市場營運。",
-      },
-      {
-        title: "Data-Driven",
-        body: "數據驅動營運判斷，讓每一次決策更清晰。",
-      },
-    ],
-  },
-  presence: {
-    eyebrow: "08 · Global Presence",
-    title: "Markets & Presence",
-    layers: [
-      { title: "Markets", body: "以城市與港口作為全球佈局的視覺語言。" },
-      { title: "Partners", body: "供應商、通路與企業夥伴的長期協作網絡。" },
-      { title: "Operations", body: "貿易、物流與合規在地落地的營運節點。" },
-      {
-        title: "Global Vista Group",
-        body: "以長遠視野連結市場，創造可持續的商業價值。",
-      },
-    ],
-  },
-  ending: {
-    title: "Begin the Journey",
+  finale: {
+    title: "Begin with Global Vista Group",
     line: "Ready to connect markets?",
     lineZh: "準備好開啟全球視野了嗎？",
     ctaPrimary: "進入企業官網",
@@ -138,4 +53,4 @@ export const MOVIE_V2 = {
   },
 } as const;
 
-export default MOVIE_V2;
+export default MOVIE_V3;

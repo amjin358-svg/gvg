@@ -6,7 +6,7 @@ import { Earth } from "@/components/three/Earth";
 import { Stars } from "@/components/three/Stars";
 import { createEarthScrollSpin } from "@/components/animation/ScrollAnimations";
 import { EARTH_SCROLL_END } from "@/lib/cinematic";
-import { MOVIE_V2 } from "@/lib/movieContent";
+import { MOVIE_V3 } from "@/lib/movieContent";
 import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 function EarthStage({
@@ -65,9 +65,9 @@ export function Scene02Earth() {
           </CanvasSafe>
         </div>
         <div className="earth-scene__copy">
-          <p className="earth-scene__eyebrow">{MOVIE_V2.earth.eyebrow}</p>
-          <h2>{MOVIE_V2.earth.title}</h2>
-          <p>{MOVIE_V2.earth.body}</p>
+          <p className="earth-scene__eyebrow">{MOVIE_V3.earth.eyebrow}</p>
+          <h2>{MOVIE_V3.earth.title}</h2>
+          <p>{MOVIE_V3.earth.body}</p>
         </div>
       </section>
     </div>

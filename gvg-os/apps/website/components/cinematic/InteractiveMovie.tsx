@@ -1,25 +1,19 @@
 "use client";
 
 import { useEffect } from "react";
-import { MouseGlow } from "@/components/animation/MouseGlow";
+import { MouseMeteors } from "@/components/animation/MouseMeteors";
 import { MovieErrorBoundary } from "@/components/cinematic/MovieErrorBoundary";
 import { GalaxyPhotoLayer } from "@/components/home/GalaxyPhotoLayer";
-import { Scene01Logo } from "@/components/cinematic/Scene01Logo";
+import { Scene01Open } from "@/components/cinematic/Scene01Open";
 import { Scene02Earth } from "@/components/cinematic/Scene02Earth";
-import { Scene03Global } from "@/components/cinematic/Scene03Global";
-import { Scene04Marketplace } from "@/components/cinematic/Scene04Marketplace";
-import { Scene05AI } from "@/components/cinematic/Scene05AI";
-import { Scene06Business } from "@/components/cinematic/Scene06Business";
-import { Scene07Investment } from "@/components/cinematic/Scene07Investment";
-import { Scene08RealEstate } from "@/components/cinematic/Scene08RealEstate";
-import { Ending } from "@/components/cinematic/Ending";
+import { Scene03Routes } from "@/components/cinematic/Scene03Routes";
+import { Scene04Pillars } from "@/components/cinematic/Scene04Pillars";
+import { Scene05Finale } from "@/components/cinematic/Scene05Finale";
 
 /**
- * Interactive Movie V2 — homepage OS palette + corporate narrative
- * 01 GVG + Star Wars crawl → 02 Earth → 03 Global → 04 Product Center
- * → 05 AI → 06 Services → 07 Platform → 08 Presence → Ending CTA
- *
- * MouseGlow: blue/violet bloom. Scrub lag 0.85. Noise 0.015.
+ * Interactive Movie V3
+ * Keep Scene 02 Earth spin. Replace all other scenes.
+ * Mouse: meteor streaks follow pointer velocity.
  */
 export function InteractiveMovie() {
   useEffect(() => {
@@ -38,20 +32,16 @@ export function InteractiveMovie() {
   return (
     <MovieErrorBoundary>
       <main
-        className="movie-root movie-root--seamless movie-root--os"
+        className="movie-root movie-root--seamless movie-root--os movie-root--v3"
         aria-label="Global Vista Group Interactive Movie"
       >
         <GalaxyPhotoLayer className="movie-root__galaxy" mode="absolute" />
-        <MouseGlow />
-        <Scene01Logo />
+        <MouseMeteors />
+        <Scene01Open />
         <Scene02Earth />
-        <Scene03Global />
-        <Scene04Marketplace />
-        <Scene05AI />
-        <Scene06Business />
-        <Scene07Investment />
-        <Scene08RealEstate />
-        <Ending />
+        <Scene03Routes />
+        <Scene04Pillars />
+        <Scene05Finale />
       </main>
     </MovieErrorBoundary>
   );
