@@ -2,42 +2,17 @@
 
 import { useRef } from "react";
 import { MOVIE_ASSETS, SCRUB_SMOOTH } from "@/lib/cinematic";
+import { MOVIE_V2 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
-const SERVICES = [
-  {
-    title: "Enterprise Office",
-    body: "總部級營運視圖，串聯跨國團隊決策與日常協作。",
-  },
-  {
-    title: "Legal",
-    body: "跨境合規與法務流程，降低制度與文件風險。",
-  },
-  {
-    title: "Finance",
-    body: "資金、外匯與合併報表，掌握全球財務節奏。",
-  },
-  {
-    title: "Procurement",
-    body: "採購中樞與落地成本控管，優化供應策略。",
-  },
-  {
-    title: "ERP",
-    body: "核心帳務與營運數據同步，市場之間無縫銜接。",
-  },
-  {
-    title: "CRM",
-    body: "客戶、管道與夥伴網絡，沉澱長期關係資產。",
-  },
-];
-
 /**
- * Scene 6｜Business Services — photo plate + transform-only reveals
+ * Scene 6｜Core Services — portal business lines
  */
 export function Scene06Business() {
   const root = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const services = MOVIE_V2.business.services;
 
   useGSAP(
     () => {
@@ -88,23 +63,23 @@ export function Scene06Business() {
     <div ref={root}>
       <section
         className="scene scene--navy business-scene"
-        aria-label="Business Services"
+        aria-label="Core Services"
       >
         <div
           className="business-scene__office"
           aria-hidden
           style={{
             backgroundImage: `
-              linear-gradient(105deg, rgba(5,14,32,0.88) 0%, rgba(5,14,32,0.55) 48%, rgba(5,14,32,0.72) 100%),
+              linear-gradient(105deg, rgba(2,6,15,0.88) 0%, rgba(7,20,40,0.55) 48%, rgba(2,6,15,0.72) 100%),
               url("${MOVIE_ASSETS.office}")
             `,
           }}
         />
         <div className="business-scene__content">
-          <p className="scene-eyebrow">06 · Enterprise Stack</p>
-          <h2 ref={titleRef}>Business Services</h2>
+          <p className="scene-eyebrow">{MOVIE_V2.business.eyebrow}</p>
+          <h2 ref={titleRef}>{MOVIE_V2.business.title}</h2>
           <ul className="business-scene__list">
-            {SERVICES.map((svc, i) => (
+            {services.map((svc, i) => (
               <li
                 key={svc.title}
                 ref={(el) => {

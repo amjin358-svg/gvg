@@ -73,7 +73,7 @@ export function MouseGlow() {
         maxHeight: 520,
         transform: "translate3d(-9999px, -9999px, 0) translate(-50%, -50%)",
         background:
-          "radial-gradient(circle, rgba(212,175,55,0.7) 0%, rgba(200,163,95,0.25) 35%, transparent 70%)",
+          "radial-gradient(circle, rgba(126,182,255,0.72) 0%, rgba(139,108,255,0.28) 38%, transparent 70%)",
         filter: "blur(56px)",
         opacity: 0,
         zIndex: 50,

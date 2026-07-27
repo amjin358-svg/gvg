@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { GLOBAL_ROUTE } from "@/lib/globalRoute";
 import { BRAND_GOLD, CLASSIC_GOLD, MOVIE_ASSETS } from "@/lib/cinematic";
+import { MOVIE_V2 } from "@/lib/movieContent";
 import { createGlobalRouteTimeline } from "@/components/animation/ScrollAnimations";
 import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
@@ -160,7 +161,7 @@ export function Scene03Global() {
         </nav>
 
         <p ref={finaleRef} className="network-scene__finale">
-          Global Supply Chain · 全球供應網絡
+          {MOVIE_V2.global.finale}
         </p>
       </section>
     </div>

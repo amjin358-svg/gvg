@@ -6,6 +6,7 @@ import { Earth } from "@/components/three/Earth";
 import { Stars } from "@/components/three/Stars";
 import { createEarthScrollSpin } from "@/components/animation/ScrollAnimations";
 import { EARTH_SCROLL_END } from "@/lib/cinematic";
+import { MOVIE_V2 } from "@/lib/movieContent";
 import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 function EarthStage({
@@ -19,7 +20,7 @@ function EarthStage({
       <ambientLight intensity={0.35} />
       <directionalLight position={[-4, 2.5, 5]} intensity={2.1} color="#cfe3ff" />
       <directionalLight position={[3, -1, -2]} intensity={0.35} color="#1a3a6e" />
-      <pointLight position={[2.2, 1.2, 3.2]} intensity={0.85} color="#C8A35F" />
+      <pointLight position={[2.2, 1.2, 3.2]} intensity={0.85} color="#7EB6FF" />
       <Stars />
       <Suspense fallback={null}>
         <Earth rotationYRef={rotationYRef} autoSpin={0} showOrbits />
@@ -64,11 +65,9 @@ export function Scene02Earth() {
           </CanvasSafe>
         </div>
         <div className="earth-scene__copy">
-          <p className="earth-scene__eyebrow">02 · Planetary View</p>
-          <h2>One Planet. Infinite Markets.</h2>
-          <p>
-            從軌道俯瞰全球商流 — 緩慢轉動地球，感受跨境貿易網絡如何交織成一幅完整版圖。
-          </p>
+          <p className="earth-scene__eyebrow">{MOVIE_V2.earth.eyebrow}</p>
+          <h2>{MOVIE_V2.earth.title}</h2>
+          <p>{MOVIE_V2.earth.body}</p>
         </div>
       </section>
     </div>

@@ -91,7 +91,7 @@ export function createGlobalRouteTimeline({
     tl.to(label, { opacity: 1, duration: 0.35 }, i);
 
     if (rail) {
-      tl.to(rail, { opacity: 1, color: "#C8A35F", duration: 0.35 }, i);
+      tl.to(rail, { opacity: 1, color: "#7EB6FF", duration: 0.35 }, i);
       railItems.forEach((item, ri) => {
         if (ri !== i) {
           tl.to(
@@ -168,7 +168,7 @@ export function createAiDataTimeline(
         el,
         {
           opacity: i === index ? 1 : 0.35,
-          color: i === index ? "#C8A35F" : "rgba(245,245,245,0.45)",
+          color: i === index ? "#7EB6FF" : "rgba(245,245,245,0.45)",
           duration: 0.35,
         },
         "<",

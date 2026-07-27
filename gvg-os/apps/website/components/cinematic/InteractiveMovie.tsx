@@ -15,11 +15,11 @@ import { Scene08RealEstate } from "@/components/cinematic/Scene08RealEstate";
 import { Ending } from "@/components/cinematic/Ending";
 
 /**
- * Interactive Movie — smoother scrub + high-quality materials
- * 01 Logo → 02 Earth (Blue Marble) → 03 Global → 04 Marketplace
- * → 05 AI → 06–08 plates → Ending
+ * Interactive Movie V2 — homepage OS palette + corporate narrative
+ * 01 Logo → 02 Earth → 03 Global → 04 Product Center
+ * → 05 AI → 06 Services → 07 Platform → 08 Presence → Ending
  *
- * MouseGlow: DOM-driven gold bloom. Scrub lag 0.85. Noise 0.015.
+ * MouseGlow: blue/violet bloom. Scrub lag 0.85. Noise 0.015.
  */
 export function InteractiveMovie() {
   useEffect(() => {
@@ -38,7 +38,7 @@ export function InteractiveMovie() {
   return (
     <MovieErrorBoundary>
       <main
-        className="movie-root movie-root--seamless"
+        className="movie-root movie-root--seamless movie-root--os"
         aria-label="Global Vista Group Interactive Movie"
       >
         <GalaxyPhotoLayer className="movie-root__galaxy" mode="absolute" />

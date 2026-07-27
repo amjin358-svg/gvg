@@ -2,26 +2,18 @@
 
 import { useRef } from "react";
 import { MOVIE_ASSETS, SCRUB_SMOOTH } from "@/lib/cinematic";
+import { MOVIE_V2 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
-const LAYERS = [
-  { title: "City", body: "以城市天際線作為全球佈局的視覺語言。" },
-  { title: "Architecture", body: "地標、複合開發與長期資產結構。" },
-  { title: "Community", body: "讓市場與生活交會的場所與社群。" },
-  {
-    title: "Global Vista Group Project",
-    body: "以長遠視野塑造的標誌性開發與合作計畫。",
-  },
-];
-
 /**
- * Scene 8｜Real Estate — skyline photography plate
+ * Scene 8｜Global Presence — markets & partners
  */
 export function Scene08RealEstate() {
   const root = useRef<HTMLDivElement>(null);
   const skylineRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const layers = MOVIE_V2.presence.layers;
 
   useGSAP(
     () => {
@@ -69,23 +61,23 @@ export function Scene08RealEstate() {
 
   return (
     <div ref={root}>
-      <section className="scene scene--navy estate-scene" aria-label="Real Estate">
+      <section className="scene scene--navy estate-scene" aria-label="Global Presence">
         <div
           ref={skylineRef}
           className="estate-scene__skyline estate-scene__skyline--photo"
           aria-hidden
           style={{
             backgroundImage: `
-              linear-gradient(180deg, rgba(5,14,32,0.35) 0%, rgba(5,14,32,0.78) 100%),
+              linear-gradient(180deg, rgba(2,6,15,0.35) 0%, rgba(2,6,15,0.78) 100%),
               url("${MOVIE_ASSETS.skyline}")
             `,
           }}
         />
         <div className="estate-scene__content">
-          <p className="scene-eyebrow">08 · Place & Presence</p>
-          <h2 ref={titleRef}>Real Estate</h2>
+          <p className="scene-eyebrow">{MOVIE_V2.presence.eyebrow}</p>
+          <h2 ref={titleRef}>{MOVIE_V2.presence.title}</h2>
           <ul>
-            {LAYERS.map((layer, i) => (
+            {layers.map((layer, i) => (
               <li
                 key={layer.title}
                 ref={(el) => {

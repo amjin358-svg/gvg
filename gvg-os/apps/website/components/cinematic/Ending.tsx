@@ -5,10 +5,11 @@ import Link from "next/link";
 import SplitType from "split-type";
 import { revertSplit } from "@/components/animation/SplitText";
 import { SCRUB_SMOOTH } from "@/lib/cinematic";
+import { MOVIE_V2 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Scene 9｜Ending — brand lockup with silky scrub
+ * Scene 9｜Ending — homepage brand lockup + portal CTA
  */
 export function Ending() {
   const root = useRef<HTMLDivElement>(null);
@@ -63,17 +64,18 @@ export function Ending() {
       <section className="scene scene--black ending-scene" aria-label="Ending">
         <div className="ending-scene__mark">
           <h2 ref={logo} className="logo">
-            Global Vista Group
+            {MOVIE_V2.ending.title}
           </h2>
           <p ref={line} className="ending-scene__line">
-            以高質感視野，連結全球市場與無限商機。
+            <strong>{MOVIE_V2.ending.line}</strong>
+            <span>{MOVIE_V2.ending.lineZh}</span>
           </p>
           <div ref={cta} className="ending-scene__actions">
-            <Link className="ending-scene__cta" href={portal}>
-              進入企業官網
+            <Link className="btn btn--glow ending-scene__cta" href={portal}>
+              {MOVIE_V2.ending.ctaPrimary}
             </Link>
-            <Link className="ending-scene__cta ending-scene__cta--ghost" href="/experience">
-              再看一次
+            <Link className="btn btn--ghost ending-scene__cta ending-scene__cta--ghost" href="/experience">
+              {MOVIE_V2.ending.ctaAgain}
             </Link>
           </div>
         </div>

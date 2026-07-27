@@ -9,16 +9,13 @@ import { AnimatedGrid } from "@/components/cinematic/AnimatedGrid";
 import { NetworkLines } from "@/components/three/NetworkLines";
 import { ParticleField } from "@/components/three/ParticleField";
 import { AI_LAYER, BRAND_GOLD } from "@/lib/cinematic";
+import { MOVIE_V2 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /** Particles resolve into these digits */
 const DIGITS = ["0", "1", "8", "5", "3", "9"];
 
-const KPIS = [
-  { value: "99.7%", label: "預測準確率", kind: "static" as const },
-  { value: "0", label: "數據節點", kind: "counter" as const },
-  { value: "$2.8M+", label: "客戶節省", kind: "static" as const },
-];
+const KPIS = MOVIE_V2.ai.kpis;
 
 /** Binary stream: bits fall into AI */
 const BINARY_ROWS: Array<
@@ -42,14 +39,10 @@ const BINARY_ROWS: Array<
 const DATA_CHAIN = [18394829, 18394841, 18395010];
 
 /** Charts beat — block lengths relative to Growth (12) */
-const CHART_METRICS = [
-  { label: "Revenue", blocks: 10, max: 12 },
-  { label: "ROI", blocks: 7, max: 12 },
-  { label: "Growth", blocks: 12, max: 12 },
-];
+const CHART_METRICS = MOVIE_V2.ai.charts;
 
 /** Canonical Scene05 cascade */
-const STAGE_RAIL = ["Particles", "Numbers", "Charts", "Connections"] as const;
+const STAGE_RAIL = MOVIE_V2.ai.rail;
 
 function formatCounter(value: number) {
   if (value >= 1_000_000) {
@@ -267,10 +260,10 @@ export function Scene05AI() {
       >
         <header className="ai-headline">
           <h2 ref={title} className="ai-headline__title">
-            Artificial Intelligence
+            {MOVIE_V2.ai.line1}
           </h2>
-          <p className="ai-headline__for">for</p>
-          <p className="ai-headline__sub">Global Business</p>
+          <p className="ai-headline__for">{MOVIE_V2.ai.lineFor}</p>
+          <p className="ai-headline__sub">{MOVIE_V2.ai.line2}</p>
         </header>
 
         <div ref={numbersRef} className="ai-stage" style={{ opacity: 0 }}>

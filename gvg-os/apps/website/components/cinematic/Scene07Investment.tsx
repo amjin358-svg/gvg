@@ -2,25 +2,11 @@
 
 import { useRef } from "react";
 import { MOVIE_ASSETS, SCRUB_SMOOTH } from "@/lib/cinematic";
+import { MOVIE_V2 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
-const PILLARS = [
-  {
-    title: "Building",
-    body: "長期收益導向的實體資產配置，構築穩健基本面。",
-  },
-  {
-    title: "Capital",
-    body: "跨市場結構性工具，靈活調度成長動能。",
-  },
-  {
-    title: "Investment",
-    body: "以智慧配置捕捉全球商機與價值曲線。",
-  },
-];
-
 /**
- * Scene 7｜Investment — finance plate + rising metrics
+ * Scene 7｜Platform Strength — homepage value language
  */
 export function Scene07Investment() {
   const root = useRef<HTMLDivElement>(null);
@@ -28,6 +14,7 @@ export function Scene07Investment() {
   const barRefs = useRef<(HTMLElement | null)[]>([]);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const pillars = MOVIE_V2.values.pillars;
 
   useGSAP(
     () => {
@@ -82,7 +69,7 @@ export function Scene07Investment() {
 
   return (
     <div ref={root}>
-      <section className="scene scene--black invest-scene" aria-label="Investment">
+      <section className="scene scene--black invest-scene" aria-label="Platform Strength">
         <div
           className="invest-scene__plate"
           aria-hidden
@@ -93,8 +80,8 @@ export function Scene07Investment() {
             `,
           }}
         />
-        <p className="scene-eyebrow">07 · Capital Intelligence</p>
-        <h2 ref={titleRef}>Investment</h2>
+        <p className="scene-eyebrow">{MOVIE_V2.values.eyebrow}</p>
+        <h2 ref={titleRef}>{MOVIE_V2.values.title}</h2>
         <div ref={chartRef} className="invest-scene__chart" aria-hidden>
           {Array.from({ length: 16 }).map((_, i) => (
             <span
@@ -107,7 +94,7 @@ export function Scene07Investment() {
           ))}
         </div>
         <div className="invest-scene__pillars">
-          {PILLARS.map((p, i) => (
+          {pillars.map((p, i) => (
             <article
               key={p.title}
               ref={(el) => {

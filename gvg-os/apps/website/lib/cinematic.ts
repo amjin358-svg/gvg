@@ -1,8 +1,20 @@
-/** Shared cinematic constants */
+/** Shared cinematic constants — Homepage OS palette (blue / violet) */
 
-export const BRAND_NAVY = "#0B1F3A";
-export const BRAND_GOLD = "#C8A35F";
-export const CLASSIC_GOLD = "#D4AF37";
+export const BRAND_NAVY = "#071428";
+
+/** Primary movie accent — matches homepage `--os-blue-bright` */
+export const MOVIE_ACCENT = "#7EB6FF";
+/** Secondary accent — matches homepage `--os-violet` */
+export const MOVIE_VIOLET = "#8B6CFF";
+/** Soft blue — matches homepage `--os-blue` */
+export const MOVIE_BLUE = "#5B8CFF";
+
+/**
+ * Legacy names used across Three.js / SVG scenes.
+ * Remapped to homepage accents so materials stay in sync.
+ */
+export const BRAND_GOLD = MOVIE_ACCENT;
+export const CLASSIC_GOLD = MOVIE_VIOLET;
 
 /** Soft grain — keep subtle for a cleaner premium look */
 export const NOISE_STRENGTH = 0.015;
