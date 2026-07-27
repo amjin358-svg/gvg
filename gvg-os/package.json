@@ -18,6 +18,8 @@
     "build:portal": "npm run build -w @gvg/portal",
     "dev:v3": "npm run dev -w @gvg/v3",
     "build:v3": "npm run build -w @gvg/v3",
+    "dev:v4": "npm run dev -w @gvg/v4",
+    "build:v4": "npm run build -w @gvg/v4",
     "build:pages": "node ./scripts/build-pages.mjs"
   }
 
