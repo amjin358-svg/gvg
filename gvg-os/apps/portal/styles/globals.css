@@ -325,7 +325,10 @@ img {
   z-index: 1;
   width: var(--container);
   margin: 0 auto;
-  padding: 5.5rem 0 7.5rem;
+  padding: 4.5rem 0 6.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .home-hero h1 {
@@ -340,7 +343,7 @@ img {
 }
 
 .home-hero__sub {
-  margin: 1rem 0 0;
+  margin: 0.85rem 0 0;
   max-width: 36rem;
   font-size: 1.05rem;
   font-weight: 500;
@@ -348,9 +351,24 @@ img {
   letter-spacing: 0.02em;
 }
 
+/* Service white cards — moved up into hero title area */
+.home-hero__services {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.services-strip__inner--on-hero {
+  width: 100%;
+  margin: 0;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0, 20, 40, 0.28);
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+}
+
 .home-hero__stats {
   list-style: none;
-  margin: 2.1rem 0 0;
+  margin: 1.65rem 0 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -476,10 +494,10 @@ img {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.7rem;
-  padding: 1.35rem 1.05rem 1.2rem;
+  gap: 0.55rem;
+  padding: 1.1rem 0.85rem 1rem;
   border-right: 1px solid var(--gvg-line);
-  min-height: 168px;
+  min-height: 148px;
   transition: background 160ms ease;
 }
 
@@ -591,6 +609,37 @@ img {
 
 .categories {
   background: transparent;
+}
+
+/* Categories take the former services overlap position under hero */
+.categories--overlap {
+  position: relative;
+  z-index: 3;
+  margin-top: -3.5rem;
+  width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0;
+  padding-bottom: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.categories--overlap .section__head {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 12px 12px 0 0;
+  padding: 1rem 1.15rem 0.85rem;
+  margin-bottom: 0;
+  border: 1px solid var(--gvg-line);
+  border-bottom: 0;
+}
+
+.category-grid--overlap {
+  background: #fff;
+  border: 1px solid var(--gvg-line);
+  border-radius: 0 0 14px 14px;
+  padding: 0.85rem;
+  gap: 0.65rem;
+  box-shadow: 0 22px 50px rgba(0, 35, 71, 0.12);
 }
 
 .category-grid {
@@ -862,6 +911,21 @@ img {
   background: var(--gvg-navy-deep);
   color: rgba(255, 255, 255, 0.86);
   margin-top: auto;
+}
+
+.site-footer--minimal {
+  background: var(--gvg-navy-deep);
+  padding: 0;
+}
+
+.site-footer__bar--solo {
+  justify-content: center;
+  text-align: center;
+  padding: 1.35rem 1.25rem;
+  border-top: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .site-footer__grid {

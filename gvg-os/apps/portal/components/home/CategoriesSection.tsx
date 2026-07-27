@@ -6,11 +6,14 @@ import { IconArrow } from "@/components/icons";
 import { RiseTitle } from "@/components/RiseTitle";
 
 /**
- * Popular categories — mockup order #4
+ * Popular categories — sits in the former services overlap slot under hero.
  */
 export function CategoriesSection() {
   return (
-    <section className="section categories" aria-labelledby="categories-title">
+    <section
+      className="section categories categories--overlap"
+      aria-labelledby="categories-title"
+    >
       <div className="section__head">
         <RiseTitle as="h2" id="categories-title">
           熱門產品分類
@@ -20,7 +23,7 @@ export function CategoriesSection() {
         </Link>
       </div>
 
-      <div className="category-grid">
+      <div className="category-grid category-grid--overlap">
         {CATEGORIES.map((item, i) => (
           <RiseTitle
             as={Link}

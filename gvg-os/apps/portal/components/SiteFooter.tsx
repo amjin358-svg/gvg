@@ -1,7 +1,23 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BRAND, NAV, SERVICES } from "@/lib/content";
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  const isHome = pathname === "/" || pathname === "";
+
+  if (isHome) {
+    return (
+      <footer className="site-footer site-footer--minimal">
+        <div className="site-footer__bar site-footer__bar--solo">
+          <span>© 2026 {BRAND.nameEn}. All rights reserved.</span>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className="site-footer">
       <div className="site-footer__grid">
@@ -51,7 +67,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="site-footer__bar">
-        <span>© {new Date().getFullYear()} {BRAND.nameEn}. All rights reserved.</span>
+        <span>© 2026 {BRAND.nameEn}. All rights reserved.</span>
         <span className="en-soft">{BRAND.taglineEn}</span>
       </div>
     </footer>

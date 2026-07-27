@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { BRAND, STATS } from "@/lib/content";
+import { BRAND, SERVICES, STATS } from "@/lib/content";
 import { asset } from "@/lib/assets";
-import { IconArrow, StatIcon } from "@/components/icons";
+import { IconArrow, ServiceIcon, StatIcon } from "@/components/icons";
 import { RiseTitle } from "@/components/RiseTitle";
 
 /**
- * Official homepage hero — mockup order:
- * full-bleed port → H1 → sub → stats+icons → CTAs
+ * Homepage hero — title area hosts the service icon strip;
+ * categories overlap the former services slot below.
  */
 export function HomeHero() {
   const heroSrc = asset("/images/hero/home-full.jpg");
@@ -23,16 +23,42 @@ export function HomeHero() {
       <div className="home-hero__veil" aria-hidden />
 
       <div className="home-hero__content">
-        <RiseTitle as="h1" delay={80} immediate>
+        <RiseTitle as="h1" delay={60} immediate>
           {BRAND.taglineZh}
         </RiseTitle>
-        <RiseTitle as="p" className="home-hero__sub" delay={180} immediate>
+        <RiseTitle as="p" className="home-hero__sub" delay={140} immediate>
           {BRAND.trustZh}
         </RiseTitle>
 
+        <div className="home-hero__services" id="services" aria-label="核心服務項目">
+          <div className="services-strip__inner services-strip__inner--on-hero">
+            {SERVICES.map((item, index) => (
+              <RiseTitle
+                as={Link}
+                key={item.href}
+                href={item.href}
+                className="services-strip__item"
+                delay={200 + index * 45}
+                immediate
+              >
+                <span className="services-strip__icon">
+                  <ServiceIcon index={index} />
+                </span>
+                <span className="services-strip__text">
+                  <strong>{item.title}</strong>
+                  <small>{item.desc}</small>
+                </span>
+                <span className="services-strip__arrow" aria-hidden>
+                  <IconArrow />
+                </span>
+              </RiseTitle>
+            ))}
+          </div>
+        </div>
+
         <ul className="home-hero__stats">
           {STATS.map((item, i) => (
-            <RiseTitle as="li" key={item.label} delay={280 + i * 70} immediate>
+            <RiseTitle as="li" key={item.label} delay={480 + i * 55} immediate>
               <span className="home-hero__stat-icon" aria-hidden>
                 <StatIcon name={item.icon} />
               </span>
@@ -44,7 +70,7 @@ export function HomeHero() {
           ))}
         </ul>
 
-        <RiseTitle as="div" className="home-hero__cta" delay={620} immediate>
+        <RiseTitle as="div" className="home-hero__cta" delay={720} immediate>
           <Link href="/services" className="btn btn--primary">
             探索我們的服務 <IconArrow />
           </Link>
