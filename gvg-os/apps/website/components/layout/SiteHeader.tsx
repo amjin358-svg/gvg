@@ -8,7 +8,7 @@ const NAV = [
   { href: "#overview", label: "Overview" },
   { href: "#modules", label: "Modules" },
   { href: `${portalUrl}/services`, label: "服務項目", external: true },
-  { href: `${portalUrl}/products`, label: "全球產品", external: true },
+  { href: `${portalUrl}/products`, label: "商品中心", external: true },
   { href: `${portalUrl}/trade`, label: "貿易中心", external: true },
   { href: "#about", label: "About" },
 ];
