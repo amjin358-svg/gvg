@@ -5,18 +5,12 @@ import { SERVICES } from "@/lib/content";
 import { IconArrow, ServiceIcon } from "@/components/icons";
 import { RiseTitle } from "@/components/RiseTitle";
 
-/** Horizontal service strip overlapping the hero */
+/**
+ * Services strip — white overlapping card under hero (mockup order #3)
+ */
 export function ServicesSection() {
   return (
     <section className="services-strip" id="services" aria-label="核心服務項目">
-      <div className="services-strip__label">
-        <RiseTitle as="p" className="eyebrow" delay={40}>
-          Business Lines
-        </RiseTitle>
-        <RiseTitle as="h2" delay={120}>
-          核心業務項目
-        </RiseTitle>
-      </div>
       <div className="services-strip__inner">
         {SERVICES.map((item, index) => (
           <RiseTitle
@@ -24,7 +18,7 @@ export function ServicesSection() {
             key={item.href}
             href={item.href}
             className="services-strip__item"
-            delay={100 + index * 60}
+            delay={80 + index * 55}
           >
             <span className="services-strip__icon">
               <ServiceIcon index={index} />

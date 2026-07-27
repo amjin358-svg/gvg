@@ -113,3 +113,22 @@ export function ServiceIcon({ index }: { index: number }) {
     </svg>
   );
 }
+
+const STAT_PATHS: Record<string, string> = {
+  globe:
+    "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 0c2.5 2.8 3.8 5.8 3.8 9S14.5 18.2 12 21c-2.5-2.8-3.8-5.8-3.8-9S9.5 5.8 12 3zM3 12h18",
+  box: "M4 8.5 12 4l8 4.5v7L12 20l-8-4.5v-7zm8 0v11.5M4.2 8.6 12 13l7.8-4.4",
+  users:
+    "M9 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm8 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM3.5 19c1.2-3 3.5-4.5 5.5-4.5S13.3 16 14.5 19M14 14.5c1.6 0 3.4.8 4.5 2.5",
+  chart:
+    "M4 19h16M7 16V10M12 16V7M17 16v-4",
+};
+
+export function StatIcon({ name }: { name: string }) {
+  const d = STAT_PATHS[name] ?? STAT_PATHS.globe;
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
+      <path d={d} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+    </svg>
+  );
+}

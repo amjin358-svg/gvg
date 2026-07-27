@@ -14,7 +14,7 @@ export const NAV = [
   { href: "/", label: "首頁", en: "Home" },
   { href: "/about", label: "關於GVG", en: "About" },
   { href: "/services", label: "服務項目", en: "Services" },
-  { href: "/products", label: "商品中心", en: "Product Center" },
+  { href: "/products", label: "全球產品", en: "Global Products" },
   { href: "/trade", label: "貿易中心", en: "Trade Hub" },
   { href: "/suppliers", label: "供應商", en: "Suppliers" },
   { href: "/news", label: "最新消息", en: "News" },

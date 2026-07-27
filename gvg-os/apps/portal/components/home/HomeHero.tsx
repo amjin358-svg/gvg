@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { BRAND, STATS } from "@/lib/content";
 import { asset } from "@/lib/assets";
-import { IconArrow } from "@/components/icons";
+import { IconArrow, StatIcon } from "@/components/icons";
 import { RiseTitle } from "@/components/RiseTitle";
 
+/**
+ * Official homepage hero — mockup order:
+ * full-bleed port → H1 → sub → stats+icons → CTAs
+ */
 export function HomeHero() {
   const heroSrc = asset("/images/hero/home-full.jpg");
 
@@ -19,34 +23,28 @@ export function HomeHero() {
       <div className="home-hero__veil" aria-hidden />
 
       <div className="home-hero__content">
-        <RiseTitle as="p" className="home-hero__brand" delay={60} immediate>
-          <span>{BRAND.short}</span> {BRAND.nameEn}
-        </RiseTitle>
-        <RiseTitle as="h1" delay={160} immediate>
+        <RiseTitle as="h1" delay={80} immediate>
           {BRAND.taglineZh}
         </RiseTitle>
-        <RiseTitle as="p" className="home-hero__sub" delay={280} immediate>
+        <RiseTitle as="p" className="home-hero__sub" delay={180} immediate>
           {BRAND.trustZh}
         </RiseTitle>
 
         <ul className="home-hero__stats">
           {STATS.map((item, i) => (
-            <RiseTitle
-              as="li"
-              key={item.label}
-              delay={360 + i * 70}
-              immediate
-            >
-              <strong>{item.value}</strong>
-              <span>
-                {item.label}
-                <small>{item.en}</small>
+            <RiseTitle as="li" key={item.label} delay={280 + i * 70} immediate>
+              <span className="home-hero__stat-icon" aria-hidden>
+                <StatIcon name={item.icon} />
               </span>
+              <div className="home-hero__stat-copy">
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </div>
             </RiseTitle>
           ))}
         </ul>
 
-        <RiseTitle as="div" className="home-hero__cta" delay={720} immediate>
+        <RiseTitle as="div" className="home-hero__cta" delay={620} immediate>
           <Link href="/services" className="btn btn--primary">
             探索我們的服務 <IconArrow />
           </Link>

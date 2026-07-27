@@ -5,16 +5,16 @@ import { CATEGORIES } from "@/lib/content";
 import { IconArrow } from "@/components/icons";
 import { RiseTitle } from "@/components/RiseTitle";
 
+/**
+ * Popular categories — mockup order #4
+ */
 export function CategoriesSection() {
   return (
     <section className="section categories" aria-labelledby="categories-title">
       <div className="section__head">
-        <div>
-          <RiseTitle as="h2" id="categories-title">
-            熱門產品分類
-          </RiseTitle>
-          <p>探索我們豐富的產品類別 · Explore our curated collections</p>
-        </div>
+        <RiseTitle as="h2" id="categories-title">
+          熱門產品分類
+        </RiseTitle>
         <Link href="/products" className="text-link">
           瀏覽所有產品 <IconArrow />
         </Link>
@@ -29,7 +29,7 @@ export function CategoriesSection() {
             className="category-tile category-tile--photo"
             delay={i * 70}
             style={{
-              backgroundImage: `linear-gradient(180deg, transparent 22%, rgba(0,16,36,0.78)), url("${item.image}")`,
+              backgroundImage: `linear-gradient(180deg, transparent 28%, rgba(0,20,48,0.78)), url("${item.image}")`,
             }}
           >
             <span>
