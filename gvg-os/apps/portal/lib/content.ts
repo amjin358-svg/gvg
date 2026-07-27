@@ -1,3 +1,5 @@
+import { asset } from "@/lib/assets";
+
 export const BRAND = {
   short: "GVG",
   nameZh: "環球視界集團",
@@ -80,6 +82,7 @@ export const CATEGORIES: ReadonlyArray<{
   en: string;
   tone: string;
   blurb: string;
+  image: string;
 }> = [
   {
     id: "supplements",
@@ -88,6 +91,7 @@ export const CATEGORIES: ReadonlyArray<{
     en: "Health Supplements",
     tone: "a",
     blurb: "精選全球保健與營養品類，支援品牌導入與通路鋪貨。",
+    image: asset("/images/categories/supplements.jpg"),
   },
   {
     id: "food",
@@ -96,6 +100,7 @@ export const CATEGORIES: ReadonlyArray<{
     en: "Food & Beverages",
     tone: "b",
     blurb: "休閒食品、飲品與進口食材，靈活對接批發與零售需求。",
+    image: asset("/images/categories/food.jpg"),
   },
   {
     id: "home",
@@ -104,6 +109,7 @@ export const CATEGORIES: ReadonlyArray<{
     en: "Home & Living",
     tone: "c",
     blurb: "家具、收納與居家生活選品，打造高質感生活場景。",
+    image: asset("/images/categories/home.jpg"),
   },
   {
     id: "hardware",
@@ -112,6 +118,7 @@ export const CATEGORIES: ReadonlyArray<{
     en: "Hardware & Tools",
     tone: "d",
     blurb: "精選優質五金工具與配件，專業耐用，滿足各種工作需求。",
+    image: asset("/images/categories/hardware.jpg"),
   },
   {
     id: "materials",
@@ -120,6 +127,7 @@ export const CATEGORIES: ReadonlyArray<{
     en: "Building Materials",
     tone: "e",
     blurb: "工程與建材相關產品，協助專案採購與供應鏈整合。",
+    image: asset("/images/categories/materials.jpg"),
   },
   {
     id: "office",
@@ -128,6 +136,7 @@ export const CATEGORIES: ReadonlyArray<{
     en: "Office Supplies",
     tone: "f",
     blurb: "辦公設備與耗材，支援企業日常營運與據點佈建。",
+    image: asset("/images/categories/office.jpg"),
   },
 ];
 
@@ -183,7 +192,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 128,
         image:
-          "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/tape-measure.jpg"),
       },
       {
         id: "hw-2",
@@ -195,7 +204,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 86,
         badge: "熱銷",
         image:
-          "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/drill.jpg"),
       },
       {
         id: "hw-3",
@@ -206,7 +215,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 64,
         image:
-          "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/pliers.jpg"),
       },
       {
         id: "hw-4",
@@ -218,7 +227,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 210,
         badge: "新品",
         image:
-          "https://images.unsplash.com/photo-1581147036324-c1c88bf95caa?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/drill-bits.jpg"),
       },
       {
         id: "hw-5",
@@ -229,7 +238,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 93,
         image:
-          "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/screwdriver-bits.jpg"),
       },
       {
         id: "hw-6",
@@ -240,7 +249,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 412,
         image:
-          "https://images.unsplash.com/photo-1589939705388-23914aa7ad70?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/wd40.jpg"),
       },
       {
         id: "hw-7",
@@ -251,7 +260,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 77,
         image:
-          "https://images.unsplash.com/photo-1586864387789-628af9feed72?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/hammer.jpg"),
       },
       {
         id: "hw-8",
@@ -262,7 +271,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 55,
         image:
-          "https://images.unsplash.com/photo-1426927308491-6380b6a9936f?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/clamp.jpg"),
       },
       {
         id: "hw-9",
@@ -273,7 +282,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 39,
         image:
-          "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/level.jpg"),
       },
       {
         id: "hw-10",
@@ -284,7 +293,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 148,
         image:
-          "https://images.unsplash.com/photo-1595846519845-68e298c2dda8?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/gloves.jpg"),
       },
       {
         id: "hw-11",
@@ -295,7 +304,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 61,
         image:
-          "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/flashlight.jpg"),
       },
       {
         id: "hw-12",
@@ -306,7 +315,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 102,
         image:
-          "https://images.unsplash.com/photo-1581783898377-1c85bf937427?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/toolbox.jpg"),
       },
     ],
   },
@@ -336,7 +345,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 214,
         image:
-          "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/bed.jpg"),
       },
       {
         id: "hm-2",
@@ -347,7 +356,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 88,
         badge: "熱銷",
         image:
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/sofa.jpg"),
       },
       {
         id: "hm-3",
@@ -357,7 +366,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 56,
         image:
-          "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/chair.jpg"),
       },
       {
         id: "hm-4",
@@ -368,7 +377,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 173,
         badge: "新品",
         image:
-          "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/office-chair.jpg"),
       },
       {
         id: "hm-5",
@@ -378,7 +387,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 97,
         image:
-          "https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/coffee-table.jpg"),
       },
       {
         id: "hm-6",
@@ -388,7 +397,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 140,
         image:
-          "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/bookshelf.jpg"),
       },
       {
         id: "hm-7",
@@ -398,7 +407,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 45,
         image:
-          "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/nightstand.jpg"),
       },
       {
         id: "hm-8",
@@ -408,7 +417,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 62,
         image:
-          "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/dining.jpg"),
       },
       {
         id: "hm-9",
@@ -418,7 +427,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 119,
         image:
-          "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/lamp.jpg"),
       },
       {
         id: "hm-10",
@@ -428,7 +437,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 201,
         image:
-          "https://images.unsplash.com/photo-1594026112284-02bb6f3352cd?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/storage.jpg"),
       },
       {
         id: "hm-11",
@@ -438,7 +447,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 38,
         image:
-          "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/outdoor-chair.jpg"),
       },
       {
         id: "hm-12",
@@ -448,7 +457,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 74,
         image:
-          "https://images.unsplash.com/photo-1518455027359-f3f8164ba9bd?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/desk.jpg"),
       },
     ],
   },
@@ -474,7 +483,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 320,
         image:
-          "https://images.unsplash.com/photo-1550572017-edd951aa8f72?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/vitamins.jpg"),
       },
       {
         id: "sp-2",
@@ -485,7 +494,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 188,
         badge: "熱銷",
         image:
-          "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/protein.jpg"),
       },
       {
         id: "sp-3",
@@ -495,7 +504,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 96,
         image:
-          "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/vitamins.jpg"),
       },
       {
         id: "sp-4",
@@ -505,7 +514,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 150,
         image:
-          "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/protein.jpg"),
       },
       {
         id: "sp-5",
@@ -515,7 +524,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 240,
         image:
-          "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/vitamins.jpg"),
       },
       {
         id: "sp-6",
@@ -526,7 +535,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 110,
         badge: "新品",
         image:
-          "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/protein.jpg"),
       },
     ],
   },
@@ -551,7 +560,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 76,
         image:
-          "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/snacks.jpg"),
       },
       {
         id: "fd-2",
@@ -561,7 +570,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 54,
         image:
-          "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/soda.jpg"),
       },
       {
         id: "fd-3",
@@ -572,7 +581,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 201,
         badge: "熱銷",
         image:
-          "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/snacks.jpg"),
       },
       {
         id: "fd-4",
@@ -582,7 +591,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 133,
         image:
-          "https://images.unsplash.com/photo-1548907040-4baa42d10919?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/soda.jpg"),
       },
       {
         id: "fd-5",
@@ -592,7 +601,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 88,
         image:
-          "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/snacks.jpg"),
       },
       {
         id: "fd-6",
@@ -602,7 +611,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 41,
         image:
-          "https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/soda.jpg"),
       },
     ],
   },
@@ -627,7 +636,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 67,
         image:
-          "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/faucet.jpg"),
       },
       {
         id: "mt-2",
@@ -637,7 +646,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 22,
         image:
-          "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/level.jpg"),
       },
       {
         id: "mt-3",
@@ -647,7 +656,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 35,
         image:
-          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/faucet.jpg"),
       },
       {
         id: "mt-4",
@@ -658,7 +667,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 48,
         badge: "新品",
         image:
-          "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/level.jpg"),
       },
       {
         id: "mt-5",
@@ -668,7 +677,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 29,
         image:
-          "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/faucet.jpg"),
       },
       {
         id: "mt-6",
@@ -678,7 +687,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 18,
         image:
-          "https://images.unsplash.com/photo-1524484489611-0e7b6a8b1b1c?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/level.jpg"),
       },
     ],
   },
@@ -703,7 +712,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 260,
         image:
-          "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/mouse.jpg"),
       },
       {
         id: "of-2",
@@ -714,7 +723,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 74,
         badge: "熱銷",
         image:
-          "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/printer.jpg"),
       },
       {
         id: "of-3",
@@ -724,7 +733,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 4,
         reviews: 51,
         image:
-          "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/mouse.jpg"),
       },
       {
         id: "of-4",
@@ -734,7 +743,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 190,
         image:
-          "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/printer.jpg"),
       },
       {
         id: "of-5",
@@ -744,7 +753,7 @@ export const CATEGORY_DETAILS: Record<
         rating: 5,
         reviews: 112,
         image:
-          "https://images.unsplash.com/photo-1531346680769-a1d79b57de5c?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/mouse.jpg"),
       },
       {
         id: "of-6",
@@ -755,7 +764,7 @@ export const CATEGORY_DETAILS: Record<
         reviews: 98,
         badge: "新品",
         image:
-          "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=70",
+          asset("/images/products/printer.jpg"),
       },
     ],
   },

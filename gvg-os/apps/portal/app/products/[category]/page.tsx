@@ -7,6 +7,7 @@ import {
   type CategoryId,
 } from "@/lib/content";
 import { IconArrow } from "@/components/icons";
+import { RiseTitle } from "@/components/RiseTitle";
 
 const IDS = CATEGORIES.map((c) => c.id);
 
@@ -101,11 +102,13 @@ export default async function ProductCategoryPage({
 
         <div className="pc__main">
           <header className="pc__head">
-            <h1>
+            <RiseTitle as="h1" delay={60} immediate>
               {detail.titleZh}
               <small>{detail.titleEn}</small>
-            </h1>
-            <p>{detail.description}</p>
+            </RiseTitle>
+            <RiseTitle as="p" delay={160} immediate>
+              {detail.description}
+            </RiseTitle>
           </header>
 
           <div className="pc__subgrid" aria-label="子分類">

@@ -1,14 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import { CATEGORIES } from "@/lib/content";
 import { IconArrow } from "@/components/icons";
+import { RiseTitle } from "@/components/RiseTitle";
 
 export function CategoriesSection() {
   return (
     <section className="section categories" aria-labelledby="categories-title">
       <div className="section__head">
         <div>
-          <h2 id="categories-title">熱門產品分類</h2>
-          <p>探索我們豐富的產品類別 · Explore our wide range of categories</p>
+          <RiseTitle as="h2" id="categories-title">
+            熱門產品分類
+          </RiseTitle>
+          <p>探索我們豐富的產品類別 · Explore our curated collections</p>
         </div>
         <Link href="/products" className="text-link">
           瀏覽所有產品 <IconArrow />
@@ -16,17 +21,22 @@ export function CategoriesSection() {
       </div>
 
       <div className="category-grid">
-        {CATEGORIES.map((item) => (
-          <Link
+        {CATEGORIES.map((item, i) => (
+          <RiseTitle
+            as={Link}
             key={item.href}
             href={item.href}
-            className={`category-tile category-tile--${item.tone}`}
+            className="category-tile category-tile--photo"
+            delay={i * 70}
+            style={{
+              backgroundImage: `linear-gradient(180deg, transparent 22%, rgba(0,16,36,0.78)), url("${item.image}")`,
+            }}
           >
             <span>
               {item.zh}
               <small>{item.en}</small>
             </span>
-          </Link>
+          </RiseTitle>
         ))}
       </div>
     </section>
