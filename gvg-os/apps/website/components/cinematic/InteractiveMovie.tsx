@@ -15,12 +15,11 @@ import { Scene08RealEstate } from "@/components/cinematic/Scene08RealEstate";
 import { Ending } from "@/components/cinematic/Ending";
 
 /**
- * Interactive Movie scaffold (plan):
- * 01 Logo (GSAP) → 02 Earth (R3F spin +=3000) → 03 Global hops
- * (Golden Arc → Glow → Pulse) → 04 Marketplace → 05 AI
- * (Particles → Numbers → Charts → Connections) → 06–08 stubs → Ending
+ * Interactive Movie — smoother scrub + high-quality materials
+ * 01 Logo → 02 Earth (Blue Marble) → 03 Global → 04 Marketplace
+ * → 05 AI → 06–08 plates → Ending
  *
- * MouseGlow: #D4AF37 blur 80px. Noise strength 0.02.
+ * MouseGlow: DOM-driven gold bloom. Scrub lag 0.85. Noise 0.015.
  */
 export function InteractiveMovie() {
   useEffect(() => {
@@ -28,8 +27,12 @@ export function InteractiveMovie() {
       const msg = String(event.message || event.error || "");
       if (/WebGL|webgl/i.test(msg)) event.preventDefault();
     };
+    document.documentElement.classList.add("movie-playing");
     window.addEventListener("error", onError);
-    return () => window.removeEventListener("error", onError);
+    return () => {
+      document.documentElement.classList.remove("movie-playing");
+      window.removeEventListener("error", onError);
+    };
   }, []);
 
   return (

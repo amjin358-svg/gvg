@@ -1,20 +1,38 @@
 "use client";
 
 import { useRef } from "react";
+import { MOVIE_ASSETS, SCRUB_SMOOTH } from "@/lib/cinematic";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 const SERVICES = [
-  { title: "Enterprise Office", body: "HQ operating system for global teams." },
-  { title: "Legal", body: "Cross-border compliance & counsel workflows." },
-  { title: "Finance", body: "Treasury, FX, and consolidated reporting." },
-  { title: "Procurement", body: "Sourcing desks with landed-cost control." },
-  { title: "ERP", body: "Core ledgers synchronized across markets." },
-  { title: "CRM", body: "Accounts, pipeline, and partner networks." },
+  {
+    title: "Enterprise Office",
+    body: "總部級營運視圖，串聯跨國團隊決策與日常協作。",
+  },
+  {
+    title: "Legal",
+    body: "跨境合規與法務流程，降低制度與文件風險。",
+  },
+  {
+    title: "Finance",
+    body: "資金、外匯與合併報表，掌握全球財務節奏。",
+  },
+  {
+    title: "Procurement",
+    body: "採購中樞與落地成本控管，優化供應策略。",
+  },
+  {
+    title: "ERP",
+    body: "核心帳務與營運數據同步，市場之間無縫銜接。",
+  },
+  {
+    title: "CRM",
+    body: "客戶、管道與夥伴網絡，沉澱長期關係資產。",
+  },
 ];
 
 /**
- * Scene 6｜Business Services
- * Camera flies into the enterprise stack — services unfold one by one
+ * Scene 6｜Business Services — photo plate + transform-only reveals
  */
 export function Scene06Business() {
   const root = useRef<HTMLDivElement>(null);
@@ -27,22 +45,27 @@ export function Scene06Business() {
       if (!root.current) return;
 
       const items = itemRefs.current.filter(Boolean) as HTMLElement[];
-      gsap.set(items, { opacity: 0, x: -40, filter: "blur(8px)" });
-      if (titleRef.current) gsap.set(titleRef.current, { opacity: 0, y: 24 });
+      gsap.set(items, { opacity: 0, x: -28 });
+      if (titleRef.current) gsap.set(titleRef.current, { opacity: 0, y: 20 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
           end: "+=2800",
-          scrub: true,
+          scrub: SCRUB_SMOOTH,
           pin: true,
           anticipatePin: 1,
         },
       });
 
       if (titleRef.current) {
-        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.5 });
+        tl.to(titleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          ease: "power2.out",
+        });
       }
 
       items.forEach((item, i) => {
@@ -51,11 +74,10 @@ export function Scene06Business() {
           {
             opacity: 1,
             x: 0,
-            filter: "blur(0px)",
-            duration: 0.55,
+            duration: 0.6,
             ease: "power2.out",
           },
-          0.35 + i * 0.45,
+          0.4 + i * 0.4,
         );
       });
     },
@@ -64,9 +86,22 @@ export function Scene06Business() {
 
   return (
     <div ref={root}>
-      <section className="scene scene--navy business-scene" aria-label="Business Services">
-        <div className="business-scene__office" aria-hidden />
+      <section
+        className="scene scene--navy business-scene"
+        aria-label="Business Services"
+      >
+        <div
+          className="business-scene__office"
+          aria-hidden
+          style={{
+            backgroundImage: `
+              linear-gradient(105deg, rgba(5,14,32,0.88) 0%, rgba(5,14,32,0.55) 48%, rgba(5,14,32,0.72) 100%),
+              url("${MOVIE_ASSETS.office}")
+            `,
+          }}
+        />
         <div className="business-scene__content">
+          <p className="scene-eyebrow">06 · Enterprise Stack</p>
           <h2 ref={titleRef}>Business Services</h2>
           <ul className="business-scene__list">
             {SERVICES.map((svc, i) => (

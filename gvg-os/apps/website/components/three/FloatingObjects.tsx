@@ -2,12 +2,13 @@
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Environment, MeshTransmissionMaterial } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import type { Group, Mesh } from "three";
 import { BRAND_GOLD } from "@/lib/cinematic";
 
 /**
- * Floating · Rotate · Glass · Reflection
+ * Floating glass / metal accents — MeshPhysicalMaterial instead of
+ * heavy MeshTransmissionMaterial for smoother frame pacing.
  */
 export function FloatingObjects() {
   const group = useRef<Group>(null);
@@ -17,65 +18,66 @@ export function FloatingObjects() {
 
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
-    if (group.current) {
-      group.current.rotation.y = t * 0.15;
-    }
+    if (group.current) group.current.rotation.y = t * 0.12;
     if (a.current) {
-      a.current.position.y = Math.sin(t * 0.9) * 0.25;
-      a.current.rotation.x = t * 0.35;
-      a.current.rotation.y = t * 0.5;
+      a.current.position.y = Math.sin(t * 0.7) * 0.22;
+      a.current.rotation.x = t * 0.28;
+      a.current.rotation.y = t * 0.4;
     }
     if (b.current) {
-      b.current.position.y = Math.cos(t * 0.7) * 0.3;
-      b.current.rotation.y = -t * 0.4;
+      b.current.position.y = Math.cos(t * 0.55) * 0.26;
+      b.current.rotation.y = -t * 0.32;
     }
     if (c.current) {
-      c.current.position.y = Math.sin(t * 1.1 + 1) * 0.2;
-      c.current.rotation.z = t * 0.25;
+      c.current.position.y = Math.sin(t * 0.9 + 1) * 0.18;
+      c.current.rotation.z = t * 0.2;
     }
   });
 
   return (
     <group ref={group}>
-      <Environment preset="city" />
-      <mesh ref={a} position={[-1.4, 0, 0]}>
-        <icosahedronGeometry args={[0.55, 0]} />
-        <MeshTransmissionMaterial
-          backside
-          samples={4}
-          thickness={0.6}
-          chromaticAberration={0.06}
-          anisotropy={0.1}
-          distortion={0.1}
-          distortionScale={0.2}
-          temporalDistortion={0.05}
-          color="#e8f0ff"
+      <Environment preset="warehouse" />
+      <mesh ref={a} position={[-1.35, 0, 0]}>
+        <icosahedronGeometry args={[0.52, 1]} />
+        <meshPhysicalMaterial
+          color="#eaf2ff"
+          metalness={0.15}
+          roughness={0.08}
+          transmission={0.72}
+          thickness={0.55}
+          ior={1.4}
+          transparent
+          opacity={0.92}
+          envMapIntensity={1.2}
         />
       </mesh>
-      <mesh ref={b} position={[0.2, 0.2, -0.4]}>
-        <torusGeometry args={[0.45, 0.16, 24, 48]} />
-        <MeshTransmissionMaterial
-          backside
-          samples={4}
-          thickness={0.4}
-          color="#fff8e8"
-          roughness={0.05}
+      <mesh ref={b} position={[0.15, 0.15, -0.35]}>
+        <torusGeometry args={[0.42, 0.14, 32, 64]} />
+        <meshPhysicalMaterial
+          color="#fff4df"
+          metalness={0.35}
+          roughness={0.12}
+          transmission={0.55}
+          thickness={0.35}
+          transparent
+          opacity={0.9}
+          envMapIntensity={1.1}
         />
       </mesh>
-      <mesh ref={c} position={[1.5, -0.1, 0.3]}>
-        <boxGeometry args={[0.7, 0.7, 0.7]} />
+      <mesh ref={c} position={[1.4, -0.08, 0.25]}>
+        <boxGeometry args={[0.62, 0.62, 0.62]} />
         <meshStandardMaterial
-          color="#1a3358"
-          metalness={0.7}
-          roughness={0.15}
+          color="#152848"
+          metalness={0.85}
+          roughness={0.18}
           emissive={BRAND_GOLD}
-          emissiveIntensity={0.15}
+          emissiveIntensity={0.18}
+          envMapIntensity={1.3}
         />
       </mesh>
-      {/* Gold edge accent ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[2.2, 0.01, 8, 64]} />
-        <meshBasicMaterial color={BRAND_GOLD} transparent opacity={0.5} />
+        <torusGeometry args={[2.05, 0.008, 8, 96]} />
+        <meshBasicMaterial color={BRAND_GOLD} transparent opacity={0.45} />
       </mesh>
     </group>
   );

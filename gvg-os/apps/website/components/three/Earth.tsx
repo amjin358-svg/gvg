@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef, type MutableRefObject } from "react";
-import { useFrame } from "@react-three/fiber";
-import type { Group } from "three";
-import { BRAND_GOLD, BRAND_NAVY } from "@/lib/cinematic";
+import { useFrame, useLoader } from "@react-three/fiber";
+import { TextureLoader, type Group } from "three";
+import { BRAND_GOLD, movieAsset } from "@/lib/cinematic";
 
 type EarthProps = {
   /** External scroll-driven Y rotation (radians) */
@@ -14,6 +14,9 @@ type EarthProps = {
   autoSpin?: number;
 };
 
+/**
+ * Photoreal Earth with Blue Marble day map + night lights emissive.
+ */
 export function Earth({
   rotationYRef,
   showOrbits = false,
@@ -21,6 +24,11 @@ export function Earth({
 }: EarthProps) {
   const group = useRef<Group>(null);
   const orbits = useRef<Group>(null);
+  const [dayMap, nightMap, topoMap] = useLoader(TextureLoader, [
+    movieAsset("earthDay"),
+    movieAsset("earthNight"),
+    movieAsset("earthTopo"),
+  ]);
 
   useFrame((_, delta) => {
     if (group.current) {
@@ -31,8 +39,8 @@ export function Earth({
       }
     }
     if (orbits.current) {
-      orbits.current.rotation.y += delta * 0.35;
-      orbits.current.rotation.z += delta * 0.12;
+      orbits.current.rotation.y += delta * 0.22;
+      orbits.current.rotation.z += delta * 0.08;
     }
   });
 
@@ -40,31 +48,35 @@ export function Earth({
     <group>
       <group ref={group}>
         <mesh>
-          <sphereGeometry args={[1.6, 64, 64]} />
+          <sphereGeometry args={[1.6, 96, 96]} />
           <meshStandardMaterial
-            color={BRAND_NAVY}
-            roughness={0.45}
-            metalness={0.35}
-            emissive={BRAND_NAVY}
-            emissiveIntensity={0.35}
+            map={dayMap}
+            roughnessMap={topoMap}
+            roughness={0.72}
+            metalness={0.08}
+            emissiveMap={nightMap}
+            emissive="#ffd9a0"
+            emissiveIntensity={0.55}
           />
         </mesh>
+        {/* Atmosphere rim */}
         <mesh>
-          <sphereGeometry args={[1.62, 32, 32]} />
+          <sphereGeometry args={[1.72, 64, 64]} />
+          <meshBasicMaterial
+            color="#6eb6ff"
+            transparent
+            opacity={0.12}
+            depthWrite={false}
+          />
+        </mesh>
+        {/* Soft gold wireframe veil */}
+        <mesh>
+          <sphereGeometry args={[1.63, 36, 36]} />
           <meshBasicMaterial
             color={BRAND_GOLD}
             wireframe
             transparent
-            opacity={0.18}
-          />
-        </mesh>
-        <mesh>
-          <sphereGeometry args={[1.78, 48, 48]} />
-          <meshBasicMaterial
-            color="#1a3a6e"
-            transparent
-            opacity={0.16}
-            depthWrite={false}
+            opacity={0.08}
           />
         </mesh>
       </group>
@@ -73,11 +85,11 @@ export function Earth({
         <group ref={orbits}>
           {[1.95, 2.2, 2.45].map((r, i) => (
             <mesh key={r} rotation={[Math.PI / 2.6 + i * 0.35, 0.4 * i, 0.2]}>
-              <torusGeometry args={[r, 0.012 + i * 0.004, 16, 128]} />
+              <torusGeometry args={[r, 0.01 + i * 0.003, 12, 96]} />
               <meshBasicMaterial
                 color={BRAND_GOLD}
                 transparent
-                opacity={0.55 - i * 0.12}
+                opacity={0.45 - i * 0.1}
               />
             </mesh>
           ))}

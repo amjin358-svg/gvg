@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { GLOBAL_ROUTE } from "@/lib/globalRoute";
-import { BRAND_GOLD, CLASSIC_GOLD } from "@/lib/cinematic";
+import { BRAND_GOLD, CLASSIC_GOLD, MOVIE_ASSETS } from "@/lib/cinematic";
 import { createGlobalRouteTimeline } from "@/components/animation/ScrollAnimations";
 import { registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
@@ -53,7 +53,18 @@ export function Scene03Global() {
   return (
     <div ref={root}>
       <section className="scene scene--navy network-scene" aria-label="Global hops">
-        <div ref={mapRef} className="network-scene__map" aria-hidden>
+        <div
+          ref={mapRef}
+          className="network-scene__map network-scene__map--photo"
+          aria-hidden
+          style={{
+            backgroundImage: `
+              radial-gradient(ellipse at 50% 45%, rgba(11,31,58,0.25), rgba(1,4,12,0.82) 70%),
+              linear-gradient(180deg, rgba(1,4,12,0.35), rgba(1,4,12,0.7)),
+              url("${MOVIE_ASSETS.mapDark}")
+            `,
+          }}
+        >
           <div className="network-scene__continent network-scene__continent--americas" />
           <div className="network-scene__continent network-scene__continent--eurasia" />
           <div className="network-scene__continent network-scene__continent--sea" />
@@ -149,7 +160,7 @@ export function Scene03Global() {
         </nav>
 
         <p ref={finaleRef} className="network-scene__finale">
-          Global Supply Chain
+          Global Supply Chain · 全球供應網絡
         </p>
       </section>
     </div>

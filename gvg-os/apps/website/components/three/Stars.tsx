@@ -2,16 +2,17 @@
 
 import { Stars as DreiStars } from "@react-three/drei";
 
+/** Leaner starfield — smoother scroll while keeping depth */
 export function Stars() {
   return (
     <DreiStars
-      radius={100}
-      depth={60}
-      count={7000}
-      factor={4}
-      saturation={0.55}
+      radius={90}
+      depth={50}
+      count={2800}
+      factor={3.2}
+      saturation={0.4}
       fade
-      speed={0.32}
+      speed={0.12}
     />
   );
 }

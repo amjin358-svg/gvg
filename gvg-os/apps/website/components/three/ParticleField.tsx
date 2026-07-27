@@ -3,44 +3,34 @@
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { BRAND_GOLD, NOISE_STRENGTH } from "@/lib/cinematic";
+import { BRAND_GOLD } from "@/lib/cinematic";
 
-const COUNT = 1200;
+const COUNT = 520;
 
+/**
+ * Lightweight particle field — rotate the whole cloud instead of
+ * rewriting every vertex each frame (much smoother under scrub).
+ */
 export function ParticleField() {
   const points = useRef<THREE.Points>(null);
-  const { positions, base } = useMemo(() => {
-    const positions = new Float32Array(COUNT * 3);
-    const base = new Float32Array(COUNT * 3);
+  const positions = useMemo(() => {
+    const arr = new Float32Array(COUNT * 3);
     for (let i = 0; i < COUNT; i++) {
       const i3 = i * 3;
-      const x = (Math.random() - 0.5) * 10;
-      const y = (Math.random() - 0.5) * 6;
-      const z = (Math.random() - 0.5) * 6;
-      positions[i3] = x;
-      positions[i3 + 1] = y;
-      positions[i3 + 2] = z;
-      base[i3] = x;
-      base[i3 + 1] = y;
-      base[i3 + 2] = z;
+      const r = 1.2 + Math.random() * 4.5;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      arr[i3] = r * Math.sin(phi) * Math.cos(theta);
+      arr[i3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.65;
+      arr[i3 + 2] = r * Math.cos(phi) * 0.7;
     }
-    return { positions, base };
+    return arr;
   }, []);
 
-  useFrame(({ clock }) => {
-    const geo = points.current?.geometry;
-    if (!geo) return;
-    const attr = geo.getAttribute("position") as THREE.BufferAttribute;
-    const arr = attr.array as Float32Array;
-    const t = clock.elapsedTime;
-    for (let i = 0; i < COUNT; i++) {
-      const i3 = i * 3;
-      // Subtle noise offset at NOISE_STRENGTH
-      arr[i3] = base[i3]! + Math.sin(t * 0.7 + i) * NOISE_STRENGTH * 8;
-      arr[i3 + 1] = base[i3 + 1]! + Math.cos(t * 0.5 + i * 0.3) * NOISE_STRENGTH * 8;
-      arr[i3 + 2] = base[i3 + 2]! + Math.sin(t * 0.4 + i * 0.2) * NOISE_STRENGTH * 4;
-    }
-    attr.needsUpdate = true;
+  useFrame((_, delta) => {
+    if (!points.current) return;
+    points.current.rotation.y += delta * 0.06;
+    points.current.rotation.x += delta * 0.015;
   });
 
   return (
@@ -54,10 +44,10 @@ export function ParticleField() {
       </bufferGeometry>
       <pointsMaterial
         color={BRAND_GOLD}
-        size={0.035}
+        size={0.04}
         sizeAttenuation
         transparent
-        opacity={0.85}
+        opacity={0.78}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
       />

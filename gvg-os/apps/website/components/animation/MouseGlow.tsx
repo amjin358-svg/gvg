@@ -1,31 +1,51 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * Layer 5 — Mouse Glow
- * Fixed gold bloom that tracks the pointer.
- * pointer-events-none so it never blocks CTAs.
+ * Direct DOM updates (no React setState per frame) for smoother compositing.
  */
 export function MouseGlow() {
-  const [pos, setPos] = useState({ x: -9999, y: -9999 });
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const el = glowRef.current;
+    if (!el) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      el.style.opacity = "0";
+      return;
+    }
+
     let raf = 0;
-    let targetX = -9999;
-    let targetY = -9999;
-    let currentX = -9999;
-    let currentY = -9999;
+    let targetX = window.innerWidth * 0.5;
+    let targetY = window.innerHeight * 0.4;
+    let currentX = targetX;
+    let currentY = targetY;
+    let visible = false;
+    let idleTimer = 0;
 
     const onMove = (e: PointerEvent) => {
       targetX = e.clientX;
       targetY = e.clientY;
+      visible = true;
+      el.style.opacity = "0.38";
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(() => {
+        visible = false;
+        el.style.opacity = "0";
+      }, 1400);
     };
 
     const tick = () => {
-      currentX += (targetX - currentX) * 0.12;
-      currentY += (targetY - currentY) * 0.12;
-      setPos({ x: currentX, y: currentY });
+      // Slightly heavier lerp = silkier trail
+      currentX += (targetX - currentX) * 0.09;
+      currentY += (targetY - currentY) * 0.09;
+      if (visible || Math.abs(targetX - currentX) > 0.4) {
+        el.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+      }
       raf = requestAnimationFrame(tick);
     };
 
@@ -34,24 +54,33 @@ export function MouseGlow() {
     return () => {
       window.removeEventListener("pointermove", onMove);
       cancelAnimationFrame(raf);
+      window.clearTimeout(idleTimer);
     };
   }, []);
 
   return (
     <div
-      className="pointer-events-none fixed"
+      ref={glowRef}
+      className="movie-mouse-glow"
       aria-hidden
       style={{
-        left: pos.x,
-        top: pos.y,
-        width: "40vw",
-        height: "40vw",
-        transform: "translate(-50%, -50%)",
-        background: "radial-gradient(circle,#D4AF37,transparent)",
-        filter: "blur(80px)",
-        opacity: 0.45,
-        zIndex: 50, // Layer 5 — above all scene layers
+        position: "fixed",
+        left: 0,
+        top: 0,
+        width: "36vw",
+        height: "36vw",
+        maxWidth: 520,
+        maxHeight: 520,
+        transform: "translate3d(-9999px, -9999px, 0) translate(-50%, -50%)",
+        background:
+          "radial-gradient(circle, rgba(212,175,55,0.7) 0%, rgba(200,163,95,0.25) 35%, transparent 70%)",
+        filter: "blur(56px)",
+        opacity: 0,
+        zIndex: 50,
         mixBlendMode: "screen",
+        pointerEvents: "none",
+        willChange: "transform, opacity",
+        transition: "opacity 400ms ease",
       }}
     />
   );

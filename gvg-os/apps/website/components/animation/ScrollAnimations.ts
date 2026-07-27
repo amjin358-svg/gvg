@@ -2,7 +2,7 @@
 
 import type { RefObject } from "react";
 import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap";
-import { EARTH_SCROLL_END } from "@/lib/cinematic";
+import { EARTH_SCROLL_END, SCRUB_SMOOTH } from "@/lib/cinematic";
 import { GLOBAL_ROUTE } from "@/lib/globalRoute";
 
 type EarthSpinOptions = {
@@ -26,7 +26,7 @@ export function createEarthScrollSpin({
       trigger: section,
       start: "top top",
       end: EARTH_SCROLL_END,
-      scrub: true,
+      scrub: SCRUB_SMOOTH,
       pin: true,
       anticipatePin: 1,
     },
@@ -67,7 +67,7 @@ export function createGlobalRouteTimeline({
       trigger: section,
       start: "top top",
       end: `+=${GLOBAL_ROUTE.length * 900 + 600}`,
-      scrub: true,
+      scrub: SCRUB_SMOOTH,
       pin: true,
       anticipatePin: 1,
     },
@@ -78,8 +78,8 @@ export function createGlobalRouteTimeline({
   }
   if (finale) gsap.set(finale, { opacity: 0, y: 24 });
   if (map) {
-    gsap.set(map, { opacity: 0, scale: 1.08 });
-    tl.to(map, { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" });
+    gsap.set(map, { opacity: 0, scale: 1.06 });
+    tl.to(map, { opacity: 1, scale: 1, duration: 0.9, ease: "power2.out" });
   }
 
   hopLabels.forEach((label, i) => {
@@ -154,7 +154,7 @@ export function createAiDataTimeline(
       trigger: section,
       start: "top top",
       end: "+=3200",
-      scrub: true,
+      scrub: SCRUB_SMOOTH,
       pin: true,
       anticipatePin: 1,
     },

@@ -15,9 +15,9 @@ import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 const DIGITS = ["0", "1", "8", "5", "3", "9"];
 
 const KPIS = [
-  { value: "99.7%", label: "AI", kind: "static" as const },
-  { value: "0", label: "GDP", kind: "counter" as const },
-  { value: "$18.5B", label: "ROI", kind: "static" as const },
+  { value: "99.7%", label: "預測準確率", kind: "static" as const },
+  { value: "0", label: "數據節點", kind: "counter" as const },
+  { value: "$2.8M+", label: "客戶節省", kind: "static" as const },
 ];
 
 /** Binary stream: bits fall into AI */
@@ -106,71 +106,68 @@ export function Scene05AI() {
         railItems: railRefs.current.filter(Boolean) as HTMLElement[],
       });
 
-      const particles = particlesRef.current;
-      if (particles) {
-        gsap.to(particles, {
-          y: -30,
-          duration: 8,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      }
-
+      // Soft, scrub-aligned reveals (no delayed toggleActions / no infinite yoyo)
       const binaryRows = binaryRefs.current.filter(Boolean) as HTMLElement[];
       const digits = digitRefs.current.filter(Boolean) as HTMLElement[];
       const kpis = kpiRefs.current.filter(Boolean) as HTMLElement[];
       const chain = chainRefs.current.filter(Boolean) as HTMLElement[];
 
       if (binaryRows.length) {
-        gsap.set(binaryRows, { opacity: 0, y: -18 });
-        gsap.to(binaryRows, {
-          opacity: 1,
-          y: 0,
-          duration: 0.55,
-          stagger: 0.14,
-          ease: "sine.out",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            toggleActions: "play none none reverse",
+        gsap.fromTo(
+          binaryRows,
+          { opacity: 0, y: -12 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.08,
+            ease: "none",
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top top",
+              end: "+=900",
+              scrub: 0.85,
+            },
           },
-        });
+        );
       }
 
       if (digits.length) {
-        gsap.set(digits, { opacity: 0, y: 40, scale: 0.6 });
-        gsap.to(digits, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: "sine.out",
-          delay: 1.2,
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            toggleActions: "play none none reverse",
+        gsap.fromTo(
+          digits,
+          { opacity: 0, y: 28, scale: 0.85 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            stagger: 0.08,
+            ease: "none",
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top+=200 top",
+              end: "+=1200",
+              scrub: 0.85,
+            },
           },
-        });
+        );
       }
 
       if (kpis.length) {
-        gsap.set(kpis, { opacity: 0, y: 28 });
-        gsap.to(kpis, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.18,
-          ease: "sine.out",
-          delay: 1.8,
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            toggleActions: "play none none reverse",
+        gsap.fromTo(
+          kpis,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top+=400 top",
+              end: "+=1400",
+              scrub: 0.85,
+            },
           },
-        });
+        );
       }
 
       const counterEl = counterValueRef.current;
@@ -178,14 +175,13 @@ export function Scene05AI() {
         const counter = { value: 0 };
         gsap.to(counter, {
           value: 25000000,
-          duration: 2,
+          ease: "none",
           snap: "value",
-          ease: "power1.out",
-          delay: 2,
           scrollTrigger: {
             trigger: root.current,
-            start: "top top",
-            toggleActions: "play none none reverse",
+            start: "top+=500 top",
+            end: "+=1600",
+            scrub: 0.85,
           },
           onUpdate: () => {
             counterEl.textContent = formatCounter(counter.value);
@@ -194,20 +190,22 @@ export function Scene05AI() {
       }
 
       if (chain.length) {
-        gsap.set(chain, { opacity: 0, y: -24 });
-        gsap.to(chain, {
-          opacity: 1,
-          y: 0,
-          duration: 1.1,
-          stagger: 0.45,
-          ease: "sine.out",
-          delay: 2.4,
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            toggleActions: "play none none reverse",
+        gsap.fromTo(
+          chain,
+          { opacity: 0, y: -16 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.2,
+            ease: "none",
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top+=700 top",
+              end: "+=1800",
+              scrub: 0.85,
+            },
           },
-        });
+        );
       }
 
       return () => {

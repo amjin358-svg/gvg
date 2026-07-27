@@ -4,11 +4,11 @@ import { useRef } from "react";
 import Link from "next/link";
 import SplitType from "split-type";
 import { revertSplit } from "@/components/animation/SplitText";
+import { SCRUB_SMOOTH } from "@/lib/cinematic";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Scene 9｜Ending
- * Everything retracts → full brand → statement → return to the opening
+ * Scene 9｜Ending — brand lockup with silky scrub
  */
 export function Ending() {
   const root = useRef<HTMLDivElement>(null);
@@ -24,8 +24,8 @@ export function Ending() {
       const split = new SplitType(logo.current, { types: "chars" });
       const chars = split.chars?.length ? split.chars : logo.current;
 
-      gsap.set(chars, { opacity: 0, scale: 0.5, y: 30 });
-      gsap.set([line.current, cta.current], { opacity: 0, y: 24 });
+      gsap.set(chars, { opacity: 0, scale: 0.72, y: 22 });
+      gsap.set([line.current, cta.current], { opacity: 0, y: 18 });
 
       gsap
         .timeline({
@@ -33,7 +33,7 @@ export function Ending() {
             trigger: root.current,
             start: "top top",
             end: "+=1600",
-            scrub: true,
+            scrub: SCRUB_SMOOTH,
             pin: true,
             anticipatePin: 1,
           },
@@ -42,12 +42,12 @@ export function Ending() {
           opacity: 1,
           scale: 1,
           y: 0,
-          stagger: 0.08,
-          duration: 0.8,
+          stagger: 0.05,
+          duration: 0.95,
           ease: "power3.out",
         })
-        .to(line.current, { opacity: 1, y: 0, duration: 0.7 })
-        .to(cta.current, { opacity: 1, y: 0, duration: 0.55 });
+        .to(line.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+        .to(cta.current, { opacity: 1, y: 0, duration: 0.65, ease: "power2.out" });
 
       return () => {
         revertSplit(split);
@@ -55,6 +55,8 @@ export function Ending() {
     },
     { scope: root },
   );
+
+  const portal = process.env.NEXT_PUBLIC_PORTAL_URL || "/";
 
   return (
     <div ref={root}>
@@ -64,11 +66,14 @@ export function Ending() {
             Global Vista Group
           </h2>
           <p ref={line} className="ending-scene__line">
-            Building the Future of Global Business.
+            以高質感視野，連結全球市場與無限商機。
           </p>
-          <div ref={cta}>
-            <Link className="ending-scene__cta" href="/">
-              Back to Homepage
+          <div ref={cta} className="ending-scene__actions">
+            <Link className="ending-scene__cta" href={portal}>
+              進入企業官網
+            </Link>
+            <Link className="ending-scene__cta ending-scene__cta--ghost" href="/experience">
+              再看一次
             </Link>
           </div>
         </div>
