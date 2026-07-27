@@ -1,0 +1,8 @@
+{
+  "label": "homepage-v4-backup",
+  "sourceApp": "@gvg/website",
+  "sourcePath": "gvg-os/apps/website",
+  "publicUrlAtBackup": "https://amjin358-svg.github.io/gvg/",
+  "backedUpAt": "2026-07-27T07:15:00Z",
+  "note": "Frozen copy of the GitHub-published V4 marketing homepage. Do not treat as the live deploy target."
+}
