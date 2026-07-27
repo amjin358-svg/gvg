@@ -25,12 +25,15 @@ export default function ProductsPage() {
           </Link>
         </div>
 
-        <div className="category-grid">
+        <div className="category-grid category-grid--catalog">
           {CATEGORIES.map((item) => (
             <Link
               key={item.id}
               href={item.href}
-              className={`category-tile category-tile--${item.tone}`}
+              className="category-tile category-tile--photo category-tile--catalog"
+              style={{
+                backgroundImage: `linear-gradient(180deg, transparent 18%, rgba(0,16,36,0.8)), url("${item.image}")`,
+              }}
             >
               <span>
                 {item.zh}

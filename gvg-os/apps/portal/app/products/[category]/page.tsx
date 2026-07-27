@@ -56,8 +56,19 @@ export default async function ProductCategoryPage({
                     href={item.href}
                     className={item.id === category ? "is-active" : undefined}
                   >
-                    {item.zh}
-                    <small>{item.en}</small>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      className="pc__cat-thumb"
+                      src={item.image}
+                      alt=""
+                      loading="lazy"
+                      width={44}
+                      height={44}
+                    />
+                    <span className="pc__cat-text">
+                      {item.zh}
+                      <small>{item.en}</small>
+                    </span>
                   </Link>
                   {item.id === category ? (
                     <ul className="pc__sub-list">
