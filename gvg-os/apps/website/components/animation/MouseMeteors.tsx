@@ -15,7 +15,7 @@ type Meteor = {
 };
 
 /**
- * Mouse meteors — shooting-star streaks that follow pointer velocity.
+ * Pointer meteors + ambient tiny shooting stars across the deep-space plate.
  */
 export function MouseMeteors() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -39,6 +39,7 @@ export function MouseMeteors() {
     let prevX = window.innerWidth * 0.5;
     let prevY = window.innerHeight * 0.4;
     let lastMove = 0;
+    let lastAmbient = 0;
     const meteors: Meteor[] = [];
 
     const resize = () => {
@@ -52,44 +53,71 @@ export function MouseMeteors() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
+    const pushMeteor = (m: Meteor) => {
+      meteors.push(m);
+      if (meteors.length > 140) meteors.splice(0, meteors.length - 140);
+    };
+
+    const spawnAmbient = () => {
+      // Tiny background meteors — frequent, faint, short trails
+      const burst = 2 + Math.floor(Math.random() * 3);
+      for (let i = 0; i < burst; i++) {
+        const fromLeft = Math.random() > 0.45;
+        const x = fromLeft ? -20 - Math.random() * 40 : w + 20 + Math.random() * 40;
+        const y = Math.random() * h * 0.92;
+        const angle = fromLeft
+          ? 0.35 + Math.random() * 0.55
+          : Math.PI - (0.35 + Math.random() * 0.55);
+        const mag = 10 + Math.random() * 18;
+        pushMeteor({
+          x,
+          y,
+          vx: Math.cos(angle) * mag,
+          vy: Math.sin(angle) * mag * (0.35 + Math.random() * 0.4),
+          life: 1,
+          maxLife: 0.7 + Math.random() * 0.9,
+          length: 18 + Math.random() * 36,
+          width: 0.55 + Math.random() * 0.9,
+          hue: Math.random() > 0.5 ? 205 : 250,
+        });
+      }
+    };
+
     const spawn = (x: number, y: number, dx: number, dy: number) => {
       const speed = Math.hypot(dx, dy);
-      if (speed < 1.2) return;
+      if (speed < 1.0) return;
 
-      const count = speed > 28 ? 3 : speed > 14 ? 2 : 1;
+      const count = speed > 28 ? 5 : speed > 14 ? 3 : 2;
       for (let i = 0; i < count; i++) {
-        const angle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 0.28;
-        const mag = Math.min(42, speed * (0.55 + Math.random() * 0.45));
-        meteors.push({
-          x: x + (Math.random() - 0.5) * 10,
-          y: y + (Math.random() - 0.5) * 10,
+        const angle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 0.32;
+        const mag = Math.min(44, speed * (0.55 + Math.random() * 0.45));
+        pushMeteor({
+          x: x + (Math.random() - 0.5) * 12,
+          y: y + (Math.random() - 0.5) * 12,
           vx: Math.cos(angle) * mag,
           vy: Math.sin(angle) * mag,
           life: 1,
-          maxLife: 0.55 + Math.random() * 0.55,
-          length: 28 + speed * 1.8 + Math.random() * 36,
-          width: 1.2 + Math.random() * 1.8,
+          maxLife: 0.5 + Math.random() * 0.55,
+          length: 22 + speed * 1.5 + Math.random() * 28,
+          width: 0.9 + Math.random() * 1.5,
           hue: Math.random() > 0.55 ? 210 : 265,
         });
       }
 
-      // Occasional bright lead meteor
-      if (speed > 18 && Math.random() > 0.55) {
+      if (speed > 16 && Math.random() > 0.45) {
         const angle = Math.atan2(dy, dx);
-        meteors.push({
+        pushMeteor({
           x,
           y,
           vx: Math.cos(angle) * Math.min(52, speed * 0.9),
           vy: Math.sin(angle) * Math.min(52, speed * 0.9),
           life: 1,
-          maxLife: 0.85,
-          length: 70 + speed * 2.2,
-          width: 2.4,
+          maxLife: 0.8,
+          length: 60 + speed * 2,
+          width: 2.1,
           hue: 200,
         });
       }
-
-      if (meteors.length > 80) meteors.splice(0, meteors.length - 80);
     };
 
     const onMove = (e: PointerEvent) => {
@@ -105,7 +133,12 @@ export function MouseMeteors() {
       spawn(x, y, dx, dy);
     };
 
-    const tick = () => {
+    const tick = (now: number) => {
+      if (now - lastAmbient > 220) {
+        lastAmbient = now;
+        spawnAmbient();
+      }
+
       ctx.clearRect(0, 0, w, h);
 
       for (let i = meteors.length - 1; i >= 0; i--) {
@@ -118,8 +151,8 @@ export function MouseMeteors() {
 
         m.x += m.vx * 0.016 * 60 * 0.35;
         m.y += m.vy * 0.016 * 60 * 0.35;
-        m.vx *= 0.985;
-        m.vy *= 0.985;
+        m.vx *= 0.986;
+        m.vy *= 0.986;
 
         const angle = Math.atan2(m.vy, m.vx);
         const alpha = Math.max(0, m.life);
@@ -131,23 +164,22 @@ export function MouseMeteors() {
 
         const grad = ctx.createLinearGradient(tx, ty, hx, hy);
         grad.addColorStop(0, `hsla(${m.hue}, 90%, 70%, 0)`);
-        grad.addColorStop(0.45, `hsla(${m.hue}, 95%, 75%, ${0.35 * alpha})`);
-        grad.addColorStop(1, `hsla(${m.hue + 20}, 100%, 92%, ${0.95 * alpha})`);
+        grad.addColorStop(0.45, `hsla(${m.hue}, 95%, 75%, ${0.28 * alpha})`);
+        grad.addColorStop(1, `hsla(${m.hue + 20}, 100%, 92%, ${0.9 * alpha})`);
 
         ctx.beginPath();
         ctx.strokeStyle = grad;
-        ctx.lineWidth = m.width * (0.6 + alpha);
+        ctx.lineWidth = m.width * (0.55 + alpha);
         ctx.lineCap = "round";
         ctx.moveTo(tx, ty);
         ctx.lineTo(hx, hy);
         ctx.stroke();
 
-        // Hot head
         ctx.beginPath();
-        ctx.fillStyle = `hsla(${m.hue + 30}, 100%, 96%, ${0.9 * alpha})`;
-        ctx.shadowColor = `hsla(${m.hue}, 100%, 70%, ${0.8 * alpha})`;
-        ctx.shadowBlur = 12;
-        ctx.arc(hx, hy, m.width * 1.1, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${m.hue + 30}, 100%, 96%, ${0.85 * alpha})`;
+        ctx.shadowColor = `hsla(${m.hue}, 100%, 70%, ${0.65 * alpha})`;
+        ctx.shadowBlur = 8;
+        ctx.arc(hx, hy, Math.max(0.6, m.width * 0.95), 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
       }

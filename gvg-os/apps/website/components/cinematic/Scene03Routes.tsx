@@ -6,7 +6,7 @@ import { MOVIE_V5 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Scene 03｜Routes — constellation hubs (replaces global arc map)
+ * Scene 03｜Routes — hubs sit lower so they never cover the subtitle block
  */
 export function Scene03Routes() {
   const root = useRef<HTMLDivElement>(null);
@@ -53,12 +53,13 @@ export function Scene03Routes() {
   );
 
   const hubs = MOVIE_V5.routes.hubs;
-  // Approximate node positions in % for constellation layout
+  // Keep hubs in the lower constellation band so 供應樞紐 / 合規通道
+  // never overlap the top subtitle copy.
   const points = [
-    { x: 18, y: 42 },
-    { x: 42, y: 28 },
-    { x: 68, y: 38 },
-    { x: 86, y: 58 },
+    { x: 16, y: 58 },
+    { x: 38, y: 68 },
+    { x: 64, y: 64 },
+    { x: 84, y: 74 },
   ];
 
   return (
