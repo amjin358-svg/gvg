@@ -4,7 +4,6 @@ import { useMemo, useRef, type MutableRefObject, Suspense } from "react";
 import { CanvasSafe } from "@/components/three/CanvasSafe";
 import { Earth } from "@/components/three/Earth";
 import { Stars } from "@/components/three/Stars";
-import { TradeSceneWipe } from "@/components/cinematic/TradeSceneWipe";
 import { createEarthScrollSpin } from "@/components/animation/ScrollAnimations";
 import { EARTH_SCROLL_END } from "@/lib/cinematic";
 import { MOVIE_V5 } from "@/lib/movieContent";
@@ -29,7 +28,6 @@ function EarthStage({
         <Earth
           rotationYRef={rotationYRef}
           autoSpin={0}
-          showOrbits={false}
           showCountries
           showTradeNetwork
         />
@@ -39,7 +37,7 @@ function EarthStage({
 }
 
 /**
- * Scene 2｜Earth — restored scrub spin + trade network arcs (reference look)
+ * Scene 2｜Earth — scrub spin + trade network (no planar orbit rings)
  */
 export function Scene02Earth() {
   const root = useRef<HTMLDivElement>(null);
@@ -65,7 +63,6 @@ export function Scene02Earth() {
         aria-label="Earth"
         data-scroll-end={EARTH_SCROLL_END}
       >
-        <TradeSceneWipe theme="orbital" />
         <div className="earth-scene__stage" aria-hidden>
           <CanvasSafe
             camera={{ position: [0, 0.15, 5.0], fov: 40 }}
