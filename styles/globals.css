@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Static Stitch design mockups are not part of the app UI; keep them out of
+   Tailwind's content scan so stray arbitrary classes in those HTML files
+   don't emit unresolvable CSS. */
+@source not "../site";
+@source not "../.stitch";
+
 :root {
   --color-ink: #0a1628;
   --color-ink-soft: #132338;
