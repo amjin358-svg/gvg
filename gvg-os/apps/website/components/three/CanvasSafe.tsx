@@ -133,7 +133,7 @@ export function CanvasSafe({
           gl={{
             antialias: false,
             alpha: true,
-            powerPreference: "high-performance",
+            powerPreference: "default",
             failIfMajorPerformanceCaveat: false,
             ...(typeof gl === "object" && gl ? gl : {}),
           }}

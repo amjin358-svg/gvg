@@ -4,24 +4,14 @@
  */
 
 export const MOVIE_VERSION = {
-  /** Public version code */
   code: "IM-V5.0",
-  /** Semver for the experience package surface */
   semver: "0.5.0",
-  /** Human label */
   label: "Interactive Movie V5",
-  /** ISO date of this script freeze */
   releasedAt: "2026-07-29",
-  /** Live watch path (GitHub Pages: /gvg/experience/) */
   path: "/experience",
-  /** Scene stack id */
   pipeline: "open → earth → routes → pillars → finale",
 } as const;
 
-/**
- * Interactive Movie V5 — polished cosmo opening, Earth spin, trade routes,
- * pillars, and gold finale. Alias MOVIE_V3 kept for transitional imports.
- */
 export const MOVIE_V5 = {
   open: {
     mark: "GVG",
@@ -65,6 +55,7 @@ export const MOVIE_V5 = {
     ],
   },
   finale: {
+    ready: "Are you ready?",
     lead: "Begin with",
     brand: "Global Vista Group",
     line: "Ready to connect markets?",
@@ -74,7 +65,7 @@ export const MOVIE_V5 = {
   },
 } as const;
 
-/** @deprecated Use MOVIE_V5 — kept so older scene imports keep resolving. */
+/** @deprecated Use MOVIE_V5 */
 export const MOVIE_V3 = MOVIE_V5;
 
 export default MOVIE_V5;

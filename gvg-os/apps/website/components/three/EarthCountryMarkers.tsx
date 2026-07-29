@@ -78,7 +78,7 @@ function CountryMarker({
       </mesh>
           <Html
             center
-            distanceFactor={7.2}
+            distanceFactor={8.8}
             style={{ pointerEvents: "none", userSelect: "none" }}
             zIndexRange={[20, 0]}
           >

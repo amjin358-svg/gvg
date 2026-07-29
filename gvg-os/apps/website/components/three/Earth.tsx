@@ -28,6 +28,7 @@ export function Earth({
 }: EarthProps) {
   const group = useRef<Group>(null);
   const orbits = useRef<Group>(null);
+  const drift = useRef(0);
   const [dayMap, nightMap, topoMap] = useLoader(TextureLoader, [
     movieAsset("earthDay"),
     movieAsset("earthNight"),
@@ -35,16 +36,14 @@ export function Earth({
   ]);
 
   useFrame((_, delta) => {
+    drift.current += autoSpin * (delta * 60);
     if (group.current) {
-      if (rotationYRef) {
-        group.current.rotation.y = rotationYRef.current.value;
-      } else {
-        group.current.rotation.y += autoSpin;
-      }
+      const scrub = rotationYRef?.current.value ?? 0;
+      group.current.rotation.y = scrub + drift.current;
     }
     if (orbits.current) {
-      orbits.current.rotation.y += delta * 0.22;
-      orbits.current.rotation.z += delta * 0.08;
+      orbits.current.rotation.y += delta * 0.14;
+      orbits.current.rotation.z += delta * 0.05;
     }
   });
 
