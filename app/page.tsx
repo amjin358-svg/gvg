@@ -1,14 +1,14 @@
 import {
   HomeCategories,
   HomeCtaBand,
-  HomeHero,
   HomeServices,
 } from "@/frontend/features/home/HomeMarketing";
+import { HeroExperience } from "@/frontend/features/experience/HeroExperience";
 
 export default function HomePage() {
   return (
     <>
-      <HomeHero />
+      <HeroExperience />
       <HomeServices />
       <HomeCategories />
       <HomeCtaBand />
