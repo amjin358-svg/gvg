@@ -65,6 +65,7 @@ export const MOVIE_V5 = {
     ],
   },
   finale: {
+    ready: ["Are.", "You.", "Ready?"],
     lead: "Begin with",
     brand: "Global Vista Group",
     line: "Ready to connect markets?",

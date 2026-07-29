@@ -13,7 +13,7 @@ import { MOVIE_VERSION } from "@/lib/movieContent";
 /**
  * Interactive Movie V5 (IM-V5.0)
  * Open → Earth spin → Routes → Pillars → Finale
- * Starfield + ambient / pointer meteors (no rotating purple galaxy plate).
+ * Minimal starfield + frosted meteor drag trails.
  */
 export function InteractiveMovie() {
   useEffect(() => {
@@ -39,8 +39,7 @@ export function InteractiveMovie() {
         data-movie-version={MOVIE_VERSION.code}
       >
         <div className="movie-root__deepspace" aria-hidden />
-        <div className="movie-root__star-twinkle movie-root__star-twinkle--dense" aria-hidden />
-        <div className="movie-root__star-twinkle movie-root__star-twinkle--dense-b" aria-hidden />
+        <div className="movie-root__star-twinkle movie-root__star-twinkle--min" aria-hidden />
         <MouseMeteors />
         <Scene01Open />
         <Scene02Earth />
