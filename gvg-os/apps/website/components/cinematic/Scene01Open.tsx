@@ -102,8 +102,7 @@ export function Scene01Open() {
     <div ref={root}>
       <section className="scene scene--black open-scene open-scene--cosmo" aria-label="Opening">
         <div className="open-scene__starfield" aria-hidden>
-          <div className="open-scene__stars open-scene__stars--script" />
-          <div className="open-scene__stars open-scene__stars--twinkle-b" />
+          <div className="open-scene__stars open-scene__stars--static" />
         </div>
 
         <div ref={rings} className="open-scene__compression" aria-hidden>
@@ -116,14 +115,14 @@ export function Scene01Open() {
         </div>
 
         <div className="open-scene__brand open-scene__brand--raised">
-          <h1 ref={mark} className="open-scene__mark open-scene__mark--white-glow">
+          <h1 ref={mark} className="open-scene__mark open-scene__mark--bright-white">
             {MOVIE_V5.open.mark}
           </h1>
         </div>
         <div ref={copy} className="open-scene__copy">
-          <p className="open-scene__kicker">{MOVIE_V5.open.title}</p>
+          <p className="open-scene__kicker open-scene__kicker--gold">{MOVIE_V5.open.title}</p>
           <p className="open-scene__line">
-            <strong className="open-scene__line-gold">{MOVIE_V5.open.line}</strong>
+            <strong className="open-scene__line-en">{MOVIE_V5.open.line}</strong>
             <span className="open-scene__line-zh">{MOVIE_V5.open.lineZh}</span>
           </p>
         </div>

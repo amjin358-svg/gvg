@@ -66,7 +66,7 @@ export function Scene02Earth() {
         data-scroll-end={EARTH_SCROLL_END}
       >
         <TradeSceneWipe theme="orbital" />
-        <div className="earth-scene__star-script" aria-hidden />
+        <div className="earth-scene__starfield" aria-hidden />
         <div className="earth-scene__stage" aria-hidden>
           <CanvasSafe
             camera={{ position: [0, 0.15, 5.0], fov: 40 }}
