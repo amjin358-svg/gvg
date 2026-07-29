@@ -1,14 +1,34 @@
-﻿import type { ReactNode } from "react";
-import type { Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
+import { Noto_Sans_TC, Outfit } from "next/font/google";
 import "@/styles/globals.css";
 
-export const metadata = {
-  title: "Global Vista Group — Interactive Cinematic Experience",
+const display = Outfit({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const body = Noto_Sans_TC({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: "GVG — Global Vista Group",
+    template: "%s | GVG",
+  },
   description:
-    "GVG Interactive Cinematic Homepage — Build Beyond Borders. Space, Earth, Network, AI, Marketplace, and Investment in one continuous movie experience.",
+    "Build Beyond Borders. An interactive cinematic experience by Global Vista Group — Earth, Network, AI, Marketplace, Business, and Investment.",
+  applicationName: "GVG",
   appleWebApp: {
     capable: true,
     title: "GVG",
+    statusBarStyle: "black-translucent",
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
 };
 
@@ -16,27 +36,28 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#01040c",
+  themeColor: "#03060c",
+  colorScheme: "dark",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    // suppressHydrationWarning: browser extensions often mutate <html>/<body>
-    // (e.g. className="ipa-annotator-disabled") before React hydrates.
-    <html lang="zh-Hant" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body suppressHydrationWarning>{children}</body>
+    <html
+      lang="zh-Hant"
+      className={`${display.variable} ${body.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body
+        className="min-h-full overflow-x-hidden bg-[#03060c] text-white"
+        style={{ fontFamily: "var(--font-body), 'Noto Sans TC', system-ui, sans-serif" }}
+        suppressHydrationWarning
+      >
+        {children}
+      </body>
     </html>
   );
 }
