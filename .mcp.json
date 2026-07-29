@@ -5,6 +5,9 @@
       "headers": {
         "X-Goog-Api-Key": "${STITCH_API_KEY}"
       }
+    },
+    "figma": {
+      "url": "https://mcp.figma.com/mcp"
     }
   }
 }
