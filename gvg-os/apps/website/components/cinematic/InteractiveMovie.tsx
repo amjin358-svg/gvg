@@ -35,7 +35,8 @@ export function InteractiveMovie() {
         className="movie-root movie-root--seamless movie-root--os movie-root--v3"
         aria-label="Global Vista Group Interactive Movie"
       >
-        <GalaxyPhotoLayer className="movie-root__galaxy" mode="absolute" />
+        <GalaxyPhotoLayer className="movie-root__galaxy movie-root__galaxy--spin" mode="absolute" />
+        <div className="movie-root__star-twinkle" aria-hidden />
         <MouseMeteors />
         <Scene01Open />
         <Scene02Earth />

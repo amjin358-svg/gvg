@@ -76,12 +76,12 @@ function CountryMarker({
         <sphereGeometry args={[0.022, 12, 12]} />
         <meshBasicMaterial color="#FFF6D8" transparent opacity={0.95} />
       </mesh>
-      <Html
-        center
-        distanceFactor={6.5}
-        style={{ pointerEvents: "none", userSelect: "none" }}
-        zIndexRange={[20, 0]}
-      >
+          <Html
+            center
+            distanceFactor={7.2}
+            style={{ pointerEvents: "none", userSelect: "none" }}
+            zIndexRange={[20, 0]}
+          >
         <div className="earth-marker-label">
           <span className="earth-marker-label__dot" aria-hidden />
           <strong>{label}</strong>

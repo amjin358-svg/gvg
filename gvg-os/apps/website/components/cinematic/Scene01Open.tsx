@@ -6,7 +6,7 @@ import { MOVIE_V3 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Scene 01｜Open — galaxy/cosmo plate + oversized GVG with soft yellow glow
+ * Scene 01｜Open — rotating galaxy + GVG slow 3s float-in with large scale delta
  */
 export function Scene01Open() {
   const root = useRef<HTMLDivElement>(null);
@@ -19,8 +19,14 @@ export function Scene01Open() {
       registerGsapPlugins();
       if (!root.current || !mark.current || !copy.current) return;
 
-      gsap.set(mark.current, { opacity: 0, scale: 0.82, filter: "blur(10px)" });
-      gsap.set(copy.current, { opacity: 0, y: 32 });
+      // Large entrance → settle delta (~3× visual grow while floating up)
+      gsap.set(mark.current, {
+        opacity: 0,
+        y: 140,
+        scale: 0.28,
+        filter: "blur(14px)",
+      });
+      gsap.set(copy.current, { opacity: 0, y: 40 });
       if (hint.current) gsap.set(hint.current, { opacity: 0, y: 12 });
 
       gsap
@@ -28,7 +34,7 @@ export function Scene01Open() {
           scrollTrigger: {
             trigger: root.current,
             start: "top top",
-            end: "+=2000",
+            end: "+=2600",
             scrub: SCRUB_SMOOTH,
             pin: true,
             anticipatePin: 1,
@@ -36,14 +42,15 @@ export function Scene01Open() {
         })
         .to(mark.current, {
           opacity: 1,
+          y: 0,
           scale: 1,
           filter: "blur(0px)",
-          duration: 1.2,
+          duration: 3,
           ease: "power2.out",
         })
-        .to(copy.current, { opacity: 1, y: 0, duration: 0.9 }, "-=0.4")
-        .to(hint.current, { opacity: 1, y: 0, duration: 0.5 }, "-=0.25")
-        .to(mark.current, { scale: 1.04, duration: 0.8 }, "+=0.35");
+        .to(copy.current, { opacity: 1, y: 0, duration: 1.1 }, "-=1.1")
+        .to(hint.current, { opacity: 1, y: 0, duration: 0.55 }, "-=0.35")
+        .to(mark.current, { scale: 1.06, duration: 0.9 }, "+=0.25");
     },
     { scope: root },
   );
@@ -51,8 +58,11 @@ export function Scene01Open() {
   return (
     <div ref={root}>
       <section className="scene scene--black open-scene open-scene--cosmo" aria-label="Opening">
-        <div className="open-scene__nebula" aria-hidden />
-        <div className="open-scene__stars" aria-hidden />
+        <div className="open-scene__galaxy-spin" aria-hidden>
+          <div className="open-scene__nebula" />
+          <div className="open-scene__stars open-scene__stars--twinkle" />
+          <div className="open-scene__stars open-scene__stars--twinkle-b" />
+        </div>
         <h1 ref={mark} className="open-scene__mark">
           {MOVIE_V3.open.mark}
         </h1>

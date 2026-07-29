@@ -9,14 +9,16 @@ import { MOVIE_V3 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Scene 05｜Finale — stunning close; brand name stays on one line
+ * Scene 05｜Finale — same-line title, burst glow, brand delayed 1.5s gold entrance
  */
 export function Scene05Finale() {
   const root = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const brand = useRef<HTMLSpanElement>(null);
+  const lead = useRef<HTMLSpanElement>(null);
   const burst = useRef<HTMLDivElement>(null);
   const rays = useRef<HTMLDivElement>(null);
+  const actions = useRef<HTMLDivElement>(null);
   const portal = process.env.NEXT_PUBLIC_PORTAL_URL || "/";
 
   useGSAP(
@@ -27,16 +29,19 @@ export function Scene05Finale() {
       const split = new SplitType(brand.current, { types: "chars" });
       const chars = split.chars?.length ? split.chars : [brand.current];
 
-      gsap.set(panel.current, { opacity: 0, y: 40, scale: 0.9 });
-      gsap.set(chars, { opacity: 0, y: 28, scale: 0.7, rotateX: 40 });
-      if (burst.current) gsap.set(burst.current, { scale: 0.2, opacity: 0 });
-      if (rays.current) gsap.set(rays.current, { opacity: 0, rotate: -12 });
+      // Settle ~3× from entrance scale
+      gsap.set(panel.current, { opacity: 0, y: 48, scale: 0.33 });
+      gsap.set(lead.current, { opacity: 0, y: 12 });
+      gsap.set(chars, { opacity: 0, y: 36, scale: 0.45, rotateX: 55 });
+      if (burst.current) gsap.set(burst.current, { scale: 0.15, opacity: 0 });
+      if (rays.current) gsap.set(rays.current, { opacity: 0, rotate: -18 });
+      if (actions.current) gsap.set(actions.current, { opacity: 0, y: 28 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: "+=2000",
+          end: "+=2600",
           scrub: SCRUB_SMOOTH,
           pin: true,
           anticipatePin: 1,
@@ -47,34 +52,41 @@ export function Scene05Finale() {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.85,
+        duration: 1.1,
         ease: "power2.out",
       })
         .to(
           burst.current,
-          { opacity: 0.9, scale: 1.35, duration: 0.9, ease: "power2.out" },
-          "<0.1",
+          { opacity: 1, scale: 1.55, duration: 1.0, ease: "power2.out" },
+          "<0.05",
         )
         .to(
           rays.current,
-          { opacity: 0.75, rotate: 0, duration: 1.1, ease: "sine.out" },
+          { opacity: 0.85, rotate: 0, duration: 1.2, ease: "sine.out" },
           "<",
         )
-        .to(chars, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          rotateX: 0,
-          stagger: 0.045,
-          duration: 0.85,
-          ease: "power3.out",
-        })
+        .to(lead.current, { opacity: 1, y: 0, duration: 0.6 }, "<0.15")
+        // Global Vista Group delayed ~1.5s after lead/burst start
+        .to(
+          chars,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotateX: 0,
+            stagger: 0.05,
+            duration: 1.0,
+            ease: "power3.out",
+          },
+          "+=1.5",
+        )
         .to(
           burst.current,
-          { scale: 1.85, opacity: 0.35, duration: 0.9, ease: "power1.inOut" },
-          "-=0.3",
+          { scale: 2.1, opacity: 0.4, duration: 1.0, ease: "power1.inOut" },
+          "-=0.35",
         )
-        .to(panel.current, { scale: 1.03, duration: 0.55, ease: "sine.inOut" });
+        .to(panel.current, { scale: 1.08, duration: 0.7, ease: "sine.inOut" })
+        .to(actions.current, { opacity: 1, y: 0, duration: 0.65 }, "-=0.35");
 
       return () => {
         revertSplit(split);
@@ -90,7 +102,9 @@ export function Scene05Finale() {
         <div ref={rays} className="finale-scene__rays" aria-hidden />
         <div ref={panel} className="finale-scene__panel">
           <h2 className="finale-scene__title">
-            <span className="finale-scene__lead">{MOVIE_V3.finale.lead} </span>
+            <span ref={lead} className="finale-scene__lead">
+              {MOVIE_V3.finale.lead}{" "}
+            </span>
             <span ref={brand} className="finale-scene__brand">
               {MOVIE_V3.finale.brand}
             </span>
@@ -99,7 +113,7 @@ export function Scene05Finale() {
             <strong>{MOVIE_V3.finale.line}</strong>
             <span>{MOVIE_V3.finale.lineZh}</span>
           </p>
-          <div className="finale-scene__actions">
+          <div ref={actions} className="finale-scene__actions">
             <Link className="btn btn--glow" href={portal}>
               {MOVIE_V3.finale.ctaPrimary}
             </Link>

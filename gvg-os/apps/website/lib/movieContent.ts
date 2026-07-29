@@ -5,7 +5,7 @@
 export const MOVIE_V3 = {
   open: {
     mark: "GVG",
-    title: "Global Vista",
+    title: "Global Vista Group",
     line: "Connecting Markets. Creating Value.",
     lineZh: "連接全球市場，創造無限商機。",
     hint: "Scroll · Move to summon meteors",
@@ -23,7 +23,7 @@ export const MOVIE_V3 = {
       { name: "Americas", note: "市場入口" },
       { name: "Asia Pacific", note: "供應樞紐" },
       { name: "Europe", note: "合規通道" },
-      { name: "Global Hub", note: "協同中心" },
+      { name: "Global Hub", note: "協作中心" },
     ],
   },
   pillars: {
@@ -50,7 +50,7 @@ export const MOVIE_V3 = {
     line: "Ready to connect markets?",
     lineZh: "準備好開啟全球視野了嗎？",
     ctaPrimary: "進入企業官網",
-    ctaAgain: "再看一次",
+    ctaAgain: "GVG簡介",
   },
 } as const;
 
