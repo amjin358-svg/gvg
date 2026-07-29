@@ -3,13 +3,16 @@
 import { useRef, type MutableRefObject } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader, type Group } from "three";
-import { BRAND_GOLD, movieAsset } from "@/lib/cinematic";
+import { BRAND_GOLD, MOVIE_ACCENT, movieAsset } from "@/lib/cinematic";
+import { EarthCountryMarkers } from "@/components/three/EarthCountryMarkers";
 
 type EarthProps = {
   /** External scroll-driven Y rotation (radians) */
   rotationYRef?: MutableRefObject<{ value: number }>;
-  /** Gold orbital rings for Opening scene */
+  /** Orbital rings for Earth scene */
   showOrbits?: boolean;
+  /** Blink country markers with labels */
+  showCountries?: boolean;
   /** Auto-spin when not scrub-driven */
   autoSpin?: number;
 };
@@ -20,6 +23,7 @@ type EarthProps = {
 export function Earth({
   rotationYRef,
   showOrbits = false,
+  showCountries = false,
   autoSpin = 0.002,
 }: EarthProps) {
   const group = useRef<Group>(null);
@@ -69,27 +73,29 @@ export function Earth({
             depthWrite={false}
           />
         </mesh>
-        {/* Soft gold wireframe veil */}
+        {/* Soft wireframe veil */}
         <mesh>
           <sphereGeometry args={[1.63, 36, 36]} />
           <meshBasicMaterial
-            color={BRAND_GOLD}
+            color={MOVIE_ACCENT}
             wireframe
             transparent
-            opacity={0.08}
+            opacity={0.06}
           />
         </mesh>
+        {showCountries ? <EarthCountryMarkers /> : null}
       </group>
 
       {showOrbits ? (
         <group ref={orbits}>
           {[1.95, 2.2, 2.45].map((r, i) => (
             <mesh key={r} rotation={[Math.PI / 2.6 + i * 0.35, 0.4 * i, 0.2]}>
-              <torusGeometry args={[r, 0.01 + i * 0.003, 12, 96]} />
+              {/* Thinner satellite orbit lines */}
+              <torusGeometry args={[r, 0.0035 + i * 0.0012, 10, 128]} />
               <meshBasicMaterial
-                color={BRAND_GOLD}
+                color={i === 1 ? BRAND_GOLD : MOVIE_ACCENT}
                 transparent
-                opacity={0.45 - i * 0.1}
+                opacity={0.38 - i * 0.07}
               />
             </mesh>
           ))}

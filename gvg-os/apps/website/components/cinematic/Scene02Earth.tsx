@@ -23,7 +23,7 @@ function EarthStage({
       <pointLight position={[2.2, 1.2, 3.2]} intensity={0.85} color="#7EB6FF" />
       <Stars />
       <Suspense fallback={null}>
-        <Earth rotationYRef={rotationYRef} autoSpin={0} showOrbits />
+        <Earth rotationYRef={rotationYRef} autoSpin={0} showOrbits showCountries />
       </Suspense>
     </>
   );

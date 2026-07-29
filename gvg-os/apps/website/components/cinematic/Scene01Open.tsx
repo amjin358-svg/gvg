@@ -6,7 +6,7 @@ import { MOVIE_V3 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Scene 01｜Open — clean brand pulse (replaces crawl / logo punch)
+ * Scene 01｜Open — galaxy/cosmo plate + oversized GVG with soft yellow glow
  */
 export function Scene01Open() {
   const root = useRef<HTMLDivElement>(null);
@@ -19,8 +19,8 @@ export function Scene01Open() {
       registerGsapPlugins();
       if (!root.current || !mark.current || !copy.current) return;
 
-      gsap.set(mark.current, { opacity: 0, scale: 0.86, filter: "blur(8px)" });
-      gsap.set(copy.current, { opacity: 0, y: 28 });
+      gsap.set(mark.current, { opacity: 0, scale: 0.82, filter: "blur(10px)" });
+      gsap.set(copy.current, { opacity: 0, y: 32 });
       if (hint.current) gsap.set(hint.current, { opacity: 0, y: 12 });
 
       gsap
@@ -28,7 +28,7 @@ export function Scene01Open() {
           scrollTrigger: {
             trigger: root.current,
             start: "top top",
-            end: "+=1800",
+            end: "+=2000",
             scrub: SCRUB_SMOOTH,
             pin: true,
             anticipatePin: 1,
@@ -38,25 +38,26 @@ export function Scene01Open() {
           opacity: 1,
           scale: 1,
           filter: "blur(0px)",
-          duration: 1.1,
+          duration: 1.2,
           ease: "power2.out",
         })
-        .to(copy.current, { opacity: 1, y: 0, duration: 0.85 }, "-=0.35")
-        .to(hint.current, { opacity: 1, y: 0, duration: 0.5 }, "-=0.2")
-        .to(mark.current, { opacity: 0.15, scale: 1.08, duration: 0.9 }, "+=0.4");
+        .to(copy.current, { opacity: 1, y: 0, duration: 0.9 }, "-=0.4")
+        .to(hint.current, { opacity: 1, y: 0, duration: 0.5 }, "-=0.25")
+        .to(mark.current, { scale: 1.04, duration: 0.8 }, "+=0.35");
     },
     { scope: root },
   );
 
   return (
     <div ref={root}>
-      <section className="scene scene--black open-scene" aria-label="Opening">
+      <section className="scene scene--black open-scene open-scene--cosmo" aria-label="Opening">
+        <div className="open-scene__nebula" aria-hidden />
         <div className="open-scene__stars" aria-hidden />
         <h1 ref={mark} className="open-scene__mark">
           {MOVIE_V3.open.mark}
         </h1>
         <div ref={copy} className="open-scene__copy">
-          <p className="open-scene__title">{MOVIE_V3.open.title}</p>
+          <p className="open-scene__kicker">{MOVIE_V3.open.title}</p>
           <p className="open-scene__line">
             <strong>{MOVIE_V3.open.line}</strong>
             <span>{MOVIE_V3.open.lineZh}</span>

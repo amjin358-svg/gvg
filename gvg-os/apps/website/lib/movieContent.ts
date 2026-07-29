@@ -45,7 +45,8 @@ export const MOVIE_V3 = {
     ],
   },
   finale: {
-    title: "Begin with Global Vista Group",
+    lead: "Begin with",
+    brand: "Global Vista Group",
     line: "Ready to connect markets?",
     lineZh: "準備好開啟全球視野了嗎？",
     ctaPrimary: "進入企業官網",
