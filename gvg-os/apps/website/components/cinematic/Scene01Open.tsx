@@ -101,10 +101,6 @@ export function Scene01Open() {
   return (
     <div ref={root}>
       <section className="scene scene--black open-scene open-scene--cosmo" aria-label="Opening">
-        <div className="open-scene__starfield" aria-hidden>
-          <div className="open-scene__stars open-scene__stars--static" />
-        </div>
-
         <div ref={rings} className="open-scene__compression" aria-hidden>
           <span className="open-scene__ring open-scene__ring--1" />
           <span className="open-scene__ring open-scene__ring--2" />
