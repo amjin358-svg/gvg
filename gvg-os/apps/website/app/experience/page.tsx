@@ -1,6 +1,6 @@
 import { InteractiveMovie } from "@/components/cinematic/InteractiveMovie";
 
-/** Interactive Movie IM-V5.0 — mobile + desktop watch surface */
+/** Interactive Movie — enter from Watch Movie, return home at the ending */
 export default function ExperiencePage() {
   return <InteractiveMovie />;
 }

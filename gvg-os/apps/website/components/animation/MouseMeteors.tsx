@@ -2,18 +2,20 @@
 
 import { useEffect, useRef } from "react";
 
-type Mist = {
+type Meteor = {
   x: number;
   y: number;
   vx: number;
   vy: number;
   life: number;
   maxLife: number;
-  size: number;
+  length: number;
+  width: number;
+  hue: number;
 };
 
 /**
- * Lightweight frosted meteor drag — fluency first, no ambient spam.
+ * Mouse meteors — shooting-star streaks that follow pointer velocity.
  */
 export function MouseMeteors() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -24,7 +26,8 @@ export function MouseMeteors() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
       canvas.style.opacity = "0";
       return;
     }
@@ -36,10 +39,10 @@ export function MouseMeteors() {
     let prevX = window.innerWidth * 0.5;
     let prevY = window.innerHeight * 0.4;
     let lastMove = 0;
-    const mist: Mist[] = [];
+    const meteors: Meteor[] = [];
 
     const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = window.innerWidth;
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);
@@ -49,58 +52,106 @@ export function MouseMeteors() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
+    const spawn = (x: number, y: number, dx: number, dy: number) => {
+      const speed = Math.hypot(dx, dy);
+      if (speed < 1.2) return;
+
+      const count = speed > 28 ? 3 : speed > 14 ? 2 : 1;
+      for (let i = 0; i < count; i++) {
+        const angle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 0.28;
+        const mag = Math.min(42, speed * (0.55 + Math.random() * 0.45));
+        meteors.push({
+          x: x + (Math.random() - 0.5) * 10,
+          y: y + (Math.random() - 0.5) * 10,
+          vx: Math.cos(angle) * mag,
+          vy: Math.sin(angle) * mag,
+          life: 1,
+          maxLife: 0.55 + Math.random() * 0.55,
+          length: 28 + speed * 1.8 + Math.random() * 36,
+          width: 1.2 + Math.random() * 1.8,
+          hue: Math.random() > 0.55 ? 210 : 265,
+        });
+      }
+
+      // Occasional bright lead meteor
+      if (speed > 18 && Math.random() > 0.55) {
+        const angle = Math.atan2(dy, dx);
+        meteors.push({
+          x,
+          y,
+          vx: Math.cos(angle) * Math.min(52, speed * 0.9),
+          vy: Math.sin(angle) * Math.min(52, speed * 0.9),
+          life: 1,
+          maxLife: 0.85,
+          length: 70 + speed * 2.2,
+          width: 2.4,
+          hue: 200,
+        });
+      }
+
+      if (meteors.length > 80) meteors.splice(0, meteors.length - 80);
+    };
+
     const onMove = (e: PointerEvent) => {
       const x = e.clientX;
       const y = e.clientY;
       const now = performance.now();
-      const dt = Math.max(10, now - lastMove);
+      const dt = Math.max(8, now - lastMove);
       lastMove = now;
       const dx = ((x - prevX) / dt) * 16;
       const dy = ((y - prevY) / dt) * 16;
       prevX = x;
       prevY = y;
-      const speed = Math.hypot(dx, dy);
-      if (speed < 1.4) return;
-
-      const angle = Math.atan2(dy, dx);
-      const mag = Math.min(22, speed * 0.4);
-      mist.push({
-        x,
-        y,
-        vx: Math.cos(angle) * mag,
-        vy: Math.sin(angle) * mag,
-        life: 1,
-        maxLife: 0.45,
-        size: 9 + speed * 0.4,
-      });
-      if (mist.length > 36) mist.splice(0, mist.length - 36);
+      spawn(x, y, dx, dy);
     };
 
     const tick = () => {
       ctx.clearRect(0, 0, w, h);
-      for (let i = mist.length - 1; i >= 0; i--) {
-        const m = mist[i]!;
+
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        const m = meteors[i]!;
         m.life -= 0.016 / m.maxLife;
         if (m.life <= 0) {
-          mist.splice(i, 1);
+          meteors.splice(i, 1);
           continue;
         }
-        m.x += m.vx * 0.28;
-        m.y += m.vy * 0.28;
-        m.vx *= 0.96;
-        m.vy *= 0.96;
 
-        const a = Math.max(0, m.life) * 0.35;
-        const r = m.size * (0.7 + (1 - m.life) * 0.6);
-        const g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, r);
-        g.addColorStop(0, `rgba(230, 240, 255, ${0.35 * a})`);
-        g.addColorStop(0.5, `rgba(170, 200, 240, ${0.12 * a})`);
-        g.addColorStop(1, "rgba(140, 170, 210, 0)");
+        m.x += m.vx * 0.016 * 60 * 0.35;
+        m.y += m.vy * 0.016 * 60 * 0.35;
+        m.vx *= 0.985;
+        m.vy *= 0.985;
+
+        const angle = Math.atan2(m.vy, m.vx);
+        const alpha = Math.max(0, m.life);
+        const tail = m.length * (0.55 + alpha * 0.45);
+        const hx = m.x;
+        const hy = m.y;
+        const tx = hx - Math.cos(angle) * tail;
+        const ty = hy - Math.sin(angle) * tail;
+
+        const grad = ctx.createLinearGradient(tx, ty, hx, hy);
+        grad.addColorStop(0, `hsla(${m.hue}, 90%, 70%, 0)`);
+        grad.addColorStop(0.45, `hsla(${m.hue}, 95%, 75%, ${0.35 * alpha})`);
+        grad.addColorStop(1, `hsla(${m.hue + 20}, 100%, 92%, ${0.95 * alpha})`);
+
         ctx.beginPath();
-        ctx.fillStyle = g;
-        ctx.arc(m.x, m.y, r, 0, Math.PI * 2);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = m.width * (0.6 + alpha);
+        ctx.lineCap = "round";
+        ctx.moveTo(tx, ty);
+        ctx.lineTo(hx, hy);
+        ctx.stroke();
+
+        // Hot head
+        ctx.beginPath();
+        ctx.fillStyle = `hsla(${m.hue + 30}, 100%, 96%, ${0.9 * alpha})`;
+        ctx.shadowColor = `hsla(${m.hue}, 100%, 70%, ${0.8 * alpha})`;
+        ctx.shadowBlur = 12;
+        ctx.arc(hx, hy, m.width * 1.1, 0, Math.PI * 2);
         ctx.fill();
+        ctx.shadowBlur = 0;
       }
+
       raf = requestAnimationFrame(tick);
     };
 
@@ -108,6 +159,7 @@ export function MouseMeteors() {
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", onMove, { passive: true });
     raf = requestAnimationFrame(tick);
+
     return () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onMove);
@@ -127,8 +179,7 @@ export function MouseMeteors() {
         height: "100%",
         zIndex: 50,
         pointerEvents: "none",
-        mixBlendMode: "soft-light",
-        opacity: 0.85,
+        mixBlendMode: "screen",
       }}
     />
   );

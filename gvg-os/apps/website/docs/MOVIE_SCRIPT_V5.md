@@ -23,12 +23,12 @@
 
 | 項目 | 規格 |
 | --- | --- |
-| 背景 | 深空星野（無紫色旋轉底圖）；細星大量加密 + 雙層閃爍 |
-| 流星 | 環境微小流星持續飛過；游標／觸控拖尾加強 |
-| 主標 | **GVG** — 字級減半；進場為「太空跳躍前」蓄能／壓縮／釋放特效 |
+| 背景 | 銀河圖層緩慢自轉 + 星雲漂移；白色細星點雙層微閃爍 |
+| 主標 | **GVG** — 位置偏上；約 3 秒由下浮進；進場 scale≈0.28 → 定位 1（落差大）；字級約 3× |
 | 副標 | 金黃色 **Global Vista Group** |
 | 標語 | Connecting Markets. Creating Value. |
-| 中文 | 連接全球市場，創造無限商機。 |
+| 中文 | 連接全球市場，創造無限商機。（放大） |
+| 互動 | 提示 Scroll · Move to summon meteors |
 
 ### 02｜Earth — 地球自轉
 
@@ -44,7 +44,7 @@
 | 項目 | 規格 |
 | --- | --- |
 | 概念 | 海運、空運與數位網絡交會，形成 GVG 的全球動線 |
-| 樞紐 | Americas／Asia Pacific／Europe／Global Hub（下半區，不擋副標） |
+| 樞紐 | Americas／Asia Pacific／Europe／Global Hub |
 | 註記（金黃放大） | 市場入口 · 供應樞紐 · 合規通道 · 協作中心 |
 | 動效 | 樞紐依序縮放進場；連線 strokeDash 描繪 |
 
@@ -52,20 +52,20 @@
 
 | 項目 | 規格 |
 | --- | --- |
-| Eyebrow | **What We Build** — 字級減半、淡紫色 |
+| Eyebrow | **What We Build** — 約 4× 字級 |
 | 標題 | Trade. Intelligence. Scale. |
 | 卡片 | 01 Product Center · 02 Supply Chain · 03 AI Insight |
-| 說明 | 對齊企業官網總架構（六大品類／貿易採購物流合規／數據洞察）詳實彙整 |
-| 數字 | **01 / 02 / 03** — 大字級；卡片升起 + 輕微 rotateX |
+| 數字 | **01 / 02 / 03** — 約 5× 字級；卡片升起 + 輕微 rotateX |
 
 ### 05｜Finale — 收尾
 
 | 項目 | 規格 |
 | --- | --- |
-| 標題列 | **Begin with** + **Global Vista Group** 同一行；字級減半 |
-| 特效 | 太空跳躍蓄能／釋放 + 爆發光暈（重於單純發光字） |
-| 震波 | **兩層重疊** shockwave 環（錯開時間擴張） |
-| CTA | 「進入企業官網」；「GVG簡介」回到本體驗 |
+| 標題列 | **Begin with** + **Global Vista Group** 同一行 |
+| 特效 | 爆發光暈 + 錐形光射 + 字母 SplitType 進場 |
+| 品牌 | 金黃色；延遲約 1.5s 進場；字級約 3× |
+| 定位 | 整體由 scale≈0.33 放大至定位（約 3× 落差） |
+| CTA | 「進入企業官網」略下移；「GVG簡介」回到本體驗 |
 
 ### 全域互動
 

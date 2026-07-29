@@ -16,26 +16,21 @@ function EarthStage({
 }) {
   return (
     <>
-      <fog attach="fog" args={["#01040c", 10, 22]} />
+      <fog attach="fog" args={["#01040c", 9, 20]} />
       <ambientLight intensity={0.35} />
-      <directionalLight position={[-4, 2.5, 5]} intensity={2.0} color="#cfe3ff" />
-      <directionalLight position={[3, -1, -2]} intensity={0.3} color="#1a3a6e" />
-      <pointLight position={[2.2, 1.2, 3.2]} intensity={0.7} color="#7EB6FF" />
+      <directionalLight position={[-4, 2.5, 5]} intensity={2.1} color="#cfe3ff" />
+      <directionalLight position={[3, -1, -2]} intensity={0.35} color="#1a3a6e" />
+      <pointLight position={[2.2, 1.2, 3.2]} intensity={0.85} color="#7EB6FF" />
       <Stars />
       <Suspense fallback={null}>
-        <Earth
-          rotationYRef={rotationYRef}
-          autoSpin={0.0018}
-          showOrbits
-          showCountries
-        />
+        <Earth rotationYRef={rotationYRef} autoSpin={0} showOrbits showCountries />
       </Suspense>
     </>
   );
 }
 
 /**
- * Scene 2｜Earth — continuous spin restored + light scroll assist
+ * Scene 2｜Earth — Blue Marble materials, silky scrub spin
  */
 export function Scene02Earth() {
   const root = useRef<HTMLDivElement>(null);
@@ -64,7 +59,6 @@ export function Scene02Earth() {
         <div className="earth-scene__stage" aria-hidden>
           <CanvasSafe
             camera={{ position: [0, 0.15, 5.0], fov: 40 }}
-            dpr={[1, 1.5]}
             fallback={<div className="opening-scene__fallback" />}
           >
             <EarthStage rotationYRef={rotationYRef} />
@@ -72,7 +66,7 @@ export function Scene02Earth() {
         </div>
         <div className="earth-scene__copy">
           <p className="earth-scene__eyebrow">{MOVIE_V5.earth.eyebrow}</p>
-          <h2 className="earth-scene__title">{MOVIE_V5.earth.title}</h2>
+          <h2>{MOVIE_V5.earth.title}</h2>
           <p>{MOVIE_V5.earth.body}</p>
         </div>
       </section>

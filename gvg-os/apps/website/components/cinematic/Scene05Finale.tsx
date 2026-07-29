@@ -2,80 +2,96 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import SplitType from "split-type";
+import { revertSplit } from "@/components/animation/SplitText";
 import { SCRUB_SMOOTH } from "@/lib/cinematic";
 import { MOVIE_V5 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Scene 05｜Finale — light sequence, then settle into silent cosmic black
+ * Scene 05｜Finale — same-line title, burst glow, brand delayed 1.5s gold entrance
  */
 export function Scene05Finale() {
   const root = useRef<HTMLDivElement>(null);
-  const voidRef = useRef<HTMLDivElement>(null);
-  const stage = useRef<HTMLDivElement>(null);
-  const readyRef = useRef<HTMLParagraphElement>(null);
-  const lead = useRef<HTMLSpanElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
   const brand = useRef<HTMLSpanElement>(null);
-  const title = useRef<HTMLHeadingElement>(null);
-  const line = useRef<HTMLParagraphElement>(null);
+  const lead = useRef<HTMLSpanElement>(null);
   const burst = useRef<HTMLDivElement>(null);
-  const waveA = useRef<HTMLDivElement>(null);
-  const waveB = useRef<HTMLDivElement>(null);
+  const rays = useRef<HTMLDivElement>(null);
   const actions = useRef<HTMLDivElement>(null);
+  // Absolute path already includes basePath on Pages — use <a>, not Link
   const portal = process.env.NEXT_PUBLIC_PORTAL_URL || "/";
 
   useGSAP(
     () => {
       registerGsapPlugins();
-      if (!root.current || !stage.current || !brand.current || !readyRef.current) return;
+      if (!root.current || !panel.current || !brand.current) return;
 
-      const readyWords = gsap.utils.toArray<HTMLElement>(
-        readyRef.current.querySelectorAll(".finale-scene__ready-word"),
-      );
+      const split = new SplitType(brand.current, { types: "chars" });
+      const chars = split.chars?.length ? split.chars : [brand.current];
 
-      gsap.set(readyWords, { opacity: 0, y: 16 });
-      gsap.set(lead.current, { opacity: 0, y: 12, scale: 0.92 });
-      gsap.set(brand.current, { opacity: 0, y: 14 });
-      gsap.set(title.current, { opacity: 0 });
-      gsap.set(line.current, { opacity: 0, y: 12 });
-      if (burst.current) gsap.set(burst.current, { scale: 0.2, opacity: 0 });
-      if (waveA.current) gsap.set(waveA.current, { scale: 0.2, opacity: 0 });
-      if (waveB.current) gsap.set(waveB.current, { scale: 0.15, opacity: 0 });
-      if (actions.current) gsap.set(actions.current, { opacity: 0, y: 14 });
-      if (voidRef.current) gsap.set(voidRef.current, { opacity: 0 });
-      gsap.set(stage.current, { scaleX: 1, scaleY: 1 });
+      // Settle ~3× from entrance scale
+      gsap.set(panel.current, { opacity: 0, y: 48, scale: 0.33 });
+      gsap.set(lead.current, { opacity: 0, y: 12 });
+      gsap.set(chars, { opacity: 0, y: 36, scale: 0.45, rotateX: 55 });
+      if (burst.current) gsap.set(burst.current, { scale: 0.15, opacity: 0 });
+      if (rays.current) gsap.set(rays.current, { opacity: 0, rotate: -18 });
+      if (actions.current) gsap.set(actions.current, { opacity: 0, y: 28 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: "+=2400",
+          end: "+=2600",
           scrub: SCRUB_SMOOTH,
           pin: true,
           anticipatePin: 1,
         },
       });
 
-      readyWords.forEach((word, i) => {
-        tl.to(word, { opacity: 1, y: 0, duration: 0.22, ease: "power2.out" }, i * 0.18);
-      });
+      tl.to(panel.current, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.1,
+        ease: "power2.out",
+      })
+        .to(
+          burst.current,
+          { opacity: 1, scale: 1.55, duration: 1.0, ease: "power2.out" },
+          "<0.05",
+        )
+        .to(
+          rays.current,
+          { opacity: 0.85, rotate: 0, duration: 1.2, ease: "sine.out" },
+          "<",
+        )
+        .to(lead.current, { opacity: 1, y: 0, duration: 0.6 }, "<0.15")
+        // Global Vista Group delayed ~1.5s after lead/burst start
+        .to(
+          chars,
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotateX: 0,
+            stagger: 0.05,
+            duration: 1.0,
+            ease: "power3.out",
+          },
+          "+=1.5",
+        )
+        .to(
+          burst.current,
+          { scale: 2.1, opacity: 0.4, duration: 1.0, ease: "power1.inOut" },
+          "-=0.35",
+        )
+        .to(panel.current, { scale: 1.08, duration: 0.7, ease: "sine.inOut" })
+        .to(actions.current, { opacity: 1, y: 0, duration: 0.65 }, "-=0.35");
 
-      tl.to(title.current, { opacity: 1, duration: 0.12 }, "+=0.2")
-        .to(lead.current, { opacity: 1, y: 0, scale: 1.12, duration: 0.45 }, "<")
-        .to(readyWords, { opacity: 0, duration: 0.3 }, "<0.1")
-        .to(brand.current, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" }, "+=0.15")
-        .to(stage.current, { scaleX: 0.88, scaleY: 1.06, duration: 0.35, ease: "power2.in" }, "+=0.12")
-        .to(burst.current, { opacity: 0.85, scale: 1.5, duration: 0.55, ease: "power2.out" }, "<0.05")
-        .to(waveA.current, { opacity: 0.75, scale: 1.6, duration: 0.65, ease: "power2.out" }, "<")
-        .to(waveB.current, { opacity: 0.55, scale: 2.1, duration: 0.8, ease: "power2.out" }, "<0.12")
-        .to(stage.current, { scaleX: 1, scaleY: 1, duration: 0.5, ease: "power2.out" }, "-=0.35")
-        // After bloom expands → silent cosmic black
-        .to(voidRef.current, { opacity: 1, duration: 0.85, ease: "power1.inOut" }, "-=0.15")
-        .to(burst.current, { opacity: 0.12, scale: 2.2, duration: 0.7 }, "<")
-        .to(waveA.current, { opacity: 0.08, scale: 2.4, duration: 0.75 }, "<")
-        .to(waveB.current, { opacity: 0.05, scale: 2.9, duration: 0.85 }, "<")
-        .to(line.current, { opacity: 1, y: 0, duration: 0.55 }, "-=0.2")
-        .to(actions.current, { opacity: 1, y: 0, duration: 0.45 }, "-=0.15");
+      return () => {
+        revertSplit(split);
+      };
     },
     { scope: root },
   );
@@ -83,34 +99,21 @@ export function Scene05Finale() {
   return (
     <div ref={root}>
       <section className="scene scene--black finale-scene" aria-label="Finale">
-        <div ref={voidRef} className="finale-scene__void" aria-hidden />
         <div ref={burst} className="finale-scene__burst" aria-hidden />
-        <div ref={waveA} className="finale-scene__shockwave finale-scene__shockwave--a" aria-hidden />
-        <div ref={waveB} className="finale-scene__shockwave finale-scene__shockwave--b" aria-hidden />
-
-        <div ref={stage} className="finale-scene__stage">
-          <p ref={readyRef} className="finale-scene__ready" aria-label="Are. You. Ready?">
-            {MOVIE_V5.finale.ready.map((word) => (
-              <span key={word} className="finale-scene__ready-word">
-                {word}
-              </span>
-            ))}
-          </p>
-
-          <h2 ref={title} className="finale-scene__title">
+        <div ref={rays} className="finale-scene__rays" aria-hidden />
+        <div ref={panel} className="finale-scene__panel">
+          <h2 className="finale-scene__title">
             <span ref={lead} className="finale-scene__lead">
-              {MOVIE_V5.finale.lead}
+              {MOVIE_V5.finale.lead}{" "}
             </span>
             <span ref={brand} className="finale-scene__brand">
               {MOVIE_V5.finale.brand}
             </span>
           </h2>
-
-          <p ref={line} className="finale-scene__line">
+          <p className="finale-scene__line">
             <strong>{MOVIE_V5.finale.line}</strong>
             <span>{MOVIE_V5.finale.lineZh}</span>
           </p>
-
           <div ref={actions} className="finale-scene__actions">
             <a className="btn btn--glow" href={portal}>
               {MOVIE_V5.finale.ctaPrimary}

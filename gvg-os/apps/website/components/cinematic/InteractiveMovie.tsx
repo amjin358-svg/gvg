@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { MouseMeteors } from "@/components/animation/MouseMeteors";
 import { MovieErrorBoundary } from "@/components/cinematic/MovieErrorBoundary";
+import { GalaxyPhotoLayer } from "@/components/home/GalaxyPhotoLayer";
 import { Scene01Open } from "@/components/cinematic/Scene01Open";
 import { Scene02Earth } from "@/components/cinematic/Scene02Earth";
 import { Scene03Routes } from "@/components/cinematic/Scene03Routes";
@@ -11,7 +12,9 @@ import { Scene05Finale } from "@/components/cinematic/Scene05Finale";
 import { MOVIE_VERSION } from "@/lib/movieContent";
 
 /**
- * Interactive Movie V5 — fluency-first motion budget
+ * Interactive Movie V5 (IM-V5.0)
+ * Open → Earth spin → Routes → Pillars → Finale
+ * Pointer / touch meteors follow velocity.
  */
 export function InteractiveMovie() {
   useEffect(() => {
@@ -32,12 +35,12 @@ export function InteractiveMovie() {
   return (
     <MovieErrorBoundary>
       <main
-        className="movie-root movie-root--seamless movie-root--os movie-root--v5 movie-root--deepspace movie-root--fluent"
+        className="movie-root movie-root--seamless movie-root--os movie-root--v5"
         aria-label={`${MOVIE_VERSION.label} — Global Vista Group`}
         data-movie-version={MOVIE_VERSION.code}
       >
-        <div className="movie-root__deepspace" aria-hidden />
-        <div className="movie-root__star-twinkle movie-root__star-twinkle--min" aria-hidden />
+        <GalaxyPhotoLayer className="movie-root__galaxy movie-root__galaxy--spin" mode="absolute" />
+        <div className="movie-root__star-twinkle" aria-hidden />
         <MouseMeteors />
         <Scene01Open />
         <Scene02Earth />

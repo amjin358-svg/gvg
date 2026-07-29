@@ -21,11 +21,11 @@ export const NOISE_STRENGTH = 0.015;
 
 /**
  * Scrub lag (seconds of smoothing).
- * Lower = snappier / higher frame fluency on scroll.
+ * `true` feels hard; 0.7–1.0 reads as cinematic inertia.
  */
-export const SCRUB_SMOOTH = 0.35;
+export const SCRUB_SMOOTH = 0.85;
 
-export const EARTH_SCROLL_END = "+=2400";
+export const EARTH_SCROLL_END = "+=3000";
 
 /** Bundled high-quality plates (see public/) — paths relative to site root */
 const ASSET_PATHS = {
