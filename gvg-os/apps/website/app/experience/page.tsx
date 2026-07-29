@@ -1,6 +1,6 @@
-import { InteractiveMovie } from "@/components/cinematic/InteractiveMovie";
+import { ExperienceMovie } from "@/components/cinematic/ExperienceMovie";
 
-/** Interactive Movie — enter from Watch Movie, return home at the ending */
+/** Interactive Movie IM-V5 — enter from Watch Movie, return home at the ending */
 export default function ExperiencePage() {
-  return <InteractiveMovie />;
+  return <ExperienceMovie />;
 }

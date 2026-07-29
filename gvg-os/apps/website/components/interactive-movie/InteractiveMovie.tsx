@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls } from "@react-three/drei";
 
+import "@/styles/interactive-movie.css";
 import AmbientBackground from "@/components/background/AmbientBackground";
 import MouseGlow from "@/components/effects/MouseGlow";
 

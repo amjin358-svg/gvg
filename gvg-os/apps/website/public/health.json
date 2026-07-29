@@ -1,11 +1,11 @@
 {
   "ok": true,
   "service": "@gvg/website",
-  "home": "cinematic-interactive-experience",
+  "home": "interactive-movie-scrollcontrols",
   "experience": "interactive-movie",
-  "version": "CX-HOME-1.0",
+  "version": "CX-HOME-2.0",
   "movieVersion": "IM-V5.0",
-  "semver": "1.0.0",
+  "semver": "2.0.0",
   "releasedAt": "2026-07-29",
   "watch": {
     "pages": "https://amjin358-svg.github.io/gvg/",

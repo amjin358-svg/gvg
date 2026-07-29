@@ -1,12 +1,5 @@
-﻿"use client";
+﻿import InteractiveMovie from "@/components/cinematic/InteractiveMovie";
 
-import "@/styles/interactive-movie.css";
-import InteractiveMovie from "@/components/interactive-movie/InteractiveMovie";
-
-/**
- * GVG Interactive Cinematic Homepage
- * Architecture: AmbientBackground + MouseGlow + Canvas ScrollControls (9 scenes)
- */
-export default function MarketingHomePage() {
+export default function Home() {
   return <InteractiveMovie />;
 }
