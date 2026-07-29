@@ -2,8 +2,8 @@
 
 import { useRef, type MutableRefObject } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
-import { TextureLoader, type Group } from "three";
-import { BRAND_GOLD, MOVIE_ACCENT, movieAsset } from "@/lib/cinematic";
+import { TextureLoader, BackSide, type Group } from "three";
+import { MOVIE_ACCENT, movieAsset } from "@/lib/cinematic";
 import { EarthCountryMarkers } from "@/components/three/EarthCountryMarkers";
 import { EarthTradeNetwork } from "@/components/three/EarthTradeNetwork";
 
@@ -66,24 +66,34 @@ export function Earth({
             emissiveIntensity={0.78}
           />
         </mesh>
-        {/* Atmosphere rim — horizon sunburst feel */}
+        {/* Thin white mist rim — slight glow */}
         <mesh>
-          <sphereGeometry args={[1.72, 64, 64]} />
+          <sphereGeometry args={[1.618, 64, 64]} />
           <meshBasicMaterial
-            color="#6eb6ff"
+            color="#f2f7ff"
             transparent
-            opacity={0.14}
+            opacity={0.28}
+            depthWrite={false}
+            side={BackSide}
+          />
+        </mesh>
+        <mesh>
+          <sphereGeometry args={[1.628, 64, 64]} />
+          <meshBasicMaterial
+            color="#ffffff"
+            transparent
+            opacity={0.1}
             depthWrite={false}
           />
         </mesh>
         {/* Soft wireframe veil */}
         <mesh>
-          <sphereGeometry args={[1.63, 36, 36]} />
+          <sphereGeometry args={[1.605, 36, 36]} />
           <meshBasicMaterial
             color={MOVIE_ACCENT}
             wireframe
             transparent
-            opacity={0.055}
+            opacity={0.04}
           />
         </mesh>
         {showTradeNetwork ? <EarthTradeNetwork /> : null}
@@ -94,10 +104,9 @@ export function Earth({
         <group ref={orbits}>
           {[1.95, 2.2, 2.45].map((r, i) => (
             <mesh key={r} rotation={[Math.PI / 2.6 + i * 0.35, 0.4 * i, 0.2]}>
-              {/* Thinner satellite orbit lines */}
               <torusGeometry args={[r, 0.0035 + i * 0.0012, 10, 128]} />
               <meshBasicMaterial
-                color={i === 1 ? BRAND_GOLD : MOVIE_ACCENT}
+                color={i === 1 ? "#F0C14D" : MOVIE_ACCENT}
                 transparent
                 opacity={0.38 - i * 0.07}
               />

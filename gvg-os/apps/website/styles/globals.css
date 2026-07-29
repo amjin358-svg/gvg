@@ -2214,27 +2214,27 @@ a {
   gap: 0.65rem;
 }
 
-/* EN tagline — white, ~1.5 levels smaller */
+/* EN tagline — white (swapped: larger) */
 .open-scene__line strong,
 .open-scene__line-en,
 .open-scene__line-gold {
   color: #ffffff;
   text-shadow: 0 2px 14px rgba(0, 10, 30, 0.4);
-  font-size: clamp(0.9rem, 2.25vw, 1.45rem);
+  font-size: clamp(1.45rem, 3.6vw, 2.2rem);
   font-weight: 550;
   letter-spacing: 0.08em;
   line-height: 1.35;
-  text-transform: uppercase;
+  text-transform: none;
   background: none;
   -webkit-background-clip: unset;
   background-clip: unset;
   filter: none;
 }
 
-/* ZH — blue → white gradient */
+/* ZH — blue → white gradient (swapped: smaller) */
 .open-scene__line span,
 .open-scene__line-zh {
-  font-size: clamp(1.45rem, 3.6vw, 2.2rem);
+  font-size: clamp(0.9rem, 2.25vw, 1.45rem);
   letter-spacing: 0.12em;
   font-weight: 500;
   background: linear-gradient(185deg, #1a4a9a 0%, #4a8fd8 38%, #b8d8ff 72%, #ffffff 100%);
@@ -3050,12 +3050,12 @@ a {
 
   .open-scene__line strong,
   .open-scene__line-en {
-    font-size: clamp(0.82rem, 3.3vw, 1.15rem);
+    font-size: clamp(1.05rem, 4.2vw, 1.4rem);
   }
 
   .open-scene__line span,
   .open-scene__line-zh {
-    font-size: clamp(1.05rem, 4.2vw, 1.4rem);
+    font-size: clamp(0.82rem, 3.3vw, 1.15rem);
     letter-spacing: 0.06em;
   }
 

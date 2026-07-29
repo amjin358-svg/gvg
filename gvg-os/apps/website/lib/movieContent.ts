@@ -16,8 +16,8 @@ export const MOVIE_V5 = {
   open: {
     mark: "GVG",
     title: "Global Vista Group",
-    line: "Connecting the World, Creating Value.",
-    lineZh: "連接全球市場，創造無限商機。",
+    line: "Connecting the World ・ Creating Value",
+    lineZh: "連接全球市場，創造無限商機",
     hint: "Scroll · Move to summon meteors",
   },
   earth: {

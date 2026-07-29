@@ -29,7 +29,7 @@ function EarthStage({
         <Earth
           rotationYRef={rotationYRef}
           autoSpin={0}
-          showOrbits
+          showOrbits={false}
           showCountries
           showTradeNetwork
         />
