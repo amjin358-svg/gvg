@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useRef, type MutableRefObject, Suspense } from "react";
-import { CanvasSafe } from "@/components/three/CanvasSafe";
-import { Earth } from "@/components/three/Earth";
-import { Stars } from "@/components/three/Stars";
-import { createEarthScrollSpin } from "@/components/animation/ScrollAnimations";
+import { CanvasSafe } from "@/components/earth/CanvasSafe";
+import { Earth } from "@/components/earth/Earth";
+import { Stars } from "@/components/earth/Stars";
+import { createEarthScrollSpin } from "@/lib/ScrollAnimations";
 import { EARTH_SCROLL_END } from "@/lib/cinematic";
 import { MOVIE_V5 } from "@/lib/movieContent";
 import { registerGsapPlugins, useGSAP } from "@/lib/gsap";

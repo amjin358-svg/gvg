@@ -1,7 +1,7 @@
 "use client";
 
 import { Component, type ErrorInfo, type ReactNode } from "react";
-import { BrandLogo } from "@/components/brand/BrandLogo";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 type Props = { children: ReactNode };
 type State = { error: Error | null };

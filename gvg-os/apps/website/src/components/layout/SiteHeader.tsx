@@ -1,6 +1,6 @@
 "use client";
 
-import { BrandLogo } from "@/components/brand/BrandLogo";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 const portalUrl = process.env.NEXT_PUBLIC_PORTAL_URL || "http://localhost:3001";
 

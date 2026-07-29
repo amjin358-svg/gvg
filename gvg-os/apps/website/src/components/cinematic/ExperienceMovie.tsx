@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { MouseMeteors } from "@/components/mouse-cursor/MouseCursorTrail";
+import { MouseMeteors } from "@/components/effects/MouseCursorTrail";
 import { MovieErrorBoundary } from "@/components/cinematic/MovieErrorBoundary";
 import { Scene01Open } from "@/components/cinematic/Scene01Open";
 import { Scene02Earth } from "@/components/cinematic/Scene02Earth";
