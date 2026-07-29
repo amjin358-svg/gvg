@@ -90,9 +90,9 @@ export function Scene05Finale() {
         <div ref={rays} className="finale-scene__rays" aria-hidden />
         <div ref={panel} className="finale-scene__panel">
           <h2 className="finale-scene__title">
-            <span className="finale-scene__lead">Begin with </span>
+            <span className="finale-scene__lead">{MOVIE_V3.finale.lead} </span>
             <span ref={brand} className="finale-scene__brand">
-              Global Vista Group
+              {MOVIE_V3.finale.brand}
             </span>
           </h2>
           <p className="finale-scene__line">
