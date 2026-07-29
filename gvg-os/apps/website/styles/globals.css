@@ -53,9 +53,14 @@ a {
   --movie-violet: var(--os-violet);
 }
 
-.movie-root--v5 {
-  /* IM-V5.0 surface — version badge via .movie-root__version */
-  scroll-behavior: smooth;
+.movie-root--fluent .open-scene__stars--twinkle,
+.movie-root--fluent .movie-root__star-twinkle {
+  animation: none;
+  opacity: 0.45;
+}
+
+.movie-root--fluent .open-scene__mark--glow-loop {
+  animation-duration: 4.5s;
 }
 
 .movie-root__version {
@@ -1839,8 +1844,9 @@ a {
 .open-scene {
   display: grid;
   place-items: center;
-  align-content: start;
-  padding-top: clamp(8vh, 14vh, 18vh);
+  align-content: center;
+  justify-items: center;
+  padding-top: 0;
   text-align: center;
   overflow: hidden;
 }
@@ -1858,32 +1864,16 @@ a {
 .open-scene__jump-warp {
   position: absolute;
   left: 50%;
-  top: 40%;
-  width: min(90vw, 720px);
-  height: min(90vw, 720px);
+  top: 50%;
+  width: min(70vw, 520px);
+  height: min(70vw, 520px);
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(255, 230, 170, 0.4) 0%, rgba(240, 193, 77, 0.16) 28%, transparent 62%);
-  filter: blur(10px);
+    radial-gradient(circle, rgba(255, 230, 170, 0.35) 0%, rgba(240, 193, 77, 0.12) 30%, transparent 68%);
+  filter: blur(12px);
   mix-blend-mode: screen;
   pointer-events: none;
-}
-
-.open-scene__jump-charge {
-  position: absolute;
-  left: 50%;
-  top: 40%;
-  width: min(42vw, 280px);
-  height: min(42vw, 280px);
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 1px solid rgba(240, 193, 77, 0.45);
-  box-shadow:
-    0 0 30px rgba(240, 193, 77, 0.35),
-    inset 0 0 40px rgba(255, 230, 170, 0.18);
-  pointer-events: none;
-  mix-blend-mode: screen;
 }
 
 .open-scene__stars {
@@ -1966,20 +1956,14 @@ a {
 @keyframes gvg-gold-glow {
   0%,
   100% {
-    color: #f0c14d;
     text-shadow:
-      0 0 14px rgba(240, 193, 77, 0.75),
-      0 0 32px rgba(255, 210, 100, 0.4),
-      0 0 60px rgba(255, 190, 80, 0.22);
-    filter: brightness(1);
+      0 0 12px rgba(240, 193, 77, 0.65),
+      0 0 28px rgba(255, 210, 100, 0.32);
   }
   50% {
-    color: #ffe6a0;
     text-shadow:
-      0 0 22px rgba(255, 230, 160, 0.95),
-      0 0 48px rgba(240, 193, 77, 0.65),
-      0 0 90px rgba(255, 210, 100, 0.4);
-    filter: brightness(1.12);
+      0 0 18px rgba(255, 230, 160, 0.85),
+      0 0 40px rgba(240, 193, 77, 0.45);
   }
 }
 
@@ -2113,16 +2097,20 @@ a {
   color: rgba(126, 182, 255, 0.92);
 }
 
-.earth-scene__copy h2 {
+.earth-scene__copy h2,
+.earth-scene__title {
   margin: 0;
-  font-size: clamp(2.1rem, 5.2vw, 3.6rem);
-  letter-spacing: 0.08em;
+  white-space: nowrap;
+  width: 100%;
+  max-width: 96vw;
+  font-size: clamp(1.15rem, 4.6vw, 3.4rem);
+  letter-spacing: 0.04em;
   line-height: 1.15;
-  background: linear-gradient(120deg, #b9d9ff 0%, #7eb6ff 42%, #cfe8ff 78%, #9ecfff 100%);
+  background: linear-gradient(100deg, #a78bfa 0%, #7eb6ff 48%, #ffffff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 18px rgba(126, 182, 255, 0.35));
+  filter: drop-shadow(0 0 14px rgba(126, 182, 255, 0.28));
 }
 
 .earth-scene__copy p {
@@ -2256,11 +2244,14 @@ a {
 }
 
 .pillars-scene__copy .scene-eyebrow {
-  font-size: clamp(1.15rem, 2.8vw, 1.75rem);
+  font-size: clamp(1.05rem, 2.5vw, 1.55rem);
   letter-spacing: 0.16em;
   font-weight: 700;
-  color: #a78bfa;
-  text-shadow: 0 0 16px rgba(167, 139, 250, 0.35);
+  background: linear-gradient(100deg, #5b8cff 0%, #4ade80 52%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 12px rgba(74, 222, 128, 0.2));
 }
 
 .pillars-scene__copy h2 {
@@ -2322,6 +2313,15 @@ a {
   place-items: center;
   text-align: center;
   overflow: hidden;
+}
+
+.finale-scene__void {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #000000;
+  opacity: 0;
 }
 
 .finale-scene__stage {
@@ -2513,7 +2513,7 @@ a {
   }
 
   .open-scene {
-    padding-top: clamp(5vh, 9vh, 12vh);
+    padding-top: 0;
   }
 
   .open-scene__brand {
@@ -2577,6 +2577,11 @@ a {
 
   .pillars-scene__card span {
     font-size: clamp(2.2rem, 9vw, 3rem);
+  }
+
+  .earth-scene__title,
+  .earth-scene__copy h2 {
+    font-size: clamp(0.95rem, 5.2vw, 1.55rem);
   }
 
   .earth-scene__copy {

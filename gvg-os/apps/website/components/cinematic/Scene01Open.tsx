@@ -6,7 +6,7 @@ import { MOVIE_V5 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
- * Scene 01｜Open — minimal stars, gold GVG glow-loop, matching-width brand line
+ * Scene 01｜Open — centered gold GVG; brief jump then settle (no vertical lines)
  */
 export function Scene01Open() {
   const root = useRef<HTMLDivElement>(null);
@@ -14,7 +14,6 @@ export function Scene01Open() {
   const copy = useRef<HTMLDivElement>(null);
   const hint = useRef<HTMLDivElement>(null);
   const warp = useRef<HTMLDivElement>(null);
-  const charge = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -23,57 +22,51 @@ export function Scene01Open() {
 
       gsap.set(mark.current, {
         opacity: 0,
-        scaleX: 0.12,
-        scaleY: 2.4,
-        filter: "blur(18px) brightness(2.2)",
-        letterSpacing: "0.55em",
+        scale: 0.55,
+        filter: "blur(10px)",
       });
-      gsap.set(copy.current, { opacity: 0, y: 36 });
-      if (hint.current) gsap.set(hint.current, { opacity: 0, y: 12 });
-      if (warp.current) gsap.set(warp.current, { opacity: 0, scale: 0.4 });
-      if (charge.current) gsap.set(charge.current, { opacity: 0, scale: 0.2 });
+      gsap.set(copy.current, { opacity: 0, y: 20 });
+      if (hint.current) gsap.set(hint.current, { opacity: 0 });
+      if (warp.current) gsap.set(warp.current, { opacity: 0, scale: 0.5 });
 
       gsap
         .timeline({
           scrollTrigger: {
             trigger: root.current,
             start: "top top",
-            end: "+=2600",
+            end: "+=1800",
             scrub: SCRUB_SMOOTH,
             pin: true,
             anticipatePin: 1,
           },
         })
-        .to(charge.current, { opacity: 1, scale: 1.1, duration: 1.1, ease: "power2.in" }, 0)
-        .to(warp.current, { opacity: 0.85, scale: 1.35, duration: 1.2, ease: "power3.in" }, 0.08)
+        // brief jump bloom
+        .to(warp.current, { opacity: 0.7, scale: 1.2, duration: 0.7, ease: "power2.in" }, 0)
         .to(
           mark.current,
           {
             opacity: 1,
-            scaleX: 0.35,
-            scaleY: 1.65,
-            filter: "blur(8px) brightness(1.7)",
-            duration: 1.15,
-            ease: "power2.in",
+            scale: 1.08,
+            filter: "blur(2px)",
+            duration: 0.8,
+            ease: "power2.out",
           },
           0.15,
         )
+        // settle to center — warp lines fully gone
         .to(
           mark.current,
           {
-            scaleX: 1,
-            scaleY: 1,
-            filter: "blur(0px) brightness(1)",
-            letterSpacing: "0.22em",
-            duration: 1.5,
-            ease: "power3.out",
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.9,
+            ease: "power2.out",
           },
-          1.3,
+          0.95,
         )
-        .to(charge.current, { opacity: 0.18, scale: 1.7, duration: 1.2, ease: "power2.out" }, 1.4)
-        .to(warp.current, { opacity: 0.12, scale: 2.1, duration: 1.35, ease: "power2.out" }, 1.45)
-        .to(copy.current, { opacity: 1, y: 0, duration: 1.0 }, 2.05)
-        .to(hint.current, { opacity: 1, y: 0, duration: 0.5 }, 2.45);
+        .to(warp.current, { opacity: 0, scale: 1.6, duration: 0.85, ease: "power1.out" }, 0.95)
+        .to(copy.current, { opacity: 1, y: 0, duration: 0.7 }, 1.4)
+        .to(hint.current, { opacity: 1, duration: 0.4 }, 1.7);
     },
     { scope: root },
   );
@@ -82,10 +75,9 @@ export function Scene01Open() {
     <div ref={root}>
       <section className="scene scene--black open-scene open-scene--cosmo" aria-label="Opening">
         <div className="open-scene__starfield" aria-hidden>
-          <div className="open-scene__stars open-scene__stars--min open-scene__stars--twinkle" />
+          <div className="open-scene__stars open-scene__stars--min" />
         </div>
         <div ref={warp} className="open-scene__jump-warp" aria-hidden />
-        <div ref={charge} className="open-scene__jump-charge" aria-hidden />
         <div className="open-scene__brand">
           <h1 ref={mark} className="open-scene__mark open-scene__mark--glow-loop">
             {MOVIE_V5.open.mark}

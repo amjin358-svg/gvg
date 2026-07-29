@@ -11,9 +11,7 @@ import { Scene05Finale } from "@/components/cinematic/Scene05Finale";
 import { MOVIE_VERSION } from "@/lib/movieContent";
 
 /**
- * Interactive Movie V5 (IM-V5.0)
- * Open → Earth spin → Routes → Pillars → Finale
- * Minimal starfield + frosted meteor drag trails.
+ * Interactive Movie V5 — fluency-first motion budget
  */
 export function InteractiveMovie() {
   useEffect(() => {
@@ -34,7 +32,7 @@ export function InteractiveMovie() {
   return (
     <MovieErrorBoundary>
       <main
-        className="movie-root movie-root--seamless movie-root--os movie-root--v5 movie-root--deepspace"
+        className="movie-root movie-root--seamless movie-root--os movie-root--v5 movie-root--deepspace movie-root--fluent"
         aria-label={`${MOVIE_VERSION.label} — Global Vista Group`}
         data-movie-version={MOVIE_VERSION.code}
       >

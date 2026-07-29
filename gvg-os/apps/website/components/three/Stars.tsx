@@ -2,17 +2,17 @@
 
 import { Stars as DreiStars } from "@react-three/drei";
 
-/** Leaner starfield — subtle twinkle via speed + fade */
+/** Minimal starfield — fluency first */
 export function Stars() {
   return (
     <DreiStars
-      radius={90}
-      depth={50}
-      count={3200}
-      factor={3.4}
-      saturation={0.35}
+      radius={80}
+      depth={40}
+      count={900}
+      factor={2.6}
+      saturation={0.25}
       fade
-      speed={0.55}
+      speed={0.06}
     />
   );
 }

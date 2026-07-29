@@ -13,21 +13,23 @@ type EarthProps = {
   showOrbits?: boolean;
   /** Blink country markers with labels */
   showCountries?: boolean;
-  /** Auto-spin when not scrub-driven */
+  /** Continuous spin (rad/frame baseline) — always applied for living globe */
   autoSpin?: number;
 };
 
 /**
  * Photoreal Earth with Blue Marble day map + night lights emissive.
+ * Continuous auto-spin is always on; scroll scrub adds on top.
  */
 export function Earth({
   rotationYRef,
   showOrbits = false,
   showCountries = false,
-  autoSpin = 0.002,
+  autoSpin = 0.0016,
 }: EarthProps) {
   const group = useRef<Group>(null);
   const orbits = useRef<Group>(null);
+  const drift = useRef(0);
   const [dayMap, nightMap, topoMap] = useLoader(TextureLoader, [
     movieAsset("earthDay"),
     movieAsset("earthNight"),
@@ -35,16 +37,14 @@ export function Earth({
   ]);
 
   useFrame((_, delta) => {
+    drift.current += autoSpin * (delta * 60);
     if (group.current) {
-      if (rotationYRef) {
-        group.current.rotation.y = rotationYRef.current.value;
-      } else {
-        group.current.rotation.y += autoSpin;
-      }
+      const scrub = rotationYRef?.current.value ?? 0;
+      group.current.rotation.y = scrub + drift.current;
     }
     if (orbits.current) {
-      orbits.current.rotation.y += delta * 0.22;
-      orbits.current.rotation.z += delta * 0.08;
+      orbits.current.rotation.y += delta * 0.12;
+      orbits.current.rotation.z += delta * 0.04;
     }
   });
 
@@ -52,7 +52,7 @@ export function Earth({
     <group>
       <group ref={group}>
         <mesh>
-          <sphereGeometry args={[1.6, 96, 96]} />
+          <sphereGeometry args={[1.6, 64, 64]} />
           <meshStandardMaterial
             map={dayMap}
             roughnessMap={topoMap}
@@ -60,27 +60,16 @@ export function Earth({
             metalness={0.08}
             emissiveMap={nightMap}
             emissive="#ffd9a0"
-            emissiveIntensity={0.55}
+            emissiveIntensity={0.5}
           />
         </mesh>
-        {/* Atmosphere rim */}
         <mesh>
-          <sphereGeometry args={[1.72, 64, 64]} />
+          <sphereGeometry args={[1.72, 48, 48]} />
           <meshBasicMaterial
             color="#6eb6ff"
             transparent
-            opacity={0.12}
+            opacity={0.1}
             depthWrite={false}
-          />
-        </mesh>
-        {/* Soft wireframe veil */}
-        <mesh>
-          <sphereGeometry args={[1.63, 36, 36]} />
-          <meshBasicMaterial
-            color={MOVIE_ACCENT}
-            wireframe
-            transparent
-            opacity={0.06}
           />
         </mesh>
         {showCountries ? <EarthCountryMarkers /> : null}
@@ -90,12 +79,11 @@ export function Earth({
         <group ref={orbits}>
           {[1.95, 2.2, 2.45].map((r, i) => (
             <mesh key={r} rotation={[Math.PI / 2.6 + i * 0.35, 0.4 * i, 0.2]}>
-              {/* Thinner satellite orbit lines */}
-              <torusGeometry args={[r, 0.0035 + i * 0.0012, 10, 128]} />
+              <torusGeometry args={[r, 0.0035 + i * 0.0012, 8, 96]} />
               <meshBasicMaterial
                 color={i === 1 ? BRAND_GOLD : MOVIE_ACCENT}
                 transparent
-                opacity={0.38 - i * 0.07}
+                opacity={0.32 - i * 0.06}
               />
             </mesh>
           ))}
