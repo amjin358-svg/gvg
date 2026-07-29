@@ -2900,8 +2900,8 @@ a {
   position: absolute;
   left: 50%;
   top: 50%;
-  /* ~3× prior entrance size */
-  font-size: clamp(4.8rem, 18vw, 14rem);
+  /* entrance size ÷ 1.5 from prior 3× scale */
+  font-size: clamp(3.2rem, 12vw, 9.333rem);
   font-weight: 800;
   letter-spacing: 0.04em;
   color: #ffffff;
