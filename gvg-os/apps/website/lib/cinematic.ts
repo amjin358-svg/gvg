@@ -21,9 +21,10 @@ export const NOISE_STRENGTH = 0.015;
 
 /**
  * Scrub lag (seconds of smoothing).
- * `true` feels hard; 0.7–1.0 reads as cinematic inertia.
+ * Lower = tighter follow / less inertia lag during scroll.
+ * Keep under ~0.7 so scrubbed timelines stay responsive.
  */
-export const SCRUB_SMOOTH = 0.85;
+export const SCRUB_SMOOTH = 0.55;
 
 export const EARTH_SCROLL_END = "+=3600";
 

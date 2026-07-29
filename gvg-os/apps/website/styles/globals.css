@@ -2673,22 +2673,20 @@ a {
   height: min(48vw, 360px);
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.45);
-  box-shadow:
-    0 0 40px rgba(255, 255, 255, 0.35),
-    inset 0 0 60px rgba(180, 210, 255, 0.25);
-  animation: trade-portal-pulse 2.4s ease-in-out infinite;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  box-shadow: none;
+  animation: trade-portal-pulse 2.8s ease-in-out infinite;
 }
 
 @keyframes trade-portal-pulse {
   0%,
   100% {
-    transform: translate(-50%, -50%) scale(0.92);
-    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0.94);
+    opacity: 0.35;
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.08);
-    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.04);
+    opacity: 0.7;
   }
 }
 
@@ -2783,21 +2781,21 @@ a {
   position: absolute;
   left: 50%;
   top: 46%;
-  width: min(120vw, 900px);
-  height: min(120vw, 900px);
+  width: min(100vw, 720px);
+  height: min(100vw, 720px);
   transform: translate(-50%, -50%);
   pointer-events: none;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 220, 150, 0.25) 10%, transparent 28%),
-    repeating-conic-gradient(
-      from 20deg at 50% 50%,
-      rgba(255, 255, 255, 0.1) 0deg 1deg,
-      transparent 1deg 8deg
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.05) 18%,
+      transparent 42%
     );
-  mask-image: radial-gradient(circle, #000 0%, transparent 70%);
-  mix-blend-mode: screen;
+  mask-image: radial-gradient(circle, #000 0%, transparent 68%);
   will-change: transform, opacity;
+  contain: layout paint;
 }
 
 .finale-scene__ready {
@@ -2827,39 +2825,45 @@ a {
   position: absolute;
   left: 50%;
   top: 46%;
-  width: min(70vw, 520px);
-  height: min(70vw, 520px);
+  width: min(56vw, 420px);
+  height: min(56vw, 420px);
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(255, 230, 170, 0.55) 0%, rgba(126, 182, 255, 0.25) 28%, transparent 68%);
-  filter: blur(8px);
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(240, 193, 77, 0.08) 32%,
+      transparent 70%
+    );
   pointer-events: none;
-  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  contain: layout paint;
 }
 
 .finale-scene__rays {
   position: absolute;
-  inset: -20%;
+  inset: -10%;
   background:
     conic-gradient(
       from 90deg at 50% 50%,
       transparent 0deg,
-      rgba(255, 230, 170, 0.08) 12deg,
+      rgba(255, 255, 255, 0.04) 12deg,
       transparent 28deg,
-      rgba(126, 182, 255, 0.1) 48deg,
+      rgba(255, 255, 255, 0.05) 48deg,
       transparent 70deg,
-      rgba(196, 181, 255, 0.08) 110deg,
+      rgba(255, 255, 255, 0.035) 110deg,
       transparent 140deg,
-      rgba(255, 210, 140, 0.08) 180deg,
+      rgba(255, 255, 255, 0.04) 180deg,
       transparent 220deg,
-      rgba(126, 182, 255, 0.1) 260deg,
+      rgba(255, 255, 255, 0.05) 260deg,
       transparent 300deg,
-      rgba(255, 230, 170, 0.08) 330deg,
+      rgba(255, 255, 255, 0.035) 330deg,
       transparent 360deg
     );
   pointer-events: none;
-  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  contain: layout paint;
 }
 
 .finale-scene__panel {
@@ -2901,14 +2905,13 @@ a {
   font-weight: 800;
   letter-spacing: 0.04em;
   color: #ffffff;
-  text-shadow:
-    0 0 22px rgba(255, 255, 255, 0.95),
-    0 0 60px rgba(255, 230, 170, 0.55),
-    0 0 100px rgba(180, 210, 255, 0.4);
+  text-shadow: none;
   white-space: nowrap;
   text-align: center;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
+  transform: translateZ(0);
   transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .finale-scene__shatter {
@@ -2927,19 +2930,19 @@ a {
   left: 50%;
   top: 50%;
   width: 48%;
-  height: 2px;
+  height: 1.5px;
   margin-left: -24%;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 245, 210, 0.95) 35%,
+    rgba(255, 255, 255, 0.75) 35%,
     rgba(255, 255, 255, 0.9) 50%,
-    rgba(240, 193, 77, 0.85) 65%,
+    rgba(240, 193, 77, 0.55) 65%,
     transparent 100%
   );
-  box-shadow: 0 0 12px rgba(255, 230, 170, 0.65);
+  box-shadow: none;
   transform-origin: 50% 50%;
-  transform: rotate(calc(var(--i) * 30deg));
+  transform: rotate(calc(var(--i) * 36deg));
   will-change: transform, opacity;
 }
 
@@ -3017,13 +3020,10 @@ a {
   letter-spacing: 0.03em;
   color: #f0c14d;
   filter: none;
-  text-shadow:
-    0 0 20px rgba(240, 193, 77, 0.95),
-    0 0 48px rgba(255, 210, 100, 0.65),
-    0 0 90px rgba(255, 190, 80, 0.4);
+  text-shadow: none;
 }
 
-/* Crisp white-gold — no matte / fog */
+/* Crisp white-gold — no glow / no pulse */
 .finale-scene__brand--vip-whitegold,
 .finale-scene__brand--vip-white {
   position: absolute;
@@ -3036,61 +3036,11 @@ a {
   filter: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  text-shadow:
-    0 0 18px rgba(255, 255, 255, 0.95),
-    0 0 36px rgba(255, 230, 160, 0.85),
-    0 0 70px rgba(240, 193, 77, 0.55),
-    0 0 110px rgba(255, 210, 120, 0.35);
-  animation: finale-brand-whitegold 3s ease-in-out infinite;
-  will-change: transform, opacity, filter;
-}
-
-@keyframes finale-brand-whitegold {
-  0%,
-  100% {
-    color: #fff8e8;
-    text-shadow:
-      0 0 16px rgba(255, 255, 255, 0.9),
-      0 0 34px rgba(255, 230, 170, 0.75),
-      0 0 68px rgba(240, 193, 77, 0.45);
-  }
-  50% {
-    color: #ffe9a8;
-    text-shadow:
-      0 0 24px rgba(255, 255, 255, 1),
-      0 0 48px rgba(255, 235, 180, 0.95),
-      0 0 90px rgba(240, 193, 77, 0.65);
-  }
-}
-
-@keyframes finale-brand-white-glow {
-  0%,
-  100% {
-    text-shadow:
-      0 0 18px rgba(255, 255, 255, 0.85),
-      0 0 42px rgba(255, 230, 170, 0.55);
-  }
-  50% {
-    text-shadow:
-      0 0 28px rgba(255, 255, 255, 1),
-      0 0 64px rgba(255, 230, 170, 0.8);
-  }
-}
-
-@keyframes finale-brand-glow {
-  0%,
-  100% {
-    text-shadow:
-      0 0 18px rgba(240, 193, 77, 0.85),
-      0 0 42px rgba(255, 210, 100, 0.5),
-      0 0 80px rgba(255, 190, 80, 0.3);
-  }
-  50% {
-    text-shadow:
-      0 0 26px rgba(255, 230, 160, 1),
-      0 0 60px rgba(255, 210, 100, 0.75),
-      0 0 110px rgba(255, 200, 90, 0.5);
-  }
+  text-shadow: none;
+  animation: none;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .finale-scene__brand .char {
@@ -3483,7 +3433,21 @@ a {
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.btn--primary {
+  color: #fff;
+  border: 1px solid rgba(126, 182, 255, 0.45);
+  background: linear-gradient(120deg, rgba(79, 124, 255, 0.55), rgba(107, 92, 255, 0.65));
+  box-shadow: none;
+}
+
+.btn--primary:hover {
+  transform: translateY(-1px);
+  border-color: rgba(126, 182, 255, 0.7);
+  background: linear-gradient(120deg, rgba(79, 124, 255, 0.7), rgba(107, 92, 255, 0.8));
 }
 
 .btn--glow {

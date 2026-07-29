@@ -12,7 +12,7 @@ import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
  * Are → you → ready? → Begin with (one scroll each):
  * far tiny → near 3× huge → fade, centered.
  * Then Global Vista Group: hyperspace warp-distort → settle,
- * explosive open lines behind, crisp white-gold glow.
+ * shatter open lines behind — no glow / no filter scrub.
  */
 export function Scene05Finale() {
   const root = useRef<HTMLDivElement>(null);
@@ -44,50 +44,58 @@ export function Scene05Finale() {
           )
         : [];
 
-      gsap.set(panel.current, { opacity: 1 });
+      // Transform + opacity only — avoid filter/blur during scrub (main jank source)
+      gsap.set(panel.current, { opacity: 1, force3D: true });
       gsap.set(wordEls, {
         opacity: 0,
         scale: 0.05,
         xPercent: -50,
         yPercent: -50,
-        z: -900,
+        z: -720,
         transformPerspective: 1100,
-        filter: "blur(14px)",
+        force3D: true,
       });
       gsap.set(brand.current, {
         opacity: 0,
-        scaleX: 2.8,
-        scaleY: 0.12,
+        scaleX: 2.6,
+        scaleY: 0.14,
         xPercent: -50,
         yPercent: -50,
-        z: -420,
+        z: -360,
         transformPerspective: 1000,
-        filter: "blur(0px) brightness(2.4)",
-        skewX: 28,
-        skewY: -8,
+        skewX: 22,
+        skewY: -6,
+        force3D: true,
       });
       if (brandWrap.current) {
-        gsap.set(brandWrap.current, { opacity: 1 });
+        gsap.set(brandWrap.current, { opacity: 1, force3D: true });
       }
       gsap.set(shatterLines, {
         opacity: 0,
         scaleX: 0.05,
         transformOrigin: "50% 50%",
+        force3D: true,
       });
-      gsap.set(line.current, { opacity: 0, y: 14 });
-      if (burst.current) gsap.set(burst.current, { scale: 0.12, opacity: 0 });
-      if (rays.current) gsap.set(rays.current, { opacity: 0, rotate: -24, scale: 0.6 });
-      if (jump.current) gsap.set(jump.current, { opacity: 0, scale: 0.35 });
-      if (actions.current) gsap.set(actions.current, { opacity: 0, y: 28 });
+      gsap.set(line.current, { opacity: 0, y: 14, force3D: true });
+      if (burst.current) gsap.set(burst.current, { scale: 0.2, opacity: 0, force3D: true });
+      if (rays.current) gsap.set(rays.current, { opacity: 0, rotate: -18, scale: 0.7, force3D: true });
+      if (jump.current) gsap.set(jump.current, { opacity: 0, scale: 0.4, force3D: true });
+      if (actions.current) gsap.set(actions.current, { opacity: 0, y: 20, force3D: true });
+
+      // Slightly tighter scrub than global default for finale word beats
+      const scrub = Math.min(SCRUB_SMOOTH, 0.55);
 
       const tl = gsap.timeline({
+        defaults: { ease: "none", force3D: true },
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
           end: "+=5600",
-          scrub: SCRUB_SMOOTH,
+          scrub,
           pin: true,
           anticipatePin: 1,
+          fastScrollEnd: true,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -96,16 +104,14 @@ export function Scene05Finale() {
 
       wordEls.forEach((el, i) => {
         const t = i * BEAT;
-        // Far tiny → near 3× huge → fade
+        // Far tiny → near 3× huge → fade (no blur)
         tl.to(
           el,
           {
             opacity: 1,
             scale: 1.0,
             z: 0,
-            filter: "blur(0px)",
             duration: 0.42,
-            ease: "power3.out",
           },
           t,
         ).to(
@@ -113,51 +119,46 @@ export function Scene05Finale() {
           {
             scale: 3.0,
             opacity: 0,
-            z: 280,
-            filter: "blur(4px)",
+            z: 240,
             duration: 0.48,
-            ease: "power2.in",
           },
           t + 0.42,
         );
       });
 
-      const afterWords = words.length * BEAT + 0.15;
+      const afterWords = words.length * BEAT + 0.12;
 
       // Hyperspace jump + shatter lines open
-      tl.to(jump.current, { opacity: 0.95, scale: 1.45, duration: 0.55, ease: "power3.in" }, afterWords)
-        .to(burst.current, { opacity: 1, scale: 1.8, duration: 0.7, ease: "power2.out" }, afterWords + 0.05)
+      tl.to(jump.current, { opacity: 0.55, scale: 1.35, duration: 0.5 }, afterWords)
+        .to(burst.current, { opacity: 0.7, scale: 1.55, duration: 0.65 }, afterWords + 0.04)
         .to(
           rays.current,
-          { opacity: 0.9, rotate: 0, scale: 1.15, duration: 0.85, ease: "power2.out" },
-          afterWords + 0.05,
+          { opacity: 0.55, rotate: 0, scale: 1.08, duration: 0.75 },
+          afterWords + 0.04,
         )
         .to(
           shatterLines,
           {
-            opacity: 0.95,
-            scaleX: 1.35,
-            stagger: 0.04,
-            duration: 0.55,
-            ease: "power3.out",
+            opacity: 0.85,
+            scaleX: 1.3,
+            stagger: 0.03,
+            duration: 0.5,
           },
-          afterWords + 0.12,
+          afterWords + 0.1,
         )
-        // Warp-distorted GVG flies in, then snaps to clear normal
+        // Warp-distorted GVG flies in, then settles crisp (no brightness/glow)
         .to(
           brand.current,
           {
             opacity: 1,
-            scaleX: 1.35,
-            scaleY: 0.55,
-            z: -80,
-            skewX: 12,
-            skewY: -4,
-            filter: "blur(0px) brightness(1.8)",
-            duration: 0.55,
-            ease: "power3.in",
+            scaleX: 1.28,
+            scaleY: 0.58,
+            z: -60,
+            skewX: 10,
+            skewY: -3,
+            duration: 0.5,
           },
-          afterWords + 0.2,
+          afterWords + 0.18,
         )
         .to(
           brand.current,
@@ -167,26 +168,24 @@ export function Scene05Finale() {
             z: 0,
             skewX: 0,
             skewY: 0,
-            filter: "blur(0px) brightness(1)",
-            duration: 0.85,
-            ease: "power2.out",
+            duration: 0.8,
           },
-          afterWords + 0.75,
+          afterWords + 0.68,
         )
         .to(
           shatterLines,
           {
-            opacity: 0.25,
-            scaleX: 1.8,
-            duration: 0.9,
-            ease: "power1.out",
+            opacity: 0.2,
+            scaleX: 1.7,
+            duration: 0.85,
           },
-          afterWords + 0.85,
+          afterWords + 0.78,
         )
-        .to(burst.current, { scale: 2.6, opacity: 0.22, duration: 0.95 }, afterWords + 1.1)
-        .to(jump.current, { opacity: 0.1, scale: 2.0, duration: 0.85 }, afterWords + 1.1)
-        .to(line.current, { opacity: 1, y: 0, duration: 0.55 }, afterWords + 1.55)
-        .to(actions.current, { opacity: 1, y: 0, duration: 0.5 }, afterWords + 1.75);
+        .to(burst.current, { scale: 2.2, opacity: 0, duration: 0.85 }, afterWords + 1.0)
+        .to(jump.current, { opacity: 0, scale: 1.85, duration: 0.75 }, afterWords + 1.0)
+        .to(rays.current, { opacity: 0, duration: 0.7 }, afterWords + 1.05)
+        .to(line.current, { opacity: 1, y: 0, duration: 0.5 }, afterWords + 1.45)
+        .to(actions.current, { opacity: 1, y: 0, duration: 0.45 }, afterWords + 1.65);
     },
     { scope: root },
   );
@@ -199,7 +198,7 @@ export function Scene05Finale() {
         <div ref={burst} className="finale-scene__burst" aria-hidden />
         <div ref={rays} className="finale-scene__rays" aria-hidden />
         <div ref={linesRef} className="finale-scene__shatter" aria-hidden>
-          {Array.from({ length: 12 }).map((_, i) => (
+          {Array.from({ length: 10 }).map((_, i) => (
             <span
               key={i}
               className="finale-scene__shatter-line"
@@ -236,7 +235,7 @@ export function Scene05Finale() {
           </p>
 
           <div ref={actions} className="finale-scene__actions">
-            <a className="btn btn--glow" href={portal}>
+            <a className="btn btn--primary" href={portal}>
               {MOVIE_V5.finale.ctaPrimary}
             </a>
             <Link className="btn btn--ghost btn--gvg-intro" href="/experience">
