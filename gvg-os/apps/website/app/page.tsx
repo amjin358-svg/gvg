@@ -1,13 +1,12 @@
 ﻿"use client";
 
-import "@/styles/cinematic-home.css";
-import { CinematicHome } from "@/components/cinematic-home/CinematicHome";
+import "@/styles/interactive-movie.css";
+import InteractiveMovie from "@/components/interactive-movie/InteractiveMovie";
 
 /**
  * GVG Interactive Cinematic Homepage
- * Experience quality target: Apple / Tesla / Interstellar
- * Legacy movie: /experience · Portal: NEXT_PUBLIC_PORTAL_URL
+ * Architecture: AmbientBackground + MouseGlow + Canvas ScrollControls (9 scenes)
  */
 export default function MarketingHomePage() {
-  return <CinematicHome />;
+  return <InteractiveMovie />;
 }

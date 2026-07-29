@@ -1,0 +1,130 @@
+/* Interactive Movie homepage — ScrollControls architecture */
+
+.im-root {
+  --im-gold: #e0b84a;
+  --im-gold-soft: #f0d080;
+  --im-ink: #f7f4ec;
+  --im-muted: rgba(247, 244, 236, 0.62);
+  font-family: "Outfit", system-ui, sans-serif;
+}
+
+.im-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.im-ambient__noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.im-ambient__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.im-ambient__gold {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 18%, rgba(224, 184, 74, 0.07), transparent 60%),
+    linear-gradient(180deg, rgba(224, 184, 74, 0.035), transparent 42%);
+}
+
+.im-mouse-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(224, 184, 74, 0.14),
+    transparent 55%
+  );
+  mix-blend-mode: screen;
+}
+
+.im-chrome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem clamp(1rem, 4vw, 2.5rem);
+  pointer-events: none;
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--im-muted);
+}
+
+.im-chrome__brand {
+  color: var(--im-gold-soft);
+}
+
+.im-canvas {
+  z-index: 10 !important;
+}
+
+.im-ending-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 260px;
+}
+
+.im-glass-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.2rem;
+  padding: 0.9rem 1.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(224, 184, 74, 0.5);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(12, 18, 32, 0.4));
+  backdrop-filter: blur(16px) saturate(1.2);
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    border-color 0.35s ease,
+    transform 0.35s ease,
+    background 0.35s ease;
+}
+
+.im-glass-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(224, 184, 74, 0.95);
+  background: linear-gradient(135deg, rgba(224, 184, 74, 0.24), rgba(12, 18, 32, 0.5));
+}
+
+.im-ending-link {
+  color: var(--im-muted);
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.im-ending-link:hover {
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .im-mouse-glow {
+    display: none;
+  }
+}
