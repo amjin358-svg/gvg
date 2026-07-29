@@ -19,6 +19,7 @@ export function Scene05Finale() {
   const burst = useRef<HTMLDivElement>(null);
   const rays = useRef<HTMLDivElement>(null);
   const actions = useRef<HTMLDivElement>(null);
+  // Absolute path already includes basePath on Pages — use <a>, not Link
   const portal = process.env.NEXT_PUBLIC_PORTAL_URL || "/";
 
   useGSAP(
@@ -114,9 +115,9 @@ export function Scene05Finale() {
             <span>{MOVIE_V3.finale.lineZh}</span>
           </p>
           <div ref={actions} className="finale-scene__actions">
-            <Link className="btn btn--glow" href={portal}>
+            <a className="btn btn--glow" href={portal}>
               {MOVIE_V3.finale.ctaPrimary}
-            </Link>
+            </a>
             <Link className="btn btn--ghost" href="/experience">
               {MOVIE_V3.finale.ctaAgain}
             </Link>
