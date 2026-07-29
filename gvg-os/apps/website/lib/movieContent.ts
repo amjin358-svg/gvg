@@ -16,14 +16,14 @@ export const MOVIE_V5 = {
   open: {
     mark: "GVG",
     title: "Global Vista Group",
-    line: "Connecting Markets. Creating Value.",
+    line: "Connecting the World, Creating Value.",
     lineZh: "連接全球市場，創造無限商機。",
     hint: "Scroll · Move to summon meteors",
   },
   earth: {
     eyebrow: "Orbital View",
     title: "One Planet. Infinite Markets.",
-    body: "保留地球自轉視角 — 緩慢轉動，感受全球貿易版圖在星空中展開。",
+    body: "地球緩緩自轉 — 金色航線與城市燈火，勾勒全球貿易版圖。",
   },
   routes: {
     eyebrow: "Trade Routes",
@@ -56,6 +56,7 @@ export const MOVIE_V5 = {
   },
   finale: {
     ready: "Are you ready?",
+    words: ["Are", "you", "ready?", "Begin", "with"] as const,
     lead: "Begin with",
     brand: "Global Vista Group",
     line: "Ready to connect markets?",

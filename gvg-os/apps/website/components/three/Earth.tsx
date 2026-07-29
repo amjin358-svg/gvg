@@ -5,6 +5,7 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader, type Group } from "three";
 import { BRAND_GOLD, MOVIE_ACCENT, movieAsset } from "@/lib/cinematic";
 import { EarthCountryMarkers } from "@/components/three/EarthCountryMarkers";
+import { EarthTradeNetwork } from "@/components/three/EarthTradeNetwork";
 
 type EarthProps = {
   /** External scroll-driven Y rotation (radians) */
@@ -13,6 +14,8 @@ type EarthProps = {
   showOrbits?: boolean;
   /** Blink country markers with labels */
   showCountries?: boolean;
+  /** Golden trade arcs + city lights */
+  showTradeNetwork?: boolean;
   /** Auto-spin when not scrub-driven */
   autoSpin?: number;
 };
@@ -24,6 +27,7 @@ export function Earth({
   rotationYRef,
   showOrbits = false,
   showCountries = false,
+  showTradeNetwork = false,
   autoSpin = 0.002,
 }: EarthProps) {
   const group = useRef<Group>(null);
@@ -59,16 +63,16 @@ export function Earth({
             metalness={0.08}
             emissiveMap={nightMap}
             emissive="#ffd9a0"
-            emissiveIntensity={0.55}
+            emissiveIntensity={0.78}
           />
         </mesh>
-        {/* Atmosphere rim */}
+        {/* Atmosphere rim — horizon sunburst feel */}
         <mesh>
           <sphereGeometry args={[1.72, 64, 64]} />
           <meshBasicMaterial
             color="#6eb6ff"
             transparent
-            opacity={0.12}
+            opacity={0.14}
             depthWrite={false}
           />
         </mesh>
@@ -79,9 +83,10 @@ export function Earth({
             color={MOVIE_ACCENT}
             wireframe
             transparent
-            opacity={0.06}
+            opacity={0.055}
           />
         </mesh>
+        {showTradeNetwork ? <EarthTradeNetwork /> : null}
         {showCountries ? <EarthCountryMarkers /> : null}
       </group>
 

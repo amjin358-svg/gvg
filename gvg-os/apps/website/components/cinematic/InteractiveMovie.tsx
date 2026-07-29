@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { MouseMeteors } from "@/components/mouse-cursor/MouseCursorTrail";
+import { GalaxyPhotoLayer } from "@/components/home/GalaxyPhotoLayer";
 import { MovieErrorBoundary } from "@/components/cinematic/MovieErrorBoundary";
 import { Scene01Open } from "@/components/cinematic/Scene01Open";
 import { Scene02Earth } from "@/components/cinematic/Scene02Earth";
@@ -11,7 +12,7 @@ import { Scene05Finale } from "@/components/cinematic/Scene05Finale";
 import { MOVIE_VERSION } from "@/lib/movieContent";
 
 /**
- * Interactive Movie V5 — deep-space plate (no rotating galaxy photo)
+ * Interactive Movie V5 — reference cosmic plate (galaxy + night Earth trade glow)
  */
 export function InteractiveMovie() {
   useEffect(() => {
@@ -37,6 +38,10 @@ export function InteractiveMovie() {
         data-movie-version={MOVIE_VERSION.code}
       >
         <div className="movie-root__deepspace" aria-hidden />
+        <GalaxyPhotoLayer
+          className="movie-root__galaxy movie-root__galaxy--ref"
+          mode="absolute"
+        />
         <div className="movie-root__star-twinkle movie-root__star-twinkle--script" aria-hidden />
         <MouseMeteors />
         <Scene01Open />

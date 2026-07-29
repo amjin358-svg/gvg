@@ -25,7 +25,7 @@ export const NOISE_STRENGTH = 0.015;
  */
 export const SCRUB_SMOOTH = 0.85;
 
-export const EARTH_SCROLL_END = "+=3000";
+export const EARTH_SCROLL_END = "+=3600";
 
 /** Bundled high-quality plates (see public/) — paths relative to site root */
 const ASSET_PATHS = {

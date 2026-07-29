@@ -23,9 +23,9 @@ export function GalaxyPhotoLayer({
       aria-hidden
       style={{
         backgroundImage: `
-          radial-gradient(ellipse at 22% 28%, rgba(120, 70, 220, 0.28), transparent 36%),
-          radial-gradient(ellipse at 72% 22%, rgba(50, 130, 255, 0.26), transparent 34%),
-          radial-gradient(ellipse at 55% 70%, rgba(200, 80, 150, 0.14), transparent 40%),
+          radial-gradient(ellipse at 22% 28%, rgba(50, 100, 200, 0.22), transparent 36%),
+          radial-gradient(ellipse at 72% 22%, rgba(40, 120, 220, 0.24), transparent 34%),
+          radial-gradient(ellipse at 55% 70%, rgba(30, 60, 120, 0.12), transparent 40%),
           linear-gradient(180deg, rgba(1, 4, 12, 0.28) 0%, rgba(3, 14, 32, 0.18) 42%, rgba(1, 4, 12, 0.48) 100%),
           url("${src}")
         `,

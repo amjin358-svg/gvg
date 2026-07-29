@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { TradeSceneWipe } from "@/components/cinematic/TradeSceneWipe";
 import { SCRUB_SMOOTH } from "@/lib/cinematic";
 import { MOVIE_V5 } from "@/lib/movieContent";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
@@ -11,6 +12,7 @@ import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 export function Scene03Routes() {
   const root = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const wipeRef = useRef<HTMLDivElement>(null);
   const hubRefs = useRef<(HTMLElement | null)[]>([]);
   const lineRefs = useRef<(SVGLineElement | null)[]>([]);
   const satRef = useRef<HTMLDivElement>(null);
@@ -32,6 +34,7 @@ export function Scene03Routes() {
       const lines = lineRefs.current.filter(Boolean) as SVGLineElement[];
 
       gsap.set(titleRef.current, { opacity: 0, y: 20 });
+      if (wipeRef.current) gsap.set(wipeRef.current, { opacity: 0.9 });
       gsap.set(hubs, {
         opacity: 0,
         scale: 0.65,
@@ -62,7 +65,9 @@ export function Scene03Routes() {
         },
       });
 
-      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.65 });
+      // Shipping-lane entrance wipe
+      tl.to(wipeRef.current, { opacity: 0, duration: 0.7, ease: "power1.out" }, 0);
+      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.65 }, 0.15);
       tl.to(satRef.current, { opacity: 1, scale: 1, duration: 0.4 }, 0.4);
 
       hubs.forEach((hub, i) => {
@@ -104,6 +109,9 @@ export function Scene03Routes() {
   return (
     <div ref={root}>
       <section className="scene scene--cosmos routes-scene" aria-label="Trade routes">
+        <div ref={wipeRef}>
+          <TradeSceneWipe theme="shipping" />
+        </div>
         <div className="routes-scene__glow" aria-hidden />
         <div ref={titleRef} className="routes-scene__copy">
           <p className="scene-eyebrow">{MOVIE_V5.routes.eyebrow}</p>

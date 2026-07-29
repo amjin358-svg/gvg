@@ -4,6 +4,7 @@ import { useMemo, useRef, type MutableRefObject, Suspense } from "react";
 import { CanvasSafe } from "@/components/three/CanvasSafe";
 import { Earth } from "@/components/three/Earth";
 import { Stars } from "@/components/three/Stars";
+import { TradeSceneWipe } from "@/components/cinematic/TradeSceneWipe";
 import { createEarthScrollSpin } from "@/components/animation/ScrollAnimations";
 import { EARTH_SCROLL_END } from "@/lib/cinematic";
 import { MOVIE_V5 } from "@/lib/movieContent";
@@ -17,17 +18,20 @@ function EarthStage({
   return (
     <>
       <fog attach="fog" args={["#01040c", 9, 20]} />
-      <ambientLight intensity={0.35} />
-      <directionalLight position={[-4, 2.5, 5]} intensity={2.0} color="#cfe3ff" />
-      <directionalLight position={[3, -1, -2]} intensity={0.3} color="#1a3a6e" />
-      <pointLight position={[2.2, 1.2, 3.2]} intensity={0.75} color="#7EB6FF" />
+      <ambientLight intensity={0.32} />
+      <directionalLight position={[-4, 2.5, 5]} intensity={2.15} color="#cfe3ff" />
+      <directionalLight position={[3, -1, -2]} intensity={0.35} color="#1a3a6e" />
+      {/* Horizon sunburst backlight */}
+      <pointLight position={[0, -0.4, -3.2]} intensity={2.4} color="#ffd089" />
+      <pointLight position={[2.2, 1.2, 3.2]} intensity={0.7} color="#7EB6FF" />
       <Stars />
       <Suspense fallback={null}>
         <Earth
           rotationYRef={rotationYRef}
-          autoSpin={0.0016}
+          autoSpin={0}
           showOrbits
           showCountries
+          showTradeNetwork
         />
       </Suspense>
     </>
@@ -35,7 +39,7 @@ function EarthStage({
 }
 
 /**
- * Scene 2｜Earth — continuous spin + one-line light-blue title
+ * Scene 2｜Earth — restored scrub spin + trade network arcs (reference look)
  */
 export function Scene02Earth() {
   const root = useRef<HTMLDivElement>(null);
@@ -61,6 +65,7 @@ export function Scene02Earth() {
         aria-label="Earth"
         data-scroll-end={EARTH_SCROLL_END}
       >
+        <TradeSceneWipe theme="orbital" />
         <div className="earth-scene__star-script" aria-hidden />
         <div className="earth-scene__stage" aria-hidden>
           <CanvasSafe
