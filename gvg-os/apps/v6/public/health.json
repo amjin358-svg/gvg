@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "service": "@gvg/v6",
+  "surface": "homepage-fx",
+  "version": "HOME-V6.0",
+  "semver": "6.0.0",
+  "frozen": true,
+  "releasedAt": "2026-07-29",
+  "watch": {
+    "pages": "https://amjin358-svg.github.io/gvg/",
+    "path": "/",
+    "devices": ["mobile", "desktop", "tablet"]
+  }
+}

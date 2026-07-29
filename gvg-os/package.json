@@ -22,6 +22,8 @@
     "build:v4": "npm run build -w @gvg/v4",
     "build:pages": "node ./scripts/build-pages.mjs",
     "dev:v5": "npm run dev -w @gvg/v5",
-    "build:v5": "npm run build -w @gvg/v5"
+    "build:v5": "npm run build -w @gvg/v5",
+    "dev:v6": "npm run dev -w @gvg/v6",
+    "build:v6": "npm run build -w @gvg/v6"
   }
 }

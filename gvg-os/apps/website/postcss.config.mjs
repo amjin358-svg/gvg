@@ -1,6 +1,8 @@
-/** Local PostCSS config so the parent trade-os Tailwind config is not inherited. */
+/** Local PostCSS — Tailwind only activates for files that `@import "tailwindcss"`. */
 const config = {
-  plugins: {},
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
 };
 
 export default config;

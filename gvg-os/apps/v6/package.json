@@ -1,36 +1,33 @@
 {
-  "name": "@gvg/website",
-  "version": "0.5.0",
+  "name": "@gvg/v6",
+  "version": "6.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3000",
+    "dev": "next dev --port 3006",
     "build": "next build",
-    "start": "next start",
-    "lint": "echo \"lint website\""
+    "start": "next start --port 3006",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.0.6",
     "@react-three/fiber": "^9.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.6.3",
-    "gsap": "^3.13.0",
     "lucide-react": "^0.487.0",
     "next": "15.5.21",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "split-type": "^0.3.4",
     "tailwind-merge": "^3.0.2",
     "three": "^0.175.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.3",
-    "@types/node": "^22.14.0",
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "@types/three": "^0.175.0",
     "tailwindcss": "^4.1.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5"
   }
 }

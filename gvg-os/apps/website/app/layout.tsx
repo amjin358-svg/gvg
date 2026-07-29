@@ -3,12 +3,12 @@ import type { Viewport } from "next";
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: "Global Vista Group — Interactive Movie IM-V5.0",
+  title: "Global Vista Group — Homepage FX · HOME-V6.0",
   description:
-    "Global Vista Group Interactive Movie V5 — watch on mobile or desktop. Connecting Markets. Creating Value.",
+    "Global Vista Group cinematic homepage — galaxy zoom, warp flight, trade globe. Interactive Movie at /experience.",
   appleWebApp: {
     capable: true,
-    title: "GVG Movie",
+    title: "GVG Home",
   },
 };
 
