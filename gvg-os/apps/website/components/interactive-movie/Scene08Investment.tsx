@@ -14,7 +14,7 @@ function Towers({ progressRef }: { progressRef: React.MutableRefObject<number> }
     [],
   );
 
-  useFrame((state) => {
+  useFrame(() => {
     const p = progressRef.current;
     if (!group.current) return;
     group.current.children.forEach((child, i) => {
@@ -24,10 +24,6 @@ function Towers({ progressRef }: { progressRef: React.MutableRefObject<number> }
       mesh.scale.y = THREE.MathUtils.lerp(mesh.scale.y || 0.01, Math.max(0.01, target), 0.12);
       mesh.position.y = mesh.scale.y / 2;
     });
-    state.camera.position.x = THREE.MathUtils.lerp(-2.0, 2.2, p);
-    state.camera.position.z = THREE.MathUtils.lerp(7.2, 4.4, p);
-    state.camera.position.y = 2.1;
-    state.camera.lookAt(0, 1.1, 0);
   });
 
   return (
