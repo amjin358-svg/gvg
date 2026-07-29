@@ -2,4 +2,4 @@
 
 See full docs: [`docs/mouse-cursor/README.md`](../../docs/mouse-cursor/README.md)
 
-CPU-safe Canvas 2D meteor cursor for the Interactive Movie.
+IM-V5.0 velocity-driven meteor cursor for the Interactive Movie.
