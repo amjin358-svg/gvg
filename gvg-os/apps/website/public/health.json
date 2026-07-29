@@ -1,14 +1,16 @@
 {
   "ok": true,
-  "service": "@gvg/v5",
+  "service": "@gvg/website",
+  "home": "homepage-fx",
   "experience": "interactive-movie",
-  "version": "IM-V5.0",
-  "semver": "0.5.0",
-  "frozen": true,
+  "version": "HOME-V6.0",
+  "movieVersion": "IM-V5.0",
+  "semver": "0.6.0",
   "releasedAt": "2026-07-29",
   "watch": {
-    "pages": "https://amjin358-svg.github.io/gvg/experience/",
-    "path": "/experience",
+    "pages": "https://amjin358-svg.github.io/gvg/",
+    "home": "/",
+    "experience": "/experience",
     "devices": ["mobile", "desktop", "tablet"]
   }
 }
