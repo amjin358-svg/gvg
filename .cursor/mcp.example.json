@@ -12,6 +12,9 @@
     "playwright": {
       "command": "npx",
       "args": ["-y", "@playwright/mcp@latest", "--headless", "--browser", "chromium"]
+    },
+    "canva": {
+      "url": "https://mcp.canva.com/mcp"
     }
   }
 }
