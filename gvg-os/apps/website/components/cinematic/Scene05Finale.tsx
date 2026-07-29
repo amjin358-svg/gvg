@@ -9,14 +9,18 @@ import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 /**
  * Scene 05｜Finale —
- * Word-by-word scroll (far tiny → near huge → fade):
- * Are · you · ready? · Begin · with → VIP white Global Vista Group
+ * Are → you → ready? → Begin with (one scroll each):
+ * far tiny → near 3× huge → fade, centered.
+ * Then Global Vista Group: hyperspace warp-distort → settle,
+ * explosive open lines behind, crisp white-gold glow.
  */
 export function Scene05Finale() {
   const root = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const wordStage = useRef<HTMLDivElement>(null);
   const brand = useRef<HTMLHeadingElement>(null);
+  const brandWrap = useRef<HTMLDivElement>(null);
+  const linesRef = useRef<HTMLDivElement>(null);
   const line = useRef<HTMLParagraphElement>(null);
   const burst = useRef<HTMLDivElement>(null);
   const rays = useRef<HTMLDivElement>(null);
@@ -34,94 +38,155 @@ export function Scene05Finale() {
       const wordEls = gsap.utils.toArray<HTMLElement>(
         wordStage.current.querySelectorAll(".finale-scene__zoom-word"),
       );
+      const shatterLines = linesRef.current
+        ? gsap.utils.toArray<HTMLElement>(
+            linesRef.current.querySelectorAll(".finale-scene__shatter-line"),
+          )
+        : [];
 
       gsap.set(panel.current, { opacity: 1 });
       gsap.set(wordEls, {
         opacity: 0,
-        scale: 0.08,
+        scale: 0.05,
         xPercent: -50,
         yPercent: -50,
-        z: -600,
-        transformPerspective: 800,
-        filter: "blur(12px)",
+        z: -900,
+        transformPerspective: 1100,
+        filter: "blur(14px)",
       });
       gsap.set(brand.current, {
         opacity: 0,
-        scale: 0.82,
-        y: 36,
-        filter: "blur(0px)",
-        color: "#ffffff",
+        scaleX: 2.8,
+        scaleY: 0.12,
+        xPercent: -50,
+        yPercent: -50,
+        z: -420,
+        transformPerspective: 1000,
+        filter: "blur(0px) brightness(2.4)",
+        skewX: 28,
+        skewY: -8,
+      });
+      if (brandWrap.current) {
+        gsap.set(brandWrap.current, { opacity: 1 });
+      }
+      gsap.set(shatterLines, {
+        opacity: 0,
+        scaleX: 0.05,
+        transformOrigin: "50% 50%",
       });
       gsap.set(line.current, { opacity: 0, y: 14 });
-      if (burst.current) gsap.set(burst.current, { scale: 0.15, opacity: 0 });
-      if (rays.current) gsap.set(rays.current, { opacity: 0, rotate: -16 });
-      if (jump.current) gsap.set(jump.current, { opacity: 0, scale: 0.5 });
+      if (burst.current) gsap.set(burst.current, { scale: 0.12, opacity: 0 });
+      if (rays.current) gsap.set(rays.current, { opacity: 0, rotate: -24, scale: 0.6 });
+      if (jump.current) gsap.set(jump.current, { opacity: 0, scale: 0.35 });
       if (actions.current) gsap.set(actions.current, { opacity: 0, y: 28 });
 
-      // One scrub slice ≈ one wheel tick per word
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: "+=5200",
+          end: "+=5600",
           scrub: SCRUB_SMOOTH,
           pin: true,
           anticipatePin: 1,
         },
       });
 
-      const BEAT = 0.85;
+      // One wheel tick per word/phrase
+      const BEAT = 1.0;
 
       wordEls.forEach((el, i) => {
         const t = i * BEAT;
-        // Far tiny → near huge
+        // Far tiny → near 3× huge → fade
         tl.to(
           el,
           {
             opacity: 1,
-            scale: 1.05,
+            scale: 1.0,
             z: 0,
             filter: "blur(0px)",
-            duration: 0.38,
+            duration: 0.42,
             ease: "power3.out",
           },
           t,
-        )
-          .to(
-            el,
-            {
-              scale: 3.6,
-              opacity: 0,
-              z: 220,
-              filter: "blur(6px)",
-              duration: 0.42,
-              ease: "power2.in",
-            },
-            t + 0.38,
-          );
+        ).to(
+          el,
+          {
+            scale: 3.0,
+            opacity: 0,
+            z: 280,
+            filter: "blur(4px)",
+            duration: 0.48,
+            ease: "power2.in",
+          },
+          t + 0.42,
+        );
       });
 
-      const afterWords = words.length * BEAT + 0.2;
+      const afterWords = words.length * BEAT + 0.15;
 
-      // VIP slow entrance — bright white, no matte
-      tl.to(jump.current, { opacity: 0.75, scale: 1.25, duration: 0.7, ease: "power2.in" }, afterWords)
-        .to(burst.current, { opacity: 1, scale: 1.55, duration: 0.9, ease: "power2.out" }, afterWords + 0.1)
-        .to(rays.current, { opacity: 0.75, rotate: 0, duration: 1.0 }, afterWords + 0.1)
+      // Hyperspace jump + shatter lines open
+      tl.to(jump.current, { opacity: 0.95, scale: 1.45, duration: 0.55, ease: "power3.in" }, afterWords)
+        .to(burst.current, { opacity: 1, scale: 1.8, duration: 0.7, ease: "power2.out" }, afterWords + 0.05)
+        .to(
+          rays.current,
+          { opacity: 0.9, rotate: 0, scale: 1.15, duration: 0.85, ease: "power2.out" },
+          afterWords + 0.05,
+        )
+        .to(
+          shatterLines,
+          {
+            opacity: 0.95,
+            scaleX: 1.35,
+            stagger: 0.04,
+            duration: 0.55,
+            ease: "power3.out",
+          },
+          afterWords + 0.12,
+        )
+        // Warp-distorted GVG flies in, then snaps to clear normal
         .to(
           brand.current,
           {
             opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 1.65,
+            scaleX: 1.35,
+            scaleY: 0.55,
+            z: -80,
+            skewX: 12,
+            skewY: -4,
+            filter: "blur(0px) brightness(1.8)",
+            duration: 0.55,
+            ease: "power3.in",
+          },
+          afterWords + 0.2,
+        )
+        .to(
+          brand.current,
+          {
+            scaleX: 1,
+            scaleY: 1,
+            z: 0,
+            skewX: 0,
+            skewY: 0,
+            filter: "blur(0px) brightness(1)",
+            duration: 0.85,
+            ease: "power2.out",
+          },
+          afterWords + 0.75,
+        )
+        .to(
+          shatterLines,
+          {
+            opacity: 0.25,
+            scaleX: 1.8,
+            duration: 0.9,
             ease: "power1.out",
           },
-          afterWords + 0.55,
+          afterWords + 0.85,
         )
-        .to(burst.current, { scale: 2.2, opacity: 0.28, duration: 0.9 }, afterWords + 1.4)
-        .to(jump.current, { opacity: 0.12, scale: 1.85, duration: 0.8 }, afterWords + 1.4)
-        .to(line.current, { opacity: 1, y: 0, duration: 0.55 }, afterWords + 1.85)
-        .to(actions.current, { opacity: 1, y: 0, duration: 0.5 }, afterWords + 2.05);
+        .to(burst.current, { scale: 2.6, opacity: 0.22, duration: 0.95 }, afterWords + 1.1)
+        .to(jump.current, { opacity: 0.1, scale: 2.0, duration: 0.85 }, afterWords + 1.1)
+        .to(line.current, { opacity: 1, y: 0, duration: 0.55 }, afterWords + 1.55)
+        .to(actions.current, { opacity: 1, y: 0, duration: 0.5 }, afterWords + 1.75);
     },
     { scope: root },
   );
@@ -133,6 +198,15 @@ export function Scene05Finale() {
         <div ref={jump} className="finale-scene__jump" aria-hidden />
         <div ref={burst} className="finale-scene__burst" aria-hidden />
         <div ref={rays} className="finale-scene__rays" aria-hidden />
+        <div ref={linesRef} className="finale-scene__shatter" aria-hidden>
+          {Array.from({ length: 12 }).map((_, i) => (
+            <span
+              key={i}
+              className="finale-scene__shatter-line"
+              style={{ ["--i" as string]: i }}
+            />
+          ))}
+        </div>
 
         <div ref={panel} className="finale-scene__panel finale-scene__panel--vip">
           <div
@@ -147,9 +221,14 @@ export function Scene05Finale() {
             ))}
           </div>
 
-          <h2 ref={brand} className="finale-scene__brand finale-scene__brand--vip-white">
-            {MOVIE_V5.finale.brand}
-          </h2>
+          <div ref={brandWrap} className="finale-scene__brand-wrap">
+            <h2
+              ref={brand}
+              className="finale-scene__brand finale-scene__brand--vip-whitegold"
+            >
+              {MOVIE_V5.finale.brand}
+            </h2>
+          </div>
 
           <p ref={line} className="finale-scene__line">
             <strong>{MOVIE_V5.finale.line}</strong>

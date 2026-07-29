@@ -56,7 +56,7 @@ export const MOVIE_V5 = {
   },
   finale: {
     ready: "Are you ready?",
-    words: ["Are", "you", "ready?", "Begin", "with"] as const,
+    words: ["Are", "you", "ready?", "Begin with"] as const,
     lead: "Begin with",
     brand: "Global Vista Group",
     line: "Ready to connect markets?",
