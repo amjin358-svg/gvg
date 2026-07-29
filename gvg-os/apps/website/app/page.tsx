@@ -1,13 +1,13 @@
 ﻿"use client";
 
-import "@/styles/home-fx.css";
-import { HeroExperience } from "@/frontend/features/experience/HeroExperience";
+import "@/styles/cinematic-home.css";
+import { CinematicHome } from "@/components/cinematic-home/CinematicHome";
 
 /**
- * Cinematic homepage FX (HOME-V6.0).
- * Interactive Movie: /experience · Portal: NEXT_PUBLIC_PORTAL_URL
- * Freeze backup: gvg-os/apps/v6
+ * GVG Interactive Cinematic Homepage
+ * Experience quality target: Apple / Tesla / Interstellar
+ * Legacy movie: /experience · Portal: NEXT_PUBLIC_PORTAL_URL
  */
 export default function MarketingHomePage() {
-  return <HeroExperience />;
+  return <CinematicHome />;
 }
