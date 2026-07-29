@@ -1,6 +1,6 @@
 {
   "name": "gvg-os",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -20,7 +20,8 @@
     "build:v3": "npm run build -w @gvg/v3",
     "dev:v4": "npm run dev -w @gvg/v4",
     "build:v4": "npm run build -w @gvg/v4",
-    "build:pages": "node ./scripts/build-pages.mjs"
+    "build:pages": "node ./scripts/build-pages.mjs",
+    "dev:v5": "npm run dev -w @gvg/v5",
+    "build:v5": "npm run build -w @gvg/v5"
   }
-
 }

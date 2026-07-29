@@ -1,5 +1,13 @@
 {
   "ok": true,
   "service": "@gvg/website",
-  "experience": "interactive-movie"
+  "experience": "interactive-movie",
+  "version": "IM-V5.0",
+  "semver": "0.5.0",
+  "releasedAt": "2026-07-29",
+  "watch": {
+    "pages": "https://amjin358-svg.github.io/gvg/experience/",
+    "path": "/experience",
+    "devices": ["mobile", "desktop", "tablet"]
+  }
 }
