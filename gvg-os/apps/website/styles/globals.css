@@ -2314,7 +2314,6 @@ a {
   z-index: 3;
   width: 44px;
   height: 44px;
-  transform: translate(-50%, -50%);
   filter: drop-shadow(0 0 12px rgba(126, 182, 255, 0.65));
   pointer-events: none;
   will-change: left, top, transform, opacity;
@@ -2333,7 +2332,6 @@ a {
 
 .routes-scene__hub {
   position: absolute;
-  transform: translate(-50%, -50%);
   min-width: min(12rem, 44vw);
   padding: 1.1rem 1.2rem;
   border-radius: 14px;

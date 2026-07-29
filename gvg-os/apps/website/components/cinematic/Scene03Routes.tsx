@@ -32,12 +32,20 @@ export function Scene03Routes() {
       const lines = lineRefs.current.filter(Boolean) as SVGLineElement[];
 
       gsap.set(titleRef.current, { opacity: 0, y: 20 });
-      gsap.set(hubs, { opacity: 0, scale: 0.65, y: 18 });
+      gsap.set(hubs, {
+        opacity: 0,
+        scale: 0.65,
+        xPercent: -50,
+        yPercent: -50,
+        y: 18,
+      });
       gsap.set(lines, { strokeDasharray: 140, strokeDashoffset: 140, opacity: 0.15 });
       if (satRef.current) {
         gsap.set(satRef.current, {
           left: `${points[0]!.x}%`,
           top: `${points[0]!.y}%`,
+          xPercent: -50,
+          yPercent: -50,
           opacity: 0,
           scale: 0.6,
         });
