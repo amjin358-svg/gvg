@@ -1,18 +1,19 @@
 "use client";
 
-import { useMemo, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
-import { Text, useScroll } from "@react-three/drei";
+import { Suspense, useMemo, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Text } from "@react-three/drei";
 import * as THREE from "three";
-import { pageProgress, smoothstep } from "@/components/cinematic/scrollMath";
+import { smoothstep } from "./scrollMath";
 
 /**
  * Scene 01 — Black → gold particles → metal GVG logo (~65%).
+ * Self-contained Canvas; timeline plays on mount (no ScrollControls required).
  */
-export default function Scene01Logo() {
-  const scroll = useScroll();
+function LogoAwaken() {
   const logo = useRef<THREE.Group>(null);
   const pts = useRef<THREE.Points>(null);
+  const progress = useRef(0);
   const COUNT = 2200;
 
   const { positions, seeds } = useMemo(() => {
@@ -26,8 +27,9 @@ export default function Scene01Logo() {
     return { positions, seeds };
   }, []);
 
-  useFrame(() => {
-    const p = pageProgress(scroll.offset, 0);
+  useFrame((_, delta) => {
+    progress.current = Math.min(1, progress.current + delta * 0.22);
+    const p = progress.current;
     const birth = smoothstep(0, 0.35, p);
     const merge = smoothstep(0.32, 0.75, p);
     const logoIn = smoothstep(0.4, 0.85, p);
@@ -48,7 +50,7 @@ export default function Scene01Logo() {
     }
 
     if (logo.current) {
-      logo.current.visible = p > 0.28 && p < 1.001;
+      logo.current.visible = p > 0.28;
       const s = 0.35 + logoIn * 0.95;
       logo.current.scale.setScalar(s);
       logo.current.position.z = THREE.MathUtils.lerp(2.5, 0.2, logoIn);
@@ -71,7 +73,7 @@ export default function Scene01Logo() {
         />
       </points>
 
-      <group ref={logo} position={[0, 0.15, 0.2]}>
+      <group ref={logo} position={[0, 0.15, 0.2]} visible={false}>
         <Text
           fontSize={1.55}
           letterSpacing={0.12}
@@ -84,7 +86,6 @@ export default function Scene01Logo() {
         >
           GVG
         </Text>
-        {/* Soft bloom plate */}
         <mesh position={[0, 0, -0.2]} scale={[4.2, 1.6, 1]}>
           <planeGeometry />
           <meshBasicMaterial
@@ -97,5 +98,22 @@ export default function Scene01Logo() {
         </mesh>
       </group>
     </group>
+  );
+}
+
+export default function Scene01Logo() {
+  return (
+    <div className="absolute inset-0 z-10">
+      <Canvas
+        dpr={[1, 1.6]}
+        camera={{ position: [0, 0, 8], fov: 45 }}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <Suspense fallback={null}>
+          <LogoAwaken />
+        </Suspense>
+      </Canvas>
+    </div>
   );
 }
