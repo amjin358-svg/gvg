@@ -1,15 +1,5 @@
-"use client";
-
-import AmbientBackground from "../background/AmbientBackground";
-import MouseGlow from "../effects/MouseGlow";
-import Scene01Logo from "./Scene01Logo";
-
-export default function InteractiveMovie() {
-  return (
-    <main className="relative h-screen w-screen overflow-hidden bg-black">
-      <AmbientBackground />
-      <MouseGlow />
-      <Scene01Logo />
-    </main>
-  );
-}
+/**
+ * Homepage entry re-exports the new Scene01 shell.
+ * Legacy R3F cinematic scenes remain under this folder; new FX live in `cinematic-shell/`.
+ */
+export { default } from "../cinematic-shell/InteractiveMovie";
