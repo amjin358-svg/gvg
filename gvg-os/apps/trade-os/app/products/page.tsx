@@ -1,36 +1,16 @@
 import type { Metadata } from "next";
-import { Container } from "@/components/atoms/Container";
-import { SectionHeading } from "@/components/atoms/SectionHeading";
-import { ProductCard } from "@/components/molecules/ProductCard";
-import { PageHero } from "@/components/organisms/PageHero";
-import { products } from "@/frontend/data/mock/catalog";
+import { ProductCenterView } from "@/frontend/features/products/ProductCenterView";
 
 export const metadata: Metadata = {
-  title: "Products",
-  description: "Browse the GVG global product catalog across trade verticals.",
+  title: "商品中心",
+  description: "GVG 全球商品中心：保健食品、五金工具、居家生活、品牌服飾與裝潢建材。",
 };
 
 export default function ProductsPage() {
   return (
-    <>
-      <PageHero
-        eyebrow="Module 02"
-        title="Products"
-        description="Search and quote from a multi-vertical catalog with MOQ, lead time, origin, and compliance tags."
-      />
-      <section className="py-16 sm:py-20">
-        <Container>
-          <SectionHeading
-            title="Global catalog"
-            description={`${products.length} featured SKUs in this demo dataset.`}
-          />
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </Container>
-      </section>
-    </>
+    <ProductCenterView
+      title="商品中心"
+      description="精選全球優質商品，支援批發、OEM 與跨境貿易採購。"
+    />
   );
 }

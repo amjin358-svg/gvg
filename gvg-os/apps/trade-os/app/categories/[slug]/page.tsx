@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Container } from "@/components/atoms/Container";
-import { ProductCard } from "@/components/molecules/ProductCard";
-import { PageHero } from "@/components/organisms/PageHero";
+import { ProductCenterView } from "@/frontend/features/products/ProductCenterView";
+import { CATALOG_NAV } from "@/frontend/data/mock/catalogNav";
 import { categories, products } from "@/frontend/data/mock/catalog";
+import type { ProductCategory } from "@/types";
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -17,9 +17,13 @@ export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const nav = CATALOG_NAV.find((item) => item.slug === slug);
   const category = categories.find((item) => item.slug === slug);
   if (!category) return { title: "Category" };
-  return { title: category.name, description: category.description };
+  return {
+    title: nav?.nameZh ?? category.name,
+    description: category.description,
+  };
 }
 
 export default async function CategoryDetailPage({ params }: CategoryPageProps) {
@@ -27,26 +31,20 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
   const category = categories.find((item) => item.slug === slug);
   if (!category) notFound();
 
+  const nav = CATALOG_NAV.find((item) => item.slug === slug);
   const items = products.filter((product) => product.categorySlug === category.slug);
 
   return (
-    <>
-      <PageHero eyebrow="Category" title={category.name} description={category.description} />
-      <section className="py-16">
-        <Container>
-          {items.length > 0 ? (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-[var(--color-muted)]">
-              No demo products in this category yet. Browse the full catalog or open an RFQ.
-            </p>
-          )}
-        </Container>
-      </section>
-    </>
+    <ProductCenterView
+      activeSlug={category.slug as ProductCategory}
+      title={nav?.nameZh ?? category.name}
+      description={
+        nav
+          ? `精選優質${nav.nameZh}，專業耐用，滿足全球貿易與通路需求。`
+          : category.description
+      }
+      items={items}
+      totalCount={nav?.count ?? items.length}
+    />
   );
 }

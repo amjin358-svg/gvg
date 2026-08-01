@@ -11,7 +11,6 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { Button } from "@/components/atoms/Button";
 import { Container } from "@/components/atoms/Container";
 import { BRAND, PRIMARY_NAV, UTILITY_NAV } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -22,39 +21,40 @@ export function SiteHeader() {
   const [query, setQuery] = useState("");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--color-line)] bg-white/95 backdrop-blur">
-      <div className="border-b border-[var(--color-line)] bg-white">
-        <Container className="flex h-14 items-center gap-4 lg:h-16">
+    <header className="sticky top-0 z-50 shadow-sm">
+      {/* Navy utility + search band */}
+      <div className="bg-[var(--color-navy)] text-white">
+        <Container className="flex h-16 items-center gap-4 lg:h-[4.25rem]">
           <Link href="/" className="flex shrink-0 items-center gap-2.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/gvg-mark.svg" alt="GVG" className="h-9 w-9" />
+            <img src="/brand/gvg-mark.svg" alt="GVG" className="h-9 w-9 brightness-110" />
             <span className="leading-tight">
-              <span className="block font-[family-name:var(--font-display)] text-sm font-semibold text-[var(--color-navy)] sm:text-base">
-                {BRAND.shortName} {BRAND.name}
+              <span className="block font-[family-name:var(--font-display)] text-sm font-semibold tracking-wide text-[var(--color-gold)] sm:text-base">
+                {BRAND.shortName}
               </span>
-              <span className="hidden text-[11px] tracking-[0.12em] text-[var(--color-muted)] sm:block">
-                {BRAND.productZh}
+              <span className="hidden text-[10px] uppercase tracking-[0.14em] text-white/80 sm:block">
+                Global Vista Group
               </span>
             </span>
           </Link>
 
           <form
-            className="mx-auto hidden max-w-xl flex-1 md:flex"
+            className="mx-auto hidden max-w-2xl flex-1 md:flex"
             action="/marketplace"
             method="get"
             role="search"
           >
             <label className="sr-only" htmlFor="global-search">
-              搜尋產品或供應商
+              搜尋商品、品牌、類別
             </label>
-            <div className="flex h-10 w-full overflow-hidden rounded-full border border-[var(--color-line)] bg-[var(--color-mist)]">
+            <div className="flex h-11 w-full overflow-hidden rounded-full bg-white shadow-sm">
               <input
                 id="global-search"
                 name="q"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="搜尋產品、供應商、品牌…"
-                className="w-full bg-transparent px-4 text-sm outline-none"
+                placeholder="搜尋商品、品牌、類別..."
+                className="w-full bg-transparent px-4 text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-muted)]"
               />
               <button
                 type="submit"
@@ -66,15 +66,15 @@ export function SiteHeader() {
             </div>
           </form>
 
-          <div className="ml-auto hidden items-center gap-4 text-sm text-[var(--color-muted)] lg:flex">
+          <div className="ml-auto hidden items-center gap-3 text-xs text-white/85 lg:flex xl:gap-4 xl:text-sm">
             {UTILITY_NAV.map((item) => (
-              <Link key={item.href} href={item.href} className="hover:text-[var(--color-navy)]">
+              <Link key={item.href} href={item.href} className="hover:text-white">
                 {item.label}
               </Link>
             ))}
             <button
               type="button"
-              className="inline-flex items-center gap-1 hover:text-[var(--color-navy)]"
+              className="inline-flex items-center gap-1 hover:text-white"
               aria-label="語言"
             >
               <Globe2 className="h-4 w-4" />
@@ -82,14 +82,14 @@ export function SiteHeader() {
             </button>
             <Link
               href="/portal/customer"
-              className="inline-flex items-center gap-1 hover:text-[var(--color-navy)]"
+              className="inline-flex items-center gap-1 hover:text-white"
             >
               <UserRound className="h-4 w-4" />
               登入 / 註冊
             </Link>
             <Link
               href="/marketplace"
-              className="relative inline-flex items-center hover:text-[var(--color-navy)]"
+              className="relative inline-flex items-center hover:text-white"
               aria-label="購物車"
             >
               <ShoppingCart className="h-4 w-4" />
@@ -97,16 +97,11 @@ export function SiteHeader() {
                 2
               </span>
             </Link>
-            <Link href="/rfq">
-              <Button size="sm" variant="primary">
-                立即詢價
-              </Button>
-            </Link>
           </div>
 
           <button
             type="button"
-            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded text-[var(--color-navy)] lg:hidden"
+            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded text-white lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((value) => !value)}
@@ -117,7 +112,8 @@ export function SiteHeader() {
         </Container>
       </div>
 
-      <nav className="hidden bg-white lg:block" aria-label="主選單">
+      {/* White primary nav */}
+      <nav className="hidden border-b border-[var(--color-line)] bg-white lg:block" aria-label="主選單">
         <Container className="flex h-12 items-center gap-7">
           {PRIMARY_NAV.map((item) => {
             const active =
@@ -148,7 +144,7 @@ export function SiteHeader() {
       <div
         id="mobile-nav"
         className={cn(
-          "border-t border-[var(--color-line)] bg-white lg:hidden",
+          "border-b border-[var(--color-line)] bg-white lg:hidden",
           open ? "block" : "hidden",
         )}
       >
@@ -156,7 +152,7 @@ export function SiteHeader() {
           <form action="/marketplace" method="get" className="mb-3">
             <input
               name="q"
-              placeholder="搜尋產品、供應商…"
+              placeholder="搜尋商品、品牌、類別..."
               className="h-10 w-full rounded-md border border-[var(--color-line)] px-3 text-sm"
             />
           </form>
@@ -170,9 +166,6 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <Link href="/rfq" className="mt-2" onClick={() => setOpen(false)}>
-            <Button className="w-full">立即詢價</Button>
-          </Link>
         </Container>
       </div>
     </header>

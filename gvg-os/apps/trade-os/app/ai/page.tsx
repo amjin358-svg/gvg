@@ -25,15 +25,17 @@ export const metadata: Metadata = {
 };
 
 const SIDEBAR = [
-  { label: "商務顧問", href: "/ai#consultant" },
+  { label: "服務總覽", href: "/ai", active: true },
+  { label: "AI 商務顧問", href: "/ai#consultant" },
   { label: "市場趨勢分析", href: "/ai#trends" },
-  { label: "智慧採購", href: "/ai#procurement", active: true },
+  { label: "智慧採購助理", href: "/ai#procurement" },
   { label: "供應商推薦", href: "/ai#suppliers" },
-  { label: "價格預測", href: "/ai#pricing" },
-  { label: "行銷助理", href: "/ai#marketing" },
-  { label: "文件翻譯", href: "/ai#translate" },
+  { label: "價格預測分析", href: "/ai#pricing" },
+  { label: "智慧行銷助理", href: "/ai#marketing" },
+  { label: "文件翻譯服務", href: "/ai#translate" },
+  { label: "法規合規諮詢", href: "/ai#compliance" },
+  { label: "客製 AI 方案", href: "/contact" },
 ];
-
 const AI_SERVICES = [
   {
     title: "市場趨勢",
@@ -125,20 +127,21 @@ export default function AiServicesPage() {
               </li>
             ))}
           </ul>
-          <div className="rounded-lg bg-[var(--color-navy)] p-4 text-white">
-            <p className="text-sm font-semibold">客製 AI 方案</p>
-            <p className="mt-2 text-xs text-white/70">为企业流程打造專屬助理與知識庫。</p>
+          <div className="rounded-lg border border-[var(--color-line)] bg-[var(--color-mist)] p-4">
+            <p className="text-sm font-semibold text-[var(--color-navy)]">想要專屬 AI 方案？</p>
+            <p className="mt-2 text-xs text-[var(--color-muted)]">為企業流程打造專屬助理與知識庫。</p>
             <Link href="/contact" className="mt-4 block">
-              <Button size="sm" variant="gold" className="w-full">
-                洽詢方案
+              <Button size="sm" className="w-full">
+                諮詢專家 →
               </Button>
             </Link>
           </div>
-          <div className="rounded-lg bg-[var(--color-mist)] p-4 text-sm">
+          <div className="rounded-lg border border-[var(--color-line)] bg-white p-4 text-sm">
             <p className="font-semibold text-[var(--color-ink)]">我的 AI 工具箱</p>
             <ul className="mt-3 space-y-2 text-[var(--color-muted)]">
               <li>我的專案</li>
               <li>我的報告</li>
+              <li>已收藏工具</li>
               <li>使用紀錄</li>
             </ul>
           </div>

@@ -15,30 +15,23 @@ export const BRAND = {
   url: "https://globalvistagroup.com",
 } as const;
 
-/** Top utility links (mockup header) */
+/** Top utility links (mockup header — lean chrome) */
 export const UTILITY_NAV: NavItem[] = [
   { label: "關於 GVG", href: "/about" },
   { label: "服務項目", href: "/services" },
-  { label: "Enterprise", href: "/enterprise" },
-  { label: "企業資訊", href: "/business" },
-  { label: "設計中心", href: "/design" },
-  { label: "開發儀表板", href: "/development" },
-  { label: "營運儀表板", href: "/operations" },
   { label: "最新消息", href: "/news" },
   { label: "聯絡我們", href: "/contact" },
 ];
 
-/** Primary marketing nav */
+/** Primary marketing nav — matches marketplace mockup IA */
 export const PRIMARY_NAV: NavItem[] = [
   { label: "首頁", href: "/" },
-  { label: "Enterprise", href: "/enterprise", description: "企業總控台" },
-  { label: "產品中心", href: "/products", description: "全球商品目錄" },
+  { label: "商品中心", href: "/products", description: "全球商品目錄" },
   { label: "全球採購", href: "/procurement", description: "採購與 OEM 方案" },
   { label: "國際貿易", href: "/trade", description: "進出口與合規" },
-  { label: "市集", href: "/marketplace", description: "供應商與熱銷商品" },
+  { label: "Marketplace", href: "/marketplace", description: "供應商與熱銷商品" },
   { label: "AI 智慧服務", href: "/ai", description: "AI 採購助理" },
-  { label: "企業資訊", href: "/business", description: "經營與投資人文檔" },
-  { label: "合作專區", href: "/portal/supplier", description: "供應商／夥伴入口" },
+  { label: "合作夥伴專區", href: "/portal/supplier", description: "供應商／夥伴入口" },
 ];
 
 export const PORTAL_NAV: NavItem[] = [
