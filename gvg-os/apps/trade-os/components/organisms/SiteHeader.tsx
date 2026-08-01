@@ -15,50 +15,87 @@ import { Container } from "@/components/atoms/Container";
 import { BRAND, PRIMARY_NAV, UTILITY_NAV } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
+/**
+ * Mockup-accurate 3-tier platform chrome:
+ * 1) thin utility bar
+ * 2) logo + search + account/cart
+ * 3) primary module navigation
+ */
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
 
   return (
-    <header className="sticky top-0 z-50 shadow-sm">
-      {/* Navy utility + search band */}
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
+      {/* Tier 1 — utility */}
       <div className="bg-[var(--color-navy)] text-white">
-        <Container className="flex h-16 items-center gap-4 lg:h-[4.25rem]">
+        <Container className="flex h-9 items-center justify-between gap-4 text-xs">
+          <p className="truncate text-white/80">
+            歡迎來到 GVG Global Trade Platform
+          </p>
+          <div className="flex items-center gap-3 sm:gap-4">
+            {UTILITY_NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="hidden text-white/85 hover:text-white sm:inline"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <button
+              type="button"
+              className="inline-flex items-center gap-1 text-white/85 hover:text-white"
+              aria-label="語言"
+            >
+              <Globe2 className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">繁體中文</span>
+            </button>
+          </div>
+        </Container>
+      </div>
+
+      {/* Tier 2 — brand + search + account */}
+      <div className="border-b border-[var(--color-line)] bg-white">
+        <Container className="flex h-16 items-center gap-4 lg:h-[4.5rem]">
           <Link href="/" className="flex shrink-0 items-center gap-2.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/gvg-mark.svg" alt="GVG" className="h-9 w-9 brightness-110" />
+            <img src="/brand/gvg-mark.svg" alt="GVG" className="h-10 w-10" />
             <span className="leading-tight">
-              <span className="block font-[family-name:var(--font-display)] text-sm font-semibold tracking-wide text-[var(--color-gold)] sm:text-base">
-                {BRAND.shortName}
+              <span className="block font-[family-name:var(--font-display)] text-base font-semibold text-[var(--color-navy)]">
+                {BRAND.shortName}{" "}
+                <span className="hidden font-medium text-[var(--color-gold-strong)] sm:inline">
+                  GLOBAL VISTA GROUP
+                </span>
               </span>
-              <span className="hidden text-[10px] uppercase tracking-[0.14em] text-white/80 sm:block">
-                Global Vista Group
+              <span className="hidden text-[11px] tracking-[0.08em] text-[var(--color-muted)] md:block">
+                Global Trade Platform
               </span>
             </span>
           </Link>
 
           <form
             className="mx-auto hidden max-w-2xl flex-1 md:flex"
-            action="/marketplace"
+            action="/products"
             method="get"
             role="search"
           >
             <label className="sr-only" htmlFor="global-search">
               搜尋商品、品牌、類別
             </label>
-            <div className="flex h-11 w-full overflow-hidden rounded-full bg-white shadow-sm">
+            <div className="flex h-11 w-full overflow-hidden rounded-full border border-[var(--color-line)] bg-[var(--color-mist)]">
               <input
                 id="global-search"
                 name="q"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="搜尋商品、品牌、類別..."
-                className="w-full bg-transparent px-4 text-sm text-[var(--color-ink)] outline-none placeholder:text-[var(--color-muted)]"
+                className="w-full bg-transparent px-4 text-sm text-[var(--color-ink)] outline-none"
               />
               <button
                 type="submit"
-                className="px-4 text-[var(--color-navy)]"
+                className="bg-[var(--color-navy)] px-4 text-white"
                 aria-label="搜尋"
               >
                 <Search className="h-4 w-4" />
@@ -66,34 +103,22 @@ export function SiteHeader() {
             </div>
           </form>
 
-          <div className="ml-auto hidden items-center gap-3 text-xs text-white/85 lg:flex xl:gap-4 xl:text-sm">
-            {UTILITY_NAV.map((item) => (
-              <Link key={item.href} href={item.href} className="hover:text-white">
-                {item.label}
-              </Link>
-            ))}
-            <button
-              type="button"
-              className="inline-flex items-center gap-1 hover:text-white"
-              aria-label="語言"
-            >
-              <Globe2 className="h-4 w-4" />
-              繁體中文
-            </button>
+          <div className="ml-auto hidden items-center gap-4 text-sm text-[var(--color-muted)] lg:flex">
             <Link
               href="/portal/customer"
-              className="inline-flex items-center gap-1 hover:text-white"
+              className="inline-flex items-center gap-1.5 hover:text-[var(--color-navy)]"
             >
               <UserRound className="h-4 w-4" />
               登入 / 註冊
             </Link>
             <Link
-              href="/marketplace"
-              className="relative inline-flex items-center hover:text-white"
-              aria-label="購物車"
+              href="/rfq"
+              className="relative inline-flex items-center gap-1.5 hover:text-[var(--color-navy)]"
+              aria-label="購物車／詢價籃"
             >
               <ShoppingCart className="h-4 w-4" />
-              <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-gold)] px-1 text-[10px] font-bold text-[var(--color-navy)]">
+              <span>購物車</span>
+              <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-navy)] px-1 text-[10px] font-bold text-white">
                 2
               </span>
             </Link>
@@ -101,7 +126,7 @@ export function SiteHeader() {
 
           <button
             type="button"
-            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded text-white lg:hidden"
+            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded text-[var(--color-navy)] lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((value) => !value)}
@@ -112,20 +137,25 @@ export function SiteHeader() {
         </Container>
       </div>
 
-      {/* White primary nav */}
-      <nav className="hidden border-b border-[var(--color-line)] bg-white lg:block" aria-label="主選單">
-        <Container className="flex h-12 items-center gap-7">
+      {/* Tier 3 — primary modules */}
+      <nav
+        className="hidden border-b border-[var(--color-line)] bg-white lg:block"
+        aria-label="主選單"
+      >
+        <Container className="flex h-12 items-center gap-1 xl:gap-2">
           {PRIMARY_NAV.map((item) => {
             const active =
               item.href === "/"
                 ? pathname === "/"
-                : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                : pathname === item.href ||
+                  pathname.startsWith(`${item.href}/`) ||
+                  (item.href === "/products" && pathname.startsWith("/categories"));
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative h-full content-center text-sm font-medium transition-colors",
+                  "relative flex h-full items-center px-3 text-sm font-medium transition-colors xl:px-4",
                   active
                     ? "text-[var(--color-navy)]"
                     : "text-[var(--color-muted)] hover:text-[var(--color-navy)]",
@@ -133,7 +163,7 @@ export function SiteHeader() {
               >
                 {item.label}
                 {active ? (
-                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-[var(--color-navy)]" />
+                  <span className="absolute inset-x-3 bottom-0 h-0.5 bg-[var(--color-navy)] xl:inset-x-4" />
                 ) : null}
               </Link>
             );
@@ -149,14 +179,14 @@ export function SiteHeader() {
         )}
       >
         <Container className="flex flex-col gap-1 py-4">
-          <form action="/marketplace" method="get" className="mb-3">
+          <form action="/products" method="get" className="mb-3">
             <input
               name="q"
               placeholder="搜尋商品、品牌、類別..."
               className="h-10 w-full rounded-md border border-[var(--color-line)] px-3 text-sm"
             />
           </form>
-          {[...PRIMARY_NAV, ...UTILITY_NAV, ...PORTAL_LINKS].map((item) => (
+          {[...PRIMARY_NAV, ...UTILITY_NAV].map((item) => (
             <Link
               key={`${item.href}-${item.label}`}
               href={item.href}
@@ -166,14 +196,15 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/portal/customer"
+            className="rounded px-2 py-2.5 text-sm font-medium"
+            onClick={() => setOpen(false)}
+          >
+            登入 / 註冊
+          </Link>
         </Container>
       </div>
     </header>
   );
 }
-
-const PORTAL_LINKS = [
-  { label: "登入 / 註冊", href: "/portal/customer" },
-  { label: "客戶入口", href: "/portal/customer" },
-  { label: "供應商入口", href: "/portal/supplier" },
-];

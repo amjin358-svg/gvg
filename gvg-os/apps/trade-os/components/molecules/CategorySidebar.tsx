@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { CATALOG_NAV } from "@/frontend/data/mock/catalogNav";
+import {
+  CATALOG_NAV,
+  FURNITURE_PARENT_SLUG,
+} from "@/frontend/data/mock/catalogNav";
 import { cn } from "@/lib/utils";
 
 type CategorySidebarProps = {
+  /** Active leaf category slug (e.g. hardware-tools or furniture) */
   activeSlug?: string;
   title?: string;
   brands?: { label: string; count: number }[];
@@ -24,13 +28,18 @@ export function CategorySidebar({
   ],
   showPriceFilter = true,
 }: CategorySidebarProps) {
+  const expandedSlug =
+    activeSlug === "furniture" ? FURNITURE_PARENT_SLUG : activeSlug;
+
   return (
     <aside className="h-fit space-y-5 rounded-xl border border-[var(--color-line)] bg-white p-4">
       <div>
         <p className="text-sm font-semibold text-[var(--color-navy)]">{title}</p>
         <ul className="mt-3 space-y-1 text-sm">
           {CATALOG_NAV.map((item) => {
-            const active = activeSlug === item.slug;
+            const active = expandedSlug === item.slug;
+            const childActive =
+              activeSlug === "furniture" && item.slug === FURNITURE_PARENT_SLUG;
             return (
               <li key={item.slug}>
                 <Link
@@ -43,20 +52,31 @@ export function CategorySidebar({
                   )}
                 >
                   <span>{item.nameZh}</span>
-                  <ChevronRight className={cn("h-3.5 w-3.5", active ? "opacity-90" : "opacity-40")} />
+                  <ChevronRight
+                    className={cn("h-3.5 w-3.5", active ? "opacity-90" : "opacity-40")}
+                  />
                 </Link>
                 {active && item.children ? (
-                  <ul className="mt-1 space-y-0.5 border-l border-[var(--color-line)] pl-3 ml-2">
-                    {item.children.map((child) => (
-                      <li key={child.label}>
-                        <Link
-                          href={child.href}
-                          className="block rounded px-2 py-1.5 text-xs text-[var(--color-muted)] hover:bg-[var(--color-accent-soft)] hover:text-[var(--color-navy)]"
-                        >
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))}
+                  <ul className="mt-1 ml-2 space-y-0.5 border-l border-[var(--color-line)] pl-3">
+                    {item.children.map((child) => {
+                      const isFurnitureChild =
+                        child.href.includes("/furniture") && childActive;
+                      return (
+                        <li key={`${item.slug}-${child.label}`}>
+                          <Link
+                            href={child.href}
+                            className={cn(
+                              "block rounded px-2 py-1.5 text-xs hover:bg-[var(--color-accent-soft)] hover:text-[var(--color-navy)]",
+                              isFurnitureChild
+                                ? "bg-[var(--color-accent-soft)] font-medium text-[var(--color-navy)]"
+                                : "text-[var(--color-muted)]",
+                            )}
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 ) : null}
               </li>
@@ -77,7 +97,9 @@ export function CategorySidebar({
               />
               <label htmlFor={`brand-${brand.label}`} className="flex-1">
                 {brand.label}
-                <span className="ml-1 text-xs text-[var(--color-muted)]">({brand.count})</span>
+                <span className="ml-1 text-xs text-[var(--color-muted)]">
+                  ({brand.count})
+                </span>
               </label>
             </li>
           ))}
@@ -90,17 +112,21 @@ export function CategorySidebar({
       {showPriceFilter ? (
         <div className="space-y-3">
           <p className="text-sm font-semibold text-[var(--color-navy)]">價格區間（USD）</p>
-          <input type="range" min={0} max={2000} defaultValue={800} className="w-full accent-[var(--color-navy)]" />
+          <input
+            type="range"
+            min={0}
+            max={2000}
+            defaultValue={800}
+            className="w-full accent-[var(--color-navy)]"
+          />
           <div className="grid grid-cols-2 gap-2">
             <input
               name="min"
-              placeholder="最低"
               defaultValue={10}
               className="h-9 rounded-md border border-[var(--color-line)] px-2 text-sm"
             />
             <input
               name="max"
-              placeholder="最高"
               defaultValue={2000}
               className="h-9 rounded-md border border-[var(--color-line)] px-2 text-sm"
             />

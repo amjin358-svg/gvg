@@ -1,15 +1,19 @@
 import type { ProductCategory } from "@/types";
 
 export type CatalogNavItem = {
-  slug: ProductCategory | "all";
+  slug: ProductCategory;
   nameZh: string;
   nameEn: string;
   href: string;
   count: number;
+  /** Sub-filters shown when this category is active */
   children?: { label: string; href: string }[];
 };
 
-/** Product Center left-rail categories (mockup verticals) */
+/**
+ * Product Center taxonomy — top-level verticals match mockups.
+ * Furniture sits under 居家生活, not as a mislabeled “生活雜貨”.
+ */
 export const CATALOG_NAV: CatalogNavItem[] = [
   {
     slug: "health-supplements",
@@ -22,15 +26,24 @@ export const CATALOG_NAV: CatalogNavItem[] = [
       { label: "男性保健", href: "/categories/health-supplements" },
       { label: "女性保健", href: "/categories/health-supplements" },
       { label: "維生素", href: "/categories/health-supplements" },
+      { label: "葉黃素", href: "/categories/health-supplements" },
+      { label: "關節保健", href: "/categories/health-supplements" },
+      { label: "益生菌", href: "/categories/health-supplements" },
       { label: "魚油", href: "/categories/health-supplements" },
     ],
   },
   {
     slug: "packaged-foods",
     nameZh: "食品飲料",
-    nameEn: "Food & Drink",
+    nameEn: "Food & Beverage",
     href: "/categories/packaged-foods",
     count: 214,
+    children: [
+      { label: "全部商品", href: "/categories/packaged-foods" },
+      { label: "零食點心", href: "/categories/packaged-foods" },
+      { label: "飲料沖泡", href: "/categories/packaged-foods" },
+      { label: "南北貨", href: "/categories/packaged-foods" },
+    ],
   },
   {
     slug: "household-goods",
@@ -39,10 +52,13 @@ export const CATALOG_NAV: CatalogNavItem[] = [
     href: "/categories/household-goods",
     count: 356,
     children: [
+      { label: "全部商品", href: "/categories/household-goods" },
       { label: "傢俱", href: "/categories/furniture" },
-      { label: "收納", href: "/categories/household-goods" },
-      { label: "廚具", href: "/categories/household-goods" },
-      { label: "寢具", href: "/categories/household-goods" },
+      { label: "收納整理", href: "/categories/household-goods" },
+      { label: "廚房餐具", href: "/categories/household-goods" },
+      { label: "寢具布藝", href: "/categories/household-goods" },
+      { label: "居家飾品", href: "/categories/household-goods" },
+      { label: "清潔用品", href: "/categories/household-goods" },
     ],
   },
   {
@@ -52,10 +68,14 @@ export const CATALOG_NAV: CatalogNavItem[] = [
     href: "/categories/hardware-tools",
     count: 620,
     children: [
+      { label: "全部商品", href: "/categories/hardware-tools" },
       { label: "手工具", href: "/categories/hardware-tools" },
       { label: "電動工具", href: "/categories/hardware-tools" },
       { label: "五金配件", href: "/categories/hardware-tools" },
       { label: "量測儀器", href: "/categories/hardware-tools" },
+      { label: "氣動工具", href: "/categories/hardware-tools" },
+      { label: "焊接設備", href: "/categories/hardware-tools" },
+      { label: "工具收納", href: "/categories/hardware-tools" },
     ],
   },
   {
@@ -65,10 +85,13 @@ export const CATALOG_NAV: CatalogNavItem[] = [
     href: "/categories/home-improvement",
     count: 428,
     children: [
+      { label: "全部商品", href: "/categories/home-improvement" },
       { label: "地板材料", href: "/categories/home-improvement" },
       { label: "牆面材料", href: "/categories/home-improvement" },
+      { label: "天花材料", href: "/categories/home-improvement" },
       { label: "門窗", href: "/categories/home-improvement" },
-      { label: "衛浴廚房", href: "/categories/home-improvement" },
+      { label: "衛浴設備", href: "/categories/home-improvement" },
+      { label: "廚房設備", href: "/categories/home-improvement" },
     ],
   },
   {
@@ -78,22 +101,13 @@ export const CATALOG_NAV: CatalogNavItem[] = [
     href: "/categories/branded-apparel",
     count: 860,
     children: [
+      { label: "全部商品", href: "/categories/branded-apparel" },
       { label: "男裝", href: "/categories/branded-apparel" },
       { label: "女裝", href: "/categories/branded-apparel" },
+      { label: "童裝", href: "/categories/branded-apparel" },
       { label: "運動服飾", href: "/categories/branded-apparel" },
-      { label: "配件鞋履", href: "/categories/branded-apparel" },
-    ],
-  },
-  {
-    slug: "furniture",
-    nameZh: "生活雜貨",
-    nameEn: "General Merchandise",
-    href: "/categories/furniture",
-    count: 892,
-    children: [
-      { label: "紙品清潔", href: "/categories/furniture" },
-      { label: "洗衣清潔", href: "/categories/furniture" },
-      { label: "個人護理", href: "/categories/furniture" },
+      { label: "配件", href: "/categories/branded-apparel" },
+      { label: "鞋履", href: "/categories/branded-apparel" },
     ],
   },
   {
@@ -102,8 +116,23 @@ export const CATALOG_NAV: CatalogNavItem[] = [
     nameEn: "Auto Supplies",
     href: "/categories/oem-odm",
     count: 146,
+    children: [
+      { label: "全部商品", href: "/categories/oem-odm" },
+      { label: "車用配件", href: "/categories/oem-odm" },
+      { label: "OEM 零件", href: "/categories/oem-odm" },
+    ],
   },
 ];
+
+/** Furniture is nested under Home Living in the rail */
+export const FURNITURE_PARENT_SLUG: ProductCategory = "household-goods";
+
+export function resolveCatalogNav(slug: string): CatalogNavItem | undefined {
+  if (slug === "furniture") {
+    return CATALOG_NAV.find((item) => item.slug === FURNITURE_PARENT_SLUG);
+  }
+  return CATALOG_NAV.find((item) => item.slug === slug);
+}
 
 export const TRUST_BADGES = [
   { title: "全球精選", text: "嚴選全球優質品牌" },

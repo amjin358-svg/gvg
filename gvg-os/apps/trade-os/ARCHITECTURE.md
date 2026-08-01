@@ -1,28 +1,46 @@
-# Trade OS — Marketplace Architecture (Mockup Align)
+# Trade OS — Platform Architecture (redesigned)
 
-Public URL: https://amjin358-svg.github.io/gvg/trade-os/
+Public: https://amjin358-svg.github.io/gvg/trade-os/
 
-## Information architecture
+## Shell (3 tiers — matches mockups)
 
-| Nav | Route | View |
+1. **Utility bar** (navy): welcome + 關於 / 服務 / 消息 / 聯絡 / 語系  
+2. **Main header** (white): Logo · Search → `/products` · 登入 · 購物車  
+3. **Primary nav** (white): 商品中心 · 全球採購 · 國際貿易 · Marketplace · AI 智慧服務 · 合作夥伴專區  
+
+Home `/` is brand entry (hero), not a primary-nav item.
+
+## Module map
+
+| Module | Route | Role |
 | --- | --- | --- |
-| 首頁 | `/` | `frontend/features/home/HomeMarketing.tsx` |
-| 商品中心 | `/products`, `/categories/[slug]` | `frontend/features/products/ProductCenterView.tsx` |
-| 全球採購 | `/procurement` | page shell |
-| 國際貿易 | `/trade` | `app/trade/page.tsx` |
-| Marketplace | `/marketplace` | `frontend/features/marketplace/MarketplaceView.tsx` |
-| AI 智慧服務 | `/ai` | `app/ai/page.tsx` |
-| 合作夥伴專區 | `/portal/supplier` | portal page |
+| 首頁 | `/` | Brand / corporate landing |
+| 商品中心 | `/products` | **Hub** — pick a vertical |
+| 商品列表 | `/categories/[slug]` | Sidebar + product grid |
+| 全球採購 | `/procurement` | Sourcing programs |
+| 國際貿易 | `/trade` | Trade services (own left rail) |
+| Marketplace | `/marketplace` | Supplier bazaar (own left filters) |
+| AI 智慧服務 | `/ai` | AI tools (own left rail) |
+| 合作夥伴 | `/portal/supplier` | Partner entry |
 
-## Shared chrome
+## Product Center taxonomy
 
-- `components/organisms/SiteHeader.tsx` — navy search band + white primary nav
-- `components/molecules/CategorySidebar.tsx` — left category / brand / price filters
-- `components/molecules/CommerceProductCard.tsx` — commerce grid card
-- `frontend/data/mock/catalogNav.ts` — zh verticals for Product Center
+```
+保健食品
+食品飲料
+居家生活
+  └ 傢俱 (/categories/furniture)
+五金工具
+裝潢建材
+品牌服飾
+汽車用品
+```
 
-## Visual system
+Marketplace is **not** Product Center — different left filters (supplier type / region).
 
-- Navy `#001529`, gold `#d4a017`, mist background `#f3f6f9`
-- Dual-row header, left sidebar + content grid, trust badge footer bar
-- Category pages reuse Product Center shell (保健食品 / 五金工具 / 居家生活 / 品牌服飾 / 裝潢建材 …)
+## Key files
+
+- `components/organisms/SiteHeader.tsx`
+- `frontend/data/mock/catalogNav.ts`
+- `frontend/features/products/ProductCenterView.tsx` (`hub` | `listing`)
+- `frontend/features/marketplace/MarketplaceView.tsx`

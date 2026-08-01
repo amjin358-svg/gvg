@@ -23,9 +23,11 @@ export const UTILITY_NAV: NavItem[] = [
   { label: "聯絡我們", href: "/contact" },
 ];
 
-/** Primary marketing nav — matches marketplace mockup IA */
+/**
+ * Primary platform modules (mockup IA).
+ * Home is brand entry; Product Center owns catalog; Marketplace is supplier bazaar.
+ */
 export const PRIMARY_NAV: NavItem[] = [
-  { label: "首頁", href: "/" },
   { label: "商品中心", href: "/products", description: "全球商品目錄" },
   { label: "全球採購", href: "/procurement", description: "採購與 OEM 方案" },
   { label: "國際貿易", href: "/trade", description: "進出口與合規" },
@@ -33,7 +35,6 @@ export const PRIMARY_NAV: NavItem[] = [
   { label: "AI 智慧服務", href: "/ai", description: "AI 採購助理" },
   { label: "合作夥伴專區", href: "/portal/supplier", description: "供應商／夥伴入口" },
 ];
-
 export const PORTAL_NAV: NavItem[] = [
   { label: "客戶入口", href: "/portal/customer" },
   { label: "供應商入口", href: "/portal/supplier" },
@@ -119,7 +120,7 @@ export const CORE_SERVICES = [
 
 export const HOT_CATEGORIES = [
   {
-    nameZh: "健康保健",
+    nameZh: "保健食品",
     nameEn: "Health Supplements",
     href: "/categories/health-supplements",
     image:
@@ -147,21 +148,20 @@ export const HOT_CATEGORIES = [
       "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80",
   },
   {
-    nameZh: "建材裝修",
+    nameZh: "裝潢建材",
     nameEn: "Building Materials",
     href: "/categories/home-improvement",
     image:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
   },
   {
-    nameZh: "辦公用品",
-    nameEn: "Office Supplies",
-    href: "/categories/furniture",
+    nameZh: "品牌服飾",
+    nameEn: "Brand Apparel",
+    href: "/categories/branded-apparel",
     image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
   },
 ] as const;
-
 export const TRADE_SERVICES = [
   {
     id: "international-trading",

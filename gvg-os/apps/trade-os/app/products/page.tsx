@@ -3,14 +3,11 @@ import { ProductCenterView } from "@/frontend/features/products/ProductCenterVie
 
 export const metadata: Metadata = {
   title: "商品中心",
-  description: "GVG 全球商品中心：保健食品、五金工具、居家生活、品牌服飾與裝潢建材。",
+  description:
+    "GVG 商品中心：保健食品、食品飲料、居家生活、五金工具、裝潢建材、品牌服飾與汽車用品。",
 };
 
+/** Product Center hub — choose a vertical, then browse listing pages. */
 export default function ProductsPage() {
-  return (
-    <ProductCenterView
-      title="商品中心"
-      description="精選全球優質商品，支援批發、OEM 與跨境貿易採購。"
-    />
-  );
+  return <ProductCenterView mode="hub" />;
 }

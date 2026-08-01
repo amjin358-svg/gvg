@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductCenterView } from "@/frontend/features/products/ProductCenterView";
-import { CATALOG_NAV } from "@/frontend/data/mock/catalogNav";
+import { resolveCatalogNav } from "@/frontend/data/mock/catalogNav";
 import { categories, products } from "@/frontend/data/mock/catalog";
 import type { ProductCategory } from "@/types";
 
@@ -17,7 +17,13 @@ export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const nav = CATALOG_NAV.find((item) => item.slug === slug);
+  if (slug === "furniture") {
+    return {
+      title: "居家生活 / 傢俱",
+      description: "精選全球傢俱品牌，適合零售、專案與跨境批發採購。",
+    };
+  }
+  const nav = resolveCatalogNav(slug);
   const category = categories.find((item) => item.slug === slug);
   if (!category) return { title: "Category" };
   return {
@@ -31,17 +37,20 @@ export default async function CategoryDetailPage({ params }: CategoryPageProps) 
   const category = categories.find((item) => item.slug === slug);
   if (!category) notFound();
 
-  const nav = CATALOG_NAV.find((item) => item.slug === slug);
+  const nav = resolveCatalogNav(slug);
   const items = products.filter((product) => product.categorySlug === category.slug);
 
   return (
     <ProductCenterView
+      mode="listing"
       activeSlug={category.slug as ProductCategory}
-      title={nav?.nameZh ?? category.name}
+      title={
+        slug === "furniture" ? "居家生活 / 傢俱" : nav?.nameZh ?? category.name
+      }
       description={
-        nav
-          ? `精選優質${nav.nameZh}，專業耐用，滿足全球貿易與通路需求。`
-          : category.description
+        slug === "furniture"
+          ? "精選全球傢俱品牌，適合零售、專案與跨境批發採購。"
+          : `精選優質${nav?.nameZh ?? category.name}，專業耐用，滿足全球貿易與通路需求。`
       }
       items={items}
       totalCount={nav?.count ?? items.length}

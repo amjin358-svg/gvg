@@ -12,22 +12,15 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/atoms/Button";
 import { Container } from "@/components/atoms/Container";
-import { CategorySidebar } from "@/components/molecules/CategorySidebar";
 import { CommerceProductCard } from "@/components/molecules/CommerceProductCard";
-import { MARKETPLACE_SUPPLIERS, TRUST_BADGES } from "@/frontend/data/mock/catalogNav";
+import {
+  CATALOG_NAV,
+  MARKETPLACE_SUPPLIERS,
+  TRUST_BADGES,
+} from "@/frontend/data/mock/catalogNav";
 import { products } from "@/frontend/data/mock/catalog";
 
-const CATEGORIES = [
-  "食品飲料",
-  "居家生活",
-  "五金工具",
-  "汽車用品",
-  "辦公用品",
-  "健康保健",
-  "建材裝修",
-  "品牌服飾",
-];
-
+const CATEGORIES = CATALOG_NAV.map((item) => item.nameZh);
 const SUPPLIER_TYPES = ["製造商", "貿易商", "品牌商", "批發商", "OEM 工廠"];
 const REGIONS = ["台灣", "美國", "中國", "日本", "韓國"];
 
@@ -37,33 +30,55 @@ export function MarketplaceView() {
   return (
     <div className="bg-[var(--color-mist)] pb-0">
       <Container className="grid gap-8 py-8 lg:grid-cols-[260px_1fr]">
-        <div className="space-y-5">
-          <CategorySidebar activeSlug="all" title="瀏覽分類" />
-          <aside className="space-y-5 rounded-xl border border-[var(--color-line)] bg-white p-4">
-            <div>
-              <p className="text-sm font-semibold text-[var(--color-navy)]">供應商類型</p>
-              <ul className="mt-3 space-y-2 text-sm text-[var(--color-muted)]">
-                {SUPPLIER_TYPES.map((type) => (
-                  <li key={type} className="flex items-center gap-2">
-                    <input type="checkbox" id={`type-${type}`} className="accent-[var(--color-navy)]" />
-                    <label htmlFor={`type-${type}`}>{type}</label>
-                  </li>
-                ))}
-              </ul>
+        <aside className="h-fit space-y-5 rounded-xl border border-[var(--color-line)] bg-white p-4">
+          <div>
+            <p className="text-sm font-semibold text-[var(--color-navy)]">瀏覽分類</p>
+            <ul className="mt-3 space-y-1 text-sm">
+              {CATALOG_NAV.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={item.href}
+                    className="block rounded-md px-2.5 py-2 text-[var(--color-muted)] hover:bg-[var(--color-mist)] hover:text-[var(--color-navy)]"
+                  >
+                    {item.nameZh}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-[var(--color-navy)]">供應商類型</p>
+            <ul className="mt-3 space-y-2 text-sm text-[var(--color-muted)]">
+              {SUPPLIER_TYPES.map((type) => (
+                <li key={type} className="flex items-center gap-2">
+                  <input type="checkbox" id={`type-${type}`} className="accent-[var(--color-navy)]" />
+                  <label htmlFor={`type-${type}`}>{type}</label>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-[var(--color-navy)]">出貨地區</p>
+            <ul className="mt-3 space-y-2 text-sm text-[var(--color-muted)]">
+              {REGIONS.map((region) => (
+                <li key={region} className="flex items-center gap-2">
+                  <input type="checkbox" id={`region-${region}`} className="accent-[var(--color-navy)]" />
+                  <label htmlFor={`region-${region}`}>{region}</label>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <p className="text-sm font-semibold text-[var(--color-navy)]">價格區間（USD）</p>
+            <div className="grid grid-cols-2 gap-2">
+              <input placeholder="最低" className="h-9 rounded-md border border-[var(--color-line)] px-2 text-sm" />
+              <input placeholder="最高" className="h-9 rounded-md border border-[var(--color-line)] px-2 text-sm" />
             </div>
-            <div>
-              <p className="text-sm font-semibold text-[var(--color-navy)]">出貨地區</p>
-              <ul className="mt-3 space-y-2 text-sm text-[var(--color-muted)]">
-                {REGIONS.map((region) => (
-                  <li key={region} className="flex items-center gap-2">
-                    <input type="checkbox" id={`region-${region}`} className="accent-[var(--color-navy)]" />
-                    <label htmlFor={`region-${region}`}>{region}</label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </aside>
-        </div>
+            <Button type="button" size="sm" className="w-full">
+              確定
+            </Button>
+          </div>
+        </aside>
 
         <div className="space-y-8">
           <p className="text-xs text-[var(--color-muted)]">首頁 &gt; Marketplace</p>
