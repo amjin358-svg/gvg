@@ -1,0 +1,41 @@
+---
+description: GVG Global Trade OS — project identity, modules, roles, and source-of-truth docs
+alwaysApply: true
+---
+
+# Project — GVG Global Trade OS
+
+**Product:** Global Trade OS v1.0  
+**Company:** Global Vista Group (GVG)  
+**Architecture:** Enterprise SaaS  
+**Stack:** Next.js 15 · React 19 · TypeScript · Tailwind · Supabase
+
+## Mission
+
+B2B/B2C international trading platform connecting suppliers, manufacturers, buyers, logistics providers, and global sourcing services.
+
+## Canonical docs
+
+Prefer `docs/` numbered canon over ad-hoc notes:
+
+- `docs/000_PROJECT_OVERVIEW.md`
+- `docs/001_PRD.md`
+- `docs/002_SYSTEM_ARCHITECTURE.md`
+- `docs/004_FOLDER_STRUCTURE.md`
+- `docs/026_MASTER_TASKS.md`
+
+## Platform modules (routes)
+
+Home `/` · Products · Categories · Brands · RFQ · Quotes · Orders · Procurement · Supplier/Customer portals · Inventory · Warehouses · Logistics · Customs · CRM · CMS · News · Analytics · AI `/ai` · Admin
+
+## Roles
+
+`guest` · `customer` · `business_customer` · `supplier` · `sales` · `purchasing` · `warehouse` · `finance` · `admin` · `super_admin` · `ai_agent`
+
+## Repository boundary
+
+This Trade OS must stay separate from the weather/disaster forecast repo (`amjin358-svg/jin`). Target repo: `amjin358-svg/gvg`.
+
+## When changing structure
+
+Update `docs/004_FOLDER_STRUCTURE.md` and relevant numbered docs in the same change.

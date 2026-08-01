@@ -1,0 +1,38 @@
+---
+description: API contracts, route handlers, request/response conventions
+globs:
+  - api/**/*
+  - app/api/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# API
+
+See also: `docs/006_API_SPEC.md`
+
+## Conventions
+
+- Base path: `/api`
+- JSON in / JSON out
+- Auth via Supabase session cookies / bearer
+- Errors: `{ "error": { "code": string, "message": string } }`
+- Lists support `page`, `pageSize`, `q`, `status`
+
+## Implementation map
+
+| Piece | Location |
+|---|---|
+| Contracts | `api/contracts.ts` |
+| Handlers | `app/api/**/route.ts` |
+| Services | `backend/services/**` |
+
+## When adding an endpoint
+
+1. Add/adjust contract in `api/contracts.ts`
+2. Implement route handler with validation + authz
+3. Delegate to a service (no fat handlers)
+4. Update `docs/006_API_SPEC.md` if public surface changes
+
+## Existing foundation
+
+- `GET /api/health` → `backend/services/health.ts`

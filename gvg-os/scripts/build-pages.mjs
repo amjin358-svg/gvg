@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,18 +17,21 @@ function run(script) {
   }
 }
 
-// Live GitHub Pages site = frozen V4 marketing homepage + Interactive Movie.
+// Live root = V4 marketing homepage. Trade OS zip restore nests at /trade-os/.
 run("build:v4");
 run("build:portal");
+run("build:trade-os");
 
 const siteOut = path.join(root, "apps/v4/out");
 const portalOut = path.join(root, "apps/portal/out");
+const tradeOsOut = path.join(root, "apps/trade-os/out");
 const nestedPortal = path.join(siteOut, "portal");
+const nestedTradeOs = path.join(siteOut, "trade-os");
 const stitchSite = path.resolve(root, "../site/public");
 const nestedOs = path.join(siteOut, "os");
 
-if (!existsSync(siteOut) || !existsSync(portalOut)) {
-  console.error("Missing v4 or portal static export.");
+if (!existsSync(siteOut) || !existsSync(portalOut) || !existsSync(tradeOsOut)) {
+  console.error("Missing v4, portal, or trade-os static export.");
   process.exit(1);
 }
 
@@ -37,6 +40,12 @@ if (existsSync(nestedPortal)) {
 }
 mkdirSync(nestedPortal, { recursive: true });
 cpSync(portalOut, nestedPortal, { recursive: true });
+
+if (existsSync(nestedTradeOs)) {
+  rmSync(nestedTradeOs, { recursive: true, force: true });
+}
+mkdirSync(nestedTradeOs, { recursive: true });
+cpSync(tradeOsOut, nestedTradeOs, { recursive: true });
 
 if (existsSync(stitchSite)) {
   if (existsSync(nestedOs)) {
@@ -49,4 +58,22 @@ if (existsSync(stitchSite)) {
   console.warn("Skipping Stitch OS site: site/public not found");
 }
 
-console.log("Pages bundle ready: v4/out (+ portal nested at out/portal)");
+writeFileSync(
+  path.join(siteOut, "versions.json"),
+  JSON.stringify(
+    {
+      v4: "/",
+      experience: "/experience/",
+      portal: "/portal/",
+      tradeOs: "/trade-os/",
+      os: "/os/",
+      pages: "https://amjin358-svg.github.io/gvg/",
+    },
+    null,
+    2,
+  ),
+);
+
+console.log(
+  "Pages bundle ready: v4/out (+ portal, trade-os nested; stitch os optional)",
+);

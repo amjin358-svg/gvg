@@ -1,0 +1,38 @@
+---
+description: Backend standards — services, repositories, validation, error handling
+globs:
+  - backend/**/*.{ts,tsx}
+  - app/api/**/*.{ts,tsx}
+  - api/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Backend
+
+See also: `docs/013_BACKEND_STANDARD.md`, `docs/006_API_SPEC.md`
+
+## Layering
+
+```
+Route Handler (app/api)
+  → validate DTO
+  → authorize role
+  → backend/services use-case
+  → backend/repositories adapter
+  → Supabase / Redis / OpenAI
+```
+
+## Rules
+
+- Keep domain decisions in services
+- Define repository interfaces; implement adapters separately
+- Validate at the boundary (Zod or equivalent)
+- Never trust client-supplied roles — read from server session/profile
+- Structured errors with stable codes
+- Idempotent writes for webhooks / payment-like events
+- No PII in info logs; correlate `requestId`
+
+## Contracts
+
+- Document routes in `api/contracts.ts` when adding endpoints
+- Keep OpenAPI notes under `api/` in sync with handlers

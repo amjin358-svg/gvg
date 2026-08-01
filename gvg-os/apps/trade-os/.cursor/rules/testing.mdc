@@ -1,0 +1,39 @@
+---
+description: Testing standards — unit, integration, e2e expectations
+globs:
+  - tests/**/*
+  - "**/*.{test,spec}.{ts,tsx}"
+alwaysApply: false
+---
+
+# Testing
+
+See also: `docs/026_MASTER_TASKS.md` (definition of done)
+
+## Layout
+
+```
+tests/
+├── unit/
+├── integration/   # Phase 2
+└── e2e/           # Phase 2
+```
+
+## Commands
+
+- `npm run test` — foundation unit tests (`tsx --test`)
+
+## Expectations
+
+| Layer | Cover |
+|---|---|
+| Unit | Pure utils, contracts, role constants, services without I/O |
+| Integration | Repository + API against Supabase local (Phase 2) |
+| E2E | RFQ → quote → order happy path (Phase 2) |
+
+## Rules
+
+- Add/adjust tests with behavior changes on critical paths
+- Prefer deterministic fixtures over live network calls
+- Do not snapshot entire pages unless layout-critical
+- Definition of done includes tests for critical path features

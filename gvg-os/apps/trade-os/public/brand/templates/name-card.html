@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GVG Name Card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0a1628;
+        --teal: #1a7a6d;
+        --teal-soft: #b7e0d8;
+        --copper: #b87333;
+        --muted: #5b6b7c;
+        --line: #d5dee7;
+        --surface: #f7fafb;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        gap: 2rem;
+        padding: 2rem;
+        background: var(--surface);
+        font-family: "Source Sans 3", sans-serif;
+        color: var(--ink);
+      }
+      h1 {
+        font-family: Outfit, sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0 0 1rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .card {
+        width: 3.5in;
+        height: 2in;
+        background: white;
+        border: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: 0.28fr 0.72fr;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(10, 22, 40, 0.06);
+      }
+      .rail {
+        background: var(--ink);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.35in 0.2in;
+      }
+      .mark {
+        width: 36px;
+        height: 36px;
+      }
+      .tag {
+        color: var(--teal-soft);
+        font-size: 8px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-family: Outfit, sans-serif;
+      }
+      .body {
+        padding: 0.28in 0.3in;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .name {
+        font-family: Outfit, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+      }
+      .role {
+        margin: 4px 0 0;
+        font-size: 11px;
+        color: var(--teal);
+        font-weight: 600;
+      }
+      .meta {
+        margin-top: 12px;
+        font-size: 10px;
+        line-height: 1.45;
+        color: var(--muted);
+      }
+      .company {
+        margin-top: 10px;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink);
+        font-family: Outfit, sans-serif;
+        font-weight: 600;
+      }
+      .back {
+        background: var(--ink);
+        color: white;
+        place-items: center;
+        text-align: center;
+        padding: 0.35in;
+        display: grid;
+        align-content: center;
+        gap: 8px;
+      }
+      .back strong {
+        font-family: Outfit, sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.04em;
+      }
+      .back span {
+        color: var(--teal-soft);
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .back p {
+        margin: 10px 0 0;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 10px;
+      }
+      @media print {
+        body { background: white; display: block; padding: 0; }
+        h1 { display: none; }
+        .card { box-shadow: none; page-break-after: always; }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Front</h1>
+      <article class="card" aria-label="Name card front">
+        <div class="rail">
+          <img class="mark" src="/brand/gvg-mark.svg" alt="GVG" />
+          <div class="tag">GVG</div>
+        </div>
+        <div class="body">
+          <p class="name">Alex Chen</p>
+          <p class="role">Head of Global Procurement</p>
+          <div class="meta">
+            +1 (213) 555-0148<br />
+            alex.chen@globalvistagroup.com<br />
+            Los Angeles · Taipei
+          </div>
+          <div class="company">Global Vista Group</div>
+        </div>
+      </article>
+    </div>
+
+    <div>
+      <h1>Back</h1>
+      <article class="card back" aria-label="Name card back">
+        <strong>Global Vista Group</strong>
+        <span>Global Trade OS</span>
+        <p>Connect. Source. Ship. Scale.</p>
+        <p>globalvistagroup.com</p>
+      </article>
+    </div>
+  </body>
+</html>

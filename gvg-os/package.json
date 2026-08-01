@@ -20,6 +20,8 @@
     "build:v3": "npm run build -w @gvg/v3",
     "dev:v4": "npm run dev -w @gvg/v4",
     "build:v4": "npm run build -w @gvg/v4",
+    "dev:trade-os": "npm run dev -w @gvg/trade-os",
+    "build:trade-os": "npm run build -w @gvg/trade-os",
     "build:pages": "node ./scripts/build-pages.mjs",
     "dev:v5": "npm run dev -w @gvg/v5",
     "build:v5": "npm run build -w @gvg/v5",
