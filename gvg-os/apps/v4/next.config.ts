@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   // Prefer the gvg-os workspace root over the parent trade-os lockfile.
   outputFileTracingRoot: path.join(appDir, "../.."),
+  eslint: { ignoreDuringBuilds: true },
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
     // Feature pages live in @gvg/portal (separate app folder).

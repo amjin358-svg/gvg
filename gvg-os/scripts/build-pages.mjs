@@ -17,17 +17,18 @@ function run(script) {
   }
 }
 
-run("build:website");
+// Live GitHub Pages site = frozen V4 marketing homepage + Interactive Movie.
+run("build:v4");
 run("build:portal");
 
-const websiteOut = path.join(root, "apps/website/out");
+const siteOut = path.join(root, "apps/v4/out");
 const portalOut = path.join(root, "apps/portal/out");
-const nestedPortal = path.join(websiteOut, "portal");
+const nestedPortal = path.join(siteOut, "portal");
 const stitchSite = path.resolve(root, "../site/public");
-const nestedOs = path.join(websiteOut, "os");
+const nestedOs = path.join(siteOut, "os");
 
-if (!existsSync(websiteOut) || !existsSync(portalOut)) {
-  console.error("Missing website or portal static export.");
+if (!existsSync(siteOut) || !existsSync(portalOut)) {
+  console.error("Missing v4 or portal static export.");
   process.exit(1);
 }
 
@@ -48,4 +49,4 @@ if (existsSync(stitchSite)) {
   console.warn("Skipping Stitch OS site: site/public not found");
 }
 
-console.log("Pages bundle ready: website/out (+ portal nested at out/portal)");
+console.log("Pages bundle ready: v4/out (+ portal nested at out/portal)");

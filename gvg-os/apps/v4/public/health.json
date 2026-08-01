@@ -1,5 +1,16 @@
 {
   "ok": true,
-  "service": "@gvg/website",
-  "experience": "interactive-movie"
+  "service": "@gvg/v4",
+  "home": "v4-marketing-homepage",
+  "experience": "interactive-movie",
+  "version": "IM-V4.0",
+  "movieVersion": "IM-V4.0",
+  "semver": "0.4.0",
+  "restoredAt": "2026-08-01",
+  "watch": {
+    "pages": "https://amjin358-svg.github.io/gvg/",
+    "home": "/",
+    "experience": "/experience",
+    "devices": ["mobile", "desktop", "tablet"]
+  }
 }

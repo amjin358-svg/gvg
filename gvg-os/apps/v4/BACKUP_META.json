@@ -1,8 +1,9 @@
 {
-  "label": "homepage-v4-backup",
-  "sourceApp": "@gvg/website",
-  "sourcePath": "gvg-os/apps/website",
-  "publicUrlAtBackup": "https://amjin358-svg.github.io/gvg/",
+  "label": "homepage-v4-live",
+  "sourceApp": "@gvg/v4",
+  "sourcePath": "gvg-os/apps/v4",
+  "publicUrl": "https://amjin358-svg.github.io/gvg/",
   "backedUpAt": "2026-07-27T07:15:00Z",
-  "note": "Frozen copy of the GitHub-published V4 marketing homepage. Do not treat as the live deploy target."
+  "restoredAt": "2026-08-01",
+  "note": "Restored as the live GitHub Pages deploy target via scripts/build-pages.mjs."
 }

@@ -1,23 +1,28 @@
-﻿# @gvg/v4 — Homepage backup (GitHub V4)
+﻿# @gvg/v4 — GitHub V4 (live restore)
 
-**Purpose:** Frozen snapshot of the GitHub-published marketing homepage (`@gvg/website` / https://amjin358-svg.github.io/gvg/).
+**Purpose:** Frozen V4 marketing homepage + Interactive Movie pipeline.
 
-Treat this folder as a **read-mostly backup**. New redesigns should go elsewhere (`website`, `v3`, `site/public` stitch OS, etc.) so V4 can be restored or compared without mixing versions.
+This package is the **live GitHub Pages deploy target** again (`npm run build:pages` → `apps/v4/out`).
 
-## What was copied
+Later experiments stay elsewhere so they do not overwrite V4:
 
-Full source tree from `gvg-os/apps/website` at backup time (app, components, lib, public, styles), excluding `node_modules`, `.next`, and `out`.
+| App | Role |
+| --- | --- |
+| `v4` | **Live** V4 homepage + IM-V4 experience |
+| `website` | Later ScrollControls / cinematic WIP |
+| `v5` | IM-V5 freeze |
+| `v6` / `website` `cinematic-v6` | Homepage FX / V6 WIP |
+| `portal` | Corporate trade site |
 
-Key homepage entry points:
+## Entry points
 
 | Path | Role |
 | --- | --- |
-| `app/page.tsx` | Route `/` |
-| `components/home/HomePage.tsx` | Homepage composition |
+| `app/page.tsx` | Route `/` — `HomePage` |
 | `components/home/HeroCinematic.tsx` | Hero |
-| `app/experience/page.tsx` | Interactive Movie |
+| `app/experience/page.tsx` | Interactive Movie IM-V4 |
 
-## Dev (optional)
+## Dev
 
 ```bash
 # from gvg-os/
@@ -27,11 +32,9 @@ npm run dev:v4
 
 http://localhost:3004
 
-## Version map (apps)
+## Deploy
 
-| App | Role |
-| --- | --- |
-| `website` | Live / working cinematic site (evolves) |
-| `v3` | Cosmos ↔ trade bridge experiment |
-| `v4` | **This backup** — GitHub V4 homepage freeze |
-| `portal` | Corporate trade site |
+```bash
+npm run build:pages
+# publishes apps/v4/out (+ nested portal/os) to gh-pages
+```
