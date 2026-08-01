@@ -90,18 +90,11 @@ function VolumetricWash() {
 
 /**
  * Always-alive cinematic plate — stars, dust, grid, gold wash, noise.
+ * Renders behind the main InteractiveMovie ScrollControls canvas.
  */
 export default function AmbientBackground() {
   return (
-    <div
-      aria-hidden
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 0,
-        pointerEvents: "none",
-      }}
-    >
+    <div className="im-ambient" aria-hidden>
       <Canvas
         dpr={[1, 1.35]}
         camera={{ position: [0, 0.3, 9], fov: 48, near: 0.1, far: 80 }}
@@ -110,52 +103,15 @@ export default function AmbientBackground() {
       >
         <color attach="background" args={["#03060c"]} />
         <fog attach="fog" args={["#03060c", 14, 40]} />
-        <Stars
-          radius={70}
-          depth={45}
-          count={2000}
-          factor={2.1}
-          saturation={0}
-          fade
-          speed={0.22}
-        />
+        <Stars radius={70} depth={45} count={2000} factor={2.1} saturation={0} fade speed={0.22} />
         <Dust />
         <SoftGrid />
         <VolumetricWash />
         <ambientLight intensity={0.2} />
       </Canvas>
-
-      {/* Film noise */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.04,
-          mixBlendMode: "overlay",
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-        }}
-      />
-
-      {/* Vignette */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.7) 100%)",
-        }}
-      />
-
-      {/* Soft gold atmospheric wash */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse 50% 40% at 50% 18%, rgba(224,184,74,0.07), transparent 60%), linear-gradient(180deg, rgba(224,184,74,0.035), transparent 42%)",
-        }}
-      />
+      <div className="im-ambient__noise" />
+      <div className="im-ambient__vignette" />
+      <div className="im-ambient__gold" />
     </div>
   );
 }

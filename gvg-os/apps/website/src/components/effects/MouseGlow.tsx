@@ -40,15 +40,5 @@ export default function MouseGlow() {
     };
   }, []);
 
-  return (
-    <div
-      ref={ref}
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-20 mix-blend-screen"
-      style={{
-        background:
-          "radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(224, 184, 74, 0.14), transparent 55%)",
-      }}
-    />
-  );
+  return <div ref={ref} className="im-mouse-glow" aria-hidden />;
 }
