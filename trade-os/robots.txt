@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://amjin358-svg.github.io/gvg/trade-os/sitemap.xml
