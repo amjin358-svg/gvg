@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "service": "@gvg/website",
+  "home": "interactive-movie-scrollcontrols",
+  "experience": "interactive-movie",
+  "v6": "interactive-movie-v6-wip",
+  "version": "CX-HOME-2.0",
+  "movieVersion": "IM-V5.0",
+  "homeWip": "IM-V6.0-WIP",
+  "semver": "2.0.0",
+  "releasedAt": "2026-07-29",
+  "watch": {
+    "pages": "https://amjin358-svg.github.io/gvg/",
+    "home": "/",
+    "experience": "/experience",
+    "v6": "/v6",
+    "devices": ["mobile", "desktop", "tablet"]
+  }
+}

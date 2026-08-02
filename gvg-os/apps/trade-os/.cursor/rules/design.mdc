@@ -1,0 +1,37 @@
+---
+description: Design system — brand, tokens, typography, motion, layout rules
+globs:
+  - styles/**/*
+  - components/**/*.{ts,tsx}
+  - frontend/features/home/**/*.{ts,tsx}
+  - app/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Design
+
+See also: `docs/009_UI_DESIGN_SYSTEM.md`, `docs/011_DESIGN_TOKEN.md`
+
+## Brand
+
+- Name signal: **GVG / Global Vista Group** must be hero-level on marketing surfaces
+- Product: Global Trade OS
+- Tone: confident, global, operational — not playful startup kitsch
+
+## Tokens (`styles/globals.css`)
+
+- Ink navy `#0a1628` · Teal accent `#1a7a6d` · Copper `#b87333` (sparingly)
+- Mist / surface neutrals for content regions
+- Display font: Outfit · Body: Source Sans 3
+
+## Layout
+
+- One composition in the first viewport
+- Full-bleed heroes on promotional pages
+- One job per section
+- Cards only when interaction needs a container — never in heroes
+- No detached badges/stickers over hero media
+
+## Motion
+
+Ship 2–3 intentional motions max per visually led surface; disable transforms when `prefers-reduced-motion`.

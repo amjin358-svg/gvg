@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GVG Proposal Template</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0a1628;
+        --teal: #1a7a6d;
+        --teal-soft: #b7e0d8;
+        --copper: #b87333;
+        --muted: #5b6b7c;
+        --line: #d5dee7;
+        --mist: #eef3f6;
+      }
+      @page { size: Letter; margin: 0; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #d9e2e8;
+        font-family: "Source Sans 3", sans-serif;
+        color: var(--ink);
+      }
+      .page {
+        width: 8.5in;
+        min-height: 11in;
+        margin: 1rem auto;
+        background: white;
+        box-shadow: 0 12px 40px rgba(10, 22, 40, 0.1);
+        padding: 0.7in 0.8in;
+        page-break-after: always;
+      }
+      .cover {
+        background: linear-gradient(145deg, #07111f 0%, #0b1f33 45%, #0d3d3a 100%);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: relative;
+        overflow: hidden;
+      }
+      .cover::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+        background-size: 40px 40px;
+        opacity: 0.4;
+        mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+      }
+      .cover * { position: relative; }
+      .cover img { height: 48px; width: auto; margin-bottom: 1.2in; }
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--teal-soft);
+        font-family: Outfit, sans-serif;
+        font-weight: 600;
+      }
+      .cover h1 {
+        font-family: Outfit, sans-serif;
+        font-size: 40px;
+        line-height: 1.1;
+        margin: 12px 0;
+        font-weight: 600;
+        max-width: 5.5in;
+      }
+      .cover .tagline {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 16px;
+        margin: 0 0 0.6in;
+      }
+      .cover-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        padding-top: 0.35in;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.75);
+      }
+      h2 {
+        font-family: Outfit, sans-serif;
+        font-size: 22px;
+        margin: 0 0 12px;
+        font-weight: 600;
+      }
+      h3 {
+        font-family: Outfit, sans-serif;
+        font-size: 14px;
+        margin: 20px 0 8px;
+        color: var(--teal);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      p, li { font-size: 12.5px; line-height: 1.65; color: #243447; }
+      .lead { font-size: 15px; color: var(--ink); }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0 20px;
+        font-size: 12px;
+      }
+      th, td {
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        padding: 10px 8px;
+        vertical-align: top;
+      }
+      th {
+        font-family: Outfit, sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 8px;
+      }
+      .panel {
+        border-top: 2px solid var(--teal);
+        padding-top: 10px;
+      }
+      footer.bar {
+        margin-top: auto;
+        padding-top: 0.3in;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: var(--muted);
+      }
+      .page-inner {
+        min-height: 9.4in;
+        display: flex;
+        flex-direction: column;
+      }
+      @media print {
+        body { background: white; }
+        .page { margin: 0; box-shadow: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cover -->
+    <section class="page cover">
+      <img src="/brand/gvg-product-lockup-dark.svg" alt="GVG Global Trade OS" />
+      <div class="eyebrow">Commercial proposal</div>
+      <h1>Platform partnership & sourcing program proposal</h1>
+      <p class="tagline">Connect. Source. Ship. Scale.</p>
+      <div class="cover-meta">
+        <div>
+          <strong style="color: white">Prepared for</strong><br />
+          [Client Company]<br />
+          [Client Contact]
+        </div>
+        <div>
+          <strong style="color: white">Prepared by</strong><br />
+          Global Vista Group<br />
+          [Date] · Confidential
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="page">
+      <div class="page-inner">
+        <div class="eyebrow" style="color: var(--teal)">01 — Overview</div>
+        <h2>Executive summary</h2>
+        <p class="lead">
+          Global Vista Group proposes deploying GVG Global Trade OS to unify
+          [Client Company]’s cross-border sourcing, RFQ/quoting, order execution,
+          and logistics visibility — with optional US purchasing and OEM/ODM support.
+        </p>
+        <div class="grid">
+          <div class="panel">
+            <h3>Objectives</h3>
+            <ul>
+              <li>Shorten RFQ-to-award cycle time</li>
+              <li>Improve landed-cost visibility before commit</li>
+              <li>Centralize supplier & order status</li>
+              <li>Establish role-based controls for ops teams</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Proposed scope</h3>
+            <ul>
+              <li>Trade OS seats (Buyer / Supplier / Ops)</li>
+              <li>Catalog + RFQ + Quote + Order modules</li>
+              <li>AI Procurement Assistant (pilot)</li>
+              <li>[Optional] US purchasing consolidation</li>
+            </ul>
+          </div>
+        </div>
+        <h3>Success metrics</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Baseline</th>
+              <th>Target (90 days)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RFQ first response</td>
+              <td>[current]</td>
+              <td>&lt; 1 business day</td>
+            </tr>
+            <tr>
+              <td>Quote completeness</td>
+              <td>[current]</td>
+              <td>&gt; 95%</td>
+            </tr>
+            <tr>
+              <td>Orders with live shipment status</td>
+              <td>[current]</td>
+              <td>100% active ocean/air</td>
+            </tr>
+          </tbody>
+        </table>
+        <footer class="bar">
+          <span>Global Vista Group — Confidential</span>
+          <span>Page 2</span>
+        </footer>
+      </div>
+    </section>
+
+    <!-- Commercials -->
+    <section class="page">
+      <div class="page-inner">
+        <div class="eyebrow" style="color: var(--teal)">02 — Commercials</div>
+        <h2>Investment & timeline</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Description</th>
+              <th>Investment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Platform subscription</td>
+              <td>[Tier] · [N] seats · [term]</td>
+              <td>[USD / mo]</td>
+            </tr>
+            <tr>
+              <td>Onboarding</td>
+              <td>Catalog import, role setup, SOP training</td>
+              <td>[USD one-time]</td>
+            </tr>
+            <tr>
+              <td>US purchasing desk</td>
+              <td>Optional managed service</td>
+              <td>[retainer / %]</td>
+            </tr>
+            <tr>
+              <td>AI add-on</td>
+              <td>Procurement assistant pack</td>
+              <td>[USD / mo]</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Delivery plan</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Milestone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Kickoff, roles, sample catalog</td>
+            </tr>
+            <tr>
+              <td>2–3</td>
+              <td>RFQ/quote pilot with 1–2 suppliers</td>
+            </tr>
+            <tr>
+              <td>4–6</td>
+              <td>Order + logistics visibility live</td>
+            </tr>
+            <tr>
+              <td>7–8</td>
+              <td>Training sign-off & success review</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Next step</h3>
+        <p>
+          Approve this proposal and schedule kickoff. Binding commercials are
+          confirmed in the order form / MSA referenced by both parties.
+        </p>
+        <p>
+          <strong>[Sender Name]</strong><br />
+          [Title], Global Vista Group<br />
+          [email] · [phone]
+        </p>
+        <footer class="bar">
+          <span>Connect · Source · Ship · Scale</span>
+          <span>Page 3</span>
+        </footer>
+      </div>
+    </section>
+  </body>
+</html>

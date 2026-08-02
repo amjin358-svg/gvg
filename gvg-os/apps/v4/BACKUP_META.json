@@ -1,0 +1,9 @@
+{
+  "label": "homepage-v4-live",
+  "sourceApp": "@gvg/v4",
+  "sourcePath": "gvg-os/apps/v4",
+  "publicUrl": "https://amjin358-svg.github.io/gvg/",
+  "backedUpAt": "2026-07-27T07:15:00Z",
+  "restoredAt": "2026-08-01",
+  "note": "Restored as the live GitHub Pages deploy target via scripts/build-pages.mjs."
+}

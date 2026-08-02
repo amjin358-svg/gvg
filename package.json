@@ -8,9 +8,12 @@
     "start": "next start",
     "lint": "eslint",
     "test": "tsx --test tests/unit/**/*.test.ts",
-    "structure": "node scripts/print-structure.mjs"
+    "structure": "node scripts/print-structure.mjs",
+    "setup:stitch": "bash scripts/setup-stitch.sh"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.2",
@@ -18,7 +21,8 @@
     "next": "15.5.21",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -26,6 +30,7 @@
     "@types/node": "^20.19.43",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.185.1",
     "eslint": "^9",
     "eslint-config-next": "15.5.21",
     "tailwindcss": "^4",

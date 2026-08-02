@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "service": "@gvg/trade-os",
+  "source": "gvg-global-trade-os.zip",
+  "version": "1.0.0",
+  "restoredAt": "2026-08-01",
+  "watch": {
+    "pages": "https://amjin358-svg.github.io/gvg/trade-os/",
+    "home": "/trade-os/",
+    "devices": ["mobile", "desktop", "tablet"]
+  }
+}

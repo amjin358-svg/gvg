@@ -1,0 +1,39 @@
+---
+description: Security — auth, RBAC, secrets, RLS, audit
+globs:
+  - app/api/**/*.{ts,tsx}
+  - backend/**/*.{ts,tsx}
+  - supabase/**/*
+  - "**/*auth*"
+  - "**/*permission*"
+alwaysApply: false
+---
+
+# Security
+
+See also: `docs/007_AUTHENTICATION.md`, `docs/008_PERMISSION.md`
+
+## AuthN
+
+- Supabase Auth only for end users
+- Server clients via `@supabase/ssr` patterns (when wired)
+- Service role key never ships to the browser
+
+## AuthZ
+
+- Enforce at UI (hide), API (guard), and DB (RLS)
+- Read role from server `profiles` — ignore client role claims
+- Ownership: buyers see own RFQs/orders; suppliers see invited RFQs + own quotes
+- Role matrix source: `docs/008_PERMISSION.md` / `types/roles.ts`
+
+## Secrets
+
+- Store in Vercel / GitHub Actions / Supabase secrets
+- Never commit `.env` with real keys
+- Rotate on leak suspicion
+
+## AI safety
+
+- AI agent must not silently place binding orders
+- Confirm before mutating RFQ/order state
+- Audit tool actions; rate-limit prompts

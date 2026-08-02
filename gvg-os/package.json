@@ -1,0 +1,31 @@
+{
+  "name": "gvg-os",
+  "version": "5.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "plugins/*",
+    "services/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:website": "npm run dev -w @gvg/website",
+    "build:website": "npm run build -w @gvg/website",
+    "dev:portal": "npm run dev -w @gvg/portal",
+    "build:portal": "npm run build -w @gvg/portal",
+    "dev:v3": "npm run dev -w @gvg/v3",
+    "build:v3": "npm run build -w @gvg/v3",
+    "dev:v4": "npm run dev -w @gvg/v4",
+    "build:v4": "npm run build -w @gvg/v4",
+    "dev:trade-os": "npm run dev -w @gvg/trade-os",
+    "build:trade-os": "npm run build -w @gvg/trade-os",
+    "build:pages": "node ./scripts/build-pages.mjs",
+    "dev:v5": "npm run dev -w @gvg/v5",
+    "build:v5": "npm run build -w @gvg/v5",
+    "dev:v6": "npm run dev -w @gvg/v6",
+    "build:v6": "npm run build -w @gvg/v6"
+  }
+}

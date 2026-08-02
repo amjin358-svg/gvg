@@ -1,0 +1,42 @@
+---
+description: AI Procurement Assistant — tools, safety, UX, integrations
+globs:
+  - frontend/features/ai/**/*
+  - app/ai/**/*
+  - backend/ai/**/*
+  - "**/ai/**/*"
+alwaysApply: false
+---
+
+# AI Agent
+
+See also: `docs/015_AI_AGENT.md`
+
+## Role
+
+`ai_agent` assists humans — never silently commit binding commercial actions.
+
+## v1 capabilities
+
+- Supplier / SKU matching from natural language
+- RFQ draft generation
+- Landed-cost estimation heuristics
+- HS hints with mandatory human review later
+
+## Implementation points
+
+- UI: `/ai` · `frontend/features/ai/AiAssistantPanel.tsx`
+- API (planned): `POST /api/ai/procurement`
+- Prefer tool-calling orchestration over one-shot ungrounded answers
+- Cite matched SKUs / RFQ ids in replies
+
+## Safety
+
+- Confirm before create/update RFQ or order
+- Rate-limit per user/org
+- Redact secrets from prompt logs
+- Keep privileged model calls server-side / Edge Functions
+
+## Stack
+
+OpenAI chat + embeddings/vector search; OCR/translation/recommendations in later phases.

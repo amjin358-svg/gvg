@@ -1,0 +1,20 @@
+{
+  "id": "HOME-V6.0",
+  "label": "Homepage FX freeze",
+  "frozenAt": "2026-07-29",
+  "source": {
+    "app": "gvg-global-trade-os (workspace root)",
+    "route": "/",
+    "feature": "frontend/features/experience"
+  },
+  "includes": [
+    "HeroExperience scroll-driven cinematic homepage",
+    "HeroCanvas: galaxy zoom → warp flight → 3D text → trade globe",
+    "AnimatedLogo brand mark",
+    "Framer Motion beat copy + CTA"
+  ],
+  "ports": {
+    "dev": 3006
+  },
+  "notes": "Standalone restore snapshot of the root homepage FX. Run npm run build:v6 from gvg-os, or npm run build -w @gvg/v6."
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@gvg/v5",
+  "version": "0.5.0",
+  "private": true,
+  "description": "Frozen Interactive Movie IM-V5.0 script + effects backup of @gvg/website.",
+  "scripts": {
+    "dev": "next dev --port 3005",
+    "build": "next build",
+    "start": "next start --port 3005",
+    "lint": "echo \"lint v5\""
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@react-three/drei": "^10.0.6",
+    "@react-three/fiber": "^9.1.2",
+    "framer-motion": "^12.6.3",
+    "gsap": "^3.13.0",
+    "next": "15.5.21",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "split-type": "^0.3.4",
+    "three": "^0.175.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.175.0",
+    "typescript": "^5.8.3"
+  }
+}

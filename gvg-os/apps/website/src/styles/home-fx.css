@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Homepage FX tokens — scoped companion to movie globals.css */
+:root {
+  --color-ink: #0a1628;
+  --color-ink-soft: #132338;
+  --color-navy: #001529;
+  --color-navy-deep: #00101f;
+  --color-mist: #f3f6f9;
+  --color-surface: #ffffff;
+  --color-line: #e5eaf0;
+  --color-muted: #5b6b7c;
+  --color-accent: #0b3a6e;
+  --color-accent-strong: #072a4f;
+  --color-accent-soft: #d6e4f5;
+  --color-gold: #d4a017;
+  --color-gold-strong: #b8860b;
+  --color-teal: #1a7a6d;
+  --color-copper: #b87333;
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-body: "Noto Sans TC", system-ui, sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}

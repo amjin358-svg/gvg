@@ -1,0 +1,11 @@
+{
+  "label": "interactive-movie-im-v5-0",
+  "versionCode": "IM-V5.0",
+  "semver": "0.5.0",
+  "sourceApp": "@gvg/website",
+  "sourcePath": "gvg-os/apps/website",
+  "scriptDoc": "docs/MOVIE_SCRIPT_V5.md",
+  "publicUrlAtBackup": "https://amjin358-svg.github.io/gvg/experience/",
+  "backedUpAt": "2026-07-29T09:55:00Z",
+  "note": "Frozen copy of Interactive Movie V5 (cosmo open, Earth spin, routes, pillars, gold finale). Live site continues on @gvg/website; restore or compare from this folder."
+}

@@ -1,0 +1,19 @@
+---
+description: Google Stitch AI design collaboration for GVG UI work
+globs:
+  - gvg-os/apps/portal/**
+  - gvg-os/apps/website/components/**
+  - gvg-os/apps/website/styles/**
+  - .stitch/**
+alwaysApply: false
+---
+
+# Stitch collaboration
+
+When the user asks to design, generate, sync, or implement UI with Stitch:
+
+1. Prefer Stitch MCP tools (`list_projects`, `generate_screen_from_text`, `get_screen`, download HTML/image, etc.).
+2. Load the matching skill under `.agents/skills/` (e.g. `generate-design`, `react-components`, `enhance-prompt`).
+3. Keep cinematic marketing code in `gvg-os/apps/website`; feature UI in `gvg-os/apps/portal`.
+4. Store durable design artifacts under `.stitch/` (`DESIGN.md`, `screens/`, `exports/`).
+5. Never commit real `STITCH_API_KEY` values — use `.env` / Cursor secrets only.

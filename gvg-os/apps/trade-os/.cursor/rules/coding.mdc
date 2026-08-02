@@ -1,0 +1,45 @@
+---
+description: Coding standards — TypeScript, architecture, SOLID, repository pattern
+alwaysApply: true
+---
+
+# Coding Standards
+
+## Hard rules
+
+- Strict TypeScript — **no `any`**
+- Prefer explicit domain types from `types/`
+- Server Components first; `"use client"` only when required
+- SOLID + Clean Architecture boundaries
+- Repository pattern for data access
+- Feature-based modules under `frontend/features/<name>/`
+- Atomic Design under `components/{atoms,molecules,organisms}`
+
+## Placement
+
+| Concern | Put it in |
+|---|---|
+| Page / route | `app/` |
+| UI primitive | `components/` |
+| Feature UI / domain UI | `frontend/features/` |
+| Mock / seed data | `frontend/data/` |
+| Business service | `backend/services/` |
+| Persistence adapter | `backend/repositories/` |
+| Shared util | `lib/` |
+| Domain type | `types/` |
+| Hook | `hooks/` |
+| Global CSS / tokens | `styles/` |
+
+## Code quality
+
+- Small, focused diffs — no drive-by refactors
+- No unused exports or dead code
+- Named exports preferred for shared modules
+- Fail closed on authz once Auth is wired
+- Match existing naming and import alias style (`@/`)
+
+## Do not
+
+- Put SQL or service-role secrets in client components
+- Embed business rules inside atoms
+- Flatten enterprise folders without updating docs
