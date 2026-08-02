@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUp, Headset, Mail, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function FloatingDock() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
@@ -16,6 +19,7 @@ export function FloatingDock() {
 
   return (
     <div className="fixed bottom-6 right-4 z-50 flex flex-col items-end gap-3 sm:right-6">
+      {!isHome ? (
       <aside className="hidden overflow-hidden rounded-md bg-[var(--color-navy)] text-white shadow-lg md:block">
         <Link
           href="/contact"
@@ -41,6 +45,7 @@ export function FloatingDock() {
           WhatsApp
         </a>
       </aside>
+      ) : null}
 
       {showTop ? (
         <button

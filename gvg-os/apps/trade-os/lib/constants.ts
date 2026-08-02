@@ -124,42 +124,42 @@ export const HOT_CATEGORIES = [
     nameEn: "Health Supplements",
     href: "/categories/health-supplements",
     image:
-      "https://images.unsplash.com/photo-1550572017-edd951aa8f72?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1550572017-edd951aa8f72?auto=format&fit=crop&w=1600&q=80",
   },
   {
     nameZh: "食品飲料",
     nameEn: "Food & Beverages",
     href: "/categories/packaged-foods",
     image:
-      "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80",
   },
   {
     nameZh: "居家生活",
     nameEn: "Home & Living",
     href: "/categories/household-goods",
     image:
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1600&q=80",
   },
   {
     nameZh: "五金工具",
     nameEn: "Hardware & Tools",
     href: "/categories/hardware-tools",
     image:
-      "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1600&q=80",
   },
   {
     nameZh: "裝潢建材",
     nameEn: "Building Materials",
     href: "/categories/home-improvement",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
   },
   {
     nameZh: "品牌服飾",
     nameEn: "Brand Apparel",
     href: "/categories/branded-apparel",
     image:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80",
   },
 ] as const;
 export const TRADE_SERVICES = [

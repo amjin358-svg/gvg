@@ -8,7 +8,7 @@ Public: https://amjin358-svg.github.io/gvg/trade-os/
 2. **Main header** (white): Logo · Search → `/products` · 登入 · 購物車  
 3. **Primary nav** (white): 商品中心 · 全球採購 · 國際貿易 · Marketplace · AI 智慧服務 · 合作夥伴專區  
 
-Home `/` is brand entry (hero), not a primary-nav item.
+Home `/` is a Seedance-style cinematic product landing (full-bleed media, brand-first hero, one job per section) — not a primary-nav item. Header overlays transparent on `/`.
 
 ## Module map
 

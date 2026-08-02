@@ -2,16 +2,22 @@ import {
   HomeCategories,
   HomeCtaBand,
   HomeHero,
-  HomeServices,
+  HomeCapabilities,
+  HomeShowcase,
 } from "@/frontend/features/home/HomeMarketing";
 
+/**
+ * GVG homepage — Seedance-style cinematic product architecture.
+ * Dark full-bleed media, brand-first hero, one purpose per section.
+ */
 export default function HomePage() {
   return (
-    <>
+    <div className="home-seedance bg-[#05080f]">
       <HomeHero />
-      <HomeServices />
+      <HomeCapabilities />
+      <HomeShowcase />
       <HomeCategories />
       <HomeCtaBand />
-    </>
+    </div>
   );
 }
